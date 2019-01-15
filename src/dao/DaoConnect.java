@@ -6,13 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import control.Usuario;
+
 public class DaoConnect {
 
 	//Conexão com banco de dados - MAYNORECOMENTS
 	
 		private Connection con;
 		private PreparedStatement stmt;
-		
+		Usuario usuario = new Usuario();
 		private final String USER = "root";
 		private final String PASS = "maynore";
 		public String URL = null;
@@ -98,5 +100,116 @@ public class DaoConnect {
 			}
 
 		}
+		
+		
+		/***************************************************************************
+		 * 																		   *
+		 * 				public void inserir() {}                                   *
+		 *				public void altera() {}                                    *
+		 *				public void exclui() {}                                    *
+         *				public void dados() {}                               	   *
+		 *                                                                         *
+		 ***************************************************************************/
+		
+		
+		
+		/***************************************************************************
+		 * 																		   *
+		 * 							Funções Empresa                                *
+		 *                                                                         *
+		 ***************************************************************************/
+			public void inserirEmpresa() {}
+			public void alteraEmpresa() {}
+			public void excluiEmpresa() {}
+			public void dadosEmpresa() {}
+		
 
+		/***************************************************************************
+		 * 																		   *
+		 * 							Funções Usuario                                *
+		 *                                                                         *
+		 ***************************************************************************/
+			/*--------------------------------------------------
+			 * Cadastro de usuarios - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			
+			public void inserirUsuario(Usuario usuario ) {
+				String sql = "";
+				
+				try {
+					stmt =  con.prepareStatement(sql);
+					
+					stmt.execute();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			//Fim
+			
+			/*--------------------------------------------------
+			 * Altera de Usuarios - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			
+			public void alteraUsuario() {
+				String sql = "";
+				
+				try {
+					stmt =  con.prepareStatement(sql);
+					
+					stmt.execute();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			//Fim
+			
+			/*--------------------------------------------------
+			 * Exclui de Usuarios - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			
+			public void excluiUsuario() {}
+			//Fim
+			
+			/*--------------------------------------------------
+			 * Dados  usuarios - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			
+			public void dadosUsuario(Usuario usuario) {
+				String sql = "";
+				
+				try {
+					stmt =  con.prepareStatement(sql);
+					ResultSet res = stmt.executeQuery();
+					while(res.next()) {
+						
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			//Fim
+
+		/***************************************************************************
+		 * 																		   *
+		 * 							Função Fecha Conexão                           *
+		 *                                                                         *
+		 ***************************************************************************/
+		public void fecharCon(){
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
 }
