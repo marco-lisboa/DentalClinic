@@ -25,6 +25,9 @@ import java.awt.Cursor;
 public class Tconfigurar extends JPanel {
 	private JTable table;
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Create the panel.
@@ -42,6 +45,66 @@ public class Tconfigurar extends JPanel {
 		setOpaque(false);
 		setBounds(243, 11, 575, 427);
 		setLayout(null);
+		
+		JTabbedPane tabbedPaneCadastroUsuario = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneCadastroUsuario.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneCadastroUsuario.setBorder(null);
+		tabbedPaneCadastroUsuario.setBackground(new Color(32, 178, 170));
+		tabbedPaneCadastroUsuario.setBounds(0, 0, 575, 428);
+		add(tabbedPaneCadastroUsuario);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setForeground(Color.WHITE);
+		panel_2.setBackground(new Color(32, 178, 170));
+		tabbedPaneCadastroUsuario.addTab("USUARIO", new ImageIcon(Tconfigurar.class.getResource("/img/configPequena.png")), panel_2, null);
+		tabbedPaneCadastroUsuario.setForegroundAt(0, Color.WHITE);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/voltar.png")));
+		label_1.setToolTipText("Voltar");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(535, 2, 25, 32);
+		panel_2.add(label_1);
+		
+		JLabel label_7 = new JLabel("Nome : ");
+		label_7.setForeground(Color.WHITE);
+		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_7.setBounds(10, 14, 269, 14);
+		panel_2.add(label_7);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(52, 11, 227, 20);
+		panel_2.add(textField_1);
+		
+		JLabel lblLogin = new JLabel("Login : ");
+		lblLogin.setForeground(Color.WHITE);
+		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblLogin.setBounds(10, 53, 47, 14);
+		panel_2.add(lblLogin);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(52, 50, 227, 20);
+		panel_2.add(textField_2);
+		
+		JLabel lblSenha = new JLabel("Senha : ");
+		lblSenha.setForeground(Color.WHITE);
+		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSenha.setBounds(10, 81, 47, 14);
+		panel_2.add(lblSenha);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(52, 78, 227, 20);
+		panel_2.add(textField_3);
+		
+		JLabel label_14 = new JLabel("");
+		label_14.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
+		label_14.setHorizontalAlignment(SwingConstants.CENTER);
+		label_14.setBounds(0, 2, 570, 409);
+		panel_2.add(label_14);
 		
 		JTabbedPane tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -89,13 +152,14 @@ public class Tconfigurar extends JPanel {
 		textField.setBounds(52, 8, 145, 20);
 		panel_1.add(textField);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setToolTipText("Buscar");
-		label_1.setHorizontalAlignment(SwingConstants.LEFT);
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setBounds(207, 2, 46, 32);
-		panel_1.add(label_1);
+		JLabel btPesquisaUsuario = new JLabel("");
+		btPesquisaUsuario.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/buscar.png")));
+		btPesquisaUsuario.setToolTipText("Buscar");
+		btPesquisaUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+		btPesquisaUsuario.setForeground(Color.WHITE);
+		btPesquisaUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btPesquisaUsuario.setBounds(207, 2, 46, 32);
+		panel_1.add(btPesquisaUsuario);
 		
 		JLabel label_2 = new JLabel("Situa\u00E7\u00E3o : ");
 		label_2.setForeground(Color.WHITE);
@@ -104,6 +168,7 @@ public class Tconfigurar extends JPanel {
 		panel_1.add(label_2);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativo", "Inativo"}));
 		comboBox.setBounds(73, 36, 145, 20);
 		panel_1.add(comboBox);
 		
