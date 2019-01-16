@@ -21,13 +21,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.Cursor;
+import javax.swing.JPasswordField;
+import javax.swing.JCheckBox;
 
 public class Tconfigurar extends JPanel {
 	private JTable table;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
+	private JPasswordField textField_3;
+	private JTextField passwordField;
 
 	/**
 	 * Create the panel.
@@ -70,12 +73,12 @@ public class Tconfigurar extends JPanel {
 		JLabel label_7 = new JLabel("Nome : ");
 		label_7.setForeground(Color.WHITE);
 		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_7.setBounds(10, 14, 269, 14);
+		label_7.setBounds(10, 27, 41, 14);
 		panel_2.add(label_7);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(52, 11, 227, 20);
+		textField_1.setBounds(52, 24, 227, 20);
 		panel_2.add(textField_1);
 		
 		JLabel lblLogin = new JLabel("Login : ");
@@ -95,10 +98,53 @@ public class Tconfigurar extends JPanel {
 		lblSenha.setBounds(10, 81, 47, 14);
 		panel_2.add(lblSenha);
 		
-		textField_3 = new JTextField();
+		textField_3 = new JPasswordField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(52, 78, 227, 20);
 		panel_2.add(textField_3);
+		
+		JLabel lblFuno = new JLabel("Fun\u00E7\u00E3o : ");
+		lblFuno.setForeground(Color.WHITE);
+		lblFuno.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFuno.setBounds(10, 109, 73, 14);
+		panel_2.add(lblFuno);
+		
+		passwordField = new JTextField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(62, 106, 217, 20);
+		panel_2.add(passwordField);
+		
+		JLabel lblNivel = new JLabel("Nivel : ");
+		lblNivel.setForeground(Color.WHITE);
+		lblNivel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNivel.setBounds(10, 134, 41, 14);
+		panel_2.add(lblNivel);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"ADMINISTRADOR", "SUPERVISOR", "USUARIO"}));
+		comboBox_1.setBounds(52, 134, 159, 20);
+		panel_2.add(comboBox_1);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Usuario Ativo ?");
+		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.BOLD, 11));
+		chckbxNewCheckBox.setForeground(Color.WHITE);
+		chckbxNewCheckBox.setFocusable(false);
+		chckbxNewCheckBox.setOpaque(false);
+		chckbxNewCheckBox.setBounds(10, 170, 125, 23);
+		panel_2.add(chckbxNewCheckBox);
+		
+		JCheckBox chckbxAtivoParaAcesso = new JCheckBox("Ativo Para Acesso ao Site ?");
+		chckbxAtivoParaAcesso.setOpaque(false);
+		chckbxAtivoParaAcesso.setForeground(Color.WHITE);
+		chckbxAtivoParaAcesso.setFont(new Font("Tahoma", Font.BOLD, 11));
+		chckbxAtivoParaAcesso.setFocusable(false);
+		chckbxAtivoParaAcesso.setBounds(10, 196, 269, 23);
+		panel_2.add(chckbxAtivoParaAcesso);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setBounds(301, 27, 2, 326);
+		panel_2.add(separator_1);
 		
 		JLabel label_14 = new JLabel("");
 		label_14.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
