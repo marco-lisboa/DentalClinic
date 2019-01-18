@@ -103,6 +103,7 @@ public class Tconfigurar extends JPanel {
 		panel.add(btnUsuario);
 		
 		JButton btnUsuarios = new JButton("Usuarios");
+		btnUsuarios.setFocusable(false);
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tabbedPanePrincipal.setVisible(false);
