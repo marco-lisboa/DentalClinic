@@ -130,16 +130,46 @@ public class DaoConnect {
 		 *                                                                         *
 		 ***************************************************************************/
 			/*--------------------------------------------------
+			 * Consulta de usuarios - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			public void listUsuarios (Usuario usuario) {
+				
+			}
+			//Fim
+			/*--------------------------------------------------
 			 * Cadastro de usuarios - Comentario Maynore Soft
 			 * ------------------------------------------------ */
 			//Inicio
 			
 			public void inserirUsuario(Usuario usuario ) {
-				String sql = "";
+				String sql = "INSERT INTO login ("
+						+ "nome,"
+						+ "login,"
+						+ "senha,"
+						+ "funcao,"
+						+ "nivel,"
+						+ "padrao,"
+						+ "cadastro,"
+						+ "altera_privilegio,"
+						+ "situacao,"
+						+ "ativo_site,"
+						+ "privilegioid"
+						+ ")VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 				
 				try {
 					stmt =  con.prepareStatement(sql);
-					
+					stmt.setString(1,usuario.getNomeUsuario());
+					stmt.setString(2,usuario.getLoginUsuario());
+					stmt.setString(3,usuario.getSenhaUsuario());
+					stmt.setString(4,usuario.getFuncao());
+					stmt.setInt(5,usuario.getNivelUsuario());
+					stmt.setInt(6,usuario.getPadrao());
+					stmt.setInt(7,usuario.getCadastro());
+					stmt.setInt(8,usuario.getAltera_privi());
+					stmt.setInt(9, usuario.getSituacao());
+					stmt.setInt(10, usuario.getAtivo_site());
+					stmt.setInt(11,usuario.getPrivilegioId());
 					stmt.execute();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -154,12 +184,35 @@ public class DaoConnect {
 			 * ------------------------------------------------ */
 			//Inicio
 			
-			public void alteraUsuario() {
-				String sql = "";
+			public void alteraUsuario(Usuario usuario) {
+				String sql = "UPDATE login SET "
+						+ "nome =?, "
+						+ "login =?, "
+						+ "senha =?, "
+						+ "funcao =?, "
+						+ "nivel =?, "
+						+ "padrao =?, "
+						+ "cadastro =?, "
+						+ "altera_privilegio =?, "
+						+ "situacao =? ,"
+						+ "ativo_site =? ,"
+						+ "privilegioid =? "
+						+ "where idlogin =? ";
 				
 				try {
 					stmt =  con.prepareStatement(sql);
-					
+					stmt.setString(1,usuario.getNomeUsuario());
+					stmt.setString(2,usuario.getLoginUsuario());
+					stmt.setString(3,usuario.getSenhaUsuario());
+					stmt.setString(4,usuario.getFuncao());
+					stmt.setInt(5,usuario.getNivelUsuario());
+					stmt.setInt(6,usuario.getPadrao());
+					stmt.setInt(7,usuario.getCadastro());
+					stmt.setInt(8,usuario.getAltera_privi());
+					stmt.setInt(9, usuario.getSituacao());
+					stmt.setInt(10, usuario.getAtivo_site());
+					stmt.setInt(11,usuario.getPrivilegioId());
+					stmt.setInt(12,usuario.getUsuarioId());
 					stmt.execute();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -174,7 +227,10 @@ public class DaoConnect {
 			 * ------------------------------------------------ */
 			//Inicio
 			
-			public void excluiUsuario() {}
+			public void excluiUsuario(Usuario usuario) {
+				//String sql = "DELETE FROM login WHERE idlogin =?;";
+				
+			}
 			//Fim
 			
 			/*--------------------------------------------------
@@ -183,13 +239,23 @@ public class DaoConnect {
 			//Inicio
 			
 			public void dadosUsuario(Usuario usuario) {
-				String sql = "";
+				String sql = "SELECT * FROM login WHERE loginid ='"+usuario.getUsuarioId()+"';";
 				
 				try {
 					stmt =  con.prepareStatement(sql);
 					ResultSet res = stmt.executeQuery();
 					while(res.next()) {
-						
+						usuario.setNomeUsuario(res.getString("nome"));
+						usuario.setLoginUsuario(res.getString("login"));
+						usuario.setSenhaUsuario(res.getString("senha"));
+						usuario.setFuncao(res.getString("funcao"));
+						usuario.setNivelUsuario(res.getInt("nivel"));
+						usuario.setPadrao(res.getInt("padrao"));
+						usuario.setCadastro(res.getInt("cadastro"));
+						usuario.setAltera_privi(res.getInt("aletera_privilegio"));
+						usuario.setSituacao(res.getInt("situacao"));
+						usuario.setAtivo_site(res.getInt("ativo_site"));
+						usuario.setPrivilegioId(res.getInt("privilegioid"));
 					}
 					
 				} catch (SQLException e) {
