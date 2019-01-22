@@ -582,6 +582,23 @@ public class Tconfigurar extends JPanel {
 	}
 	
 	public void varreDados() {
-		
+		usuario.setNomeUsuario(tx_nome.getText());
+		usuario.setLoginUsuario(tx_login.getText());
+		usuario.setSenhaUsuario(tx_senha.getText());
+		usuario.setFuncao(tx_funcao.getText());
+		//Nivel usuario
+		if(nivelUsuario.getSelectedItem()=="ADMINISTRADOR"){
+			usuario.setNivelUsuario(1);
+		}else if(nivelUsuario.getSelectedItem()=="SUPERVISOR") {
+			usuario.setNivelUsuario(2);
+		}else {
+			usuario.setNivelUsuario(3);
+		}
+		//Padrão privilegios
+		if(padraoPrivilegios.getSelectedItem()=="PADR\u00C3O USUARIO") {
+			usuario.setPadrao(1);
+		}else {
+			usuario.setPadrao(2);
+		}
 	}
 }
