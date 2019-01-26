@@ -99,7 +99,10 @@ public class Usuario {
 	}
 
 		String loginUsuario,nomeUsuario,senhaUsuario, situacaoUsuario,funcao;
-		int usuarioId,nivelUsuario,padrao,cadastro,altera_privi,situacao,ativo_site,privilegioId;
+		int usuarioId,nivelUsuario,padrao,cadastro,altera_privi,situacao,ativo_site,privilegioId,
+		pCadAgenda,pAcessReceber,pRealizaOrcamento,pCadServico,pLivroCaixa,pChamada,pSincroniza,
+		pAtualizar,pAcessConfig,pCadEmpresas,pRealizaRecebimento,pRealizaRecebimentoAvulso,pExcluirFinanceiro,
+		pEstorna,pAcessGenFin,pCadDespesas,pCadFornecedor,pAcessRelatorios,pCadFuncionarios;
 		public int getUsuarioId() {
 			return usuarioId;
 		}

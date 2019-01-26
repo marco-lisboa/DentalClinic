@@ -380,6 +380,12 @@ public class Tconfigurar extends JPanel {
 		financeiro.add(priveCadastroDeFuncionarios);
 		
 		JLabel btSalvar = new JLabel("");
+		btSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				varreDados();
+			}
+		});
 		btSalvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btSalvar.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/save.png")));
 		btSalvar.setToolTipText("Salvar");
@@ -599,6 +605,27 @@ public class Tconfigurar extends JPanel {
 			usuario.setPadrao(1);
 		}else {
 			usuario.setPadrao(2);
+		}
+		//Privilegios Padrão
+		if(PermitirCadastroE.isSelected()==true) {
+			usuario.setCadastro(1);
+		}else {
+			usuario.setCadastro(0);
+		}
+		if(alteraPrivilegio.isSelected()==true) {
+			usuario.setAltera_privi(1);
+		}else {
+			usuario.setAltera_privi(0);
+		}
+		if(situacao.isSelected()==true) {
+			usuario.setSituacao(1);
+		}else {
+			usuario.setSituacao(0);
+		}
+		if(ativoSite.isSelected()==true) {
+			usuario.setAtivo_site(1);
+		}else {
+			usuario.setAtivo_site(0);
 		}
 	}
 }
