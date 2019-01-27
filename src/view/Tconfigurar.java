@@ -5,12 +5,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 
+import control.Iniciador;
 import control.Usuario;
+import dao.DaoConnect;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -46,10 +49,12 @@ public class Tconfigurar extends JPanel {
 	private JTabbedPane tabbedPaneCadastroUsuario;
 	private JTabbedPane tabbedPaneUsuarios;
 	private JTabbedPane tabbedPanePrincipal;
+	private Iniciador iniciar = new Iniciador();
 	private Usuario usuario = new Usuario();
+	private DaoConnect dao = new DaoConnect();
 	private JComboBox nivelUsuario;
 	private JComboBox padraoPrivilegios;
-	private JCheckBox PermitirCadastroE;
+	private JCheckBox PermitirCadastroUsuarios;
 	private JCheckBox alteraPrivilegio;
 	private JCheckBox situacao;
 	private JCheckBox ativoSite;
@@ -63,7 +68,7 @@ public class Tconfigurar extends JPanel {
 	private JCheckBox priviAcessoAConfiguraes;
 	private JCheckBox priviAtualizarSistema;
 	private JCheckBox priviSincronizaoDeDados;
-	private JCheckBox priviCadastroEAlterao;
+	private JCheckBox priviCadastroEAlteraEmpresa;
 	private JCheckBox priviRealizarRecebimento;
 	private JCheckBox priviRecebimentoAvuso;
 	private JCheckBox priviExcluirParcelasFinanceiras;
@@ -192,13 +197,13 @@ public class Tconfigurar extends JPanel {
 		padraoPrivilegios.setBounds(120, 156, 159, 20);
 		panel_2.add(padraoPrivilegios);
 		
-		PermitirCadastroE = new JCheckBox("Permitir Altera\u00E7\u00E3o e Cadastro de Usuarios?");
-		PermitirCadastroE.setOpaque(false);
-		PermitirCadastroE.setForeground(Color.WHITE);
-		PermitirCadastroE.setFont(new Font("Tahoma", Font.BOLD, 11));
-		PermitirCadastroE.setFocusable(false);
-		PermitirCadastroE.setBounds(10, 180, 269, 32);
-		panel_2.add(PermitirCadastroE);
+		PermitirCadastroUsuarios = new JCheckBox("Permitir Altera\u00E7\u00E3o e Cadastro de Usuarios?");
+		PermitirCadastroUsuarios.setOpaque(false);
+		PermitirCadastroUsuarios.setForeground(Color.WHITE);
+		PermitirCadastroUsuarios.setFont(new Font("Tahoma", Font.BOLD, 11));
+		PermitirCadastroUsuarios.setFocusable(false);
+		PermitirCadastroUsuarios.setBounds(10, 180, 269, 32);
+		panel_2.add(PermitirCadastroUsuarios);
 		
 		alteraPrivilegio = new JCheckBox("Permitir Altera\u00E7\u00E3o de Privilegio?");
 		alteraPrivilegio.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -301,11 +306,11 @@ public class Tconfigurar extends JPanel {
 		priviAcessoAConfiguraes.setBounds(0, 243, 236, 23);
 		geral.add(priviAcessoAConfiguraes);
 		
-		priviCadastroEAlterao = new JCheckBox("Cadastro e Altera\u00E7\u00E3o de Empresa?");
-		priviCadastroEAlterao.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		priviCadastroEAlterao.setFocusable(false);
-		priviCadastroEAlterao.setBounds(0, 269, 236, 23);
-		geral.add(priviCadastroEAlterao);
+		priviCadastroEAlteraEmpresa = new JCheckBox("Cadastro e Altera\u00E7\u00E3o de Empresa?");
+		priviCadastroEAlteraEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		priviCadastroEAlteraEmpresa.setFocusable(false);
+		priviCadastroEAlteraEmpresa.setBounds(0, 269, 236, 23);
+		geral.add(priviCadastroEAlteraEmpresa);
 		
 		JPanel financeiro = new JPanel();
 		financeiro.setBackground(Color.WHITE);
@@ -383,7 +388,10 @@ public class Tconfigurar extends JPanel {
 		btSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				varreDados();
+				varreCampos();
+				salvar();
+				tabbedPaneCadastroUsuario.setVisible(false);
+				tabbedPaneUsuarios.setVisible(true);
 			}
 		});
 		btSalvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -587,7 +595,7 @@ public class Tconfigurar extends JPanel {
 
 	}
 	
-	public void varreDados() {
+	public void varreCampos() {
 		usuario.setNomeUsuario(tx_nome.getText());
 		usuario.setLoginUsuario(tx_login.getText());
 		usuario.setSenhaUsuario(tx_senha.getText());
@@ -607,7 +615,7 @@ public class Tconfigurar extends JPanel {
 			usuario.setPadrao(2);
 		}
 		//Privilegios Padrão
-		if(PermitirCadastroE.isSelected()==true) {
+		if(PermitirCadastroUsuarios.isSelected()==true) {
 			usuario.setCadastro(1);
 		}else {
 			usuario.setCadastro(0);
@@ -627,5 +635,140 @@ public class Tconfigurar extends JPanel {
 		}else {
 			usuario.setAtivo_site(0);
 		}
+		//Privilegio Geral
+		if(priviCadastroAlteraCliente.isSelected()==true) {
+			usuario.setpCadCliente(1);
+		}else {
+			usuario.setpCadCliente(0);
+		}
+		if(priviCadastroEAlteraoAgenda.isSelected()==true) {
+			usuario.setpCadAgenda(1);
+		}else {
+			usuario.setpCadAgenda(0);
+		}
+		if(priviAcessoRebimentosPagamentos.isSelected()==true) {
+			usuario.setpAcessReceber(1);
+		}else {
+			usuario.setpAcessReceber(0);
+		}
+		if(priviSimuOrcamento.isSelected()==true) {
+			usuario.setpRealizaOrcamento(1);
+		}else {
+			usuario.setpRealizaOrcamento(0);
+		}
+		if(priviCadastroAlteraServico.isSelected()==true) {
+			usuario.setpCadServico(1);
+		}else {
+			usuario.setpCadServico(0);
+		}
+		if(priviAcessoLivroCaixa.isSelected()==true) {
+			usuario.setpLivroCaixa(1);
+		}else {
+			usuario.setpLivroCaixa(0);
+		}
+		if(priviChamadaFila.isSelected()==true) {
+			usuario.setpChamada(1);
+		}else {
+			usuario.setpChamada(0);
+		}
+		if(priviSincronizaoDeDados.isSelected()==true) {
+			usuario.setpSincroniza(1);
+		}else {
+			usuario.setpSincroniza(0);
+		}
+		if(priviAtualizarSistema.isSelected()==true) {
+			usuario.setpAtualizar(1);
+		}else {
+			usuario.setpAtualizar(0);
+		}
+		if(priviAcessoAConfiguraes.isSelected()==true) {
+			usuario.setpAcessConfig(1);
+		}else {
+			usuario.setpAcessConfig(0);
+		}
+		if(priviCadastroEAlteraEmpresa.isSelected()==true) {
+			usuario.setpCadEmpresas(1);
+		}else {
+			usuario.setpCadEmpresas(0);
+		}
+		//Privilegio Financeiro
+		if(priviRealizarRecebimento.isSelected()==true) {
+			usuario.setpRealizaRecebimento(1);
+		}else {
+			usuario.setpRealizaRecebimento(0);
+		}
+		if(priviRecebimentoAvuso.isSelected()==true) {
+			usuario.setpRealizaRecebimentoAvulso(1);
+		}else {
+			usuario.setpRealizaRecebimentoAvulso(0);
+		}
+		if(priviExcluirParcelasFinanceiras.isSelected()==true) {
+			usuario.setpExcluirFinanceiro(1);
+		}else {
+			usuario.setpExcluirFinanceiro(0);
+		}
+		if(priveEstornarRecebimentos.isSelected()==true) {
+			usuario.setpEstorna(1);
+		}else {
+			usuario.setpEstorna(0);
+		}
+		if(priveAcessoAoGerenciador.isSelected()==true) {
+			usuario.setpAcessGenFin(1);
+		}else {
+			usuario.setpAcessGenFin(0);
+		}
+		if(priveCadastroEAlteraoBacosContas.isSelected()==true) {
+			usuario.setpCadContasBancos(1);
+		}else {
+			usuario.setpCadContasBancos(0);
+		}
+		if(priveCadastroEAlteraoDespesas.isSelected()==true) {
+			usuario.setpCadDespesas(1);
+		}else {
+			usuario.setpCadDespesas(0);
+		}
+		if(priveAcessoAFolha.isSelected()==true) {
+			usuario.setpAcessFolha(1);
+		}else {
+			usuario.setpAcessFolha(0);
+		}
+		if(priveCadastroEAlteraoFornecedores.isSelected()==true) {
+			usuario.setpCadFornecedor(1);
+		}else {
+			usuario.setpCadFornecedor(0);
+		}
+		if(priviAcessoRelatroios.isSelected()==true) {
+			usuario.setpAcessRelatorios(1);
+		}else {
+			usuario.setpAcessRelatorios(0);
+		}
+		if(priveCadastroDeFuncionarios.isSelected()==true) {
+			usuario.setpCadFuncionarios(1);
+		}else {
+			usuario.setpCadFuncionarios(0);
+		}
+	}
+	
+	public void limpaCampos() {
+		tx_nome.setText("");
+		tx_login.setText("");
+		tx_senha.setText("");
+		tx_funcao.setText("");
+	}
+	public void salvar() {
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		dao.conectar(iniciar.getIp_server());
+		dao.inserirUsuario(usuario);
+		dao.fecharCon();
+		
+	}
+	
+	public void atualiza() {
+		
 	}
 }

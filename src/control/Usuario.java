@@ -6,6 +6,158 @@ public class Usuario {
 		return loginUsuario;
 	}
 
+	public int getpCadAgenda() {
+			return pCadAgenda;
+		}
+
+		public void setpCadAgenda(int pCadAgenda) {
+			this.pCadAgenda = pCadAgenda;
+		}
+
+		public int getpAcessReceber() {
+			return pAcessReceber;
+		}
+
+		public void setpAcessReceber(int pAcessReceber) {
+			this.pAcessReceber = pAcessReceber;
+		}
+
+		public int getpRealizaOrcamento() {
+			return pRealizaOrcamento;
+		}
+
+		public void setpRealizaOrcamento(int pRealizaOrcamento) {
+			this.pRealizaOrcamento = pRealizaOrcamento;
+		}
+
+		public int getpCadServico() {
+			return pCadServico;
+		}
+
+		public void setpCadServico(int pCadServico) {
+			this.pCadServico = pCadServico;
+		}
+
+		public int getpLivroCaixa() {
+			return pLivroCaixa;
+		}
+
+		public void setpLivroCaixa(int pLivroCaixa) {
+			this.pLivroCaixa = pLivroCaixa;
+		}
+
+		public int getpChamada() {
+			return pChamada;
+		}
+
+		public void setpChamada(int pChamada) {
+			this.pChamada = pChamada;
+		}
+
+		public int getpSincroniza() {
+			return pSincroniza;
+		}
+
+		public void setpSincroniza(int pSincroniza) {
+			this.pSincroniza = pSincroniza;
+		}
+
+		public int getpAtualizar() {
+			return pAtualizar;
+		}
+
+		public void setpAtualizar(int pAtualizar) {
+			this.pAtualizar = pAtualizar;
+		}
+
+		public int getpAcessConfig() {
+			return pAcessConfig;
+		}
+
+		public void setpAcessConfig(int pAcessConfig) {
+			this.pAcessConfig = pAcessConfig;
+		}
+
+		public int getpCadEmpresas() {
+			return pCadEmpresas;
+		}
+
+		public void setpCadEmpresas(int pCadEmpresas) {
+			this.pCadEmpresas = pCadEmpresas;
+		}
+
+		public int getpRealizaRecebimento() {
+			return pRealizaRecebimento;
+		}
+
+		public void setpRealizaRecebimento(int pRealizaRecebimento) {
+			this.pRealizaRecebimento = pRealizaRecebimento;
+		}
+
+		public int getpRealizaRecebimentoAvulso() {
+			return pRealizaRecebimentoAvulso;
+		}
+
+		public void setpRealizaRecebimentoAvulso(int pRealizaRecebimentoAvulso) {
+			this.pRealizaRecebimentoAvulso = pRealizaRecebimentoAvulso;
+		}
+
+		public int getpExcluirFinanceiro() {
+			return pExcluirFinanceiro;
+		}
+
+		public void setpExcluirFinanceiro(int pExcluirFinanceiro) {
+			this.pExcluirFinanceiro = pExcluirFinanceiro;
+		}
+
+		public int getpEstorna() {
+			return pEstorna;
+		}
+
+		public void setpEstorna(int pEstorna) {
+			this.pEstorna = pEstorna;
+		}
+
+		public int getpAcessGenFin() {
+			return pAcessGenFin;
+		}
+
+		public void setpAcessGenFin(int pAcessGenFin) {
+			this.pAcessGenFin = pAcessGenFin;
+		}
+
+		public int getpCadDespesas() {
+			return pCadDespesas;
+		}
+
+		public void setpCadDespesas(int pCadDespesas) {
+			this.pCadDespesas = pCadDespesas;
+		}
+
+		public int getpCadFornecedor() {
+			return pCadFornecedor;
+		}
+
+		public void setpCadFornecedor(int pCadFornecedor) {
+			this.pCadFornecedor = pCadFornecedor;
+		}
+
+		public int getpAcessRelatorios() {
+			return pAcessRelatorios;
+		}
+
+		public void setpAcessRelatorios(int pAcessRelatorios) {
+			this.pAcessRelatorios = pAcessRelatorios;
+		}
+
+		public int getpCadFuncionarios() {
+			return pCadFuncionarios;
+		}
+
+		public void setpCadFuncionarios(int pCadFuncionarios) {
+			this.pCadFuncionarios = pCadFuncionarios;
+		}
+
 	public void setLoginUsuario(String loginUsuario) {
 		this.loginUsuario = loginUsuario;
 	}
@@ -51,11 +203,11 @@ public class Usuario {
 	}
 
 	public int getCadastro() {
-		return cadastro;
+		return cadastroUsuario;
 	}
 
 	public void setCadastro(int cadastro) {
-		this.cadastro = cadastro;
+		this.cadastroUsuario = cadastro;
 	}
 
 	public int getAltera_privi() {
@@ -99,10 +251,35 @@ public class Usuario {
 	}
 
 		String loginUsuario,nomeUsuario,senhaUsuario, situacaoUsuario,funcao;
-		int usuarioId,nivelUsuario,padrao,cadastro,altera_privi,situacao,ativo_site,privilegioId,
+		
+		int usuarioId,nivelUsuario,padrao,cadastroUsuario,altera_privi,situacao,ativo_site,privilegioId,pCadCliente,
 		pCadAgenda,pAcessReceber,pRealizaOrcamento,pCadServico,pLivroCaixa,pChamada,pSincroniza,
 		pAtualizar,pAcessConfig,pCadEmpresas,pRealizaRecebimento,pRealizaRecebimentoAvulso,pExcluirFinanceiro,
-		pEstorna,pAcessGenFin,pCadDespesas,pCadFornecedor,pAcessRelatorios,pCadFuncionarios;
+		pEstorna,pAcessGenFin,pCadDespesas,pCadFornecedor,pAcessRelatorios,pCadFuncionarios,pCadContasBancos,pAcessFolha;
+		public int getpAcessFolha() {
+			return pAcessFolha;
+		}
+
+		public void setpAcessFolha(int pAcessFolha) {
+			this.pAcessFolha = pAcessFolha;
+		}
+
+		public int getpCadContasBancos() {
+			return pCadContasBancos;
+		}
+
+		public void setpCadContasBancos(int pCadContasBancos) {
+			this.pCadContasBancos = pCadContasBancos;
+		}
+
+		public int getpCadCliente() {
+			return pCadCliente;
+		}
+
+		public void setpCadCliente(int pCadCliente) {
+			this.pCadCliente = pCadCliente;
+		}
+
 		public int getUsuarioId() {
 			return usuarioId;
 		}

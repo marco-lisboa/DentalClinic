@@ -153,9 +153,8 @@ public class DaoConnect {
 						+ "cadastro,"
 						+ "altera_privilegio,"
 						+ "situacao,"
-						+ "ativo_site,"
-						+ "privilegioid"
-						+ ")VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+						+ "ativo_site"
+						+ ")VALUES(?,?,?,?,?,?,?,?,?,?)";
 				
 				try {
 					stmt =  con.prepareStatement(sql);
@@ -169,12 +168,87 @@ public class DaoConnect {
 					stmt.setInt(8,usuario.getAltera_privi());
 					stmt.setInt(9, usuario.getSituacao());
 					stmt.setInt(10, usuario.getAtivo_site());
-					stmt.setInt(11,usuario.getPrivilegioId());
 					stmt.execute();
-				} catch (SQLException e) {
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
+				//----------------------------------------------------------------------
+				String sqlprive = "SELECT MAX(idlogin) FROM login";
+
+				try {
+					stmt =  con.prepareStatement(sqlprive);
+					ResultSet res = stmt.executeQuery();
+					while(res.next()) {
+						usuario.setUsuarioId(res.getInt("MAX(idlogin)"));
+					}
+					
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				System.out.println( usuario.getUsuarioId());
+				if(usuario.getUsuarioId()>0) {
+					sqlprive = "INSERT INTO privilegios("
+							/*1*/					+ "idusuario,"
+							/*2*/					+ "cad_alt_clientes,"
+							/*3*/					+ "cad_alt_agenda,"
+							/*4*/					+ "acesso_recebe_pag,"
+							/*5*/					+ "realiza_simu_orcameto,"
+							/*6*/					+ "cad_alt_servico,"
+							/*7*/					+ "livro_caixa,"
+							/*8*/					+ "chamada,"
+							/*9*/					+ "sincroniza,"
+							/*10*/					+ "atualizar,"
+							/*11*/					+ "acesso_configuracao,"
+							/*12*/					+ "cad_alt_empresa,"
+							/*13*/					+ "realiza_recebimento,"
+							/*14*/					+ "realiza_recebimento_avul,"
+							/*15*/					+ "excluir_financeiro,"
+							/*16*/					+ "estornar,"
+							/*17*/					+ "acesso_geren_finac,"
+							/*18*/					+ "cad_alt_banco_conta,"
+							/*19*/					+ "cad_alt_despesas,"
+							/*20*/					+ "acesso_folha,"
+							/*21*/					+ "cad_alt_fornecedores,"
+							/*22*/					+ "acesso_relatorios,"
+							/*23*/					+ "cad_alt_funcionarios"
+											+ ")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+									
+									
+									try {
+										stmt =  con.prepareStatement(sqlprive);
+										stmt.setInt(1,usuario.getUsuarioId());
+										stmt.setInt(2, usuario.getpCadCliente());
+										stmt.setInt(3, usuario.getpCadAgenda());
+										stmt.setInt(4, usuario.getpAcessReceber());
+										stmt.setInt(5, usuario.getpRealizaOrcamento());
+										stmt.setInt(6, usuario.getpCadServico());
+										stmt.setInt(7, usuario.getpLivroCaixa());
+										stmt.setInt(8, usuario.getpChamada());
+										stmt.setInt(9, usuario.getpSincroniza());
+										stmt.setInt(10, usuario.getpAtualizar());
+										stmt.setInt(11, usuario.getpAcessConfig());
+										stmt.setInt(12, usuario.getpCadEmpresas());
+										stmt.setInt(13, usuario.getpRealizaRecebimento());
+										stmt.setInt(14, usuario.getpRealizaRecebimentoAvulso());
+										stmt.setInt(15, usuario.getpExcluirFinanceiro());
+										stmt.setInt(16, usuario.getpEstorna());
+										stmt.setInt(17, usuario.getpAcessGenFin());
+										stmt.setInt(18, usuario.getpCadContasBancos());
+										stmt.setInt(19, usuario.getpCadDespesas());
+										stmt.setInt(20, usuario.getpAcessFolha());
+										stmt.setInt(21,usuario.getpCadFornecedor());
+										stmt.setInt(22, usuario.getpAcessRelatorios());
+										stmt.setInt(23, usuario.getpCadFuncionarios());
+										stmt.execute();
+									} catch (SQLException e3) {
+										// TODO Auto-generated catch block
+										e3.printStackTrace();
+									}
+				}else {System.out.println("Falhou");}
+				
 			}
 			
 			//Fim
