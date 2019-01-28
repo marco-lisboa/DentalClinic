@@ -15,5 +15,9 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.47/src/lib/jboss-common-jdbc-wrapper-src.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.47/src/lib/jboss-common-jdbc-wrapper.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.47/src/lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/edisoncorSX.jar"/>
+	<classpathentry kind="lib" path="lib/l2fprod-swingx.jar"/>
+	<classpathentry kind="lib" path="lib/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

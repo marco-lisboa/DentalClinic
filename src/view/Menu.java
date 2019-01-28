@@ -22,6 +22,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Window.Type;
 import java.awt.Cursor;
 import java.awt.Frame;
+import java.awt.Font;
 
 public class Menu extends JFrame {
 
@@ -161,11 +162,12 @@ public class Menu extends JFrame {
 		menu.setLayout(null);
 		
 		JLabel fotoUsuario = new JLabel("");
-		fotoUsuario.setIcon(new ImageIcon(Menu.class.getResource("/img/man.png")));
+		fotoUsuario.setIcon(new ImageIcon(Menu.class.getResource("/img/toothgrande.png")));
 		fotoUsuario.setBounds(33, 9, 135, 134);
 		menu.add(fotoUsuario);
 		
-		JLabel nomeUsuario = new JLabel("Usuario");
+		JLabel nomeUsuario = new JLabel("Dental Clinic");
+		nomeUsuario.setFont(new Font("Arial", Font.PLAIN, 15));
 		nomeUsuario.setForeground(Color.WHITE);
 		nomeUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		nomeUsuario.setBounds(0, 160, 200, 14);

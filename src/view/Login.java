@@ -41,24 +41,26 @@ public class Login extends JFrame {
 	private JTextField tLogin;
 	private JPasswordField tSenha;
 	private JLabel btConfig;
-	private JTextField ipserve;
+	public JTextField ipserve;
 	private JLabel lblEdenreoServidor;
 	private JButton btnConfirma;
 	private DaoConnect banco = new DaoConnect();
 	private Iniciador iniciar = new Iniciador();
 	private Usuario usuario = new Usuario();
 	private Menu menu = new Menu();
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		new Thread(new Carregando()).start();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Login frame = new Login();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
+					frame.setVisible(false);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -78,7 +80,8 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		setLocationRelativeTo(null);
+		
 		JLabel btFechar = new JLabel("");
 		btFechar.setToolTipText("Fechar");
 		btFechar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

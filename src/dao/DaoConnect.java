@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
+
 import control.Usuario;
+import view.Taviso;
 
 public class DaoConnect {
 
@@ -19,6 +22,7 @@ public class DaoConnect {
 		private final String PASS = "maynore";
 		public String URL = null;
 		private ResultSet resultado = null;
+		Taviso aviso = new Taviso();
 		
 		
 		public void conectar(String ip){
@@ -72,7 +76,10 @@ public class DaoConnect {
 				if(retorno.next()){
 					logado=true;
 				}else{
-					System.out.println("USUARIO OU SENHA INCORRETOS");
+					aviso.texto.setText("USUARIO E SENHA INCORRETOS.");
+					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/fechar.png")));
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
 					logado=false;
 				}	
 			}catch (Exception e){
@@ -247,7 +254,15 @@ public class DaoConnect {
 										// TODO Auto-generated catch block
 										e3.printStackTrace();
 									}
-				}else {System.out.println("Falhou");}
+									aviso.texto.setText("CADASTRO REALIZADO COM SUCESSO.");
+									aviso.setLocationRelativeTo(null);
+									aviso.show();
+				}else {
+					aviso.texto.setText("NÃO FOI POSSIVEL CONCLUIR O CADASTRO TENTE NOVAMENTE.");
+					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/fechar.png")));
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}
 				
 			}
 			
