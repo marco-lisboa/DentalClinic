@@ -35,6 +35,7 @@ public class Carregando extends JFrame  implements Runnable {
 	 * Create the frame.
 	 */
 	public Carregando() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Carregando.class.getResource("/img/tooth.png")));
 		
 		setLocationRelativeTo(null);
 		setUndecorated(true);
