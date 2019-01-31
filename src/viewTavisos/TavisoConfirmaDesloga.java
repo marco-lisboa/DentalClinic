@@ -1,4 +1,4 @@
-package view;
+package viewTavisos;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.Login;
+import view.Menu;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Dialog.ModalityType;
@@ -16,17 +20,20 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Taviso extends JDialog {
+public class TavisoConfirmaDesloga extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	public JLabel texto;
+	private JButton btNao;
+	private JButton btSim;
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			Taviso dialog = new Taviso();
+			TavisoConfirmaDesloga dialog = new TavisoConfirmaDesloga();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			dialog.setLocationRelativeTo(null);
@@ -38,7 +45,7 @@ public class Taviso extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Taviso() {
+	public TavisoConfirmaDesloga() {
 		setUndecorated(true);
 		setBounds(100, 100, 450, 158);
 		getContentPane().setLayout(new BorderLayout());
@@ -48,7 +55,7 @@ public class Taviso extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			texto = new JLabel("");
-			texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+			texto.setIcon(new ImageIcon(TavisoConfirmaDesloga.class.getResource("/img/atencao.png")));
 			texto.setHorizontalAlignment(SwingConstants.CENTER);
 			texto.setForeground(Color.WHITE);
 			texto.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -56,26 +63,41 @@ public class Taviso extends JDialog {
 			contentPanel.add(texto);
 		}
 		{
-			JButton button = new JButton("OK");
-			button.addActionListener(new ActionListener() {
+			btSim = new JButton("Sim");
+			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					Login login = new Login();
+					Menu menu = new Menu();
+					menu.dispose();
 					dispose();
+					login.show();
 				}
 			});
-			button.setForeground(Color.WHITE);
-			button.setFocusable(false);
-			button.setBackground(new Color(32, 178, 170));
-			button.setBounds(182, 122, 89, 23);
-			contentPanel.add(button);
+			btSim.setForeground(Color.WHITE);
+			btSim.setFocusable(false);
+			btSim.setBackground(new Color(32, 178, 170));
+			btSim.setBounds(93, 124, 89, 23);
+			contentPanel.add(btSim);
 		}
+		
+		btNao = new JButton("N\u00E3o");
+		btNao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btNao.setForeground(Color.WHITE);
+		btNao.setFocusable(false);
+		btNao.setBackground(new Color(32, 178, 170));
+		btNao.setBounds(257, 124, 89, 23);
+		contentPanel.add(btNao);
 		{
 			JLabel label = new JLabel("");
-			label.setIcon(new ImageIcon(Taviso.class.getResource("/img/bk.jpeg")));
+			label.setIcon(new ImageIcon(TavisoConfirmaDesloga.class.getResource("/img/bk.jpeg")));
 			label.setVerticalAlignment(SwingConstants.BOTTOM);
 			label.setHorizontalAlignment(SwingConstants.CENTER);
 			label.setBounds(0, 0, 450, 160);
 			contentPanel.add(label);
 		}
 	}
-
 }

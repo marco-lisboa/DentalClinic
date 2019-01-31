@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 
 import control.Usuario;
-import view.Taviso;
+import viewTavisos.Taviso;
 
 public class DaoConnect {
 

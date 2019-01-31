@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import control.Iniciador;
 import control.Usuario;
 import dao.DaoConnect;
+import viewTavisos.TavisoConfirma;
 
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -47,8 +48,8 @@ public class Login extends JFrame {
 	private DaoConnect banco = new DaoConnect();
 	private Iniciador iniciar = new Iniciador();
 	private Usuario usuario = new Usuario();
-	private Menu menu = new Menu();
-	
+	Menu menu = new Menu();
+	TavisoConfirma avisoconf = new TavisoConfirma();
 
 	/**
 	 * Launch the application.
@@ -88,7 +89,7 @@ public class Login extends JFrame {
 		btFechar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				dispose();
+				sair();
 			}
 		});
 		btFechar.setBounds(795, 0, 46, 47);
@@ -117,6 +118,14 @@ public class Login extends JFrame {
 		contentPane.add(lblUsuario);
 
 		tLogin = new JTextField();
+		tLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+					sair();
+				}
+			}
+		});
 		tLogin.setBounds(354, 298, 182, 20);
 		contentPane.add(tLogin);
 		tLogin.setColumns(10);
@@ -128,6 +137,17 @@ public class Login extends JFrame {
 		contentPane.add(lblSenha);
 
 		tSenha = new JPasswordField();
+		tSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					logar();
+				}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+					sair();
+				}
+			}
+		});
 		tSenha.setColumns(10);
 		tSenha.setBounds(354, 328, 182, 20);
 		contentPane.add(tSenha);
@@ -149,48 +169,11 @@ public class Login extends JFrame {
 		
 				JButton btnNewButton = new JButton("Acessar");
 				btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnNewButton.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyPressed(KeyEvent arg0) {
-						
-						if (arg0.getKeyCode() == KeyEvent.VK_ENTER) { 
-							System.out.println("testando");
-				        }  
-					}
-				});
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
-						usuario.setLoginUsuario(tLogin.getText());
-						usuario.setSenhaUsuario(tSenha.getText());
-						try {
-							iniciar.LeituraIp();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						banco.Acesso(usuario.getLoginUsuario(), usuario.getSenhaUsuario(),iniciar.getIp_server());
-						
-						if(banco.logado == true){
-							
-							
-							menu.show();
-							menu.setLocationRelativeTo(null);
-							dispose();
-						}
-						if(banco.logado==false){
-							tLogin.setText("");
-							tSenha.setText("");
-							tLogin.requestFocus();
-							
-						}
-						
-						banco.logado=false;
-						
+						logar();
 					}
-						
-							
-						
 					
 	});
 				btnNewButton.setFocusable(false);
@@ -223,8 +206,6 @@ public class Login extends JFrame {
 		btnConfirma.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-			
 				
 				try {
 					iniciar.LeituraIp();
@@ -296,6 +277,42 @@ public class Login extends JFrame {
 
 			}
 		}
+	}
+
+	public void logar() {
+		usuario.setLoginUsuario(tLogin.getText());
+		usuario.setSenhaUsuario(tSenha.getText());
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		banco.Acesso(usuario.getLoginUsuario(), usuario.getSenhaUsuario(),iniciar.getIp_server());
+		
+		if(banco.logado == true){
+			
+			
+			menu.show();
+			menu.setLocationRelativeTo(null);
+			dispose();
+		}
+		if(banco.logado==false){
+			tLogin.setText("");
+			tSenha.setText("");
+			tLogin.requestFocus();
+			
+		}
+		
+		banco.logado=false;
+		
+	}
+	
+	public void sair() {
+		avisoconf.texto.setText("Tem certeza que deseja sair?");
+		avisoconf.texto.setIcon(new ImageIcon(TavisoConfirma.class.getResource("/img/atencao.png")));
+		avisoconf.setLocationRelativeTo(null);
+		avisoconf.show();
 	}
 }
 

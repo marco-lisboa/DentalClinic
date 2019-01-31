@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import viewTavisos.TavisoConfirma;
+import viewTavisos.TavisoConfirmaDesloga;
+
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -23,12 +27,14 @@ import java.awt.Window.Type;
 import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.Font;
+import javax.swing.JTextField;
 
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel btMenu;
 	private JPanel menu;
+	TavisoConfirmaDesloga avisoconf = new TavisoConfirmaDesloga();
 	private Tlivro_consulta tlivro = new Tlivro_consulta();
 	private Tficha_paciente tficha = new Tficha_paciente();
 	private Tagenda_marcacao tagenda = new Tagenda_marcacao();
@@ -99,7 +105,7 @@ public class Menu extends JFrame {
 		fechar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				dispose();
+				sair();
 			}
 		});
 		fechar.setBounds(795, 0, 46, 47);
@@ -411,5 +417,12 @@ public class Menu extends JFrame {
 				}
 			}
 		}
+	}
+
+	public void sair() {
+		avisoconf.texto.setText("Tem certeza que deseja sair?");
+		avisoconf.texto.setIcon(new ImageIcon(TavisoConfirma.class.getResource("/img/atencao.png")));
+		avisoconf.setLocationRelativeTo(null);
+		avisoconf.show();
 	}
 }
