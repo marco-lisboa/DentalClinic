@@ -182,6 +182,10 @@ public class Tconfigurar extends JPanel {
 		panel_2.add(lblNivel);
 		
 		nivelUsuario = new JComboBox();
+		nivelUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		nivelUsuario.setModel(new DefaultComboBoxModel(new String[] {"ADMINISTRADOR", "SUPERVISOR", "USUARIO"}));
 		nivelUsuario.setBounds(52, 134, 159, 20);
 		panel_2.add(nivelUsuario);
@@ -755,6 +759,7 @@ public class Tconfigurar extends JPanel {
 		tx_senha.setText("");
 		tx_funcao.setText("");
 	}
+	
 	public void salvar() {
 		try {
 			iniciar.LeituraIp();
@@ -771,4 +776,12 @@ public class Tconfigurar extends JPanel {
 	public void atualiza() {
 		
 	}
+	
+	public void nivelPadrao() {
+		
+		if(nivelUsuario.getSelectedItem()=="") {
+			
+		}
+	}
+
 }
