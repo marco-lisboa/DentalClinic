@@ -6,7 +6,8 @@ import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 
 import control.Iniciador;
-import control.Usuario;
+
+import control.*;
 import dao.DaoConnect;
 
 import javax.swing.ImageIcon;
@@ -14,19 +15,26 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.Cursor;
+import java.awt.Dimension;
+
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollBar;
@@ -40,8 +48,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Tconfigurar extends JPanel {
-	private JTable table;
-	private JTextField textField;
+	private JTable tableUsuario;
+	private JTextField txbuscar;
 	private JTextField tx_nome;
 	private JTextField tx_login;
 	private JPasswordField tx_senha;
@@ -80,28 +88,214 @@ public class Tconfigurar extends JPanel {
 	private JCheckBox priveAcessoAoGerenciador;
 	private JCheckBox priveEstornarRecebimentos;
 	private JCheckBox priveCadastroEAlteraoFornecedores;
+	TabelaUsuario tbUsuario = new TabelaUsuario();
+	String[] coluna  = {"Matricula", "Nome", "Função"};
+	String [][] linhas = {};
+	private DefaultTableModel tabela = new DefaultTableModel(linhas, coluna){
+		public boolean isCellEditable(int linhas, int coluna) {
+			
+			if(coluna==1){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+	};
+	private JScrollPane scroll;
+	private JComboBox cbsit;
 	
-	
+	  private JTable getTabela(){
+	    	if(tableUsuario==null){
+	    		tableUsuario = new JTable(tabela);
+	    		tableUsuario.addMouseListener(new MouseAdapter() {
+	    			public void mouseReased(MouseEvent e){
+	    				
+	    				int i = tableUsuario.getSelectedRow();
+	    				Object x = tableUsuario.getValueAt(i, 1);
+	    				String codigo = x+"";
+	    			}
 
+	    		});
+	    	}
+	    	return tableUsuario;
+
+	    }
+
+	    
+	    
+	    
+		private JScrollPane getScroll(){
+			if (scroll==null){
+				scroll = new JScrollPane();
+				scroll.setBackground(SystemColor.text);
+				scroll.setViewportView(getTabela());
+				scroll.setBounds(56,166,225,256);
+				defineRenderers();
+			}
+			
+			
+			
+			return scroll;
+			
+		}
+
+		private void defineRenderers() {
+			
+			tableUsuario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			JTableHeader header = tableUsuario.getTableHeader();
+			header.setPreferredSize(new Dimension(2000, 25));
+			TableColumnModel modColuna = tableUsuario.getColumnModel();
+			
+			modColuna.getColumn(0).setPreferredWidth(50);
+			modColuna.getColumn(1).setPreferredWidth(150);
+			modColuna.getColumn(2).setPreferredWidth(150);
+			
+			
+		}
 	/**
 	 * Create the panel.
 	 */
 	public Tconfigurar() {
-		addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent evt) {
-				 if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
-				       setVisible(false);
-				    }
-				
-			}
-		});
+		
+		
 		setOpaque(false);
 		setBounds(243, 11, 575, 427);
 		setLayout(null);
 		
 		tabbedPaneCadastroUsuario = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneCadastroUsuario.setVisible(false);
+		
+		tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneUsuarios.setVisible(false);
+		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneUsuarios.setBorder(null);
+		tabbedPaneUsuarios.setBackground(new Color(32, 178, 170));
+		tabbedPaneUsuarios.setBounds(0, 0, 575, 428);
+		add(tabbedPaneUsuarios);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setForeground(Color.WHITE);
+		panel_1.setBackground(new Color(32, 178, 170));
+		tabbedPaneUsuarios.addTab("USUARIO", new ImageIcon(Tconfigurar.class.getResource("/img/configPequena.png")), panel_1, null);
+		
+		JLabel voltarUsuarios = new JLabel("");
+		voltarUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		voltarUsuarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPaneUsuarios.setVisible(false);
+				tabbedPanePrincipal.setVisible(true);
+			}
+		});
+		voltarUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/voltar.png")));
+		voltarUsuarios.setToolTipText("Voltar");
+		voltarUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
+		voltarUsuarios.setBounds(535, 2, 25, 32);
+		panel_1.add(voltarUsuarios);
+		
+		scroll = new JScrollPane();
+		scroll.setBounds(10, 100, 550, 244);
+		panel_1.add(scroll);
+		
+		tableUsuario = new JTable();
+		tableUsuario.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Codigo", "Nome", "Função"
+			}
+		));
+		scroll.setViewportView(tableUsuario);
+		
+		JLabel label = new JLabel("Nome : ");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label.setBounds(10, 11, 46, 14);
+		panel_1.add(label);
+		
+		txbuscar = new JTextField();
+		txbuscar.setColumns(10);
+		txbuscar.setBounds(52, 8, 145, 20);
+		panel_1.add(txbuscar);
+		
+		JLabel btPesquisaUsuario = new JLabel("");
+		btPesquisaUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				buscar();
+			}
+		});
+		btPesquisaUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btPesquisaUsuario.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/buscar.png")));
+		btPesquisaUsuario.setToolTipText("Buscar");
+		btPesquisaUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+		btPesquisaUsuario.setForeground(Color.WHITE);
+		btPesquisaUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btPesquisaUsuario.setBounds(207, 2, 46, 32);
+		panel_1.add(btPesquisaUsuario);
+		
+		JLabel label_2 = new JLabel("Situa\u00E7\u00E3o : ");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(10, 39, 89, 14);
+		panel_1.add(label_2);
+		
+		cbsit = new JComboBox();
+		cbsit.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativo", "Inativo"}));
+		cbsit.setBounds(73, 36, 145, 20);
+		panel_1.add(cbsit);
+		
+		JLabel label_3 = new JLabel("null registros encontrados");
+		label_3.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/confimado.png")));
+		label_3.setForeground(Color.WHITE);
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_3.setBounds(10, 368, 208, 14);
+		panel_1.add(label_3);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		label_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPaneUsuarios.setVisible(false);
+				tabbedPaneCadastroUsuario.setVisible(true);
+			}
+		});
+		label_4.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/add.png")));
+		label_4.setToolTipText("Adicionar Novo Paciente");
+		label_4.setHorizontalAlignment(SwingConstants.CENTER);
+		label_4.setBounds(221, 355, 46, 43);
+		panel_1.add(label_4);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		label_5.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/editar (2).png")));
+		label_5.setToolTipText("Editar");
+		label_5.setHorizontalAlignment(SwingConstants.CENTER);
+		label_5.setBounds(281, 355, 46, 43);
+		panel_1.add(label_5);
+		
+		JLabel label_6 = new JLabel("");
+		label_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				prencheCampos();
+			}
+		});
+		label_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		label_6.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/deleta.png")));
+		label_6.setToolTipText("Remover Paciente");
+		label_6.setHorizontalAlignment(SwingConstants.CENTER);
+		label_6.setBounds(337, 355, 46, 43);
+		panel_1.add(label_6);
+		
+		JLabel bkUsuarios = new JLabel("");
+		bkUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
+		bkUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
+		bkUsuarios.setBounds(0, 2, 570, 409);
+		panel_1.add(bkUsuarios);
 		tabbedPaneCadastroUsuario.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneCadastroUsuario.setBorder(null);
 		tabbedPaneCadastroUsuario.setBackground(new Color(32, 178, 170));
@@ -476,127 +670,33 @@ public class Tconfigurar extends JPanel {
 		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
-		
-		tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneUsuarios.setVisible(false);
-		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPaneUsuarios.setBorder(null);
-		tabbedPaneUsuarios.setBackground(new Color(32, 178, 170));
-		tabbedPaneUsuarios.setBounds(0, 0, 575, 428);
-		add(tabbedPaneUsuarios);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setForeground(Color.WHITE);
-		panel_1.setBackground(new Color(32, 178, 170));
-		tabbedPaneUsuarios.addTab("USUARIO", new ImageIcon(Tconfigurar.class.getResource("/img/configPequena.png")), panel_1, null);
-		
-		JLabel voltarUsuarios = new JLabel("");
-		voltarUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		voltarUsuarios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				tabbedPaneUsuarios.setVisible(false);
-				tabbedPanePrincipal.setVisible(true);
-			}
-		});
-		voltarUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/voltar.png")));
-		voltarUsuarios.setToolTipText("Voltar");
-		voltarUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		voltarUsuarios.setBounds(535, 2, 25, 32);
-		panel_1.add(voltarUsuarios);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 100, 550, 244);
-		panel_1.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"CODIGO", "NOME", "NIVEL"
-			}
-		));
-		scrollPane.setViewportView(table);
-		
-		JLabel label = new JLabel("Nome : ");
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setBounds(10, 11, 46, 14);
-		panel_1.add(label);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(52, 8, 145, 20);
-		panel_1.add(textField);
-		
-		JLabel btPesquisaUsuario = new JLabel("");
-		btPesquisaUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btPesquisaUsuario.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/buscar.png")));
-		btPesquisaUsuario.setToolTipText("Buscar");
-		btPesquisaUsuario.setHorizontalAlignment(SwingConstants.LEFT);
-		btPesquisaUsuario.setForeground(Color.WHITE);
-		btPesquisaUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btPesquisaUsuario.setBounds(207, 2, 46, 32);
-		panel_1.add(btPesquisaUsuario);
-		
-		JLabel label_2 = new JLabel("Situa\u00E7\u00E3o : ");
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_2.setBounds(10, 39, 89, 14);
-		panel_1.add(label_2);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativo", "Inativo"}));
-		comboBox.setBounds(73, 36, 145, 20);
-		panel_1.add(comboBox);
-		
-		JLabel label_3 = new JLabel("null registros encontrados");
-		label_3.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/confimado.png")));
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_3.setBounds(10, 368, 208, 14);
-		panel_1.add(label_3);
-		
-		JLabel label_4 = new JLabel("");
-		label_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_4.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				tabbedPaneUsuarios.setVisible(false);
-				tabbedPaneCadastroUsuario.setVisible(true);
-			}
-		});
-		label_4.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/add.png")));
-		label_4.setToolTipText("Adicionar Novo Paciente");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setBounds(221, 355, 46, 43);
-		panel_1.add(label_4);
-		
-		JLabel label_5 = new JLabel("");
-		label_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_5.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/editar (2).png")));
-		label_5.setToolTipText("Editar");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setBounds(281, 355, 46, 43);
-		panel_1.add(label_5);
-		
-		JLabel label_6 = new JLabel("");
-		label_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_6.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/deleta.png")));
-		label_6.setToolTipText("Remover Paciente");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setBounds(337, 355, 46, 43);
-		panel_1.add(label_6);
-		
-		JLabel bkUsuarios = new JLabel("");
-		bkUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
-		bkUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		bkUsuarios.setBounds(0, 2, 570, 409);
-		panel_1.add(bkUsuarios);
 
+	}
+	
+	
+	public void buscar() {
+		usuario.setNomeUsuario(txbuscar.getText());
+		if(cbsit.getSelectedItem()=="Ativo") {
+			usuario.setSituacao(1);
+		}else if(cbsit.getSelectedItem()=="Inativo") {
+			usuario.setSituacao(0);
+		}else {
+			usuario.setSituacao(3);
+		}
+		
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		dao.conectar(iniciar.getIp_server());
+		try {
+			dao.listUsuarios(tableUsuario, usuario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void varreCampos() {
@@ -751,6 +851,24 @@ public class Tconfigurar extends JPanel {
 		}else {
 			usuario.setpCadFuncionarios(0);
 		}
+	}
+	
+	public void prencheCampos() {
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		usuario.setUsuarioId(1);
+		dao.conectar(iniciar.getIp_server());
+		dao.dadosUsuario(usuario);
+		tx_nome.setText(usuario.getNomeUsuario());
+	System.out.println(usuario.getNomeUsuario());
+	tabbedPaneUsuarios.setVisible(false);
+	tabbedPaneCadastroUsuario.setVisible(true);
+	
+		
 	}
 	
 	public void limpaCampos() {

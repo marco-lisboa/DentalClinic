@@ -5,11 +5,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-import control.Usuario;
-import viewTavisos.Taviso;
+import control.*;
+import viewTavisos.*;
 
 public class DaoConnect {
 
@@ -23,7 +27,8 @@ public class DaoConnect {
 		public String URL = null;
 		private ResultSet resultado = null;
 		Taviso aviso = new Taviso();
-		
+		TabelaUsuario tbUsuario = new TabelaUsuario();
+		private List<Usuario>dados = new ArrayList<>();
 		
 		public void conectar(String ip){
 			 URL = "jdbc:mysql://"+ip+":3306/dentalclinic";
@@ -140,8 +145,32 @@ public class DaoConnect {
 			 * Consulta de usuarios - Comentario Maynore Soft
 			 * ------------------------------------------------ */
 			//Inicio
-			public void listUsuarios (Usuario usuario) {
-				
+			public void listUsuarios (JTable tabela, Usuario usuario) throws SQLException{
+				try {
+					String sql;
+					if(usuario.getSituacao()<3) {
+						sql = "SELECT * FROM login WHERE nome like'"+usuario.getNomeUsuario()+"%' AND situacao like '"+usuario.getSituacao()+"%' ORDER BY idlogin";
+					}else {
+						sql = "SELECT * FROM login WHERE nome like'"+usuario.getNomeUsuario()+"%' ORDER BY idlogin";
+					}
+					
+					stmt = con.prepareStatement(sql);
+					ResultSet res = stmt.executeQuery();
+					DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+					modelo.setNumRows(0);
+					while(res.next()) {
+						modelo.addRow(new Object[]{
+								res.getInt("idlogin"),
+								res.getString("nome"),
+								res.getString("funcao")
+						});
+						
+					}
+					
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 			//Fim
 			/*--------------------------------------------------
@@ -195,7 +224,6 @@ public class DaoConnect {
 					e2.printStackTrace();
 				}
 				
-				System.out.println( usuario.getUsuarioId());
 				if(usuario.getUsuarioId()>0) {
 					sqlprive = "INSERT INTO privilegios("
 							/*1*/					+ "idusuario,"
@@ -328,9 +356,9 @@ public class DaoConnect {
 			//Inicio
 			
 			public void dadosUsuario(Usuario usuario) {
-				String sql = "SELECT * FROM login WHERE loginid ='"+usuario.getUsuarioId()+"';";
 				
 				try {
+					String sql = "SELECT * FROM login l,privilegios p WHERE l.idlogin = "+usuario.getUsuarioId()+"  and l.idlogin= p.idusuario;";
 					stmt =  con.prepareStatement(sql);
 					ResultSet res = stmt.executeQuery();
 					while(res.next()) {
@@ -341,10 +369,32 @@ public class DaoConnect {
 						usuario.setNivelUsuario(res.getInt("nivel"));
 						usuario.setPadrao(res.getInt("padrao"));
 						usuario.setCadastro(res.getInt("cadastro"));
-						usuario.setAltera_privi(res.getInt("aletera_privilegio"));
+						usuario.setAltera_privi(res.getInt("altera_privilegio"));
 						usuario.setSituacao(res.getInt("situacao"));
 						usuario.setAtivo_site(res.getInt("ativo_site"));
-						usuario.setPrivilegioId(res.getInt("privilegioid"));
+						//--------------------------------------------------
+						usuario.setpCadCliente(res.getInt("cad_alt_clientes"));
+						usuario.setpCadAgenda(res.getInt("cad_alt_agenda"));
+						usuario.setpAcessReceber(res.getInt("acesso_recebe_pag"));
+						usuario.setpRealizaOrcamento(res.getInt("realiza_simu_orcameto"));
+						usuario.setpCadServico(res.getInt("cad_alt_servico"));
+						usuario.setpLivroCaixa(res.getInt("livro_caixa"));
+						usuario.setpChamada(res.getInt("chamada"));
+						usuario.setpSincroniza(res.getInt("sincroniza"));
+						usuario.setpAtualizar(res.getInt("atualizar"));
+						usuario.setpAcessConfig(res.getInt("acesso_configuracao"));
+						usuario.setpCadEmpresas(res.getInt("cad_alt_empresa"));
+						usuario.setpRealizaRecebimento(res.getInt("realiza_recebimento"));
+						usuario.setpRealizaRecebimentoAvulso(res.getInt("realiza_recebimento_avul"));
+						usuario.setpExcluirFinanceiro(res.getInt("excluir_financeiro"));
+						usuario.setpEstorna(res.getInt("estornar"));
+						usuario.setpAcessGenFin(res.getInt("acesso_geren_finac"));
+						usuario.setpCadContasBancos(res.getInt("cad_alt_banco_conta"));
+						usuario.setpCadDespesas(res.getInt("cad_alt_despesas"));
+						usuario.setpAcessFolha(res.getInt("acesso_folha"));
+						usuario.setpCadFornecedor(res.getInt("cad_alt_fornecedores"));
+						usuario.setpAcessRelatorios(res.getInt("acesso_relatorios"));
+						usuario.setpCadFuncionarios(res.getInt("cad_alt_funcionarios"));
 					}
 					
 				} catch (SQLException e) {
