@@ -253,9 +253,25 @@ public class Usuario {
 		String loginUsuario,nomeUsuario,senhaUsuario, situacaoUsuario,funcao;
 		
 		int usuarioId,nivelUsuario,padrao,cadastroUsuario,altera_privi,situacao,ativo_site,privilegioId,pCadCliente,
-		pCadAgenda,pAcessReceber,pRealizaOrcamento,pCadServico,pLivroCaixa,pChamada,pSincroniza,
+		pCadAgenda,pAcessReceber,pRealizaOrcamento,pCadServico,pLivroCaixa,pChamada,pSincroniza,numeroRegistro,
 		pAtualizar,pAcessConfig,pCadEmpresas,pRealizaRecebimento,pRealizaRecebimentoAvulso,pExcluirFinanceiro,
 		pEstorna,pAcessGenFin,pCadDespesas,pCadFornecedor,pAcessRelatorios,pCadFuncionarios,pCadContasBancos,pAcessFolha;
+		public int getCadastroUsuario() {
+			return cadastroUsuario;
+		}
+
+		public void setCadastroUsuario(int cadastroUsuario) {
+			this.cadastroUsuario = cadastroUsuario;
+		}
+
+		public int getNumeroRegistro() {
+			return numeroRegistro;
+		}
+
+		public void setNumeroRegistro(int numeroRegistro) {
+			this.numeroRegistro = numeroRegistro;
+		}
+
 		public int getpAcessFolha() {
 			return pAcessFolha;
 		}

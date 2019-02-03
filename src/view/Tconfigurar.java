@@ -43,6 +43,8 @@ import javax.swing.AbstractListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -104,6 +106,7 @@ public class Tconfigurar extends JPanel {
 	};
 	private JScrollPane scroll;
 	private JComboBox cbsit;
+	private JLabel numRegistro;
 	
 	  private JTable getTabela(){
 	    	if(tableUsuario==null){
@@ -184,6 +187,7 @@ public class Tconfigurar extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				tabbedPaneUsuarios.setVisible(false);
 				tabbedPanePrincipal.setVisible(true);
+				limpaCampos();
 			}
 		});
 		voltarUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/voltar.png")));
@@ -197,6 +201,20 @@ public class Tconfigurar extends JPanel {
 		panel_1.add(scroll);
 		
 		tableUsuario = new JTable();
+		tableUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent click) {
+				if(click.getClickCount()==2) {
+					int linha;
+					Object codigo;
+					linha= tableUsuario.getSelectedRow();
+					codigo =  tableUsuario.getValueAt(linha, 0);
+					
+					usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+				}
+			}
+		});
 		tableUsuario.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -244,12 +262,12 @@ public class Tconfigurar extends JPanel {
 		cbsit.setBounds(73, 36, 145, 20);
 		panel_1.add(cbsit);
 		
-		JLabel label_3 = new JLabel("null registros encontrados");
-		label_3.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/confimado.png")));
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_3.setBounds(10, 368, 208, 14);
-		panel_1.add(label_3);
+		numRegistro = new JLabel();
+		numRegistro.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/confimado.png")));
+		numRegistro.setForeground(Color.WHITE);
+		numRegistro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		numRegistro.setBounds(10, 368, 208, 14);
+		panel_1.add(numRegistro);
 		
 		JLabel label_4 = new JLabel("");
 		label_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -693,6 +711,12 @@ public class Tconfigurar extends JPanel {
 		dao.conectar(iniciar.getIp_server());
 		try {
 			dao.listUsuarios(tableUsuario, usuario);
+			if(usuario.getNumeroRegistro()==1) {
+				numRegistro.setText(usuario.getNumeroRegistro()+" registro encontrado");
+			}else {
+				numRegistro.setText(usuario.getNumeroRegistro()+" registros encontrados");
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -716,7 +740,7 @@ public class Tconfigurar extends JPanel {
 		if(padraoPrivilegios.getSelectedItem()=="PADR\u00C3O USUARIO") {
 			usuario.setPadrao(1);
 		}else {
-			usuario.setPadrao(2);
+			usuario.setPadrao(0);
 		}
 		//Privilegios Padrão
 		if(PermitirCadastroUsuarios.isSelected()==true) {
@@ -860,7 +884,6 @@ public class Tconfigurar extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		usuario.setUsuarioId(1);
 		dao.conectar(iniciar.getIp_server());
 		dao.dadosUsuario(usuario);
 		tx_nome.setText(usuario.getNomeUsuario());
@@ -876,6 +899,167 @@ public class Tconfigurar extends JPanel {
 			nivelUsuario.setSelectedItem("USUARIO");
 		}
 		
+		if(usuario.getPadrao()==1){
+			padraoPrivilegios.setSelectedItem("PADR\u00C3O USUARIO");
+		}else {
+			padraoPrivilegios.setSelectedItem("PERSONALIZADO");
+		}
+		
+		if(usuario.getCadastro()==1) {
+			PermitirCadastroUsuarios.setSelected(true);
+		}else {
+			PermitirCadastroUsuarios.setSelected(false);
+		}
+		
+		if(usuario.getAltera_privi()==1) {
+			alteraPrivilegio.setSelected(true);
+		}else {
+			alteraPrivilegio.setSelected(false);
+		}
+		
+		if(usuario.getSituacao()==1) {
+			situacao.setSelected(true);
+		}else {
+			situacao.setSelected(true);
+		}
+		
+		if(usuario.getAtivo_site()==1) {
+			ativoSite.setSelected(true);
+		}else {
+			ativoSite.setSelected(false);
+		}
+		
+		if(usuario.getpCadCliente()==1) {
+			priviCadastroAlteraCliente.setSelected(true);
+		}else {
+			priviCadastroAlteraCliente.setSelected(false);
+		}
+		
+		if(usuario.getpCadAgenda()==1) {
+			priviCadastroEAlteraoAgenda.setSelected(true);
+		}else {
+			priviCadastroEAlteraoAgenda.setSelected(false);
+		}
+		
+		if(usuario.getpAcessReceber()==1) {
+			priviAcessoRebimentosPagamentos.setSelected(true);
+		}else {
+			priviAcessoRebimentosPagamentos.setSelected(false);
+		}
+		
+		if(usuario.getpRealizaOrcamento()==1) {
+			priviSimuOrcamento.setSelected(true);
+		}else {
+			priviSimuOrcamento.setSelected(false);
+		}
+		
+		if(usuario.getpCadServico()==1) {
+			priviCadastroAlteraServico.setSelected(true);
+		}else {
+			priviCadastroAlteraServico.setSelected(false);
+		}
+		
+		if(usuario.getpLivroCaixa()==1) {
+			priviAcessoLivroCaixa.setSelected(true);
+		}else {
+			priviAcessoLivroCaixa.setSelected(false);
+		}
+		
+		if(usuario.getpChamada()==1) {
+			priviChamadaFila.setSelected(true);
+		}else {
+			priviChamadaFila.setSelected(false);
+		}
+		
+		if(usuario.getpSincroniza()==1) {
+			priviSincronizaoDeDados.setSelected(true);
+		}else {
+			priviSincronizaoDeDados.setSelected(false);
+		}
+		
+		if(usuario.getpAtualizar()==1) {
+			priviAtualizarSistema.setSelected(true);
+		}else {
+			priviAtualizarSistema.setSelected(false);
+		}
+		
+		if(usuario.getpAcessConfig()==1) {
+			priviAcessoAConfiguraes.setSelected(true);
+		}else {
+			priviAcessoAConfiguraes.setSelected(false);
+		}
+		
+		if(usuario.getpCadEmpresas()==1) {
+			priviCadastroEAlteraEmpresa.setSelected(true);
+		}else {
+			priviCadastroEAlteraEmpresa.setSelected(false);
+		}
+		
+		if(usuario.getpRealizaRecebimento()==1) {
+			priviRealizarRecebimento.setSelected(true);
+		}else {
+			priviRealizarRecebimento.setSelected(false);
+		}
+		
+		if(usuario.getpRealizaRecebimentoAvulso()==1) {
+			priviRecebimentoAvuso.setSelected(true);
+		}else {
+			priviRecebimentoAvuso.setSelected(false);
+		}
+		
+		if(usuario.getpExcluirFinanceiro()==1) {
+			priviExcluirParcelasFinanceiras.setSelected(true);
+		}else {
+			priviExcluirParcelasFinanceiras.setSelected(false);
+		}
+		
+		if(usuario.getpEstorna()==1) {
+			priveEstornarRecebimentos.setSelected(true);
+		}else {
+			priveEstornarRecebimentos.setSelected(false);
+		}
+		
+		if(usuario.getpAcessGenFin()==1) {
+			priveAcessoAoGerenciador.setSelected(true);
+		}else {
+			priveAcessoAoGerenciador.setSelected(false);
+		}
+		
+		if(usuario.getpCadContasBancos()==1) {
+			priveCadastroEAlteraoBacosContas.setSelected(true);
+		}else {
+			priveCadastroEAlteraoBacosContas.setSelected(false);
+		}
+		
+		if(usuario.getpCadDespesas()==1) {
+			priveCadastroEAlteraoDespesas.setSelected(true);
+		}else {
+			priveCadastroEAlteraoDespesas.setSelected(false);
+		}
+		
+		if(usuario.getpAcessFolha()==1) {
+			priveAcessoAFolha.setSelected(true);
+		}else {
+			priveAcessoAFolha.setSelected(false);
+		}
+		
+		if(usuario.getpCadFornecedor()==1) {
+			priveCadastroEAlteraoFornecedores.setSelected(true);
+		}else {
+			priveCadastroEAlteraoFornecedores.setSelected(false);
+		}
+		
+		if(usuario.getpAcessRelatorios()==1) {
+			priviAcessoRelatroios.setSelected(true);
+		}else {
+			priviAcessoRelatroios.setSelected(false);
+		}
+		
+		if(usuario.getpCadFuncionarios()==1) {
+			priveCadastroDeFuncionarios.setSelected(true);
+		}else {
+			priveCadastroDeFuncionarios.setSelected(false);
+		}
 		
 		tabbedPaneUsuarios.setVisible(false);
 		tabbedPaneCadastroUsuario.setVisible(true);

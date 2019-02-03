@@ -171,6 +171,24 @@ public class DaoConnect {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
+				//--------------------------------------------------------------------------------------------------------------------------------------------
+				try {
+				String sqlconta;
+				if(usuario.getSituacao()<3) {
+					sqlconta = "SELECT COUNT(idlogin) AS nresgistro FROM login WHERE nome like'"+usuario.getNomeUsuario()+"%' AND situacao like '"+usuario.getSituacao()+"%'";
+				}else {
+					sqlconta = "SELECT COUNT(idlogin) AS nresgistro FROM login WHERE nome like'"+usuario.getNomeUsuario()+"%'";
+				}
+				stmt = con.prepareStatement(sqlconta);
+				ResultSet res = stmt.executeQuery();
+				while (res.next()) {
+					usuario.setNumeroRegistro(res.getInt("nresgistro"));
+				}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				
 			}
 			//Fim
 			/*--------------------------------------------------
