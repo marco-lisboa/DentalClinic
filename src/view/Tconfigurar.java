@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Dialog.ModalityType;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -165,7 +166,6 @@ public class Tconfigurar extends JPanel {
 		setOpaque(false);
 		setBounds(243, 11, 575, 427);
 		setLayout(null);
-		
 		tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneUsuarios.setVisible(false);
 		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -296,7 +296,7 @@ public class Tconfigurar extends JPanel {
 		label_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				prencheCampos();
+				
 			}
 		});
 		label_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1072,6 +1072,36 @@ public class Tconfigurar extends JPanel {
 		tx_login.setText("");
 		tx_senha.setText("");
 		tx_funcao.setText("");
+		nivelUsuario.setSelectedItem("ADMINISTRADOR");
+		padraoPrivilegios.setSelectedItem("PADRÃO USUARIO");
+		PermitirCadastroUsuarios.setSelected(false);
+		alteraPrivilegio.setSelected(false);
+		situacao.setSelected(false);
+		ativoSite.setSelected(false);
+		
+		priviCadastroAlteraCliente.setSelected(false);
+		priviCadastroEAlteraoAgenda.setSelected(false);
+		priviAcessoRebimentosPagamentos.setSelected(false);
+		priviSimuOrcamento.setSelected(false);
+		priviCadastroAlteraServico.setSelected(false);
+		priviAcessoLivroCaixa.setSelected(false);
+		priviChamadaFila.setSelected(false);
+		priviSincronizaoDeDados.setSelected(false);
+		priviAtualizarSistema.setSelected(false);
+		priviAcessoAConfiguraes.setSelected(false);
+		priviCadastroEAlteraEmpresa.setSelected(false);
+		
+		priviRealizarRecebimento.setSelected(false);
+		priviRecebimentoAvuso.setSelected(false);
+		priviExcluirParcelasFinanceiras.setSelected(false);
+		priveEstornarRecebimentos.setSelected(false);
+		priveAcessoAoGerenciador.setSelected(false);
+		priveCadastroEAlteraoBacosContas.setSelected(false);
+		priveCadastroEAlteraoDespesas.setSelected(false);
+		priveAcessoAFolha.setSelected(false);
+		priveCadastroEAlteraoFornecedores.setSelected(false);
+		priviAcessoRelatroios.setSelected(false);
+		priveCadastroDeFuncionarios.setSelected(false);
 	}
 	
 	public void salvar() {
