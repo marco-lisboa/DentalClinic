@@ -1128,13 +1128,16 @@ public class Tconfigurar extends JPanel {
 	}
 	
 	public void checaPrivilegio() {
+		
+		
 		try {
 			iniciar.LeituraIp();
+			iniciar.leituraUsuarioLogado();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		dao.conectar(iniciar.getIp_server());
 		dao.privilegio(usuario);
 		if(usuario.getCadastroUsuario()==1) {
 			tabbedPaneUsuarios.setVisible(false);

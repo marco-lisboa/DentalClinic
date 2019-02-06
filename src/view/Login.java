@@ -297,12 +297,19 @@ public class Login extends JFrame {
 			menu.setLocationRelativeTo(null);
 			
 			menu.nomeUsuario.setText(usuario.getNomeUsuarioLogado());
+			try {
+				iniciar.EscritaUsuarioLogado(Integer.toString( usuario.getUsuarioLogado()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			dispose();
 		}
 		if(banco.logado==false){
 			tLogin.setText("");
 			tSenha.setText("");
 			tLogin.requestFocus();
+			
 			
 		}
 		

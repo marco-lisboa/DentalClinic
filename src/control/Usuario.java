@@ -267,8 +267,8 @@ public class Usuario {
 		public void setUsuarioLogado(int usuarioLogado) {
 			this.usuarioLogado = usuarioLogado;
 		}
-
-		int usuarioLogado, usuarioId,nivelUsuario,padrao,cadastroUsuario,altera_privi,situacao,ativo_site,privilegioId,pCadCliente,
+		static int usuarioLogado;
+		int usuarioId,nivelUsuario,padrao,cadastroUsuario,altera_privi,situacao,ativo_site,privilegioId,pCadCliente,
 		pCadAgenda,pAcessReceber,pRealizaOrcamento,pCadServico,pLivroCaixa,pChamada,pSincroniza,numeroRegistro,
 		pAtualizar,pAcessConfig,pCadEmpresas,pRealizaRecebimento,pRealizaRecebimentoAvulso,pExcluirFinanceiro,
 		pEstorna,pAcessGenFin,pCadDespesas,pCadFornecedor,pAcessRelatorios,pCadFuncionarios,pCadContasBancos,pAcessFolha;

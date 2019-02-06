@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class Iniciador {
+public class Iniciador extends Usuario {
 String ip_server;
 
 public String getIp_server() {
@@ -35,6 +35,13 @@ public void LeituraIp() throws IOException{
 	setIp_server(ip);
 }
 
+public void leituraUsuarioLogado() throws IOException{
+	String id;
+	Properties prop = getProp();
+	id = prop.getProperty("prop.iduser.login");
+	setUsuarioLogado(Integer.parseInt(id));
+}
+
 public void EscritaIp(String ip) throws IOException{
 	Properties prop = getProp();
 	prop.setProperty("prop.server.host", ip); 
@@ -42,7 +49,12 @@ public void EscritaIp(String ip) throws IOException{
 	
 }
 	
-
+public void EscritaUsuarioLogado(String usuario)throws IOException{
+	Properties prop = getProp();
+	prop.setProperty("prop.iduser.login", usuario); 
+	prop.store(new FileOutputStream("./properties/dentalclinic.properties"), null);
+	
+}
 
 
 }
