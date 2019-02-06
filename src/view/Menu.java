@@ -42,6 +42,7 @@ public class Menu extends JFrame {
 	private Tcalculadora tcalcular = new Tcalculadora();
 	private Tlivrocaixa tcaixa = new Tlivrocaixa();
 	private Tconfigurar tconfig = new Tconfigurar();
+	public JLabel nomeUsuario;
 
 	/**
 	 * Launch the application.
@@ -172,7 +173,7 @@ public class Menu extends JFrame {
 		fotoUsuario.setBounds(33, 9, 135, 134);
 		menu.add(fotoUsuario);
 		
-		JLabel nomeUsuario = new JLabel("Dental Clinic");
+		nomeUsuario = new JLabel("Dental Clinic");
 		nomeUsuario.setFont(new Font("Arial", Font.PLAIN, 15));
 		nomeUsuario.setForeground(Color.WHITE);
 		nomeUsuario.setHorizontalAlignment(SwingConstants.CENTER);

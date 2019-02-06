@@ -250,9 +250,25 @@ public class Usuario {
 		this.nivelUsuario = nivelUsuario;
 	}
 
-		String loginUsuario,nomeUsuario,senhaUsuario, situacaoUsuario,funcao;
+		String loginUsuario,nomeUsuario,senhaUsuario, situacaoUsuario,funcao,nomeUsuarioLogado;
 		
-		int usuarioId,nivelUsuario,padrao,cadastroUsuario,altera_privi,situacao,ativo_site,privilegioId,pCadCliente,
+		public String getNomeUsuarioLogado() {
+			return nomeUsuarioLogado;
+		}
+
+		public void setNomeUsuarioLogado(String nomeUsuarioLogado) {
+			this.nomeUsuarioLogado = nomeUsuarioLogado;
+		}
+
+		public int getUsuarioLogado() {
+			return usuarioLogado;
+		}
+
+		public void setUsuarioLogado(int usuarioLogado) {
+			this.usuarioLogado = usuarioLogado;
+		}
+
+		int usuarioLogado, usuarioId,nivelUsuario,padrao,cadastroUsuario,altera_privi,situacao,ativo_site,privilegioId,pCadCliente,
 		pCadAgenda,pAcessReceber,pRealizaOrcamento,pCadServico,pLivroCaixa,pChamada,pSincroniza,numeroRegistro,
 		pAtualizar,pAcessConfig,pCadEmpresas,pRealizaRecebimento,pRealizaRecebimentoAvulso,pExcluirFinanceiro,
 		pEstorna,pAcessGenFin,pCadDespesas,pCadFornecedor,pAcessRelatorios,pCadFuncionarios,pCadContasBancos,pAcessFolha;

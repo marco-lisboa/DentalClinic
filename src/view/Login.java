@@ -288,13 +288,15 @@ public class Login extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		banco.Acesso(usuario.getLoginUsuario(), usuario.getSenhaUsuario(),iniciar.getIp_server());
-		
+		banco.Acesso(usuario.getLoginUsuario(), usuario.getSenhaUsuario(),iniciar.getIp_server(),usuario);
+
 		if(banco.logado == true){
-			
+
 			
 			menu.show();
 			menu.setLocationRelativeTo(null);
+			
+			menu.nomeUsuario.setText(usuario.getNomeUsuarioLogado());
 			dispose();
 		}
 		if(banco.logado==false){

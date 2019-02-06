@@ -27,7 +27,6 @@ public class DaoConnect {
 		public String URL = null;
 		private ResultSet resultado = null;
 		Taviso aviso = new Taviso();
-		TabelaUsuario tbUsuario = new TabelaUsuario();
 		private List<Usuario>dados = new ArrayList<>();
 		
 		public void conectar(String ip){
@@ -47,26 +46,8 @@ public class DaoConnect {
 		//Validação login - MAYNORECOMENTS
 		public boolean logado;
 
-		int id_usuario;
-		public int getId_usuario() {
-			return id_usuario;
-		}
-
-		public void setId_usuario(int id_usuario) {
-			this.id_usuario = id_usuario;
-		}
-
-		String nome_usuario;
-
-		public String getNome_usuario() {
-			return nome_usuario;
-		}
-
-		public void setNome_usuario(String nome_usuario) {
-			this.nome_usuario = nome_usuario;
-		}
-
-		public void Acesso(String log_usuario,String senha_usuario,String ip){
+	
+		public void Acesso(String log_usuario,String senha_usuario,String ip,Usuario usuario){
 
 			Connection conectado = null;
 			PreparedStatement consulta = null;
@@ -76,10 +57,12 @@ public class DaoConnect {
 			try{
 				url = "jdbc:mysql://"+ip+":3306/dentalclinic";
 				conectado = DriverManager.getConnection(url,"root","maynore");
-				consulta =  conectado.prepareStatement("select login, senha from login where login='"+log_usuario+"'and senha='"+senha_usuario+"'");
+				consulta =  conectado.prepareStatement("select idlogin,login, senha,nome from login where login='"+log_usuario+"'and senha='"+senha_usuario+"'");
 				retorno =consulta.executeQuery();
 				if(retorno.next()){
 					logado=true;
+					usuario.setUsuarioLogado(retorno.getInt("idlogin"));
+					usuario.setNomeUsuarioLogado((retorno.getString("nome")));
 				}else{
 					aviso.texto.setText("USUARIO E SENHA INCORRETOS.");
 					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/fechar.png")));
@@ -96,24 +79,6 @@ public class DaoConnect {
 
 		}
 
-		public void DadosUsuario(String nome){
-			String sql= "SELECT * FROM login where login='"+nome+"';";
-			try {
-				stmt =  con.prepareStatement(sql);
-				resultado = stmt.executeQuery();
-				while (resultado.next()) {
-					setId_usuario(Integer.parseInt(resultado.getString("id")));
-					setNome_usuario(resultado.getString("login"));
-
-				}
-
-			} catch (SQLException e) {
-				e.getMessage();
-			}
-
-		}
-		
-		
 		/***************************************************************************
 		 * 																		   *
 		 * 				public void inserir() {}                                   *
@@ -422,6 +387,46 @@ public class DaoConnect {
 			}
 			//Fim
 
+			public void privilegio(Usuario usuario) {
+				String sql = "SELECT * FROM login l,privilegios p WHERE l.idlogin = "+usuario.getUsuarioLogado()+"  and l.idlogin= p.idusuario;";
+				try {
+					stmt =  con.prepareStatement(sql);
+					ResultSet res = stmt.executeQuery();
+					while(res.next()) {
+						usuario.setCadastro(res.getInt("cadastro"));
+						usuario.setAltera_privi(res.getInt("altera_privilegio"));
+						usuario.setSituacao(res.getInt("situacao"));
+						usuario.setAtivo_site(res.getInt("ativo_site"));
+						//--------------------------------------------------
+						usuario.setpCadCliente(res.getInt("cad_alt_clientes"));
+						usuario.setpCadAgenda(res.getInt("cad_alt_agenda"));
+						usuario.setpAcessReceber(res.getInt("acesso_recebe_pag"));
+						usuario.setpRealizaOrcamento(res.getInt("realiza_simu_orcameto"));
+						usuario.setpCadServico(res.getInt("cad_alt_servico"));
+						usuario.setpLivroCaixa(res.getInt("livro_caixa"));
+						usuario.setpChamada(res.getInt("chamada"));
+						usuario.setpSincroniza(res.getInt("sincroniza"));
+						usuario.setpAtualizar(res.getInt("atualizar"));
+						usuario.setpAcessConfig(res.getInt("acesso_configuracao"));
+						usuario.setpCadEmpresas(res.getInt("cad_alt_empresa"));
+						usuario.setpRealizaRecebimento(res.getInt("realiza_recebimento"));
+						usuario.setpRealizaRecebimentoAvulso(res.getInt("realiza_recebimento_avul"));
+						usuario.setpExcluirFinanceiro(res.getInt("excluir_financeiro"));
+						usuario.setpEstorna(res.getInt("estornar"));
+						usuario.setpAcessGenFin(res.getInt("acesso_geren_finac"));
+						usuario.setpCadContasBancos(res.getInt("cad_alt_banco_conta"));
+						usuario.setpCadDespesas(res.getInt("cad_alt_despesas"));
+						usuario.setpAcessFolha(res.getInt("acesso_folha"));
+						usuario.setpCadFornecedor(res.getInt("cad_alt_fornecedores"));
+						usuario.setpAcessRelatorios(res.getInt("acesso_relatorios"));
+						usuario.setpCadFuncionarios(res.getInt("cad_alt_funcionarios"));
+					};
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		/***************************************************************************
 		 * 																		   *
 		 * 							Função Fecha Conexão                           *
