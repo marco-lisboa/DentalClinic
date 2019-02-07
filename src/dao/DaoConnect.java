@@ -296,7 +296,6 @@ public class DaoConnect {
 						+ "altera_privilegio =?, "
 						+ "situacao =? ,"
 						+ "ativo_site =? ,"
-						+ "privilegioid =? "
 						+ "where idlogin =? ";
 				
 				try {
@@ -312,12 +311,69 @@ public class DaoConnect {
 					stmt.setInt(9, usuario.getSituacao());
 					stmt.setInt(10, usuario.getAtivo_site());
 					stmt.setInt(11,usuario.getPrivilegioId());
-					stmt.setInt(12,usuario.getUsuarioId());
 					stmt.execute();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				String sqlprive="UPDATE privilegios SET "
+						/*1*/					+ "cad_alt_clientes=? ,"
+						/*2*/					+ "cad_alt_agenda=? ,"
+						/*3*/					+ "acesso_recebe_pag=? ,"
+						/*4*/					+ "realiza_simu_orcameto=? ,"
+						/*5*/					+ "cad_alt_servico=? ,"
+						/*6*/					+ "livro_caixa=? ,"
+						/*7*/					+ "chamada=? ,"
+						/*8*/					+ "sincroniza=? ,"
+						/*9*/					+ "atualizar=? ,"
+						/*10*/					+ "acesso_configuracao=? ,"
+						/*11*/					+ "cad_alt_empresa=? ,"
+						/*12*/					+ "realiza_recebimento=? ,"
+						/*13*/					+ "realiza_recebimento_avul=? ,"
+						/*14*/					+ "excluir_financeiro=? ,"
+						/*15*/					+ "estornar=? ,"
+						/*16*/					+ "acesso_geren_finac=? ,"
+						/*17*/					+ "cad_alt_banco_conta=? ,"
+						/*18*/					+ "cad_alt_despesas=? ,"
+						/*19*/					+ "acesso_folha=? ,"
+						/*20*/					+ "cad_alt_fornecedores=? ,"
+						/*21*/					+ "acesso_relatorios=? ,"
+						/*22*/					+ "cad_alt_funcionarios=? "
+						/*23*/					+ "WHERE idusuario = ? ";
+				try {
+					
+					stmt =  con.prepareStatement(sqlprive);
+					stmt.setInt(1, usuario.getpCadCliente());
+					stmt.setInt(2, usuario.getpCadAgenda());
+					stmt.setInt(3, usuario.getpAcessReceber());
+					stmt.setInt(4, usuario.getpRealizaOrcamento());
+					stmt.setInt(5, usuario.getpCadServico());
+					stmt.setInt(6, usuario.getpLivroCaixa());
+					stmt.setInt(7, usuario.getpChamada());
+					stmt.setInt(8, usuario.getpSincroniza());
+					stmt.setInt(9, usuario.getpAtualizar());
+					stmt.setInt(10, usuario.getpAcessConfig());
+					stmt.setInt(11, usuario.getpCadEmpresas());
+					stmt.setInt(12, usuario.getpRealizaRecebimento());
+					stmt.setInt(13, usuario.getpRealizaRecebimentoAvulso());
+					stmt.setInt(14, usuario.getpExcluirFinanceiro());
+					stmt.setInt(15, usuario.getpEstorna());
+					stmt.setInt(16, usuario.getpAcessGenFin());
+					stmt.setInt(17, usuario.getpCadContasBancos());
+					stmt.setInt(18, usuario.getpCadDespesas());
+					stmt.setInt(19, usuario.getpAcessFolha());
+					stmt.setInt(20,usuario.getpCadFornecedor());
+					stmt.setInt(21, usuario.getpAcessRelatorios());
+					stmt.setInt(22, usuario.getpCadFuncionarios());
+					stmt.setInt(23,usuario.getUsuarioId());
+					System.out.println(sqlprive);
+					stmt.execute();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			//Fim

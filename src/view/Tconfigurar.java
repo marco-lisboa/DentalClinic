@@ -36,6 +36,7 @@ import dao.DaoConnect;
 import viewTavisos.*;
 
 public class Tconfigurar extends JPanel {
+	int acao;
 	Taviso aviso = new Taviso();
 	public int idUusuarioLogado;
 	private JTable tableUsuario;
@@ -191,6 +192,7 @@ public class Tconfigurar extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent click) {
 				if(click.getClickCount()==2) {
+					acao =1;
 					int linha;
 					Object codigo;
 					linha= tableUsuario.getSelectedRow();
@@ -260,6 +262,7 @@ public class Tconfigurar extends JPanel {
 		label_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				acao= 0;
 				checaPrivilegio();
 			}
 		});
@@ -383,6 +386,7 @@ public class Tconfigurar extends JPanel {
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				limpaCampos();
 				tabbedPaneCadastroUsuario.setVisible(false);
 				tabbedPaneUsuarios.setVisible(true);
 				
@@ -655,8 +659,14 @@ public class Tconfigurar extends JPanel {
 		btSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				varreCampos();
-				salvar();
+				if(acao==1) {
+					atualiza();
+					}else {
+						salvar();
+						}
+				
 				tabbedPaneCadastroUsuario.setVisible(false);
 				tabbedPaneUsuarios.setVisible(true);
 			}
@@ -1102,7 +1112,15 @@ public class Tconfigurar extends JPanel {
 	}
 	
 	public void atualiza() {
-		
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		dao.conectar(iniciar.getIp_server());
+		dao.alteraUsuario(usuario);
+		dao.fecharCon();
 	}
 	
 	public void nivelPadrao() {
