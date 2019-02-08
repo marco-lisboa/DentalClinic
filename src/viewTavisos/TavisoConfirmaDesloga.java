@@ -61,7 +61,8 @@ public class TavisoConfirmaDesloga extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.exit(1);
+					new Login().show();
+					dispose();
 				}
 			});
 			btSim.setForeground(Color.WHITE);
@@ -74,6 +75,9 @@ public class TavisoConfirmaDesloga extends JDialog {
 		btNao = new JButton("N\u00E3o");
 		btNao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Menu mn =new Menu();
+				mn.setVisible(true);
+				mn.setLocationRelativeTo(null);
 				dispose();
 			}
 		});

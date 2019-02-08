@@ -30,7 +30,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 
 public class Menu extends JFrame {
-
 	private JPanel contentPane;
 	private JLabel btMenu;
 	private JPanel menu;
@@ -106,7 +105,9 @@ public class Menu extends JFrame {
 		fechar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				sair();
+				setVisible(false);
 			}
 		});
 		fechar.setBounds(795, 0, 46, 47);
@@ -425,5 +426,9 @@ public class Menu extends JFrame {
 		avisoconf.texto.setIcon(new ImageIcon(TavisoConfirma.class.getResource("/img/atencao.png")));
 		avisoconf.setLocationRelativeTo(null);
 		avisoconf.show();
+	}
+	
+	public void fechakrai() {
+		this.dispose();
 	}
 }

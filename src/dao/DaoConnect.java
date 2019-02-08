@@ -405,6 +405,27 @@ public class DaoConnect {
 			}
 			
 			//Fim
+			/*--------------------------------------------------
+			 * Exclui de Usuarios - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			public void desativarUsuario(Usuario usuario) {
+				String sql = "UPDATE login SET situacao = 0 WHERE idlogin = ?";
+				
+				try {
+					stmt =  con.prepareStatement(sql);
+					stmt.setInt(1,usuario.getUsuarioId());
+					stmt.execute();
+					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+					aviso.texto.setText("USUARIO DESATIVADO COM SUCESSO.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				} catch (SQLException e) {
+					erro(e.getMessage());
+				}
+				
+			}
+			
 			
 			/*--------------------------------------------------
 			 * Exclui de Usuarios - Comentario Maynore Soft
@@ -412,8 +433,28 @@ public class DaoConnect {
 			//Inicio
 			
 			public void excluiUsuario(Usuario usuario) {
-				//String sql = "DELETE FROM login WHERE idlogin =?;";
+				String sql = "DELETE FROM login WHERE idlogin =?;";
 				
+				try {
+					stmt =  con.prepareStatement(sql);
+					stmt.setInt(1,usuario.getUsuarioId());
+					stmt.execute();
+				} catch (SQLException e) {
+					erro(e.getMessage());
+				}
+				
+				String sqlprive = "DELETE FROM privilegios WHERE idusuario=?";
+				try {
+					stmt =  con.prepareStatement(sqlprive);
+					stmt.setInt(1,usuario.getUsuarioId());
+					stmt.execute();
+					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+					aviso.texto.setText("CADASTRO DELETADO COM SUCESSO.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				} catch (SQLException e) {
+					erro(e.getMessage());
+				}
 			}
 			//Fim
 			

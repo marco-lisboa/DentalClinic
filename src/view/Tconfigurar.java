@@ -34,6 +34,9 @@ import control.Iniciador;
 import control.Usuario;
 import dao.DaoConnect;
 import viewTavisos.*;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JMenuItem;
 
 public class Tconfigurar extends JPanel {
 	int acao;
@@ -203,6 +206,55 @@ public class Tconfigurar extends JPanel {
 				}
 			}
 		});
+		
+		JPopupMenu popupMenu = new JPopupMenu();
+		addPopup(scroll, popupMenu);
+		
+		JMenuItem menuItem = new JMenuItem("Novo Cadastro");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				acao= 0;
+				checaPrivilegio();
+			}
+		});
+		menuItem.setHorizontalAlignment(SwingConstants.CENTER);
+		popupMenu.add(menuItem);
+		
+		JSeparator separator_2 = new JSeparator();
+		popupMenu.add(separator_2);
+		
+		JMenuItem menuItem_1 = new JMenuItem("Editar Cadastro");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acao =1;
+				int linha;
+				Object codigo;
+				linha= tableUsuario.getSelectedRow();
+				codigo =  tableUsuario.getValueAt(linha, 0);
+				
+				usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+				prencheCampos();
+			}
+		});
+		popupMenu.add(menuItem_1);
+		
+		JSeparator separator_3 = new JSeparator();
+		popupMenu.add(separator_3);
+		
+		JMenuItem menuItem_2 = new JMenuItem("Desativar");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int t =1;
+				desativa(t);
+			}
+		});
+		popupMenu.add(menuItem_2);
+		
+		JSeparator separator_4 = new JSeparator();
+		popupMenu.add(separator_4);
+		
+		JMenuItem menuItem_3 = new JMenuItem("Excluir");
+		popupMenu.add(menuItem_3);
 		tableUsuario.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -1192,4 +1244,45 @@ public class Tconfigurar extends JPanel {
 		}
 	}
 
+	public void desativa(int op) {
+		if(op==1) {
+			int linha;
+			Object codigo;
+			linha= tableUsuario.getSelectedRow();
+			codigo =  tableUsuario.getValueAt(linha, 0);
+			
+			usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+			System.out.println(usuario.getUsuarioId());
+			try {
+				iniciar.LeituraIp();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			dao.conectar(iniciar.getIp_server());
+			dao.desativarUsuario(usuario);
+			dao.fecharCon();
+		}
+	}
+	
+	public void excluir() {
+		
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }
