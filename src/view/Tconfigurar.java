@@ -965,11 +965,10 @@ public class Tconfigurar extends JPanel {
 		}else {
 			alteraPrivilegio.setSelected(false);
 		}
-		
 		if(usuario.getSituacao()==1) {
 			situacao.setSelected(true);
 		}else {
-			situacao.setSelected(true);
+			situacao.setSelected(false);
 		}
 		
 		if(usuario.getAtivo_site()==1) {
@@ -1245,6 +1244,7 @@ public class Tconfigurar extends JPanel {
 	}
 
 	public void desativa(int op) {
+		
 		if(op==1) {
 			int linha;
 			Object codigo;
@@ -1252,7 +1252,6 @@ public class Tconfigurar extends JPanel {
 			codigo =  tableUsuario.getValueAt(linha, 0);
 			
 			usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
-			System.out.println(usuario.getUsuarioId());
 			try {
 				iniciar.LeituraIp();
 			} catch (IOException e1) {
