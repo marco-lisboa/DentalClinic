@@ -667,6 +667,8 @@ public class Tconfigurar extends JPanel {
 						salvar();
 						}
 				
+				buscar();
+				
 				tabbedPaneCadastroUsuario.setVisible(false);
 				tabbedPaneUsuarios.setVisible(true);
 			}
@@ -1108,7 +1110,7 @@ public class Tconfigurar extends JPanel {
 		dao.conectar(iniciar.getIp_server());
 		dao.inserirUsuario(usuario);
 		dao.fecharCon();
-		
+		limpaCampos();
 	}
 	
 	public void atualiza() {
@@ -1121,6 +1123,7 @@ public class Tconfigurar extends JPanel {
 		dao.conectar(iniciar.getIp_server());
 		dao.alteraUsuario(usuario);
 		dao.fecharCon();
+		limpaCampos();
 	}
 	
 	public void nivelPadrao() {

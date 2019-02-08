@@ -27,6 +27,7 @@ public class DaoConnect {
 		public String URL = null;
 		private ResultSet resultado = null;
 		Taviso aviso = new Taviso();
+		TavisoErro erro = new TavisoErro();
 		private List<Usuario>dados = new ArrayList<>();
 		
 		public void conectar(String ip){
@@ -37,7 +38,14 @@ public class DaoConnect {
 				con = DriverManager.getConnection(URL,USER,PASS);
 				
 			} catch (ClassNotFoundException | SQLException e) {
-				e.getMessage();
+				erro.textPaneErro.setText("FOI INDENTIFICADO QUE COM CONEX\u00C3O COM SERVIDOR N\u00C3O FOI COMPLETADA "
+						+ "SIGA OS PASSO A SEGUIR:\r\n1- VERIFIQUE O NOME OU IP SERVIDOR BANCO DE DADOS\r\n2-CERTIFIQUESE QUE"
+						+ " A PORTA 3366 DO SERVIDOR SE ENCONTRA LIBERADA NO SERVIDOR\r\n3- RELIZER UM TESTE DE CONEX\u00C3O COM "
+						+ "SERVIDOR E VERIFIQUE SE ELE SE ENCONTRA EM REDE.\r\n\r\nCASO O PROBLEMA PERSISTA OU TENHA ALGUMA DUVIDA "
+						+ "ENTRE EM CONTATO COM SUPORTE E INFORME O ERRO ABAIXO.\r\n---------------------------------------------------------------"
+						+ "---------------------------------------\r\n"+e.getMessage());
+				erro.setLocationRelativeTo(null);
+				erro.show();
 			}
 		}
 		/*---------------------------------------------------------------------*/
@@ -57,12 +65,24 @@ public class DaoConnect {
 			try{
 				url = "jdbc:mysql://"+ip+":3306/dentalclinic";
 				conectado = DriverManager.getConnection(url,"root","maynore");
-				consulta =  conectado.prepareStatement("select idlogin,login, senha,nome from login where login='"+log_usuario+"'and senha='"+senha_usuario+"'");
+				consulta =  conectado.prepareStatement("select idlogin,login, senha,nome,situacao from login where login='"+log_usuario+"'and senha='"+senha_usuario+"'");
 				retorno =consulta.executeQuery();
 				if(retorno.next()){
-					logado=true;
+					
 					usuario.setUsuarioLogado(retorno.getInt("idlogin"));
 					usuario.setNomeUsuarioLogado((retorno.getString("nome")));
+					usuario.setSituacao(retorno.getInt("situacao"));
+					
+					if(usuario.getSituacao()==1) {
+						logado=true;
+					}else {
+						aviso.texto.setText("USUARIO NÃO ATIVO AO SISTEMA");
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/fechar.png")));
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
+						logado=false;
+					}
+					
 				}else{
 					aviso.texto.setText("USUARIO E SENHA INCORRETOS.");
 					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/fechar.png")));
@@ -71,8 +91,14 @@ public class DaoConnect {
 					logado=false;
 				}	
 			}catch (Exception e){
-
-				e.getMessage();
+				erro.textPaneErro.setText("FOI INDENTIFICADO QUE COM CONEX\u00C3O COM SERVIDOR N\u00C3O FOI COMPLETADA "
+						+ "SIGA OS PASSO A SEGUIR:\r\n1- VERIFIQUE O NOME OU IP SERVIDOR BANCO DE DADOS\r\n2-CERTIFIQUESE QUE"
+						+ " A PORTA 3366 DO SERVIDOR SE ENCONTRA LIBERADA NO SERVIDOR\r\n3- RELIZER UM TESTE DE CONEX\u00C3O COM "
+						+ "SERVIDOR E VERIFIQUE SE ELE SE ENCONTRA EM REDE.\r\n\r\nCASO O PROBLEMA PERSISTA OU TENHA ALGUMA DUVIDA "
+						+ "ENTRE EM CONTATO COM SUPORTE E INFORME O ERRO ABAIXO.\r\n---------------------------------------------------------------"
+						+ "---------------------------------------\r\n"+e.getMessage());
+				erro.setLocationRelativeTo(null);
+				erro.show();
 
 			}
 
@@ -134,7 +160,7 @@ public class DaoConnect {
 					
 					
 				}catch(Exception e){
-					e.printStackTrace();
+					erro(e.getMessage());
 				}
 				//--------------------------------------------------------------------------------------------------------------------------------------------
 				try {
@@ -150,7 +176,7 @@ public class DaoConnect {
 					usuario.setNumeroRegistro(res.getInt("nresgistro"));
 				}
 				}catch(Exception e){
-					e.printStackTrace();
+					erro(e.getMessage());
 				}
 				
 				
@@ -189,8 +215,7 @@ public class DaoConnect {
 					stmt.setInt(10, usuario.getAtivo_site());
 					stmt.execute();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					erro(e1.getMessage());
 				}
 				//----------------------------------------------------------------------
 				String sqlprive = "SELECT MAX(idlogin) FROM login";
@@ -262,9 +287,9 @@ public class DaoConnect {
 										stmt.setInt(23, usuario.getpCadFuncionarios());
 										stmt.execute();
 									} catch (SQLException e3) {
-										// TODO Auto-generated catch block
-										e3.printStackTrace();
+										erro(e3.getMessage());
 									}
+									aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
 									aviso.texto.setText("CADASTRO REALIZADO COM SUCESSO.");
 									aviso.setLocationRelativeTo(null);
 									aviso.show();
@@ -295,7 +320,7 @@ public class DaoConnect {
 						+ "cadastro =?, "
 						+ "altera_privilegio =?, "
 						+ "situacao =? ,"
-						+ "ativo_site =? ,"
+						+ "ativo_site =? "
 						+ "where idlogin =? ";
 				
 				try {
@@ -310,11 +335,12 @@ public class DaoConnect {
 					stmt.setInt(8,usuario.getAltera_privi());
 					stmt.setInt(9, usuario.getSituacao());
 					stmt.setInt(10, usuario.getAtivo_site());
-					stmt.setInt(11,usuario.getPrivilegioId());
+					stmt.setInt(11,usuario.getUsuarioId());
 					stmt.execute();
+					
+					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					erro(e.getMessage());
 				}
 				
 				String sqlprive="UPDATE privilegios SET "
@@ -341,8 +367,8 @@ public class DaoConnect {
 						/*21*/					+ "acesso_relatorios=? ,"
 						/*22*/					+ "cad_alt_funcionarios=? "
 						/*23*/					+ "WHERE idusuario = ? ";
+				
 				try {
-					
 					stmt =  con.prepareStatement(sqlprive);
 					stmt.setInt(1, usuario.getpCadCliente());
 					stmt.setInt(2, usuario.getpCadAgenda());
@@ -367,11 +393,13 @@ public class DaoConnect {
 					stmt.setInt(21, usuario.getpAcessRelatorios());
 					stmt.setInt(22, usuario.getpCadFuncionarios());
 					stmt.setInt(23,usuario.getUsuarioId());
-					System.out.println(sqlprive);
 					stmt.execute();
+					aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+					aviso.texto.setText("ATUALIZAÇÃO REALIZADO COM SUCESSO.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					erro(e.getMessage());
 				}
 				
 			}
@@ -437,8 +465,7 @@ public class DaoConnect {
 					}
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					erro(e.getMessage());
 				}
 			}
 			//Fim
@@ -478,8 +505,7 @@ public class DaoConnect {
 						usuario.setpCadFuncionarios(res.getInt("cad_alt_funcionarios"));
 					};
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					erro(e.getMessage());
 				}
 				
 			}
@@ -494,6 +520,14 @@ public class DaoConnect {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
+			
+		}
+		
+		public void erro(String erros) {
+			erro.textPaneErro.setText("OCORREU ALGO INESPERADO, POR FAVOR INFORMAR OCORRIDO AO ADMINISTRADOR DO SISTEMA. \r\n---"
+					+ "-------------------------------------------------------------------------------------------------"
+					+ "------\r\n"+erros);
+			erro.setLocationRelativeTo(null);
+			erro.show();
 		}
 }

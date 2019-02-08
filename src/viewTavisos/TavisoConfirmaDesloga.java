@@ -1,24 +1,20 @@
 package viewTavisos;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import view.Login;
-import view.Menu;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Dialog.ModalityType;
-import java.awt.Color;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import view.*;
 
 public class TavisoConfirmaDesloga extends JDialog {
 
@@ -26,7 +22,6 @@ public class TavisoConfirmaDesloga extends JDialog {
 	public JLabel texto;
 	private JButton btNao;
 	private JButton btSim;
-	
 
 	/**
 	 * Launch the application.
@@ -66,11 +61,7 @@ public class TavisoConfirmaDesloga extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Login login = new Login();
-					Menu menu = new Menu();
-					menu.dispose();
-					dispose();
-					login.show();
+					System.exit(1);
 				}
 			});
 			btSim.setForeground(Color.WHITE);
