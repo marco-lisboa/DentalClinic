@@ -48,6 +48,7 @@ public class Taviso extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			texto = new JLabel("");
+			texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
 			texto.setHorizontalAlignment(SwingConstants.CENTER);
 			texto.setForeground(Color.WHITE);
 			texto.setFont(new Font("Tahoma", Font.BOLD, 15));

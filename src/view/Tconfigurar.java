@@ -40,6 +40,7 @@ import javax.swing.JMenuItem;
 
 public class Tconfigurar extends JPanel {
 	int acao;
+	TavisoConfiracao avisoAcao = new TavisoConfiracao();
 	Taviso aviso = new Taviso();
 	public int idUusuarioLogado;
 	private JTable tableUsuario;
@@ -244,8 +245,29 @@ public class Tconfigurar extends JPanel {
 		JMenuItem menuItem_2 = new JMenuItem("Desativar");
 		menuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int t =1;
-				desativa(t);
+				
+				int linha;
+				Object codigo;
+				linha= tableUsuario.getSelectedRow();
+				codigo =  tableUsuario.getValueAt(linha, 0);
+
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Usuario Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+					
+				}else {
+
+					usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=usuario.getUsuarioId();
+					avisoAcao.acao=2;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+					
+				}
+				
+				buscar();
 			}
 		});
 		popupMenu.add(menuItem_2);
@@ -254,6 +276,32 @@ public class Tconfigurar extends JPanel {
 		popupMenu.add(separator_4);
 		
 		JMenuItem menuItem_3 = new JMenuItem("Excluir");
+		menuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				int linha;
+				Object codigo;
+				linha= tableUsuario.getSelectedRow();
+				
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Usuario Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+					
+				}else {
+					codigo =  tableUsuario.getValueAt(linha, 0);
+					usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=usuario.getUsuarioId();
+					avisoAcao.acao=1;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				
+				buscar();
+			}
+		});
 		popupMenu.add(menuItem_3);
 		tableUsuario.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -298,7 +346,7 @@ public class Tconfigurar extends JPanel {
 		panel_1.add(label_2);
 		
 		cbsit = new JComboBox();
-		cbsit.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativo", "Inativo"}));
+		cbsit.setModel(new DefaultComboBoxModel(new String[] {"Ativo", "Inativo", "Todos"}));
 		cbsit.setBounds(73, 36, 145, 20);
 		panel_1.add(cbsit);
 		
@@ -309,42 +357,79 @@ public class Tconfigurar extends JPanel {
 		numRegistro.setBounds(10, 368, 208, 14);
 		panel_1.add(numRegistro);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_4.addMouseListener(new MouseAdapter() {
+		JLabel btAdicionar = new JLabel("");
+		btAdicionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btAdicionar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				acao= 0;
 				checaPrivilegio();
 			}
 		});
-		label_4.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/add.png")));
-		label_4.setToolTipText("Adicionar Novo Paciente");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setBounds(221, 355, 46, 43);
-		panel_1.add(label_4);
+		btAdicionar.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/add.png")));
+		btAdicionar.setToolTipText("Adicionar Novo Paciente");
+		btAdicionar.setHorizontalAlignment(SwingConstants.CENTER);
+		btAdicionar.setBounds(221, 355, 46, 43);
+		panel_1.add(btAdicionar);
 		
-		JLabel label_5 = new JLabel("");
-		label_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_5.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/editar (2).png")));
-		label_5.setToolTipText("Editar");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setBounds(281, 355, 46, 43);
-		panel_1.add(label_5);
+		JLabel btEditar = new JLabel("");
+		btEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				acao =1;
+				int linha;
+				Object codigo;
+				linha= tableUsuario.getSelectedRow();
+				codigo =  tableUsuario.getValueAt(linha, 0);
+				
+				usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+				prencheCampos();
+			}
+		});
+		btEditar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btEditar.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/editar (2).png")));
+		btEditar.setToolTipText("Editar");
+		btEditar.setHorizontalAlignment(SwingConstants.CENTER);
+		btEditar.setBounds(281, 355, 46, 43);
+		panel_1.add(btEditar);
 		
-		JLabel label_6 = new JLabel("");
-		label_6.addMouseListener(new MouseAdapter() {
+		JLabel btDelete = new JLabel("");
+		btDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
+				
+
+				int linha;
+				Object codigo;
+				linha= tableUsuario.getSelectedRow();
+				
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Usuario Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+					
+				}else {
+					codigo =  tableUsuario.getValueAt(linha, 0);
+					usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=usuario.getUsuarioId();
+					avisoAcao.acao=1;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				
+				buscar();
+				
 			}
 		});
-		label_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_6.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/deleta.png")));
-		label_6.setToolTipText("Remover Paciente");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setBounds(337, 355, 46, 43);
-		panel_1.add(label_6);
+		btDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btDelete.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/deleta.png")));
+		btDelete.setToolTipText("Remover Usuario");
+		btDelete.setHorizontalAlignment(SwingConstants.CENTER);
+		btDelete.setBounds(337, 355, 46, 43);
+		panel_1.add(btDelete);
 		
 		JLabel bkUsuarios = new JLabel("");
 		bkUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
@@ -1243,28 +1328,63 @@ public class Tconfigurar extends JPanel {
 		}
 	}
 
-	public void desativa(int op) {
+	public void desativa(int i) {
 		
-		if(op==1) {
-			int linha;
-			Object codigo;
-			linha= tableUsuario.getSelectedRow();
-			codigo =  tableUsuario.getValueAt(linha, 0);
+			usuario.setUsuarioId(i);
 			
-			usuario.setUsuarioId(Integer.parseInt(codigo.toString()));
 			try {
 				iniciar.LeituraIp();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
 			dao.conectar(iniciar.getIp_server());
+			dao.privilegio(usuario);
+			
+			if(usuario.getCadastroUsuario()==1) {
+				
 			dao.desativarUsuario(usuario);
 			dao.fecharCon();
-		}
+			
+			}else {
+				aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
+				aviso.texto.setText("VOCE NÃO TEM PRIVILEGIO PARA ESTA AÇÃO");
+				aviso.setLocationRelativeTo(null);
+				aviso.show();
+				
+			}
+			
+		
 	}
 	
-	public void excluir() {
+	public void excluir(int i) {
+		
+		usuario.setUsuarioId(i);
+		
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		dao.conectar(iniciar.getIp_server());
+		
+		dao.privilegio(usuario);
+		if(usuario.getCadastroUsuario()==1) {
+			dao.excluiUsuario(usuario);
+			dao.fecharCon();
+		}else {
+			
+			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
+			aviso.texto.setText("VOCE NÃO TEM PRIVILEGIO PARA ESTA AÇÃO");
+			aviso.setLocationRelativeTo(null);
+			aviso.show();
+		}
+		
+		
 		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
