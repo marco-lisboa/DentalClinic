@@ -36,6 +36,7 @@ public class Tficha_paciente extends JPanel {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTabbedPane tabbedPaneCadastro;
+	private JTabbedPane tabbedPaneFicha;
 
 	/**
 	 * Create the panel.
@@ -53,131 +54,6 @@ public class Tficha_paciente extends JPanel {
 		setOpaque(false);
 		setBounds(243, 11, 575, 427);
 		setLayout(null);
-		
-		JTabbedPane tabbedPaneFicha = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneFicha.setBorder(null);
-		tabbedPaneFicha.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPaneFicha.setBackground(new Color(32, 178, 170));
-		tabbedPaneFicha.setBounds(0, 0, 575, 428);
-		add(tabbedPaneFicha);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(32, 178, 170));
-		panel.setForeground(Color.WHITE);
-		tabbedPaneFicha.addTab("Ficha de Paciente", new ImageIcon(Tficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
-		tabbedPaneFicha.setForegroundAt(0, Color.WHITE);
-		panel.setLayout(null);
-		
-		JLabel lblData = new JLabel("Nome : ");
-		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblData.setForeground(Color.WHITE);
-		lblData.setBounds(10, 11, 46, 14);
-		panel.add(lblData);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setToolTipText("Buscar");
-		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
-		lblNewLabel.setBounds(207, 2, 46, 32);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				setVisible(false);
-			}
-		});
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
-		lblNewLabel_1.setBounds(535, 2, 25, 32);
-		panel.add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setBounds(52, 8, 145, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o : ");
-		lblSituao.setForeground(Color.WHITE);
-		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSituao.setBounds(10, 39, 89, 14);
-		panel.add(lblSituao);
-		
-		textField_1 = new JComboBox();
-		textField_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativos", "Inativos"}));
-		textField_1.setBounds(73, 36, 145, 20);
-		panel.add(textField_1);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 78, 550, 279);
-		panel.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"Nome", "Telefone", "Situa\u00E7\u00E3o"
-			}
-		));
-		scrollPane.setViewportView(table);
-		
-		JLabel adcionar = new JLabel("");
-		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adcionar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-				
-				tabbedPaneFicha.setVisible(false);
-				tabbedPaneCadastro.setVisible(true);
-				
-				
-				
-			}
-		});
-		adcionar.setToolTipText("Adicionar Novo Paciente");
-		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
-		adcionar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/add.png")));
-		adcionar.setBounds(221, 355, 46, 43);
-		panel.add(adcionar);
-		
-		JLabel delete = new JLabel("");
-		delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		delete.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/deleta.png")));
-		delete.setToolTipText("Remover Paciente");
-		delete.setHorizontalAlignment(SwingConstants.CENTER);
-		delete.setBounds(337, 355, 46, 43);
-		panel.add(delete);
-		
-		JLabel editar = new JLabel("");
-		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		editar.setToolTipText("Editar");
-		editar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/editar (2).png")));
-		editar.setHorizontalAlignment(SwingConstants.CENTER);
-		editar.setBounds(281, 355, 46, 43);
-		panel.add(editar);
-		
-		JLabel label_7 = new JLabel("null registros encontrados");
-		label_7.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/confimado.png")));
-		label_7.setForeground(Color.WHITE);
-		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_7.setBounds(10, 368, 208, 14);
-		panel.add(label_7);
-		
-		JLabel bk = new JLabel("");
-		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
-		bk.setBounds(0, 2, 570, 409);
-		panel.add(bk);
 		
 		tabbedPaneCadastro = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneCadastro.setVisible(false);
@@ -979,6 +855,131 @@ public class Tficha_paciente extends JPanel {
 		bkfin.setHorizontalAlignment(SwingConstants.CENTER);
 		bkfin.setBounds(0, 0, 570, 409);
 		panel_3.add(bkfin);
+		
+		tabbedPaneFicha = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneFicha.setBorder(null);
+		tabbedPaneFicha.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneFicha.setBackground(new Color(32, 178, 170));
+		tabbedPaneFicha.setBounds(0, 0, 575, 428);
+		add(tabbedPaneFicha);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(32, 178, 170));
+		panel.setForeground(Color.WHITE);
+		tabbedPaneFicha.addTab("Ficha de Paciente", new ImageIcon(Tficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
+		tabbedPaneFicha.setForegroundAt(0, Color.WHITE);
+		panel.setLayout(null);
+		
+		JLabel lblData = new JLabel("Nome : ");
+		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblData.setForeground(Color.WHITE);
+		lblData.setBounds(10, 11, 46, 14);
+		panel.add(lblData);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setToolTipText("Buscar");
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setBounds(207, 2, 46, 32);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				setVisible(false);
+			}
+		});
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setBounds(535, 2, 25, 32);
+		panel.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(52, 8, 145, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o : ");
+		lblSituao.setForeground(Color.WHITE);
+		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSituao.setBounds(10, 39, 89, 14);
+		panel.add(lblSituao);
+		
+		textField_1 = new JComboBox();
+		textField_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativos", "Inativos"}));
+		textField_1.setBounds(73, 36, 145, 20);
+		panel.add(textField_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 78, 550, 279);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"Nome", "Telefone", "Situa\u00E7\u00E3o"
+			}
+		));
+		scrollPane.setViewportView(table);
+		
+		JLabel adcionar = new JLabel("");
+		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		adcionar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				
+				tabbedPaneFicha.setVisible(false);
+				tabbedPaneCadastro.setVisible(true);
+				
+				
+				
+			}
+		});
+		adcionar.setToolTipText("Adicionar Novo Paciente");
+		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
+		adcionar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/add.png")));
+		adcionar.setBounds(221, 355, 46, 43);
+		panel.add(adcionar);
+		
+		JLabel delete = new JLabel("");
+		delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		delete.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/deleta.png")));
+		delete.setToolTipText("Remover Paciente");
+		delete.setHorizontalAlignment(SwingConstants.CENTER);
+		delete.setBounds(337, 355, 46, 43);
+		panel.add(delete);
+		
+		JLabel editar = new JLabel("");
+		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		editar.setToolTipText("Editar");
+		editar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/editar (2).png")));
+		editar.setHorizontalAlignment(SwingConstants.CENTER);
+		editar.setBounds(281, 355, 46, 43);
+		panel.add(editar);
+		
+		JLabel label_7 = new JLabel("null registros encontrados");
+		label_7.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/confimado.png")));
+		label_7.setForeground(Color.WHITE);
+		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_7.setBounds(10, 368, 208, 14);
+		panel.add(label_7);
+		
+		JLabel bk = new JLabel("");
+		bk.setHorizontalAlignment(SwingConstants.CENTER);
+		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setBounds(0, 2, 570, 409);
+		panel.add(bk);
 
 	}
 }
