@@ -23,6 +23,9 @@ import javax.swing.JTextPane;
 import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
 import java.awt.Cursor;
+import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tficha_paciente extends JPanel {
 	private JTextField textField;
@@ -37,6 +40,11 @@ public class Tficha_paciente extends JPanel {
 	private JTextField textField_8;
 	private JTabbedPane tabbedPaneCadastro;
 	private JTabbedPane tabbedPaneFicha;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtnSim;
+	private JRadioButton rdbtnNo;
+	private JTextPane textPaneobs;
+	private JLabel lblQuais;
 
 	/**
 	 * Create the panel.
@@ -78,7 +86,7 @@ public class Tficha_paciente extends JPanel {
 		
 		JLabel label_2 = new JLabel("");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setBounds(535, 2, 25, 32);
+		label_2.setBounds(505, 357, 25, 32);
 		panel_1.add(label_2);
 		
 		textField_2 = new JTextField();
@@ -189,29 +197,45 @@ public class Tficha_paciente extends JPanel {
 		lblPossuiAlergia.setBounds(14, 277, 377, 14);
 		panel_1.add(lblPossuiAlergia);
 		
-		JRadioButton rdbtnSim = new JRadioButton("sim");
+		rdbtnSim = new JRadioButton("sim");
+		rdbtnSim.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				medicamento(1);
+				
+			}
+		});
+		buttonGroup.add(rdbtnSim);
 		rdbtnSim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		rdbtnSim.setForeground(Color.WHITE);
 		rdbtnSim.setOpaque(false);
 		rdbtnSim.setBounds(10, 298, 85, 23);
 		panel_1.add(rdbtnSim);
 		
-		JRadioButton rdbtnNo = new JRadioButton("N\u00E3o");
+		rdbtnNo = new JRadioButton("N\u00E3o");
+		rdbtnNo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				medicamento(0);
+			}
+		});
+		buttonGroup.add(rdbtnNo);
 		rdbtnNo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		rdbtnNo.setOpaque(false);
 		rdbtnNo.setForeground(Color.WHITE);
 		rdbtnNo.setBounds(106, 298, 85, 23);
 		panel_1.add(rdbtnNo);
 		
-		JLabel lblQuais = new JLabel("Quais?");
+		lblQuais = new JLabel("Quais?");
+		lblQuais.setVisible(false);
 		lblQuais.setForeground(Color.WHITE);
 		lblQuais.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblQuais.setBounds(10, 316, 377, 14);
 		panel_1.add(lblQuais);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(10, 340, 317, 49);
-		panel_1.add(textPane);
+		textPaneobs = new JTextPane();
+		textPaneobs.setVisible(false);
+		textPaneobs.setBounds(10, 340, 317, 49);
+		panel_1.add(textPaneobs);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
@@ -292,6 +316,24 @@ public class Tficha_paciente extends JPanel {
 		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_3.setBounds(10, 191, 123, 14);
 		panel_1.add(label_3);
+		
+		JLabel label_8 = new JLabel("");
+		label_8.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/save.png")));
+		label_8.setToolTipText("Salvar");
+		label_8.setBounds(407, 299, 32, 49);
+		panel_1.add(label_8);
+		
+		JLabel label_9 = new JLabel("");
+		label_9.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/eraser.png")));
+		label_9.setToolTipText("Limpar");
+		label_9.setBounds(465, 299, 32, 49);
+		panel_1.add(label_9);
+		
+		JLabel label_10 = new JLabel("");
+		label_10.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		label_10.setToolTipText("Voltar");
+		label_10.setBounds(521, 299, 32, 49);
+		panel_1.add(label_10);
 		
 		JLabel label_6 = new JLabel("");
 		label_6.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/bk.jpeg")));
@@ -981,5 +1023,17 @@ public class Tficha_paciente extends JPanel {
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 
+	}
+	
+	public void medicamento(int i) {
+		
+		if(i==1) {
+			lblQuais.setVisible(true);
+			textPaneobs.setVisible(true);
+		}else {
+			lblQuais.setVisible(false);
+			textPaneobs.setVisible(false);
+		}
+		
 	}
 }
