@@ -2,13 +2,21 @@ package control;
 
 public class Paciente {
 
-	String nomepaciente, cpf, data, nascionalidade, estado,cidade,contato1,
-	contato2,op1,op2,whats1,whats2, email1,email2, convenio,matricula,obsmedicamento,
+	String nomepaciente, cpf, data, nascionalidade, estado,cidade, provicia,contato1,
+	contato2,op1,op2, email1,email2,matricula,obsmedicamento,
 	av11,av12,av13,av14,av15,av16,av17,av18,av21,av22,av23,av24,av25,av26,av27,av28,
 	av31,av32,av33,av34,av35,av36,av37,av38,av41,av42,av43,av45,av46,av47,av48;
 	
+	public String getProvicia() {
+		return provicia;
+	}
+
+	public void setProvicia(String provicia) {
+		this.provicia = provicia;
+	}
+
 	int idpaciente, idavliacao,alegia,dt11,dt12,dt13,dt14,dt15,dt16,dt17,dt18,dt21,dt22,dt23,dt24,dt25,dt26,dt27,dt28,
-	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt45,dt46,dt47,dt48;
+	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio;
 
 	public String getNomepaciente() {
 		return nomepaciente;
@@ -90,19 +98,19 @@ public class Paciente {
 		this.op2 = op2;
 	}
 
-	public String getWhats1() {
+	public int getWhats1() {
 		return whats1;
 	}
 
-	public void setWhats1(String whats1) {
+	public void setWhats1(int whats1) {
 		this.whats1 = whats1;
 	}
 
-	public String getWhats2() {
+	public int getWhats2() {
 		return whats2;
 	}
 
-	public void setWhats2(String whats2) {
+	public void setWhats2(int whats2) {
 		this.whats2 = whats2;
 	}
 
@@ -122,11 +130,11 @@ public class Paciente {
 		this.email2 = email2;
 	}
 
-	public String getConvenio() {
+	public int getConvenio() {
 		return convenio;
 	}
 
-	public void setConvenio(String convenio) {
+	public void setConvenio(int convenio) {
 		this.convenio = convenio;
 	}
 

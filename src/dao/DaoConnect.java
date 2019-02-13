@@ -22,6 +22,7 @@ public class DaoConnect {
 		private Connection con;
 		private PreparedStatement stmt;
 		Usuario usuario = new Usuario();
+		Paciente paciente = new Paciente();
 		private final String USER = "root";
 		private final String PASS = "maynore";
 		public String URL = null;
@@ -29,6 +30,7 @@ public class DaoConnect {
 		Taviso aviso = new Taviso();
 		TavisoErro erro = new TavisoErro();
 		private List<Usuario>dados = new ArrayList<>();
+		
 		
 		public void conectar(String ip){
 			 URL = "jdbc:mysql://"+ip+":3306/dentalclinic";
@@ -217,6 +219,9 @@ public class DaoConnect {
 				} catch (SQLException e1) {
 					erro(e1.getMessage());
 				}
+				
+				//---------------------------------------------------------------------
+				//Checagem de id para vincular Privilegios a o Usuario
 				//----------------------------------------------------------------------
 				String sqlprive = "SELECT MAX(idlogin) FROM login";
 
@@ -228,8 +233,7 @@ public class DaoConnect {
 					}
 					
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
+					erro(e2.getMessage());
 				}
 				
 				if(usuario.getUsuarioId()>0) {
@@ -428,7 +432,7 @@ public class DaoConnect {
 			
 			
 			/*--------------------------------------------------
-			 * Exclui de Usuarios - Comentario Maynore Soft
+			 * Excluir de Usuarios - Comentario Maynore Soft
 			 * ------------------------------------------------ */
 			//Inicio
 			
@@ -557,11 +561,80 @@ public class DaoConnect {
 			 * 							Funções Paciente                               *
 			 *                                                                         *
 			 ***************************************************************************/
-				public void inserirPaciente() {}
-				public void listaPaciente() {}
-				public void alteraPaciente() {}
-				public void excluiPaciente() {}
-				public void dadosPaciente() {}
+			/*--------------------------------------------------
+			 * Inserir Paciente - Comentario Maynore Soft
+			 * ------------------------------------------------ */
+			//Inicio
+			
+				public void inserirPaciente(Paciente paciente) {
+					String sql = "INSERT INTO("
+							+ "nome,"
+							+ "cpf,"
+							+ "datanascimento,"
+							+ "nacionalidade,"
+							+ "estado,"
+							+ "cidade,"
+							+ "provincia,"
+							+ "contato1,"
+							+ "contato2,"
+							+ "op1,"
+							+ "op2,"
+							+ "whats1,"
+							+ "whats2,"
+							+ "email1,"
+							+ "ameil2,"
+							+ "convenioid,"
+							+ "alergia,"
+							+ "obsalegia"
+							+ ")VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+					
+					try {
+						
+						stmt =  con.prepareStatement(sql);
+						stmt.setString(1, paciente.getNomepaciente());
+						stmt.setString(2,paciente.getCpf());
+						//stmt.setDate(3, paciente.getData());
+						stmt.setString(4,paciente.getNascionalidade());
+						stmt.setString(5,paciente.getEstado());
+						stmt.setString(6, paciente.getCidade());
+						stmt.setString(7, paciente.getProvicia());
+						stmt.setString(8, paciente.getContato1());
+						stmt.setString(9, paciente.getContato2());
+						stmt.setString(10, paciente.getOp1());
+						stmt.setString(11,paciente.getOp2());
+						stmt.setInt(12,paciente.getWhats1());
+						stmt.setInt(13, paciente.getWhats2());
+						stmt.setString(14, paciente.getEmail1());
+						stmt.setString(15, paciente.getEmail2());
+						stmt.setInt(16, paciente.getConvenio());
+						stmt.setInt(27,paciente.getAlegia());
+						stmt.setString(28,paciente.getObsmedicamento());
+						stmt.execute();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+					
+					String sqlprive = "SELECT MAX(idpacientes) FROM pacientes";
+					
+					try {
+						stmt =  con.prepareStatement(sqlprive);
+						ResultSet res = stmt.executeQuery();
+						while(res.next()) {
+							usuario.setUsuarioId(res.getInt("MAX(idpacientes)"));
+						}
+						
+					} catch (SQLException e2) {
+						erro(e2.getMessage());
+					}
+					
+					
+					
+				}
+			//Fim
+				public void listaPaciente(Paciente paciente) {}
+				public void alteraPaciente(Paciente paciente) {}
+				public void excluiPaciente(Paciente paciente) {}
+				public void dadosPaciente(Paciente paciente) {}
 			
 			
 		/***************************************************************************
