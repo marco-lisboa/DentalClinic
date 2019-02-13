@@ -550,6 +550,20 @@ public class DaoConnect {
 				}
 				
 			}
+		
+			
+			/***************************************************************************
+			 * 																		   *
+			 * 							Funções Paciente                               *
+			 *                                                                         *
+			 ***************************************************************************/
+				public void inserirPaciente() {}
+				public void listaPaciente() {}
+				public void alteraPaciente() {}
+				public void excluiPaciente() {}
+				public void dadosPaciente() {}
+			
+			
 		/***************************************************************************
 		 * 																		   *
 		 * 							Função Fecha Conexão                           *
