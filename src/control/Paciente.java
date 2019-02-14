@@ -5,8 +5,26 @@ public class Paciente {
 	String nomepaciente, cpf, data, nascionalidade, estado,cidade, provicia,contato1,
 	contato2,op1,op2, email1,email2,matricula,obsmedicamento,
 	av11,av12,av13,av14,av15,av16,av17,av18,av21,av22,av23,av24,av25,av26,av27,av28,
-	av31,av32,av33,av34,av35,av36,av37,av38,av41,av42,av43,av45,av46,av47,av48;
+	av31,av32,av33,av34,av35,av36,av37,av38,av41,av42,av43,av44,av45,av46,av47,av48;
 	
+	public int getDt44() {
+		return dt44;
+	}
+
+	public void setDt44(int dt44) {
+		this.dt44 = dt44;
+	}
+
+	
+
+	public String getAv44() {
+		return av44;
+	}
+
+	public void setAv44(String av44) {
+		this.av44 = av44;
+	}
+
 	public String getProvicia() {
 		return provicia;
 	}
@@ -16,7 +34,7 @@ public class Paciente {
 	}
 
 	int idpaciente, idavliacao,alegia,dt11,dt12,dt13,dt14,dt15,dt16,dt17,dt18,dt21,dt22,dt23,dt24,dt25,dt26,dt27,dt28,
-	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio;
+	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio;
 
 	public String getNomepaciente() {
 		return nomepaciente;
