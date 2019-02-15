@@ -410,8 +410,7 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneCadastro.setForegroundAt(1, Color.WHITE);
 		
 		tabbedPaneav = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneav.setVisible(false);
-		tabbedPaneav.setBounds(98, 11, 394, 378);
+		tabbedPaneav.setBounds(94, 0, 394, 378);
 		panel_2.add(tabbedPaneav);
 		
 		JPanel panel_3 = new JPanel();
@@ -523,13 +522,13 @@ public class Tficha_paciente extends JPanel {
 		
 		JLabel lblObservaesClinicas = new JLabel("Observa\u00E7\u00F5es Clinicas");
 		lblObservaesClinicas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblObservaesClinicas.setForeground(Color.BLACK);
+		lblObservaesClinicas.setForeground(Color.WHITE);
 		lblObservaesClinicas.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblObservaesClinicas.setBounds(16, 196, 363, 14);
+		lblObservaesClinicas.setBounds(16, 225, 363, 14);
 		panel_3.add(lblObservaesClinicas);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(16, 220, 363, 87);
+		textArea.setBounds(16, 242, 363, 65);
 		panel_3.add(textArea);
 		
 		JLabel btConfirma = new JLabel("");
