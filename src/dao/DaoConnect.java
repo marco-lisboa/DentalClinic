@@ -567,7 +567,7 @@ public class DaoConnect {
 	//Inicio
 
 	public void inserirPaciente(Paciente paciente) {
-		String sql = "INSERT INTO("
+		String sql = "INSERT INTO paciente("
 				+ "nome,"
 				+ "cpf,"
 				+ "datanascimento,"
@@ -781,7 +781,7 @@ public class DaoConnect {
 	//Fim
 	public void listaPaciente(Paciente paciente) {}
 	public void alteraPaciente(Paciente paciente) {
-		String sql = "UPDATE SET "
+		String sql = "UPDATE paciente SET "
 				+ "nome=?,"
 				+ "cpf=?,"
 				+ "datanascimento=?,"
@@ -830,7 +830,7 @@ public class DaoConnect {
 		}
 
 
-		String sqlprive = "INSERT INTO avaliacao("
+		String sqlprive = "UPDATE avaliacao SET"
 				+ "dt11=?,"
 				+ "avdt11=?,"
 				+ "dt12=?,"
