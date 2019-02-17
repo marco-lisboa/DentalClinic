@@ -3,9 +3,8 @@ package control;
 public class Paciente {
 
 	String nomepaciente, cpf, data, nascionalidade, estado,cidade, provicia,contato1,
-	contato2,op1,op2, email1,email2,matricula,obsmedicamento,
-	av11,av12,av13,av14,av15,av16,av17,av18,av21,av22,av23,av24,av25,av26,av27,av28,
-	av31,av32,av33,av34,av35,av36,av37,av38,av41,av42,av43,av44,av45,av46,av47,av48;
+	contato2,op1,op2, email1,email2,matricula,obsmedicamento;
+	
 	
 	public int getDt44() {
 		return dt44;
@@ -15,15 +14,6 @@ public class Paciente {
 		this.dt44 = dt44;
 	}
 
-	
-
-	public String getAv44() {
-		return av44;
-	}
-
-	public void setAv44(String av44) {
-		this.av44 = av44;
-	}
 
 	public String getProvicia() {
 		return provicia;
@@ -34,7 +24,47 @@ public class Paciente {
 	}
 
 	int idpaciente, idavliacao,alegia,dt11,dt12,dt13,dt14,dt15,dt16,dt17,dt18,dt21,dt22,dt23,dt24,dt25,dt26,dt27,dt28,
-	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio;
+	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio,dente,p1,p2,p3,p4;
+
+	public int getDente() {
+		return dente;
+	}
+
+	public void setDente(int dente) {
+		this.dente = dente;
+	}
+
+	public int getP1() {
+		return p1;
+	}
+
+	public void setP1(int p1) {
+		this.p1 = p1;
+	}
+
+	public int getP2() {
+		return p2;
+	}
+
+	public void setP2(int p2) {
+		this.p2 = p2;
+	}
+
+	public int getP3() {
+		return p3;
+	}
+
+	public void setP3(int p3) {
+		this.p3 = p3;
+	}
+
+	public int getP4() {
+		return p4;
+	}
+
+	public void setP4(int p4) {
+		this.p4 = p4;
+	}
 
 	public String getNomepaciente() {
 		return nomepaciente;
@@ -172,254 +202,7 @@ public class Paciente {
 		this.obsmedicamento = obsmedicamento;
 	}
 
-	public String getAv11() {
-		return av11;
-	}
-
-	public void setAv11(String av11) {
-		this.av11 = av11;
-	}
-
-	public String getAv12() {
-		return av12;
-	}
-
-	public void setAv12(String av12) {
-		this.av12 = av12;
-	}
-
-	public String getAv13() {
-		return av13;
-	}
-
-	public void setAv13(String av13) {
-		this.av13 = av13;
-	}
-
-	public String getAv14() {
-		return av14;
-	}
-
-	public void setAv14(String av14) {
-		this.av14 = av14;
-	}
-
-	public String getAv15() {
-		return av15;
-	}
-
-	public void setAv15(String av15) {
-		this.av15 = av15;
-	}
-
-	public String getAv16() {
-		return av16;
-	}
-
-	public void setAv16(String av16) {
-		this.av16 = av16;
-	}
-
-	public String getAv17() {
-		return av17;
-	}
-
-	public void setAv17(String av17) {
-		this.av17 = av17;
-	}
-
-	public String getAv18() {
-		return av18;
-	}
-
-	public void setAv18(String av18) {
-		this.av18 = av18;
-	}
-
-	public String getAv21() {
-		return av21;
-	}
-
-	public void setAv21(String av21) {
-		this.av21 = av21;
-	}
-
-	public String getAv22() {
-		return av22;
-	}
-
-	public void setAv22(String av22) {
-		this.av22 = av22;
-	}
-
-	public String getAv23() {
-		return av23;
-	}
-
-	public void setAv23(String av23) {
-		this.av23 = av23;
-	}
-
-	public String getAv24() {
-		return av24;
-	}
-
-	public void setAv24(String av24) {
-		this.av24 = av24;
-	}
-
-	public String getAv25() {
-		return av25;
-	}
-
-	public void setAv25(String av25) {
-		this.av25 = av25;
-	}
-
-	public String getAv26() {
-		return av26;
-	}
-
-	public void setAv26(String av26) {
-		this.av26 = av26;
-	}
-
-	public String getAv27() {
-		return av27;
-	}
-
-	public void setAv27(String av27) {
-		this.av27 = av27;
-	}
-
-	public String getAv28() {
-		return av28;
-	}
-
-	public void setAv28(String av28) {
-		this.av28 = av28;
-	}
-
-	public String getAv31() {
-		return av31;
-	}
-
-	public void setAv31(String av31) {
-		this.av31 = av31;
-	}
-
-	public String getAv32() {
-		return av32;
-	}
-
-	public void setAv32(String av32) {
-		this.av32 = av32;
-	}
-
-	public String getAv33() {
-		return av33;
-	}
-
-	public void setAv33(String av33) {
-		this.av33 = av33;
-	}
-
-	public String getAv34() {
-		return av34;
-	}
-
-	public void setAv34(String av34) {
-		this.av34 = av34;
-	}
-
-	public String getAv35() {
-		return av35;
-	}
-
-	public void setAv35(String av35) {
-		this.av35 = av35;
-	}
-
-	public String getAv36() {
-		return av36;
-	}
-
-	public void setAv36(String av36) {
-		this.av36 = av36;
-	}
-
-	public String getAv37() {
-		return av37;
-	}
-
-	public void setAv37(String av37) {
-		this.av37 = av37;
-	}
-
-	public String getAv38() {
-		return av38;
-	}
-
-	public void setAv38(String av38) {
-		this.av38 = av38;
-	}
-
-	public String getAv41() {
-		return av41;
-	}
-
-	public void setAv41(String av41) {
-		this.av41 = av41;
-	}
-
-	public String getAv42() {
-		return av42;
-	}
-
-	public void setAv42(String av42) {
-		this.av42 = av42;
-	}
-
-	public String getAv43() {
-		return av43;
-	}
-
-	public void setAv43(String av43) {
-		this.av43 = av43;
-	}
-
-	public String getAv45() {
-		return av45;
-	}
-
-	public void setAv45(String av45) {
-		this.av45 = av45;
-	}
-
-	public String getAv46() {
-		return av46;
-	}
-
-	public void setAv46(String av46) {
-		this.av46 = av46;
-	}
-
-	public String getAv47() {
-		return av47;
-	}
-
-	public void setAv47(String av47) {
-		this.av47 = av47;
-	}
-
-	public String getAv48() {
-		return av48;
-	}
-
-	public void setAv48(String av48) {
-		this.av48 = av48;
-	}
-
+	
 	public int getIdpaciente() {
 		return idpaciente;
 	}

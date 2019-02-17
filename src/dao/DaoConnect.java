@@ -586,7 +586,39 @@ public class DaoConnect {
 				+ "convenioid,"
 				+ "alergia,"
 				+ "obsalegia"
-				+ ")VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+				+ "dt11,"
+				+ "dt12,"
+				+ "dt13,"
+				+ "dt14,"
+				+ "dt15,"
+				+ "dt16,"
+				+ "dt17,"
+				+ "dt18,"
+				+ "dt21,"
+				+ "dt22,"
+				+ "dt23,"
+				+ "dt24,"
+				+ "dt25,"
+				+ "dt26,"
+				+ "dt27,"
+				+ "dt28,"
+				+ "dt31,"
+				+ "dt32,"
+				+ "dt33,"
+				+ "dt34,"
+				+ "dt35,"
+				+ "dt36,"
+				+ "dt37,"
+				+ "dt38,"
+				+ "dt41,"
+				+ "dt42,"
+				+ "dt43,"
+				+ "dt44,"
+				+ "dt45,"
+				+ "dt46,"
+				+ "dt47,"
+				+ "dt48"
+				+ ")VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 		try {
 
@@ -607,174 +639,52 @@ public class DaoConnect {
 			stmt.setString(14, paciente.getEmail1());
 			stmt.setString(15, paciente.getEmail2());
 			stmt.setInt(16, paciente.getConvenio());
-			stmt.setInt(27,paciente.getAlegia());
-			stmt.setString(28,paciente.getObsmedicamento());
+			stmt.setInt(17,paciente.getAlegia());
+			stmt.setString(18,paciente.getObsmedicamento());
+			stmt.setInt(19, paciente.getDt11());
+			stmt.setInt(20,paciente.getDt12());
+			stmt.setInt(21, paciente.getDt13());
+			stmt.setInt(22, paciente.getDt14());
+			stmt.setInt(23, paciente.getDt15());
+			stmt.setInt(24, paciente.getDt16());
+			stmt.setInt(25, paciente.getDt17());
+			stmt.setInt(26, paciente.getDt18());
+			stmt.setInt(27, paciente.getDt21());
+			stmt.setInt(28, paciente.getDt22());
+			stmt.setInt(29, paciente.getDt23());
+			stmt.setInt(30, paciente.getDt24());
+			stmt.setInt(31, paciente.getDt25());
+			stmt.setInt(32, paciente.getDt26());
+			stmt.setInt(33, paciente.getDt27());
+			stmt.setInt(34, paciente.getDt28());
+			stmt.setInt(35, paciente.getDt31());
+			stmt.setInt(36, paciente.getDt32());
+			stmt.setInt(37, paciente.getDt33());
+			stmt.setInt(38, paciente.getDt34());
+			stmt.setInt(39, paciente.getDt35());
+			stmt.setInt(40, paciente.getDt36());
+			stmt.setInt(41, paciente.getDt37());
+			stmt.setInt(42, paciente.getDt38());
+			stmt.setInt(43, paciente.getDt41());
+			stmt.setInt(44, paciente.getDt42());
+			stmt.setInt(45, paciente.getDt43());
+			stmt.setInt(46, paciente.getDt44());
+			stmt.setInt(47, paciente.getDt45());
+			stmt.setInt(48, paciente.getDt46());
+			stmt.setInt(49, paciente.getDt47());
+			stmt.setInt(50, paciente.getDt48());
 			stmt.execute();
-		} catch (SQLException e) {
-			erro(e.getMessage());
-		}
-
-		String sqlprive = "SELECT MAX(idpacientes) FROM pacientes";
-
-		try {
-			stmt =  con.prepareStatement(sqlprive);
-			ResultSet res = stmt.executeQuery();
-			while(res.next()) {
-				usuario.setUsuarioId(res.getInt("MAX(idpacientes)"));
-			}
-		} catch (SQLException e2) {
-			erro(e2.getMessage());
-		}
-
-		if(usuario.getUsuarioId()>0) {
-			sqlprive = "INSERT INTO avaliacao("
-					+ "idpaciente,"
-					+ "dt11,"
-					+ "avdt11,"
-					+ "dt12,"
-					+ "avdt12,"
-					+ "dt13,"
-					+ "avdt13,"
-					+ "dt14,"
-					+ "avdt14,"
-					+ "dt15,"
-					+ "avdt15,"
-					+ "dt16,"
-					+ "avdt16,"
-					+ "dt17,"
-					+ "avdt17,"
-					+ "dt18,"
-					+ "avdt18,"
-					+ "dt21,"
-					+ "avdt21,"
-					+ "dt22,"
-					+ "dt23,"
-					+ "avdt23,"
-					+ "dt24,"
-					+ "avdt24,"
-					+ "dt25,"
-					+ "avdt25,"
-					+ "dt26,"
-					+ "avdt26,"
-					+ "dt27,"
-					+ "avdt27,"
-					+ "dt28,"
-					+ "avdt28,"
-					+ "dt31,"
-					+ "avdt31,"
-					+ "dt32,"
-					+ "avdt32,"
-					+ "dt33,"
-					+ "avdt33,"
-					+ "dt34,"
-					+ "avdt34,"
-					+ "dt35,"
-					+ "avdt35,"
-					+ "dt36,"
-					+ "avdt36,"
-					+ "dt37,"
-					+ "dt38,"
-					+ "avdt38,"
-					+ "dt41,"
-					+ "avdt41,"
-					+ "dt42,"
-					+ "avdt42,"
-					+ "dt43,"
-					+ "avdt43,"
-					+ "dt44,"
-					+ "avdt44,"
-					+ "dt45,"
-					+ "avdt45,"
-					+ "dt46,"
-					+ "avdt46,"
-					+ "dt47,"
-					+ "avdt47,"
-					+ "dt48,"
-					+ "avdt48"
-					+ ")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-
-			try {
-				stmt =  con.prepareStatement(sqlprive);
-				stmt.setInt(1, paciente.getIdpaciente());
-				stmt.setInt(2, paciente.getDt11());
-				stmt.setString(3,paciente.getAv11());
-				stmt.setInt(4,paciente.getDt12());
-				stmt.setString(5, paciente.getAv12());
-				stmt.setInt(6, paciente.getDt13());
-				stmt.setString(7, paciente.getAv13());
-				stmt.setInt(8, paciente.getDt14());
-				stmt.setString(9, paciente.getAv14());
-				stmt.setInt(10, paciente.getDt15());
-				stmt.setString(11, paciente.getAv15());
-				stmt.setInt(12, paciente.getDt16());
-				stmt.setString(13, paciente.getAv16());
-				stmt.setInt(14, paciente.getDt17());
-				stmt.setString(15, paciente.getAv17());
-				stmt.setInt(16, paciente.getDt18());
-				stmt.setString(17, paciente.getAv18());
-				stmt.setInt(18, paciente.getDt21());
-				stmt.setString(19, paciente.getAv21());
-				stmt.setInt(20, paciente.getDt22());
-				stmt.setString(21, paciente.getAv22());
-				stmt.setInt(22, paciente.getDt23());
-				stmt.setString(23, paciente.getAv23());
-				stmt.setInt(24, paciente.getDt24());
-				stmt.setString(25, paciente.getAv24());
-				stmt.setInt(26, paciente.getDt25());
-				stmt.setString(27, paciente.getAv25());
-				stmt.setInt(28, paciente.getDt26());
-				stmt.setString(29, paciente.getAv26());
-				stmt.setInt(30, paciente.getDt27());
-				stmt.setString(31, paciente.getAv27());
-				stmt.setInt(32, paciente.getDt28());
-				stmt.setString(33, paciente.getAv28());
-				stmt.setInt(34, paciente.getDt31());
-				stmt.setString(35, paciente.getAv31());
-				stmt.setInt(36, paciente.getDt32());
-				stmt.setString(37, paciente.getAv32());
-				stmt.setInt(38, paciente.getDt33());
-				stmt.setString(39, paciente.getAv33());
-				stmt.setInt(40, paciente.getDt34());
-				stmt.setString(41, paciente.getAv34());
-				stmt.setInt(42, paciente.getDt35());
-				stmt.setString(43, paciente.getAv35());
-				stmt.setInt(44, paciente.getDt36());
-				stmt.setString(45, paciente.getAv36());
-				stmt.setInt(46, paciente.getDt37());
-				stmt.setString(47, paciente.getAv37());
-				stmt.setInt(48, paciente.getDt38());
-				stmt.setString(49, paciente.getAv38());
-				stmt.setInt(50, paciente.getDt41());
-				stmt.setString(51, paciente.getAv41());
-				stmt.setInt(52, paciente.getDt42());
-				stmt.setString(53, paciente.getAv42());
-				stmt.setInt(54, paciente.getDt43());
-				stmt.setString(55, paciente.getAv43());
-				stmt.setInt(56, paciente.getDt44());
-				stmt.setString(57, paciente.getAv44());
-				stmt.setInt(58, paciente.getDt45());
-				stmt.setString(59, paciente.getAv45());
-				stmt.setInt(60, paciente.getDt46());
-				stmt.setString(61, paciente.getAv46());
-				stmt.setInt(62, paciente.getDt47());
-				stmt.setString(63, paciente.getAv47());
-				stmt.setInt(64, paciente.getDt48());
-				stmt.setString(65, paciente.getAv48());
-				stmt.execute();
-			} catch (SQLException e3) {
-				erro(e3.getMessage());
-			}
 			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
 			aviso.texto.setText("CADASTRO REALIZADO COM SUCESSO.");
 			aviso.setLocationRelativeTo(null);
 			aviso.show();
-		}else {
-			aviso.texto.setText("NÃO FOI POSSIVEL CONCLUIR O CADASTRO TENTE NOVAMENTE.");
-			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/fechar.png")));
-			aviso.setLocationRelativeTo(null);
-			aviso.show();
+		} catch (SQLException e) {
+			erro(e.getMessage());
 		}
+
+		
+
+		
 
 
 	}
@@ -800,6 +710,38 @@ public class DaoConnect {
 				+ "convenioid=?,"
 				+ "alergia=?,"
 				+ "obsalegia=?"
+				+ "dt11=?,"
+				+ "dt12=?,"
+				+ "dt13=?,"
+				+ "dt14=?,"
+				+ "dt15=?,"
+				+ "dt16=?,"
+				+ "dt17=?,"
+				+ "dt18=?,"
+				+ "dt21=?,"
+				+ "dt22=?,"
+				+ "dt23=?,"
+				+ "dt24=?,"
+				+ "dt25=?,"
+				+ "dt26=?,"
+				+ "dt27=?,"
+				+ "dt28=?,"
+				+ "dt31=?,"
+				+ "dt32=?,"
+				+ "dt33=?,"
+				+ "dt34=?,"
+				+ "dt35=?,"
+				+ "dt36=?,"
+				+ "dt37=?,"
+				+ "dt38=?,"
+				+ "dt41=?,"
+				+ "dt42=?,"
+				+ "dt43=?,"
+				+ "dt44=?,"
+				+ "dt45=?,"
+				+ "dt46=?,"
+				+ "dt47=?,"
+				+ "dt48=?,"
 				+ "WHERE idpaciente=?;";
 
 		try {
@@ -821,153 +763,47 @@ public class DaoConnect {
 			stmt.setString(14, paciente.getEmail1());
 			stmt.setString(15, paciente.getEmail2());
 			stmt.setInt(16, paciente.getConvenio());
-			stmt.setInt(27,paciente.getAlegia());
-			stmt.setString(28,paciente.getObsmedicamento());
-			stmt.setInt(29, paciente.getIdpaciente());
+			stmt.setInt(17,paciente.getAlegia());
+			stmt.setString(18,paciente.getObsmedicamento());
+			stmt.setInt(19, paciente.getIdpaciente());
+			stmt.setInt(20, paciente.getDt11());
+			stmt.setInt(21,paciente.getDt12());
+			stmt.setInt(22, paciente.getDt13());
+			stmt.setInt(23, paciente.getDt14());
+			stmt.setInt(24, paciente.getDt15());
+			stmt.setInt(25, paciente.getDt16());
+			stmt.setInt(26, paciente.getDt17());
+			stmt.setInt(27, paciente.getDt18());
+			stmt.setInt(28, paciente.getDt21());
+			stmt.setInt(29, paciente.getDt22());
+			stmt.setInt(30, paciente.getDt23());
+			stmt.setInt(31, paciente.getDt24());
+			stmt.setInt(32, paciente.getDt25());
+			stmt.setInt(33, paciente.getDt26());
+			stmt.setInt(34, paciente.getDt27());
+			stmt.setInt(35, paciente.getDt28());
+			stmt.setInt(36, paciente.getDt31());
+			stmt.setInt(37, paciente.getDt32());
+			stmt.setInt(38, paciente.getDt33());
+			stmt.setInt(39, paciente.getDt34());
+			stmt.setInt(40, paciente.getDt35());
+			stmt.setInt(41, paciente.getDt36());
+			stmt.setInt(42, paciente.getDt37());
+			stmt.setInt(43, paciente.getDt38());
+			stmt.setInt(44, paciente.getDt41());
+			stmt.setInt(45, paciente.getDt42());
+			stmt.setInt(46, paciente.getDt43());
+			stmt.setInt(47, paciente.getDt44());
+			stmt.setInt(48, paciente.getDt45());
+			stmt.setInt(49, paciente.getDt46());
+			stmt.setInt(50, paciente.getDt47());
+			stmt.setInt(51, paciente.getDt48());
 			stmt.execute();
 		} catch (SQLException e) {
 			erro(e.getMessage());
 		}
 
-
-		String sqlprive = "UPDATE avaliacao SET"
-				+ "dt11=?,"
-				+ "avdt11=?,"
-				+ "dt12=?,"
-				+ "avdt12=?,"
-				+ "dt13=?,"
-				+ "avdt13=?,"
-				+ "dt14=?,"
-				+ "avdt14=?,"
-				+ "dt15=?,"
-				+ "avdt15=?,"
-				+ "dt16=?,"
-				+ "avdt16=?,"
-				+ "dt17=?,"
-				+ "avdt17=?,"
-				+ "dt18=?,"
-				+ "avdt18=?,"
-				+ "dt21=?,"
-				+ "avdt21=?,"
-				+ "dt22=?,"
-				+ "dt23=?,"
-				+ "avdt23=?,"
-				+ "dt24=?,"
-				+ "avdt24=?,"
-				+ "dt25=?,"
-				+ "avdt25=?,"
-				+ "dt26=?,"
-				+ "avdt26=?,"
-				+ "dt27=?,"
-				+ "avdt27=?,"
-				+ "dt28=?,"
-				+ "avdt28=?,"
-				+ "dt31=?,"
-				+ "avdt31=?,"
-				+ "dt32=?,"
-				+ "avdt32=?,"
-				+ "dt33=?,"
-				+ "avdt33=?,"
-				+ "dt34=?,"
-				+ "avdt34=?,"
-				+ "dt35=?,"
-				+ "avdt35=?,"
-				+ "dt36=?,"
-				+ "avdt36=?,"
-				+ "dt37=?,"
-				+ "dt38=?,"
-				+ "avdt38=?,"
-				+ "dt41=?,"
-				+ "avdt41=?,"
-				+ "dt42=?,"
-				+ "avdt42=?,"
-				+ "dt43=?,"
-				+ "avdt43=?,"
-				+ "dt44=?,"
-				+ "avdt44=?,"
-				+ "dt45=?,"
-				+ "avdt45=?,"
-				+ "dt46=?,"
-				+ "avdt46=?,"
-				+ "dt47=?,"
-				+ "avdt47=?,"
-				+ "dt48=?,"
-				+ "avdt48=?"
-				+ "WHERE idpaciente=?;";
-
-
-		try {
-			stmt =  con.prepareStatement(sqlprive);
-			stmt.setInt(1, paciente.getDt11());
-			stmt.setString(2,paciente.getAv11());
-			stmt.setInt(3,paciente.getDt12());
-			stmt.setString(4, paciente.getAv12());
-			stmt.setInt(5, paciente.getDt13());
-			stmt.setString(6, paciente.getAv13());
-			stmt.setInt(7, paciente.getDt14());
-			stmt.setString(8, paciente.getAv14());
-			stmt.setInt(9, paciente.getDt15());
-			stmt.setString(10, paciente.getAv15());
-			stmt.setInt(11, paciente.getDt16());
-			stmt.setString(12, paciente.getAv16());
-			stmt.setInt(13, paciente.getDt17());
-			stmt.setString(14, paciente.getAv17());
-			stmt.setInt(15, paciente.getDt18());
-			stmt.setString(16, paciente.getAv18());
-			stmt.setInt(17, paciente.getDt21());
-			stmt.setString(18, paciente.getAv21());
-			stmt.setInt(19, paciente.getDt22());
-			stmt.setString(20, paciente.getAv22());
-			stmt.setInt(21, paciente.getDt23());
-			stmt.setString(22, paciente.getAv23());
-			stmt.setInt(23, paciente.getDt24());
-			stmt.setString(24, paciente.getAv24());
-			stmt.setInt(25, paciente.getDt25());
-			stmt.setString(26, paciente.getAv25());
-			stmt.setInt(27, paciente.getDt26());
-			stmt.setString(28, paciente.getAv26());
-			stmt.setInt(29, paciente.getDt27());
-			stmt.setString(30, paciente.getAv27());
-			stmt.setInt(31, paciente.getDt28());
-			stmt.setString(32, paciente.getAv28());
-			stmt.setInt(33, paciente.getDt31());
-			stmt.setString(34, paciente.getAv31());
-			stmt.setInt(35, paciente.getDt32());
-			stmt.setString(36, paciente.getAv32());
-			stmt.setInt(37, paciente.getDt33());
-			stmt.setString(38, paciente.getAv33());
-			stmt.setInt(39, paciente.getDt34());
-			stmt.setString(40, paciente.getAv34());
-			stmt.setInt(41, paciente.getDt35());
-			stmt.setString(42, paciente.getAv35());
-			stmt.setInt(43, paciente.getDt36());
-			stmt.setString(44, paciente.getAv36());
-			stmt.setInt(45, paciente.getDt37());
-			stmt.setString(46, paciente.getAv37());
-			stmt.setInt(47, paciente.getDt38());
-			stmt.setString(48, paciente.getAv38());
-			stmt.setInt(49, paciente.getDt41());
-			stmt.setString(50, paciente.getAv41());
-			stmt.setInt(51, paciente.getDt42());
-			stmt.setString(52, paciente.getAv42());
-			stmt.setInt(53, paciente.getDt43());
-			stmt.setString(54, paciente.getAv43());
-			stmt.setInt(55, paciente.getDt44());
-			stmt.setString(56, paciente.getAv44());
-			stmt.setInt(57, paciente.getDt45());
-			stmt.setString(58, paciente.getAv45());
-			stmt.setInt(59, paciente.getDt46());
-			stmt.setString(60, paciente.getAv46());
-			stmt.setInt(61, paciente.getDt47());
-			stmt.setString(62, paciente.getAv47());
-			stmt.setInt(63, paciente.getDt48());
-			stmt.setString(64, paciente.getAv48());
-			stmt.setInt(65, paciente.getIdpaciente());
-			stmt.execute();
-		} catch (SQLException e3) {
-			erro(e3.getMessage());
-		}
-	}
+			}
 	public void excluiPaciente(Paciente paciente) {}
 	public void dadosPaciente(Paciente paciente) {}
 

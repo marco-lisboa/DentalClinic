@@ -4,10 +4,14 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
+
+import control.*;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -28,13 +32,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.TextArea;
 import javax.swing.JTextArea;
+import javax.swing.JFormattedTextField;
 
 public class Tficha_paciente extends JPanel {
+	Paciente paciente = new Paciente();
 	private JTextField textField;
 	private JComboBox textField_1;
 	private JTable table;
 	private JTextField txnome;
-	private JTextField txcpf;
+	private JFormattedTextField txcpf;
 	private JTextField txmatricula;
 	private JTextField txcontato1;
 	private JTextField txcontato2;
@@ -47,8 +53,7 @@ public class Tficha_paciente extends JPanel {
 	private JRadioButton rdbtnNo;
 	private JTextPane textPaneobs;
 	private JLabel lblQuais;
-	private JComboBox comboBox;
-	private JDateChooser dtnascimento;
+	private JComboBox nacionalidade;
 	private JComboBox op1;
 	private JCheckBox w1;
 	private JComboBox op2;
@@ -94,26 +99,37 @@ public class Tficha_paciente extends JPanel {
 	private JLabel av21;
 	private JLabel av22;
 	private JLabel av23;
-	private JLabel label_10;
-	private JLabel label_13;
-	private JLabel label_14;
-	private JLabel label_15;
-	private JLabel label_16;
-	private JLabel label_17;
-	private JLabel label_18;
-	private JLabel label_19;
-	private JLabel label_20;
-	private JLabel label_21;
-	private JLabel label_23;
-	private JLabel label_24;
-	private JLabel label_29;
-	private JLabel label_30;
-	private JLabel label_31;
-	private JLabel label_32;
-	private JLabel label_4;
+	private JLabel av24;
+	private JLabel av25;
+	private JLabel av27;
+	private JLabel av28;
+	private JLabel av45;
+	private JLabel av46;
+	private JLabel av47;
+	private JLabel av48;
+	private JLabel av31;
+	private JLabel av32;
+	private JLabel av33;
+	private JLabel av34;
+	private JLabel av35;
+	private JLabel av36;
+	private JLabel av37;
+	private JLabel av38;
+	private JLabel salva;
 	private JTabbedPane tabbedPaneav;
 	private JLabel bkav;
 	private JLabel textoav;
+	private JCheckBox p1;
+	private JCheckBox p2;
+	private JCheckBox p3;
+	private JCheckBox p4;
+	private JTextArea obsClinica;
+	private JComboBox estado;
+	private JComboBox cidade;
+	private JCheckBox dt36;
+	private JCheckBox dt37;
+	private JCheckBox dt38;
+	private JFormattedTextField dtnascimento;
 
 	/**
 	 * Create the panel.
@@ -169,9 +185,15 @@ public class Tficha_paciente extends JPanel {
 		lblCpf.setBounds(10, 39, 123, 14);
 		panel_1.add(lblCpf);
 		
-		txcpf = new JTextField();
+		txcpf = new JFormattedTextField();
 		txcpf.setColumns(10);
-		txcpf.setBounds(43, 36, 225, 20);
+		txcpf.setBounds(43, 36, 116, 20);
+		try {
+			txcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("***.***.***-**")));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		panel_1.add(txcpf);
 		
 		JLabel label_5 = new JLabel("");
@@ -186,10 +208,16 @@ public class Tficha_paciente extends JPanel {
 		lblDataNascimento.setBounds(278, 42, 123, 14);
 		panel_1.add(lblDataNascimento);
 		
-		dtnascimento = new JDateChooser();
-		dtnascimento.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		dtnascimento = new JFormattedTextField();
 		dtnascimento.setBounds(387, 39, 123, 20);
+		try {
+			dtnascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		panel_1.add(dtnascimento);
+		dtnascimento.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Nascionalidade :");
 		lblCidade.setForeground(Color.WHITE);
@@ -197,10 +225,10 @@ public class Tficha_paciente extends JPanel {
 		lblCidade.setBounds(10, 79, 123, 14);
 		panel_1.add(lblCidade);
 		
-		comboBox = new JComboBox();
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBox.setBounds(102, 75, 152, 22);
-		panel_1.add(comboBox);
+		nacionalidade = new JComboBox();
+		nacionalidade.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		nacionalidade.setBounds(102, 75, 152, 22);
+		panel_1.add(nacionalidade);
 		
 		JLabel lblEstado = new JLabel("Estado :");
 		lblEstado.setForeground(Color.WHITE);
@@ -208,12 +236,12 @@ public class Tficha_paciente extends JPanel {
 		lblEstado.setBounds(264, 79, 54, 14);
 		panel_1.add(lblEstado);
 		
-		JComboBox estado = new JComboBox();
+		estado = new JComboBox();
 		estado.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		estado.setBounds(312, 75, 54, 22);
 		panel_1.add(estado);
 		
-		JComboBox cidade = new JComboBox();
+		cidade = new JComboBox();
 		cidade.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cidade.setBounds(424, 75, 136, 22);
 		panel_1.add(cidade);
@@ -325,10 +353,11 @@ public class Tficha_paciente extends JPanel {
 		JLabel lblOp = new JLabel("Op :");
 		lblOp.setForeground(Color.WHITE);
 		lblOp.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblOp.setBounds(202, 106, 123, 14);
+		lblOp.setBounds(202, 106, 32, 14);
 		panel_1.add(lblOp);
 		
 		op1 = new JComboBox();
+		op1.setModel(new DefaultComboBoxModel(new String[] {"Vivo", "Claro", "Oi", "Tim", "Outros"}));
 		op1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		op1.setBounds(234, 103, 152, 22);
 		panel_1.add(op1);
@@ -347,6 +376,7 @@ public class Tficha_paciente extends JPanel {
 		panel_1.add(label_1);
 		
 		op2 = new JComboBox();
+		op2.setModel(new DefaultComboBoxModel(new String[] {"Vivo", "Claro", "Oi", "Tim", "Outros"}));
 		op2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		op2.setBounds(234, 131, 152, 22);
 		panel_1.add(op2);
@@ -381,21 +411,31 @@ public class Tficha_paciente extends JPanel {
 		panel_1.add(label_3);
 		
 		JLabel salvar = new JLabel("");
-		salvar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/save.png")));
+		salvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		salvar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
 		salvar.setToolTipText("Salvar");
-		salvar.setBounds(407, 299, 32, 49);
+		salvar.setBounds(414, 320, 32, 49);
 		panel_1.add(salvar);
 		
 		JLabel limpar = new JLabel("");
+		limpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		limpar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/eraser.png")));
 		limpar.setToolTipText("Limpar");
-		limpar.setBounds(465, 299, 32, 49);
+		limpar.setBounds(472, 320, 32, 49);
 		panel_1.add(limpar);
 		
 		JLabel voltar = new JLabel("");
+		voltar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		voltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPaneFicha.setVisible(true);
+				tabbedPaneCadastro.setVisible(false);
+			}
+		});
 		voltar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
 		voltar.setToolTipText("Voltar");
-		voltar.setBounds(521, 299, 32, 49);
+		voltar.setBounds(528, 320, 32, 49);
 		panel_1.add(voltar);
 		
 		JLabel label_6 = new JLabel("");
@@ -410,6 +450,7 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneCadastro.setForegroundAt(1, Color.WHITE);
 		
 		tabbedPaneav = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneav.setVisible(false);
 		tabbedPaneav.setBounds(94, 0, 394, 378);
 		panel_2.add(tabbedPaneav);
 		
@@ -424,101 +465,37 @@ public class Tficha_paciente extends JPanel {
 		textoav.setBounds(6, 11, 373, 14);
 		panel_3.add(textoav);
 		
-		JCheckBox chckbxRestaurao = new JCheckBox("Canal");
-		chckbxRestaurao.setOpaque(false);
-		chckbxRestaurao.setForeground(Color.WHITE);
-		chckbxRestaurao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxRestaurao.setFocusable(false);
-		chckbxRestaurao.setBounds(16, 36, 155, 23);
-		panel_3.add(chckbxRestaurao);
+		p1 = new JCheckBox("Canal");
+		p1.setOpaque(false);
+		p1.setForeground(Color.WHITE);
+		p1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		p1.setFocusable(false);
+		p1.setBounds(16, 36, 155, 23);
+		panel_3.add(p1);
 		
-		JCheckBox chckbxObturao = new JCheckBox("Restaura\u00E7\u00E3o");
-		chckbxObturao.setOpaque(false);
-		chckbxObturao.setForeground(Color.WHITE);
-		chckbxObturao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxObturao.setFocusable(false);
-		chckbxObturao.setBounds(16, 62, 155, 23);
-		panel_3.add(chckbxObturao);
+		p2 = new JCheckBox("Restaura\u00E7\u00E3o");
+		p2.setOpaque(false);
+		p2.setForeground(Color.WHITE);
+		p2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		p2.setFocusable(false);
+		p2.setBounds(16, 62, 155, 23);
+		panel_3.add(p2);
 		
-		JCheckBox chckbxCoroa = new JCheckBox("Coroa");
-		chckbxCoroa.setOpaque(false);
-		chckbxCoroa.setForeground(Color.WHITE);
-		chckbxCoroa.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxCoroa.setFocusable(false);
-		chckbxCoroa.setBounds(16, 88, 155, 23);
-		panel_3.add(chckbxCoroa);
+		p3 = new JCheckBox("Coroa");
+		p3.setOpaque(false);
+		p3.setForeground(Color.WHITE);
+		p3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		p3.setFocusable(false);
+		p3.setBounds(256, 32, 155, 23);
+		panel_3.add(p3);
 		
-		JCheckBox chckbxExtrao = new JCheckBox("Extra\u00E7\u00E3o");
-		chckbxExtrao.setOpaque(false);
-		chckbxExtrao.setForeground(Color.WHITE);
-		chckbxExtrao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxExtrao.setFocusable(false);
-		chckbxExtrao.setBounds(16, 114, 155, 23);
-		panel_3.add(chckbxExtrao);
-		
-		JCheckBox checkBox = new JCheckBox("Canal");
-		checkBox.setOpaque(false);
-		checkBox.setForeground(Color.WHITE);
-		checkBox.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox.setFocusable(false);
-		checkBox.setBounds(224, 36, 155, 23);
-		panel_3.add(checkBox);
-		
-		JCheckBox checkBox_1 = new JCheckBox("Restaura\u00E7\u00E3o");
-		checkBox_1.setOpaque(false);
-		checkBox_1.setForeground(Color.WHITE);
-		checkBox_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_1.setFocusable(false);
-		checkBox_1.setBounds(224, 62, 155, 23);
-		panel_3.add(checkBox_1);
-		
-		JCheckBox checkBox_2 = new JCheckBox("Coroa");
-		checkBox_2.setOpaque(false);
-		checkBox_2.setForeground(Color.WHITE);
-		checkBox_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_2.setFocusable(false);
-		checkBox_2.setBounds(224, 88, 155, 23);
-		panel_3.add(checkBox_2);
-		
-		JCheckBox checkBox_3 = new JCheckBox("Extra\u00E7\u00E3o");
-		checkBox_3.setOpaque(false);
-		checkBox_3.setForeground(Color.WHITE);
-		checkBox_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_3.setFocusable(false);
-		checkBox_3.setBounds(224, 114, 155, 23);
-		panel_3.add(checkBox_3);
-		
-		JCheckBox checkBox_4 = new JCheckBox("Coroa");
-		checkBox_4.setOpaque(false);
-		checkBox_4.setForeground(Color.WHITE);
-		checkBox_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_4.setFocusable(false);
-		checkBox_4.setBounds(16, 140, 155, 23);
-		panel_3.add(checkBox_4);
-		
-		JCheckBox checkBox_5 = new JCheckBox("Extra\u00E7\u00E3o");
-		checkBox_5.setOpaque(false);
-		checkBox_5.setForeground(Color.WHITE);
-		checkBox_5.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_5.setFocusable(false);
-		checkBox_5.setBounds(16, 166, 155, 23);
-		panel_3.add(checkBox_5);
-		
-		JCheckBox checkBox_6 = new JCheckBox("Coroa");
-		checkBox_6.setOpaque(false);
-		checkBox_6.setForeground(Color.WHITE);
-		checkBox_6.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_6.setFocusable(false);
-		checkBox_6.setBounds(224, 143, 155, 23);
-		panel_3.add(checkBox_6);
-		
-		JCheckBox checkBox_7 = new JCheckBox("Extra\u00E7\u00E3o");
-		checkBox_7.setOpaque(false);
-		checkBox_7.setForeground(Color.WHITE);
-		checkBox_7.setFont(new Font("Tahoma", Font.BOLD, 11));
-		checkBox_7.setFocusable(false);
-		checkBox_7.setBounds(224, 169, 155, 23);
-		panel_3.add(checkBox_7);
+		p4 = new JCheckBox("Extra\u00E7\u00E3o");
+		p4.setOpaque(false);
+		p4.setForeground(Color.WHITE);
+		p4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		p4.setFocusable(false);
+		p4.setBounds(256, 62, 155, 23);
+		panel_3.add(p4);
 		
 		JLabel lblObservaesClinicas = new JLabel("Observa\u00E7\u00F5es Clinicas");
 		lblObservaesClinicas.setHorizontalAlignment(SwingConstants.LEFT);
@@ -527,17 +504,25 @@ public class Tficha_paciente extends JPanel {
 		lblObservaesClinicas.setBounds(16, 225, 363, 14);
 		panel_3.add(lblObservaesClinicas);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(16, 242, 363, 65);
-		panel_3.add(textArea);
+		obsClinica = new JTextArea();
+		obsClinica.setBounds(16, 242, 363, 65);
+		panel_3.add(obsClinica);
 		
 		JLabel btConfirma = new JLabel("");
+		btConfirma.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btConfirma.setHorizontalAlignment(SwingConstants.CENTER);
 		btConfirma.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
 		btConfirma.setBounds(144, 306, 46, 33);
 		panel_3.add(btConfirma);
 		
 		JLabel btCancela = new JLabel("");
+		btCancela.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btCancela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPaneav.setVisible(false);
+			}
+		});
 		btCancela.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/fechar.png")));
 		btCancela.setHorizontalAlignment(SwingConstants.CENTER);
 		btCancela.setBounds(200, 306, 46, 33);
@@ -717,7 +702,7 @@ public class Tficha_paciente extends JPanel {
 		dt35.setBounds(442, 190, 50, 23);
 		panel_2.add(dt35);
 		
-		JCheckBox dt36 = new JCheckBox("36");
+		dt36 = new JCheckBox("36");
 		dt36.setOpaque(false);
 		dt36.setForeground(Color.WHITE);
 		dt36.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -725,7 +710,7 @@ public class Tficha_paciente extends JPanel {
 		dt36.setBounds(442, 224, 50, 23);
 		panel_2.add(dt36);
 		
-		JCheckBox dt37 = new JCheckBox("37");
+		dt37 = new JCheckBox("37");
 		dt37.setOpaque(false);
 		dt37.setForeground(Color.WHITE);
 		dt37.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -733,7 +718,7 @@ public class Tficha_paciente extends JPanel {
 		dt37.setBounds(442, 255, 50, 23);
 		panel_2.add(dt37);
 		
-		JCheckBox dt38 = new JCheckBox("38");
+		dt38 = new JCheckBox("38");
 		dt38.setOpaque(false);
 		dt38.setForeground(Color.WHITE);
 		dt38.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -825,6 +810,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(label_12);
 		
 		av11 = new JLabel("");
+		av11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(11);
+			}
+		});
 		av11.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av11.setToolTipText("Avalia");
 		av11.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
@@ -832,6 +823,13 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av11);
 		
 		av12 = new JLabel("");
+		av12.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(12);
+				
+			}
+		});
 		av12.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av12.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av12.setToolTipText("Avaliar");
@@ -839,6 +837,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av12);
 		
 		av13 = new JLabel("");
+		av13.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(13);
+			}
+		});
 		av13.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av13.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av13.setToolTipText("Avaliar");
@@ -846,6 +850,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av13);
 		
 		av14 = new JLabel("");
+		av14.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(14);
+			}
+		});
 		av14.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av14.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av14.setToolTipText("Avaliar");
@@ -853,6 +863,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av14);
 		
 		av15 = new JLabel("");
+		av15.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(15);
+			}
+		});
 		av15.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av15.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av15.setToolTipText("Avaliar");
@@ -860,6 +876,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av15);
 		
 		av16 = new JLabel("");
+		av16.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(16);
+			}
+		});
 		av16.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av16.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av16.setToolTipText("Avaliar");
@@ -867,6 +889,13 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av16);
 		
 		av17 = new JLabel("");
+		av17.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(17);
+				
+			}
+		});
 		av17.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av17.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av17.setToolTipText("Avaliar");
@@ -874,6 +903,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av17);
 		
 		av18 = new JLabel("");
+		av18.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(18);
+			}
+		});
 		av18.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av18.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av18.setToolTipText("Avaliar");
@@ -881,6 +916,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av18);
 		
 		av21 = new JLabel("");
+		av21.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(21);
+			}
+		});
 		av21.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av21.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av21.setToolTipText("Avalia");
@@ -888,6 +929,12 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av21);
 		
 		av22 = new JLabel("");
+		av22.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(22);
+			}
+		});
 		av22.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av22.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av22.setToolTipText("Avalia");
@@ -895,53 +942,290 @@ public class Tficha_paciente extends JPanel {
 		panel_2.add(av22);
 		
 		av23 = new JLabel("");
+		av23.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(23);
+			}
+		});
 		av23.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		av23.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
 		av23.setToolTipText("Avalia");
 		av23.setBounds(210, 132, 31, 25);
 		panel_2.add(av23);
 		
-		label_10 = new JLabel("");
-		label_10.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_10.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_10.setToolTipText("Avalia");
-		label_10.setBounds(210, 162, 31, 25);
-		panel_2.add(label_10);
+		av24 = new JLabel("");
+		av24.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(24);
+			}
+		});
+		av24.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av24.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av24.setToolTipText("Avalia");
+		av24.setBounds(210, 162, 31, 25);
+		panel_2.add(av24);
 		
-		label_13 = new JLabel("");
-		label_13.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_13.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_13.setToolTipText("Avalia");
-		label_13.setBounds(210, 190, 31, 25);
-		panel_2.add(label_13);
+		av25 = new JLabel("");
+		av25.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(25);
+			}
+		});
+		av25.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av25.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av25.setToolTipText("Avalia");
+		av25.setBounds(210, 190, 31, 25);
+		panel_2.add(av25);
 		
-		JLabel label_22 = new JLabel("");
-		label_22.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_22.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_22.setToolTipText("Avalia");
-		label_22.setBounds(210, 222, 31, 25);
-		panel_2.add(label_22);
+		JLabel av26 = new JLabel("");
+		av26.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(26);
+			}
+		});
+		av26.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av26.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av26.setToolTipText("Avalia");
+		av26.setBounds(210, 222, 31, 25);
+		panel_2.add(av26);
 		
-		label_14 = new JLabel("");
-		label_14.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_14.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_14.setToolTipText("Avalia");
-		label_14.setBounds(210, 253, 31, 25);
-		panel_2.add(label_14);
+		av27 = new JLabel("");
+		av27.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(27);
+			}
+		});
+		av27.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av27.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av27.setToolTipText("Avalia");
+		av27.setBounds(210, 253, 31, 25);
+		panel_2.add(av27);
 		
-		label_15 = new JLabel("");
-		label_15.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_15.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_15.setToolTipText("Avalia");
-		label_15.setBounds(210, 281, 31, 25);
-		panel_2.add(label_15);
+		av28 = new JLabel("");
+		av28.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(28);
+			}
+		});
+		av28.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av28.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av28.setToolTipText("Avalia");
+		av28.setBounds(210, 281, 31, 25);
+		panel_2.add(av28);
 		
-		JLabel label_25 = new JLabel("");
-		label_25.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_25.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_25.setToolTipText("Avalia");
-		label_25.setBounds(367, 70, 31, 25);
-		panel_2.add(label_25);
+		JLabel av41 = new JLabel("");
+		av41.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(41);
+			}
+		});
+		av41.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av41.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av41.setToolTipText("Avalia");
+		av41.setBounds(367, 70, 31, 25);
+		panel_2.add(av41);
+		
+		JLabel av42 = new JLabel("");
+		av42.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(42);
+			}
+		});
+		av42.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av42.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av42.setToolTipText("Avalia");
+		av42.setBounds(367, 104, 31, 25);
+		panel_2.add(av42);
+		
+		JLabel av43 = new JLabel("");
+		av43.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(43);
+			}
+		});
+		av43.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av43.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av43.setToolTipText("Avalia");
+		av43.setBounds(367, 132, 31, 25);
+		panel_2.add(av43);
+		
+		JLabel av44 = new JLabel("");
+		av44.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(44);
+			}
+		});
+		av44.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av44.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av44.setToolTipText("Avalia");
+		av44.setBounds(367, 162, 31, 25);
+		panel_2.add(av44);
+		
+		av45 = new JLabel("");
+		av45.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(45);
+			}
+		});
+		av45.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av45.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av45.setToolTipText("Avalia");
+		av45.setBounds(367, 194, 31, 25);
+		panel_2.add(av45);
+		
+		av46 = new JLabel("");
+		av46.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(46);
+			}
+		});
+		av46.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av46.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av46.setToolTipText("Avalia");
+		av46.setBounds(367, 222, 31, 25);
+		panel_2.add(av46);
+		
+		av47 = new JLabel("");
+		av47.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(47);
+			}
+		});
+		av47.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av47.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av47.setToolTipText("Avalia");
+		av47.setBounds(367, 253, 31, 25);
+		panel_2.add(av47);
+		
+		av48 = new JLabel("");
+		av48.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(48);
+			}
+		});
+		av48.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av48.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av48.setToolTipText("Avalia");
+		av48.setBounds(367, 281, 31, 25);
+		panel_2.add(av48);
+		
+		av31 = new JLabel("");
+		av31.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(31);
+			}
+		});
+		av31.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av31.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av31.setToolTipText("Avalia");
+		av31.setBounds(498, 72, 31, 25);
+		panel_2.add(av31);
+		
+		av32 = new JLabel("");
+		av32.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(32);
+			}
+		});
+		av32.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av32.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av32.setToolTipText("Avalia");
+		av32.setBounds(498, 104, 31, 25);
+		panel_2.add(av32);
+		
+		av33 = new JLabel("");
+		av33.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(33);
+			}
+		});
+		av33.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av33.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av33.setToolTipText("Avalia");
+		av33.setBounds(498, 134, 31, 25);
+		panel_2.add(av33);
+		
+		av34 = new JLabel("");
+		av34.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(34);
+			}
+		});
+		av34.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av34.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av34.setToolTipText("Avalia");
+		av34.setBounds(498, 162, 31, 25);
+		panel_2.add(av34);
+		
+		av35 = new JLabel("");
+		av35.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(35);
+			}
+		});
+		av35.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av35.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av35.setToolTipText("Avalia");
+		av35.setBounds(498, 190, 31, 25);
+		panel_2.add(av35);
+		
+		av36 = new JLabel("");
+		av36.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(36);
+			}
+		});
+		av36.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av36.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av36.setToolTipText("Avalia");
+		av36.setBounds(498, 222, 31, 25);
+		panel_2.add(av36);
+		
+		av37 = new JLabel("");
+		av37.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(37);
+			}
+		});
+		av37.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av37.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av37.setToolTipText("Avalia");
+		av37.setBounds(498, 253, 31, 25);
+		panel_2.add(av37);
+		
+		av38 = new JLabel("");
+		av38.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				exibiAv(38);
+			}
+		});
+		av38.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		av38.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
+		av38.setToolTipText("Avalia");
+		av38.setBounds(498, 281, 31, 25);
+		panel_2.add(av38);
 		
 		JLabel duvidas = new JLabel("");
 		duvidas.setToolTipText("O que fazer ?");
@@ -949,128 +1233,33 @@ public class Tficha_paciente extends JPanel {
 		duvidas.setBounds(10, 0, 31, 36);
 		panel_2.add(duvidas);
 		
-		JLabel label_26 = new JLabel("");
-		label_26.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_26.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_26.setToolTipText("Avalia");
-		label_26.setBounds(367, 104, 31, 25);
-		panel_2.add(label_26);
+		salva = new JLabel("");
+		salva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		salva.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
+		salva.setToolTipText("Salvar");
+		salva.setBounds(204, 351, 32, 49);
+		panel_2.add(salva);
 		
-		JLabel label_27 = new JLabel("");
-		label_27.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_27.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_27.setToolTipText("Avalia");
-		label_27.setBounds(367, 132, 31, 25);
-		panel_2.add(label_27);
+		JLabel limpa = new JLabel("");
+		limpa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		limpa.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/eraser.png")));
+		limpa.setToolTipText("Limpar");
+		limpa.setBounds(262, 351, 32, 49);
+		panel_2.add(limpa);
 		
-		JLabel label_28 = new JLabel("");
-		label_28.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_28.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_28.setToolTipText("Avalia");
-		label_28.setBounds(367, 162, 31, 25);
-		panel_2.add(label_28);
-		
-		label_16 = new JLabel("");
-		label_16.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_16.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_16.setToolTipText("Avalia");
-		label_16.setBounds(367, 194, 31, 25);
-		panel_2.add(label_16);
-		
-		label_17 = new JLabel("");
-		label_17.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_17.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_17.setToolTipText("Avalia");
-		label_17.setBounds(367, 222, 31, 25);
-		panel_2.add(label_17);
-		
-		label_18 = new JLabel("");
-		label_18.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_18.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_18.setToolTipText("Avalia");
-		label_18.setBounds(367, 253, 31, 25);
-		panel_2.add(label_18);
-		
-		label_19 = new JLabel("");
-		label_19.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_19.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_19.setToolTipText("Avalia");
-		label_19.setBounds(367, 281, 31, 25);
-		panel_2.add(label_19);
-		
-		label_20 = new JLabel("");
-		label_20.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_20.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_20.setToolTipText("Avalia");
-		label_20.setBounds(498, 72, 31, 25);
-		panel_2.add(label_20);
-		
-		label_21 = new JLabel("");
-		label_21.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_21.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_21.setToolTipText("Avalia");
-		label_21.setBounds(498, 104, 31, 25);
-		panel_2.add(label_21);
-		
-		label_23 = new JLabel("");
-		label_23.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_23.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_23.setToolTipText("Avalia");
-		label_23.setBounds(498, 134, 31, 25);
-		panel_2.add(label_23);
-		
-		label_24 = new JLabel("");
-		label_24.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_24.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_24.setToolTipText("Avalia");
-		label_24.setBounds(498, 162, 31, 25);
-		panel_2.add(label_24);
-		
-		label_29 = new JLabel("");
-		label_29.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_29.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_29.setToolTipText("Avalia");
-		label_29.setBounds(498, 190, 31, 25);
-		panel_2.add(label_29);
-		
-		label_30 = new JLabel("");
-		label_30.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_30.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_30.setToolTipText("Avalia");
-		label_30.setBounds(498, 222, 31, 25);
-		panel_2.add(label_30);
-		
-		label_31 = new JLabel("");
-		label_31.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_31.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_31.setToolTipText("Avalia");
-		label_31.setBounds(498, 253, 31, 25);
-		panel_2.add(label_31);
-		
-		label_32 = new JLabel("");
-		label_32.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label_32.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/avalia\u00E7\u00E3o.png")));
-		label_32.setToolTipText("Avalia");
-		label_32.setBounds(498, 281, 31, 25);
-		panel_2.add(label_32);
-		
-		label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
-		label_4.setToolTipText("Salvar");
-		label_4.setBounds(204, 351, 32, 49);
-		panel_2.add(label_4);
-		
-		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/eraser.png")));
-		label_8.setToolTipText("Limpar");
-		label_8.setBounds(262, 351, 32, 49);
-		panel_2.add(label_8);
-		
-		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
-		label_9.setToolTipText("Voltar");
-		label_9.setBounds(318, 351, 32, 49);
-		panel_2.add(label_9);
+		JLabel volta = new JLabel("");
+		volta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPaneFicha.setVisible(true);
+				tabbedPaneCadastro.setVisible(false);
+			}
+		});
+		volta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		volta.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		volta.setToolTipText("Voltar");
+		volta.setBounds(318, 351, 32, 49);
+		panel_2.add(volta);
 		
 		JLabel bkAvc = new JLabel("");
 		bkAvc.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/bk.jpeg")));
@@ -1217,10 +1406,127 @@ public class Tficha_paciente extends JPanel {
 		
 	}
 	
-	public void checaCampos() {
+	public void varreCampos() {
+		paciente.setNomepaciente(txnome.getText());
+		paciente.setCpf(txcpf.getText());
+		//paciente.getData(dtnascimento.getDate())
+		paciente.setNascionalidade(nacionalidade.getSelectedItem().toString());
+		paciente.setEstado(estado.getSelectedItem().toString());
+		paciente.setCidade(cidade.getSelectedItem().toString());
+		paciente.setContato1(txcontato1.getText());
+		paciente.setOp1(op1.getSelectedItem().toString());
+		paciente.setContato2(txcontato2.getText());
+		paciente.setOp2(op2.getSelectedItem().toString());
+		paciente.setEmail1(email1.getText());
+		paciente.setEmail2(email2.getText());
+		//paciente.setConvenio(convenio);
+		paciente.setObsmedicamento(textPaneobs.getText());
+		if(w1.isSelected()==true) {	paciente.setWhats1(1);}else {paciente.setWhats1(0);}
+		if(w2.isSelected()==true) {paciente.setWhats2(1);}else {paciente.setWhats2(0);}
+		if(rdbtnSim.isSelected()==true) {paciente.setAlegia(1);}else {paciente.setAlegia(0);}
+	//-----------------------------------------------------------------------------
+		if(dt11.isSelected()==true) {paciente.setDt11(1);}else {paciente.setDt11(0);}
+		if(dt12.isSelected()==true) {paciente.setDt12(1);}else {paciente.setDt12(0);}
+		if(dt13.isSelected()==true) {paciente.setDt13(1);}else {paciente.setDt13(0);}
+		if(dt14.isSelected()==true) {paciente.setDt14(1);}else {paciente.setDt14(0);}
+		if(dt15.isSelected()==true) {paciente.setDt15(1);}else {paciente.setDt15(0);}
+		if(dt16.isSelected()==true) {paciente.setDt16(1);}else {paciente.setDt16(0);}
+		if(dt17.isSelected()==true) {paciente.setDt17(1);}else {paciente.setDt17(0);}
+		if(dt18.isSelected()==true) {paciente.setDt18(1);}else {paciente.setDt18(0);}
+		if(dt21.isSelected()==true) {paciente.setDt21(1);}else {paciente.setDt21(0);}
+		if(dt22.isSelected()==true) {paciente.setDt22(1);}else {paciente.setDt22(0);}
+		if(dt23.isSelected()==true) {paciente.setDt23(1);}else {paciente.setDt23(0);}
+		if(dt24.isSelected()==true) {paciente.setDt24(1);}else {paciente.setDt24(0);}
+		if(dt25.isSelected()==true) {paciente.setDt25(1);}else {paciente.setDt25(0);}
+		if(dt26.isSelected()==true) {paciente.setDt26(1);}else {paciente.setDt26(0);}
+		if(dt27.isSelected()==true) {paciente.setDt27(1);}else {paciente.setDt27(0);}
+		if(dt28.isSelected()==true) {paciente.setDt28(1);}else {paciente.setDt28(0);}
+		if(dt31.isSelected()==true) {paciente.setDt31(1);}else {paciente.setDt31(0);}
+		if(dt32.isSelected()==true) {paciente.setDt32(1);}else {paciente.setDt32(0);}
+		if(dt33.isSelected()==true) {paciente.setDt33(1);}else {paciente.setDt33(0);}
+		if(dt34.isSelected()==true) {paciente.setDt34(1);}else {paciente.setDt34(0);}
+		if(dt35.isSelected()==true) {paciente.setDt35(1);}else {paciente.setDt35(0);}
+		if(dt36.isSelected()==true) {paciente.setDt36(1);}else {paciente.setDt36(0);}
+		if(dt37.isSelected()==true) {paciente.setDt37(1);}else {paciente.setDt37(0);}
+		if(dt38.isSelected()==true) {paciente.setDt38(1);}else {paciente.setDt38(0);}
+		if(dt41.isSelected()==true) {paciente.setDt41(1);}else {paciente.setDt41(0);}
+		if(dt42.isSelected()==true) {paciente.setDt42(1);}else {paciente.setDt42(0);}
+		if(dt43.isSelected()==true) {paciente.setDt43(1);}else {paciente.setDt43(0);}
+		if(dt44.isSelected()==true) {paciente.setDt44(1);}else {paciente.setDt44(0);}
+		if(dt45.isSelected()==true) {paciente.setDt45(1);}else {paciente.setDt45(0);}
+		if(dt46.isSelected()==true) {paciente.setDt46(1);}else {paciente.setDt46(0);}
+		if(dt47.isSelected()==true) {paciente.setDt47(1);}else {paciente.setDt47(0);}
+		if(dt48.isSelected()==true) {paciente.setDt48(1);}else {paciente.setDt48(0);}
+		
+	//-------------------------------------------------------------------------------
+		
+		
 		
 	}
+	
 	public void limpaCampos() {
-		
+		txnome.setText("");
+		txcpf.setText("");
+		dtnascimento.setText("");
+		txcontato1.setText("");
+		op1.setSelectedIndex(0);
+		w1.setSelected(false);
+		txcontato2.setText("");
+		op2.setSelectedIndex(1);
+		w2.setSelected(false);
+		email1.setText("");
+		email2.setText("");
+		convenios.setSelectedIndex(0);
+		txmatricula.setText("");
+		rdbtnSim.setSelected(false);
+		rdbtnNo.setSelected(false);
+		textPaneobs.setText("");
+		dt11.setSelected(false);
+		dt12.setSelected(false);
+		dt13.setSelected(false);
+		dt14.setSelected(false);
+		dt15.setSelected(false);
+		dt16.setSelected(false);
+		dt17.setSelected(false);
+		dt18.setSelected(false);
+		dt21.setSelected(false);
+		dt22.setSelected(false);
+		dt23.setSelected(false);
+		dt24.setSelected(false);
+		dt25.setSelected(false);
+		dt26.setSelected(false);
+		dt27.setSelected(false);
+		dt28.setSelected(false);
+		dt31.setSelected(false);
+		dt32.setSelected(false);
+		dt33.setSelected(false);
+		dt34.setSelected(false);
+		dt35.setSelected(false);
+		dt36.setSelected(false);
+		dt37.setSelected(false);
+		dt38.setSelected(false);
+		dt41.setSelected(false);
+		dt42.setSelected(false);
+		dt43.setSelected(false);
+		dt44.setSelected(false);
+		dt45.setSelected(false);
+		dt46.setSelected(false);
+		dt47.setSelected(false);
+		dt48.setSelected(false);
+		limpaav();
+	}
+	
+	public void limpaav() {
+		textoav.setText("");
+		p1.setSelected(false);
+		p2.setSelected(false);
+		p3.setSelected(false);
+		p4.setSelected(false);
+		obsClinica.setText("");
+	}
+	
+	public void exibiAv(int i) {
+		textoav.setText("Avaliação referente ao dente "+i);
+		tabbedPaneav.setVisible(true);
 	}
 }
