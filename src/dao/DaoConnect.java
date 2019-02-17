@@ -568,65 +568,66 @@
 			
 				public void inserirPaciente(Paciente paciente) {
 					String sql = "INSERT INTO paciente("
-							+ "nome,"
-							+ "cpf,"
-							+ "datanascimento,"
-							+ "nacionalidade,"
-							+ "estado,"
-							+ "cidade,"
-							+ "provincia,"
-							+ "contato1,"
-							+ "contato2,"
-							+ "op1,"
-							+ "op2,"
-							+ "whats1,"
-							+ "whats2,"
-							+ "email1,"
-							+ "ameil2,"
-							+ "convenioid,"
-							+ "alergia,"
-							+ "obsalegia"
-							+ "dt11,"
-							+ "dt12,"
-							+ "dt13,"
-							+ "dt14,"
-							+ "dt15,"
-							+ "dt16,"
-							+ "dt17,"
-							+ "dt18,"
-							+ "dt21,"
-							+ "dt22,"
-							+ "dt23,"
-							+ "dt24,"
-							+ "dt25,"
-							+ "dt26,"
-							+ "dt27,"
-							+ "dt28,"
-							+ "dt31,"
-							+ "dt32,"
-							+ "dt33,"
-							+ "dt34,"
-							+ "dt35,"
-							+ "dt36,"
-							+ "dt37,"
-							+ "dt38,"
-							+ "dt41,"
-							+ "dt42,"
-							+ "dt43,"
-							+ "dt44,"
-							+ "dt45,"
-							+ "dt46,"
-							+ "dt47,"
-							+ "dt48,"
-							+ "situacao "
-							+ ")VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+					/*1*/		+ "nome,"
+					/*2*/		+ "cpf,"
+					/*3*/		+ "datanascimento,"
+					/*4*/		+ "nacionalidade,"
+					/*5*/		+ "estado,"
+					/*6*/		+ "cidade,"
+					/*7*/		+ "provincia,"
+					/*8*/		+ "contato1,"
+					/*9*/		+ "contato2,"
+					/*10*/		+ "op1,"
+					/*11*/		+ "op2,"
+					/*12*/		+ "whats1,"
+					/*13*/		+ "whats2,"
+					/*14*/		+ "email1,"
+					/*15*/		+ "email2,"
+					/*16*/		+ "convenioid,"
+					/*17*/		+ "matricula,"
+					/*18*/		+ "alergia,"
+					/*19*/		+ "obsalegia,"
+					/*20*/		+ "dt11,"
+					/*21*/		+ "dt12,"
+					/*22*/		+ "dt13,"
+					/*23*/		+ "dt14,"
+					/*24*/		+ "dt15,"
+					/*25*/		+ "dt16,"
+					/*26*/		+ "dt17,"
+					/*27*/		+ "dt18,"
+					/*28*/		+ "dt21,"
+					/*29*/		+ "dt22,"
+					/*30*/		+ "dt23,"
+					/*31*/		+ "dt24,"
+					/*32*/		+ "dt25,"
+					/*33*/		+ "dt26,"
+					/*34*/		+ "dt27,"
+					/*35*/		+ "dt28,"
+					/*36*/		+ "dt31,"
+					/*37*/		+ "dt32,"
+					/*38*/		+ "dt33,"
+					/*39*/		+ "dt34,"
+					/*40*/		+ "dt35,"
+					/*41*/		+ "dt36,"
+					/*42*/		+ "dt37,"
+					/*43*/		+ "dt38,"
+					/*44*/		+ "dt41,"
+					/*45*/		+ "dt42,"
+					/*46*/		+ "dt43,"
+					/*47*/		+ "dt44,"
+					/*48*/		+ "dt45,"
+					/*49*/		+ "dt46,"
+					/*50*/		+ "dt47,"
+					/*51*/		+ "dt48,"
+					/*52*/		+ "situacao"
+								+ ")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 					try {
 			
 						stmt =  con.prepareStatement(sql);
 						stmt.setString(1, paciente.getNomepaciente());
 						stmt.setString(2,paciente.getCpf());
-						//stmt.setDate(3, paciente.getData());
+						stmt.setDate(3, null);
 						stmt.setString(4,paciente.getNascionalidade());
 						stmt.setString(5,paciente.getEstado());
 						stmt.setString(6, paciente.getCidade());
@@ -640,41 +641,42 @@
 						stmt.setString(14, paciente.getEmail1());
 						stmt.setString(15, paciente.getEmail2());
 						stmt.setInt(16, paciente.getConvenio());
-						stmt.setInt(17,paciente.getAlegia());
-						stmt.setString(18,paciente.getObsmedicamento());
-						stmt.setInt(19, paciente.getDt11());
-						stmt.setInt(20,paciente.getDt12());
-						stmt.setInt(21, paciente.getDt13());
-						stmt.setInt(22, paciente.getDt14());
-						stmt.setInt(23, paciente.getDt15());
-						stmt.setInt(24, paciente.getDt16());
-						stmt.setInt(25, paciente.getDt17());
-						stmt.setInt(26, paciente.getDt18());
-						stmt.setInt(27, paciente.getDt21());
-						stmt.setInt(28, paciente.getDt22());
-						stmt.setInt(29, paciente.getDt23());
-						stmt.setInt(30, paciente.getDt24());
-						stmt.setInt(31, paciente.getDt25());
-						stmt.setInt(32, paciente.getDt26());
-						stmt.setInt(33, paciente.getDt27());
-						stmt.setInt(34, paciente.getDt28());
-						stmt.setInt(35, paciente.getDt31());
-						stmt.setInt(36, paciente.getDt32());
-						stmt.setInt(37, paciente.getDt33());
-						stmt.setInt(38, paciente.getDt34());
-						stmt.setInt(39, paciente.getDt35());
-						stmt.setInt(40, paciente.getDt36());
-						stmt.setInt(41, paciente.getDt37());
-						stmt.setInt(42, paciente.getDt38());
-						stmt.setInt(43, paciente.getDt41());
-						stmt.setInt(44, paciente.getDt42());
-						stmt.setInt(45, paciente.getDt43());
-						stmt.setInt(46, paciente.getDt44());
-						stmt.setInt(47, paciente.getDt45());
-						stmt.setInt(48, paciente.getDt46());
-						stmt.setInt(49, paciente.getDt47());
-						stmt.setInt(50, paciente.getDt48());
-						stmt.setInt(51, paciente.getSit());
+						stmt.setString(17, paciente.getMatricula());
+						stmt.setInt(18,paciente.getAlegia());
+						stmt.setString(19,paciente.getObsmedicamento());
+						stmt.setInt(20, paciente.getDt11());
+						stmt.setInt(21,paciente.getDt12());
+						stmt.setInt(22, paciente.getDt13());
+						stmt.setInt(23, paciente.getDt14());
+						stmt.setInt(24, paciente.getDt15());
+						stmt.setInt(25, paciente.getDt16());
+						stmt.setInt(26, paciente.getDt17());
+						stmt.setInt(27, paciente.getDt18());
+						stmt.setInt(28, paciente.getDt21());
+						stmt.setInt(29, paciente.getDt22());
+						stmt.setInt(30, paciente.getDt23());
+						stmt.setInt(31, paciente.getDt24());
+						stmt.setInt(32, paciente.getDt25());
+						stmt.setInt(33, paciente.getDt26());
+						stmt.setInt(34, paciente.getDt27());
+						stmt.setInt(35, paciente.getDt28());
+						stmt.setInt(36, paciente.getDt31());
+						stmt.setInt(37, paciente.getDt32());
+						stmt.setInt(38, paciente.getDt33());
+						stmt.setInt(39, paciente.getDt34());
+						stmt.setInt(40, paciente.getDt35());
+						stmt.setInt(41, paciente.getDt36());
+						stmt.setInt(42, paciente.getDt37());
+						stmt.setInt(43, paciente.getDt38());
+						stmt.setInt(44, paciente.getDt41());
+						stmt.setInt(45, paciente.getDt42());
+						stmt.setInt(46, paciente.getDt43());
+						stmt.setInt(47, paciente.getDt44());
+						stmt.setInt(48, paciente.getDt45());
+						stmt.setInt(49, paciente.getDt46());
+						stmt.setInt(50, paciente.getDt47());
+						stmt.setInt(51, paciente.getDt48());
+						stmt.setInt(52, paciente.getSit());
 						stmt.execute();
 						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
 						aviso.texto.setText("CADASTRO REALIZADO COM SUCESSO.");
@@ -728,7 +730,7 @@
 					//--------------------------------------------------------------------------------------------------------------------------------------------
 					try {
 						String sqlconta;
-						if(usuario.getSituacao()<3) {
+						if(paciente.getSit()<3) {
 							sqlconta = "SELECT COUNT(idpaciente) AS nresgistro FROM paciente WHERE nome like'"+paciente.getNomepaciente()+"%' AND situacao like '"+paciente.getSit()+"%'";
 						}else {
 							sqlconta = "SELECT COUNT(idpaciente) AS nresgistro FROM paciente WHERE nome like'"+paciente.getNomepaciente()+"%'";

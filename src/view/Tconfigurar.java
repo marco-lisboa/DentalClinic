@@ -37,6 +37,8 @@ import viewTavisos.*;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import javax.swing.JMenuItem;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Tconfigurar extends JPanel {
 	int acao;
@@ -319,6 +321,14 @@ public class Tconfigurar extends JPanel {
 		panel_1.add(label);
 		
 		txbuscar = new JTextField();
+		txbuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					buscar();
+				}
+			}
+		});
 		txbuscar.setColumns(10);
 		txbuscar.setBounds(52, 8, 145, 20);
 		panel_1.add(txbuscar);
