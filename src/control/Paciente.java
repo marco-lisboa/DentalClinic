@@ -3,9 +3,17 @@ package control;
 public class Paciente {
 
 	String nomepaciente, cpf, data, nascionalidade, estado,cidade, provicia,contato1,
-	contato2,op1,op2, email1,email2,matricula,obsmedicamento;
+	contato2,op1,op2, email1,email2,matricula,obsmedicamento,obsmedica;
 	
 	
+	public String getObsmedica() {
+		return obsmedica;
+	}
+
+	public void setObsmedica(String obsmedica) {
+		this.obsmedica = obsmedica;
+	}
+
 	public int getDt44() {
 		return dt44;
 	}
@@ -24,7 +32,23 @@ public class Paciente {
 	}
 
 	int idpaciente, idavliacao,alegia,dt11,dt12,dt13,dt14,dt15,dt16,dt17,dt18,dt21,dt22,dt23,dt24,dt25,dt26,dt27,dt28,
-	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio,dente,p1,p2,p3,p4;
+	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio,dente,p1,p2,p3,p4,sit,numeroregistro;
+
+	public int getNumeroregistro() {
+		return numeroregistro;
+	}
+
+	public void setNumeroregistro(int numeroregistro) {
+		this.numeroregistro = numeroregistro;
+	}
+
+	public int getSit() {
+		return sit;
+	}
+
+	public void setSit(int sit) {
+		this.sit = sit;
+	}
 
 	public int getDente() {
 		return dente;
