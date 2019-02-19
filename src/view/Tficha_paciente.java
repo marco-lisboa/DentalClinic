@@ -51,8 +51,8 @@ public class Tficha_paciente extends JPanel {
 	private JTextField txnome;
 	private JFormattedTextField txcpf;
 	private JTextField txmatricula;
-	private JTextField txcontato1;
-	private JTextField txcontato2;
+	private JFormattedTextField txcontato1;
+	private JFormattedTextField txcontato2;
 	private JTextField email1;
 	private JTextField email2;
 	private JTabbedPane tabbedPaneCadastro;
@@ -306,7 +306,7 @@ public class Tficha_paciente extends JPanel {
 				new Object[][] {
 				},
 				new String[] {
-					"Codigo", "Nome", "Contato","Situaçao"
+					"Codigo", "Nome", "Contato"
 				}
 			));
 		scroll = new JScrollPane();
@@ -542,7 +542,7 @@ public class Tficha_paciente extends JPanel {
 		textPaneobs.setBounds(10, 340, 317, 49);
 		dados.add(textPaneobs);
 		
-		txcontato1 = new JTextField();
+		txcontato1 = new JFormattedTextField();
 		txcontato1.setColumns(10);
 		txcontato1.setBounds(64, 104, 127, 20);
 		dados.add(txcontato1);
@@ -559,7 +559,7 @@ public class Tficha_paciente extends JPanel {
 		label.setBounds(9, 135, 61, 14);
 		dados.add(label);
 		
-		txcontato2 = new JTextField();
+		txcontato2 = new JFormattedTextField();
 		txcontato2.setColumns(10);
 		txcontato2.setBounds(64, 132, 127, 20);
 		dados.add(txcontato2);

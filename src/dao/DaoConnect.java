@@ -715,8 +715,7 @@
 							modelo.addRow(new Object[]{
 									res.getInt("idpaciente"),
 									res.getString("nome"),
-									res.getString("contato1"),
-									res.getString("situacao")
+									res.getString("contato1")
 							});
 			
 						}
