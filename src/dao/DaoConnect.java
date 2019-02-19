@@ -878,7 +878,7 @@
 				 * ------------------------------------------------ */
 				//Inicio
 				public void dadosPaciente(Paciente paciente) {
-					String sql = "SELECT * FROM paciente where idpacientes ='"+ paciente.getIdpaciente()+ "';";
+					String sql = "SELECT * FROM paciente where idpaciente ='"+ paciente.getIdpaciente()+ "';";
 			
 					try {
 						stmt =  con.prepareStatement(sql);

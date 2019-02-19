@@ -302,6 +302,21 @@ public class Tficha_paciente extends JPanel {
 		
 		
 		tablePaciente = new JTable();
+		tablePaciente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent click) {
+				if(click.getClickCount()==2) {
+					//acao =1;
+					int linha;
+					Object codigo;
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+				}
+			}
+		});
 		tablePaciente.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
@@ -1613,6 +1628,22 @@ public class Tficha_paciente extends JPanel {
 		limpaav();
 	}
 	
+	public void prencheCampos() {
+		
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		dao.conectar(iniciar.getIp_server());
+		dao.dadosPaciente(paciente);
+		System.out.println("1");
+		txnome.setText(paciente.getNomepaciente());
+		
+		tabbedPaneFicha.setVisible(false);
+		tabbedPaneCadastro.setVisible(true);
+	}
+	
 	public void limpaav() {
 		textoav.setText("");
 		p1.setSelected(false);
@@ -1626,6 +1657,7 @@ public class Tficha_paciente extends JPanel {
 		textoav.setText("Avaliação referente ao dente "+i);
 		tabbedPaneav.setVisible(true);
 	}
+	
 	public void buscar() {
 		paciente.setNomepaciente(txnomebuscar.getText());
 		if(situacao.getSelectedItem()=="Ativo") {
