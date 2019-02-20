@@ -43,6 +43,7 @@ import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
 
 public class Tficha_paciente extends JPanel {
+	private int acao;
 	Paciente paciente = new Paciente();
 	Iniciador iniciar = new Iniciador();
 	DaoConnect dao = new DaoConnect();
@@ -155,6 +156,7 @@ public class Tficha_paciente extends JPanel {
 	};
 	private JScrollPane scroll;
 	private JLabel numRegistro;
+	private JLabel label_4;
 	
 	
 	  private JTable getTabela(){
@@ -230,7 +232,7 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneFicha.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneFicha.setBackground(new Color(32, 178, 170));
 		tabbedPaneFicha.setBounds(0, 0, 575, 428);
-		add(tabbedPaneFicha);
+		//add(tabbedPaneFicha);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
@@ -306,7 +308,7 @@ public class Tficha_paciente extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent click) {
 				if(click.getClickCount()==2) {
-					//acao =1;
+					acao =0;
 					int linha;
 					Object codigo;
 					linha= tablePaciente.getSelectedRow();
@@ -334,7 +336,7 @@ public class Tficha_paciente extends JPanel {
 		adcionar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				acao=1;
 				limpaCampos();
 				tabbedPaneFicha.setVisible(false);
 				tabbedPaneCadastro.setVisible(true);
@@ -560,6 +562,12 @@ public class Tficha_paciente extends JPanel {
 		txcontato1 = new JFormattedTextField();
 		txcontato1.setColumns(10);
 		txcontato1.setBounds(64, 104, 127, 20);
+		try {
+			txcontato1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(**)****-****")));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		dados.add(txcontato1);
 		
 		JLabel lblContato = new JLabel("Contato : ");
@@ -577,6 +585,12 @@ public class Tficha_paciente extends JPanel {
 		txcontato2 = new JFormattedTextField();
 		txcontato2.setColumns(10);
 		txcontato2.setBounds(64, 132, 127, 20);
+		try {
+			txcontato2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(**)****-****")));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		dados.add(txcontato2);
 		
 		JLabel lblOp = new JLabel("Op :");
@@ -643,7 +657,8 @@ public class Tficha_paciente extends JPanel {
 		salvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				salvar();
+				if(acao==1) {salvar();}else {atualiza();}
+				
 			}
 		});
 		salvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -678,6 +693,12 @@ public class Tficha_paciente extends JPanel {
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setBounds(0, 2, 570, 409);
 		dados.add(label_6);
+		
+		label_4 = new JLabel("Nascionalidade :");
+		label_4.setForeground(Color.WHITE);
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_4.setBounds(387, 277, 123, 14);
+		dados.add(label_4);
 		
 		JPanel avaliacao = new JPanel();
 		avaliacao.setEnabled(false);
@@ -1637,8 +1658,64 @@ public class Tficha_paciente extends JPanel {
 		}
 		dao.conectar(iniciar.getIp_server());
 		dao.dadosPaciente(paciente);
-		System.out.println("1");
 		txnome.setText(paciente.getNomepaciente());
+		txcpf.setText(paciente.getCpf());
+		//dtnascimento.setText(paciente.getData());
+		txmatricula.setText(paciente.getMatricula());
+		textPaneobs.setText(paciente.getObsmedicamento());
+		txcontato1.setText(paciente.getContato1());
+		txcontato2.setText(paciente.getContato2());
+		email1.setText(paciente.getEmail1());
+		email2.setText(paciente.getEmail2());
+		
+		
+		if(paciente.getWhats1()==1) {
+			w1.setSelected(true);
+		}else {
+			w1.setSelected(false);
+		}
+		
+		if(paciente.getWhats2()==1) {
+			w2.setSelected(true);
+		}else {
+			w2.setSelected(false);
+		}
+//--------------------------------------------------------------------------------------------------------
+		if(paciente.getDt11()==1) {dt11.setSelected(true);}else {dt11.setSelected(false);}
+		if(paciente.getDt12()==1) {dt12.setSelected(true);}else {dt12.setSelected(false);}
+		if(paciente.getDt13()==1) {dt13.setSelected(true);}else {dt13.setSelected(false);}
+		if(paciente.getDt14()==1) {dt14.setSelected(true);}else {dt14.setSelected(false);}
+		if(paciente.getDt15()==1) {dt15.setSelected(true);}else {dt15.setSelected(false);}
+		if(paciente.getDt16()==1) {dt16.setSelected(true);}else {dt16.setSelected(false);}
+		if(paciente.getDt17()==1) {dt17.setSelected(true);}else {dt17.setSelected(false);}
+		if(paciente.getDt18()==1) {dt18.setSelected(true);}else {dt18.setSelected(false);}
+		
+		if(paciente.getDt21()==1) {dt21.setSelected(true);}else {dt21.setSelected(false);}
+		if(paciente.getDt22()==1) {dt22.setSelected(true);}else {dt22.setSelected(false);}
+		if(paciente.getDt23()==1) {dt23.setSelected(true);}else {dt23.setSelected(false);}
+		if(paciente.getDt24()==1) {dt24.setSelected(true);}else {dt24.setSelected(false);}
+		if(paciente.getDt25()==1) {dt25.setSelected(true);}else {dt25.setSelected(false);}
+		if(paciente.getDt26()==1) {dt26.setSelected(true);}else {dt26.setSelected(false);}
+		if(paciente.getDt27()==1) {dt27.setSelected(true);}else {dt27.setSelected(false);}
+		if(paciente.getDt28()==1) {dt28.setSelected(true);}else {dt28.setSelected(false);}
+		
+		if(paciente.getDt31()==1) {dt31.setSelected(true);}else {dt31.setSelected(false);}
+		if(paciente.getDt32()==1) {dt32.setSelected(true);}else {dt32.setSelected(false);}
+		if(paciente.getDt33()==1) {dt33.setSelected(true);}else {dt33.setSelected(false);}
+		if(paciente.getDt34()==1) {dt34.setSelected(true);}else {dt34.setSelected(false);}
+		if(paciente.getDt35()==1) {dt35.setSelected(true);}else {dt35.setSelected(false);}
+		if(paciente.getDt36()==1) {dt36.setSelected(true);}else {dt36.setSelected(false);}
+		if(paciente.getDt37()==1) {dt37.setSelected(true);}else {dt37.setSelected(false);}
+		if(paciente.getDt38()==1) {dt38.setSelected(true);}else {dt38.setSelected(false);}
+		
+		if(paciente.getDt41()==1) {dt41.setSelected(true);}else {dt41.setSelected(false);}
+		if(paciente.getDt42()==1) {dt42.setSelected(true);}else {dt42.setSelected(false);}
+		if(paciente.getDt43()==1) {dt43.setSelected(true);}else {dt43.setSelected(false);}
+		if(paciente.getDt44()==1) {dt44.setSelected(true);}else {dt44.setSelected(false);}
+		if(paciente.getDt45()==1) {dt45.setSelected(true);}else {dt45.setSelected(false);}
+		if(paciente.getDt46()==1) {dt46.setSelected(true);}else {dt46.setSelected(false);}
+		if(paciente.getDt47()==1) {dt47.setSelected(true);}else {dt47.setSelected(false);}
+		if(paciente.getDt48()==1) {dt48.setSelected(true);}else {dt48.setSelected(false);}
 		
 		tabbedPaneFicha.setVisible(false);
 		tabbedPaneCadastro.setVisible(true);
@@ -1680,7 +1757,7 @@ public class Tficha_paciente extends JPanel {
 		if(paciente.getNumeroregistro()==1) {
 			numRegistro.setText(paciente.getNumeroregistro()+" registro encontrado");
 		}else {
-			numRegistro.setText(paciente.getNumeroregistro()+" registro encontrados");
+			numRegistro.setText(paciente.getNumeroregistro()+" registros encontrados");
 		}
 		
 	}
@@ -1701,4 +1778,19 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneFicha.setVisible(true);
 	}
 	
+	public void atualiza() {
+		varreCampos();
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		dao.conectar(iniciar.getIp_server());
+		dao.alteraPaciente(paciente);
+		dao.fecharCon();
+		limpaCampos();
+		buscar();
+		tabbedPaneCadastro.setVisible(false);
+		tabbedPaneFicha.setVisible(true);
+	}
 }

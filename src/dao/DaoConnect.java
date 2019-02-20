@@ -766,10 +766,11 @@
 							+ "whats1=?,"
 							+ "whats2=?,"
 							+ "email1=?,"
-							+ "ameil2=?,"
+							+ "email2=?,"
 							+ "convenioid=?,"
+							+ "matricula=?,"
 							+ "alergia=?,"
-							+ "obsalegia=?"
+							+ "obsalegia=?,"
 							+ "dt11=?,"
 							+ "dt12=?,"
 							+ "dt13=?,"
@@ -802,7 +803,7 @@
 							+ "dt46=?,"
 							+ "dt47=?,"
 							+ "dt48=?,"
-							+ "situacao=?"
+							+ "situacao=? "
 							+ "WHERE idpaciente=?;";
 			
 					try {
@@ -810,7 +811,7 @@
 						stmt =  con.prepareStatement(sql);
 						stmt.setString(1, paciente.getNomepaciente());
 						stmt.setString(2,paciente.getCpf());
-						//stmt.setDate(3, paciente.getData());
+						stmt.setDate(3, null);
 						stmt.setString(4,paciente.getNascionalidade());
 						stmt.setString(5,paciente.getEstado());
 						stmt.setString(6, paciente.getCidade());
@@ -824,9 +825,9 @@
 						stmt.setString(14, paciente.getEmail1());
 						stmt.setString(15, paciente.getEmail2());
 						stmt.setInt(16, paciente.getConvenio());
-						stmt.setInt(17,paciente.getAlegia());
-						stmt.setString(18,paciente.getObsmedicamento());
-						stmt.setInt(19, paciente.getIdpaciente());
+						stmt.setString(17, paciente.getMatricula());
+						stmt.setInt(18,paciente.getAlegia());
+						stmt.setString(19,paciente.getObsmedicamento());
 						stmt.setInt(20, paciente.getDt11());
 						stmt.setInt(21,paciente.getDt12());
 						stmt.setInt(22, paciente.getDt13());
@@ -858,9 +859,15 @@
 						stmt.setInt(48, paciente.getDt45());
 						stmt.setInt(49, paciente.getDt46());
 						stmt.setInt(50, paciente.getDt47());
-						stmt.setInt(51, paciente.getSit());
-						stmt.setInt(52, paciente.getDt48());
+						stmt.setInt(51, paciente.getDt48());
+						stmt.setInt(52, paciente.getSit());
+						stmt.setInt(53, paciente.getIdpaciente());
 						stmt.execute();
+						
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("CADASTRO ATUALIZADO COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
 					} catch (SQLException e) {
 						erro(e.getMessage());
 					}
@@ -886,11 +893,11 @@
 						while (res.next()) {
 							paciente.setNomepaciente(res.getString("nome"));
 							paciente.setCpf(res.getString("cpf"));
-							paciente.setData(res.getString("date"));
+							paciente.setData(res.getString("datanascimento"));
 							paciente.setNascionalidade(res.getString("nacionalidade"));
 							paciente.setEstado(res.getString("estado"));
 							paciente.setCidade(res.getString("cidade"));
-							paciente.setProvicia(res.getString("provicia"));
+							paciente.setProvicia(res.getString("provincia"));
 							paciente.setContato1(res.getString("contato1"));
 							paciente.setContato2(res.getString("contato2"));
 							paciente.setOp1(res.getString("op1"));
