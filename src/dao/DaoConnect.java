@@ -11,8 +11,10 @@
 			import javax.swing.ImageIcon;
 			import javax.swing.JTable;
 			import javax.swing.table.DefaultTableModel;
-			
-			import control.*;
+
+import com.mysql.fabric.xmlrpc.base.Data;
+
+import control.*;
 			import viewTavisos.*;
 			
 			public class DaoConnect {
@@ -23,6 +25,7 @@
 				private PreparedStatement stmt;
 				Usuario usuario = new Usuario();
 				Paciente paciente = new Paciente();
+				FormataData formatData = new FormataData();
 				private final String USER = "root";
 				private final String PASS = "maynore";
 				public String URL = null;
@@ -567,6 +570,8 @@
 				//Inicio
 			
 				public void inserirPaciente(Paciente paciente) {
+					formatData.Formatar(paciente.getData(), 1);
+					
 					String sql = "INSERT INTO paciente("
 					/*1*/		+ "nome,"
 					/*2*/		+ "cpf,"
@@ -627,7 +632,7 @@
 						stmt =  con.prepareStatement(sql);
 						stmt.setString(1, paciente.getNomepaciente());
 						stmt.setString(2,paciente.getCpf());
-						stmt.setDate(3, null);
+						stmt.setString(3,  formatData.getDatafinal());
 						stmt.setString(4,paciente.getNascionalidade());
 						stmt.setString(5,paciente.getEstado());
 						stmt.setString(6, paciente.getCidade());
@@ -893,7 +898,8 @@
 						while (res.next()) {
 							paciente.setNomepaciente(res.getString("nome"));
 							paciente.setCpf(res.getString("cpf"));
-							paciente.setData(res.getString("datanascimento"));
+							formatData.Formatar(res.getString("datanascimento"), 0);
+							paciente.setData(formatData.getDatafinal());
 							paciente.setNascionalidade(res.getString("nacionalidade"));
 							paciente.setEstado(res.getString("estado"));
 							paciente.setCidade(res.getString("cidade"));

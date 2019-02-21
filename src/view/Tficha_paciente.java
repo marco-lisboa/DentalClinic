@@ -156,7 +156,7 @@ public class Tficha_paciente extends JPanel {
 	};
 	private JScrollPane scroll;
 	private JLabel numRegistro;
-	private JLabel label_4;
+	private JCheckBox sit;
 	
 	
 	  private JTable getTabela(){
@@ -232,7 +232,7 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneFicha.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneFicha.setBackground(new Color(32, 178, 170));
 		tabbedPaneFicha.setBounds(0, 0, 575, 428);
-		//add(tabbedPaneFicha);
+		add(tabbedPaneFicha);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
@@ -661,6 +661,15 @@ public class Tficha_paciente extends JPanel {
 				
 			}
 		});
+		
+		sit = new JCheckBox("Paciente Ativo");
+		sit.setHorizontalAlignment(SwingConstants.LEFT);
+		sit.setOpaque(false);
+		sit.setForeground(Color.WHITE);
+		sit.setFont(new Font("Tahoma", Font.BOLD, 11));
+		sit.setBounds(387, 277, 162, 14);
+		dados.add(sit);
+		
 		salvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		salvar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
 		salvar.setToolTipText("Salvar");
@@ -693,12 +702,6 @@ public class Tficha_paciente extends JPanel {
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setBounds(0, 2, 570, 409);
 		dados.add(label_6);
-		
-		label_4 = new JLabel("Nascionalidade :");
-		label_4.setForeground(Color.WHITE);
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_4.setBounds(387, 277, 123, 14);
-		dados.add(label_4);
 		
 		JPanel avaliacao = new JPanel();
 		avaliacao.setEnabled(false);
@@ -1542,7 +1545,7 @@ public class Tficha_paciente extends JPanel {
 	public void varreCampos() {
 		paciente.setNomepaciente(txnome.getText());
 		paciente.setCpf(txcpf.getText());
-		//paciente.getData(dtnascimento.getDate())
+		paciente.setData(dtnascimento.getText());
 		paciente.setNascionalidade(nacionalidade.getSelectedItem().toString());
 		paciente.setEstado(estado.getSelectedItem().toString());
 		paciente.setCidade(cidade.getSelectedItem().toString());
@@ -1660,7 +1663,7 @@ public class Tficha_paciente extends JPanel {
 		dao.dadosPaciente(paciente);
 		txnome.setText(paciente.getNomepaciente());
 		txcpf.setText(paciente.getCpf());
-		//dtnascimento.setText(paciente.getData());
+		dtnascimento.setText(paciente.getData());
 		txmatricula.setText(paciente.getMatricula());
 		textPaneobs.setText(paciente.getObsmedicamento());
 		txcontato1.setText(paciente.getContato1());
@@ -1679,6 +1682,12 @@ public class Tficha_paciente extends JPanel {
 			w2.setSelected(true);
 		}else {
 			w2.setSelected(false);
+		}
+		
+		if(paciente.getSit()==1) {
+			sit.setSelected(true);
+		}else {
+			sit.setSelected(false);
 		}
 //--------------------------------------------------------------------------------------------------------
 		if(paciente.getDt11()==1) {dt11.setSelected(true);}else {dt11.setSelected(false);}
