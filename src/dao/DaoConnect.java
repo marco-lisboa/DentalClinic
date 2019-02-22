@@ -756,6 +756,7 @@ import control.*;
 				 * ------------------------------------------------ */
 				//Inicio
 				public void alteraPaciente(Paciente paciente) {
+					formatData.Formatar(paciente.getData(), 1);
 					String sql = "UPDATE paciente SET "
 							+ "nome=?,"
 							+ "cpf=?,"
@@ -816,7 +817,7 @@ import control.*;
 						stmt =  con.prepareStatement(sql);
 						stmt.setString(1, paciente.getNomepaciente());
 						stmt.setString(2,paciente.getCpf());
-						stmt.setDate(3, null);
+						stmt.setString(3, formatData.getDatafinal());
 						stmt.setString(4,paciente.getNascionalidade());
 						stmt.setString(5,paciente.getEstado());
 						stmt.setString(6, paciente.getCidade());

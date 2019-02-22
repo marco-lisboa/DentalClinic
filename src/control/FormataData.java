@@ -14,15 +14,15 @@ public class FormataData {
 		String dia,mes,ano,dt[];
 		if(opera==1) {
 			
-			if(i.equals("")) {
-				dt=i.split("/");
-				setDatafinal("");
+			if(i.equals("  /  /    ")) {
+				setDatafinal(null);
 			}else {
 				dt=i.split("/");
 				dia = dt[0];
 				mes=dt[1];
 				ano=dt[2];
 				setDatafinal(ano+"-"+mes+"-"+dia);
+				
 			}
 			
 		}else {
