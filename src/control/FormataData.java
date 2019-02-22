@@ -1,7 +1,7 @@
 package control;
 
 public class FormataData {
-
+//
 	String datafinal;
 	public String getDatafinal() {
 		return datafinal;

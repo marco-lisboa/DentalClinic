@@ -1,5 +1,5 @@
 package view;
-
+//
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;

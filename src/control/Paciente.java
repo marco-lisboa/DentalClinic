@@ -1,5 +1,5 @@
 package control;
-
+//
 public class Paciente {
 
 	String nomepaciente, cpf, data, nascionalidade, estado,cidade, provicia,contato1,
