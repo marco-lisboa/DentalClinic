@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import view.Tconfigurar;
+import view.Tficha_paciente;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -19,7 +20,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TavisoConfiracao extends JDialog {
+public class TavisoPacientes extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	public JLabel texto;
@@ -32,7 +33,7 @@ public class TavisoConfiracao extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			TavisoConfiracao dialog = new TavisoConfiracao();
+			TavisoPacientes dialog = new TavisoPacientes();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			dialog.setLocationRelativeTo(null);
@@ -44,7 +45,7 @@ public class TavisoConfiracao extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TavisoConfiracao() {
+	public TavisoPacientes() {
 		setUndecorated(true);
 		setBounds(100, 100, 450, 158);
 		getContentPane().setLayout(new BorderLayout());
@@ -54,7 +55,7 @@ public class TavisoConfiracao extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			texto = new JLabel("");
-			texto.setIcon(new ImageIcon(TavisoConfiracao.class.getResource("/img/atencao.png")));
+			texto.setIcon(new ImageIcon(TavisoPacientes.class.getResource("/img/atencao.png")));
 			texto.setHorizontalAlignment(SwingConstants.CENTER);
 			texto.setForeground(Color.WHITE);
 			texto.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -65,11 +66,11 @@ public class TavisoConfiracao extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Tconfigurar t = new Tconfigurar();
+					Tficha_paciente p = new Tficha_paciente();
 					if(acao==1) {
-						t.excluir(id);
+						p.excluir(id);
 					}else {
-						t.desativa(id);
+						p.desativa(id);
 					}
 					
 					dispose();
@@ -95,7 +96,7 @@ public class TavisoConfiracao extends JDialog {
 		contentPanel.add(btNao);
 		{
 			JLabel label = new JLabel("");
-			label.setIcon(new ImageIcon(TavisoConfiracao.class.getResource("/img/bk.jpeg")));
+			label.setIcon(new ImageIcon(TavisoPacientes.class.getResource("/img/bk.jpeg")));
 			label.setVerticalAlignment(SwingConstants.BOTTOM);
 			label.setHorizontalAlignment(SwingConstants.CENTER);
 			label.setBounds(0, 0, 450, 160);

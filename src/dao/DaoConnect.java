@@ -931,8 +931,53 @@ import control.*;
 				 * Excluir Paciente - Comentario Maynore Soft
 				 * ------------------------------------------------ */
 				//Inicio
-				public void excluiPaciente(Paciente paciente) {}
+				public void excluirPaciente(Paciente paciente) {
+					String sql = "DELETE FROM paciente WHERE idpaciente =?;";
+					
+					try {
+						stmt =  con.prepareStatement(sql);
+						stmt.setInt(1,paciente.getIdpaciente());
+						stmt.execute();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+			
+					String sqlprive = "DELETE FROM avaliacao WHERE idpaciente=?";
+					try {
+						stmt =  con.prepareStatement(sqlprive);
+						stmt.setInt(1,paciente.getIdpaciente());
+						stmt.execute();
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("CADASTRO DELETADO COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+				}
 				//fim
+				/*--------------------------------------------------
+				 * Desativa Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void desativaPaciente(Paciente paciente) {
+					String sql = "UPDATE paciente SET situacao = 0 WHERE idpaciente = ?";
+					
+					try {
+						
+						stmt =  con.prepareStatement(sql);
+						stmt.setInt(1,paciente.getIdpaciente());
+						stmt.execute();
+						
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("PACIENTE DESATIVADO COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+				}
+				//Fim
 				/*--------------------------------------------------
 				 * Dados Paciente - Comentario Maynore Soft
 				 * ------------------------------------------------ */
@@ -1031,7 +1076,7 @@ import control.*;
 						stmt.setInt(5, paciente.getP3());
 						stmt.setInt(6,paciente.getP4());
 						stmt.setString(7, paciente.getObsmedica());
-						stmt =  con.prepareStatement(sql);
+						stmt.execute();
 						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
 						aviso.texto.setText("REGISTRO REALIZADO COM SUCESSO.");
 						aviso.setLocationRelativeTo(null);
@@ -1050,25 +1095,24 @@ import control.*;
 				public void alteraAvaliacao(Paciente paciente) {
 			
 					String sql="UPDATE avaliacao SET "
-							+ "dente=?,"
 							+ "p1=?,"
 							+ "p2=?,"
 							+ "p3=?,"
 							+ "p4=?,"
 							+ "avdente=? "
-							+ "WHERE idpaciente=?;";
+							+ "WHERE idpaciente=? and dente=? ;";
 			
 					try {
 						stmt =  con.prepareStatement(sql);
-						stmt.setInt(1,paciente.getDente());
-						stmt.setInt(2, paciente.getP1());
-						stmt.setInt(3,paciente.getP2());
-						stmt.setInt(4, paciente.getP3());
-						stmt.setInt(5,paciente.getP4());
-						stmt.setString(6, paciente.getObsmedica());
-						stmt.setInt(7, paciente.getIdpaciente());
-						stmt =  con.prepareStatement(sql);
-						System.out.println(stmt);
+						stmt.setInt(1, paciente.getP1());
+						stmt.setInt(2,paciente.getP2());
+						stmt.setInt(3, paciente.getP3());
+						stmt.setInt(4,paciente.getP4());
+						stmt.setString(5, paciente.getObsmedica());
+						stmt.setInt(6, paciente.getIdpaciente());
+						stmt.setInt(7,paciente.getDente());
+						stmt.execute();
+						
 						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
 						aviso.texto.setText("REGISTRO ATUALIZADO COM SUCESSO.");
 						aviso.setLocationRelativeTo(null);
@@ -1132,6 +1176,12 @@ import control.*;
 						} catch (SQLException e) {
 							erro(e.getMessage());
 						}
+					}else {
+						paciente.setP1(0);
+						paciente.setP2(0);
+						paciente.setP3(0);
+						paciente.setP4(0);
+						paciente.setObsmedica("");
 					}
 				
 				}

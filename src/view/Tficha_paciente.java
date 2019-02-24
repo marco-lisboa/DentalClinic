@@ -8,6 +8,8 @@ import com.toedter.calendar.JDateChooser;
 
 import control.*;
 import dao.DaoConnect;
+import viewTavisos.Taviso;
+import viewTavisos.TavisoPacientes;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -43,10 +45,16 @@ import java.awt.event.ActionEvent;
 import java.awt.TextArea;
 import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JMenuItem;
 
 public class Tficha_paciente extends JPanel {
 	private int acao;
+	Taviso aviso = new Taviso();
+	TavisoPacientes avisoAcao = new TavisoPacientes();
 	Paciente paciente = new Paciente();
+	Usuario usuario  = new Usuario();
 	Iniciador iniciar = new Iniciador();
 	DaoConnect dao = new DaoConnect();
 	Regiao regiao = new Regiao();
@@ -165,6 +173,7 @@ public class Tficha_paciente extends JPanel {
 	private JLabel av42;
 	private JLabel av43;
 	private JLabel av44;
+	private JPopupMenu popupMenu;
 	
 	
 	  private JTable getTabela(){
@@ -343,6 +352,104 @@ public class Tficha_paciente extends JPanel {
 		scroll = new JScrollPane();
 		scroll.setBounds(10, 100, 550, 244);
 		panel.add(scroll);
+		
+		popupMenu = new JPopupMenu();
+		addPopup(scroll, popupMenu);
+		
+		JMenuItem mntmNovoCadastro = new JMenuItem("Novo Cadastro");
+		mntmNovoCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acao=1;
+				limpaCampos();
+				checaPrivilegio();
+			}
+		});
+		popupMenu.add(mntmNovoCadastro);
+		
+		JSeparator separator_1 = new JSeparator();
+		popupMenu.add(separator_1);
+		
+		JMenuItem mntmEditarCadastro = new JMenuItem("Editar Cadastro");
+		mntmEditarCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				acao =0;
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+
+				}
+			}
+		});
+		popupMenu.add(mntmEditarCadastro);
+		
+		JSeparator separator_2 = new JSeparator();
+		popupMenu.add(separator_2);
+		
+		JMenuItem mntmDesativar = new JMenuItem("Desativar");
+		mntmDesativar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acao =0;
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=paciente.getIdpaciente();
+					avisoAcao.acao=0;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				buscar();
+			}
+		});
+		popupMenu.add(mntmDesativar);
+		
+		JSeparator separator_3 = new JSeparator();
+		popupMenu.add(separator_3);
+		
+		JMenuItem mntmExcluir = new JMenuItem("Excluir");
+		mntmExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=paciente.getIdpaciente();
+					avisoAcao.acao=1;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				buscar();
+			}
+		});
+		popupMenu.add(mntmExcluir);
 		scroll.setViewportView(tablePaciente);
 		
 		JLabel adcionar = new JLabel("");
@@ -353,9 +460,7 @@ public class Tficha_paciente extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				acao=1;
 				limpaCampos();
-				tabbedPaneFicha.setVisible(false);
-				tabbedPaneCadastro.setVisible(true);
-				tabbedPaneCadastro.setEnabledAt( 1, false);
+				checaPrivilegio();
 				
 			}
 		});
@@ -366,6 +471,30 @@ public class Tficha_paciente extends JPanel {
 		panel.add(adcionar);
 		
 		JLabel delete = new JLabel("");
+		delete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=paciente.getIdpaciente();
+					avisoAcao.acao=1;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				buscar();
+				
+			}
+		});
 		delete.setFocusable(false);
 		delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		delete.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/deleta.png")));
@@ -375,6 +504,30 @@ public class Tficha_paciente extends JPanel {
 		panel.add(delete);
 		
 		JLabel editar = new JLabel("");
+		editar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				acao =0;
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+
+				}
+				
+			}
+		});
 		editar.setFocusable(false);
 		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		editar.setToolTipText("Editar");
@@ -1359,6 +1512,7 @@ public class Tficha_paciente extends JPanel {
 		av13.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(13);
 				exibiAv(13);
 			}
 		});
@@ -1374,6 +1528,7 @@ public class Tficha_paciente extends JPanel {
 		av14.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(14);
 				exibiAv(14);
 			}
 		});
@@ -1389,6 +1544,7 @@ public class Tficha_paciente extends JPanel {
 		av15.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(15);
 				exibiAv(15);
 			}
 		});
@@ -1404,6 +1560,7 @@ public class Tficha_paciente extends JPanel {
 		av16.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(16);
 				exibiAv(16);
 			}
 		});
@@ -1419,6 +1576,7 @@ public class Tficha_paciente extends JPanel {
 		av17.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(17);
 				exibiAv(17);
 				
 			}
@@ -1435,6 +1593,7 @@ public class Tficha_paciente extends JPanel {
 		av18.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(18);
 				exibiAv(18);
 			}
 		});
@@ -1450,6 +1609,7 @@ public class Tficha_paciente extends JPanel {
 		av21.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(21);
 				exibiAv(21);
 			}
 		});
@@ -1465,6 +1625,7 @@ public class Tficha_paciente extends JPanel {
 		av22.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(22);
 				exibiAv(22);
 			}
 		});
@@ -1480,6 +1641,7 @@ public class Tficha_paciente extends JPanel {
 		av23.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(23);
 				exibiAv(23);
 			}
 		});
@@ -1495,6 +1657,7 @@ public class Tficha_paciente extends JPanel {
 		av24.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(24);
 				exibiAv(24);
 			}
 		});
@@ -1510,6 +1673,7 @@ public class Tficha_paciente extends JPanel {
 		av25.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(25);
 				exibiAv(25);
 			}
 		});
@@ -1525,6 +1689,7 @@ public class Tficha_paciente extends JPanel {
 		av26.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(26);
 				exibiAv(26);
 			}
 		});
@@ -1540,6 +1705,7 @@ public class Tficha_paciente extends JPanel {
 		av27.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(27);
 				exibiAv(27);
 			}
 		});
@@ -1555,6 +1721,7 @@ public class Tficha_paciente extends JPanel {
 		av28.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(28);
 				exibiAv(28);
 			}
 		});
@@ -1570,6 +1737,7 @@ public class Tficha_paciente extends JPanel {
 		av41.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(41);
 				exibiAv(41);
 			}
 		});
@@ -1585,6 +1753,7 @@ public class Tficha_paciente extends JPanel {
 		av42.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(42);
 				exibiAv(42);
 			}
 		});
@@ -1600,6 +1769,7 @@ public class Tficha_paciente extends JPanel {
 		av43.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(43);
 				exibiAv(43);
 			}
 		});
@@ -1615,6 +1785,7 @@ public class Tficha_paciente extends JPanel {
 		av44.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(44);
 				exibiAv(44);
 			}
 		});
@@ -1630,6 +1801,7 @@ public class Tficha_paciente extends JPanel {
 		av45.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(45);
 				exibiAv(45);
 			}
 		});
@@ -1645,6 +1817,7 @@ public class Tficha_paciente extends JPanel {
 		av46.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(46);
 				exibiAv(46);
 			}
 		});
@@ -1660,6 +1833,7 @@ public class Tficha_paciente extends JPanel {
 		av47.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(47);
 				exibiAv(47);
 			}
 		});
@@ -1675,6 +1849,7 @@ public class Tficha_paciente extends JPanel {
 		av48.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(48);
 				exibiAv(48);
 			}
 		});
@@ -1690,6 +1865,7 @@ public class Tficha_paciente extends JPanel {
 		av31.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(31);
 				exibiAv(31);
 			}
 		});
@@ -1705,6 +1881,7 @@ public class Tficha_paciente extends JPanel {
 		av32.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(32);
 				exibiAv(32);
 			}
 		});
@@ -1720,6 +1897,7 @@ public class Tficha_paciente extends JPanel {
 		av33.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(33);
 				exibiAv(33);
 			}
 		});
@@ -1735,6 +1913,7 @@ public class Tficha_paciente extends JPanel {
 		av34.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(34);
 				exibiAv(34);
 			}
 		});
@@ -1750,6 +1929,7 @@ public class Tficha_paciente extends JPanel {
 		av35.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(35);
 				exibiAv(35);
 			}
 		});
@@ -1765,6 +1945,7 @@ public class Tficha_paciente extends JPanel {
 		av36.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(36);
 				exibiAv(36);
 			}
 		});
@@ -1780,6 +1961,7 @@ public class Tficha_paciente extends JPanel {
 		av37.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(37);
 				exibiAv(37);
 			}
 		});
@@ -1795,6 +1977,7 @@ public class Tficha_paciente extends JPanel {
 		av38.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(38);
 				exibiAv(38);
 			}
 		});
@@ -1815,7 +1998,7 @@ public class Tficha_paciente extends JPanel {
 		salva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				if(acao==1) {salvar();}else {atualiza();}
 			}
 		});
 		salva.setFocusable(false);
@@ -1826,6 +2009,12 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(salva);
 		
 		JLabel limpa = new JLabel("");
+		limpa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				limpaCampos();
+			}
+		});
 		limpa.setFocusable(false);
 		limpa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		limpa.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/eraser.png")));
@@ -1989,6 +2178,38 @@ public class Tficha_paciente extends JPanel {
 		dt46.setSelected(false);
 		dt47.setSelected(false);
 		dt48.setSelected(false);
+		av11.setVisible(false);
+		av12.setVisible(false);
+		av13.setVisible(false);
+		av14.setVisible(false);
+		av15.setVisible(false);
+		av16.setVisible(false);
+		av17.setVisible(false);
+		av18.setVisible(false);
+		av21.setVisible(false);
+		av22.setVisible(false);
+		av23.setVisible(false);
+		av24.setVisible(false);
+		av25.setVisible(false);
+		av26.setVisible(false);
+		av27.setVisible(false);
+		av28.setVisible(false);
+		av31.setVisible(false);
+		av32.setVisible(false);
+		av33.setVisible(false);
+		av34.setVisible(false);
+		av35.setVisible(false);
+		av36.setVisible(false);
+		av37.setVisible(false);
+		av38.setVisible(false);
+		av41.setVisible(false);
+		av42.setVisible(false);
+		av43.setVisible(false);
+		av44.setVisible(false);
+		av45.setVisible(false);
+		av46.setVisible(false);
+		av47.setVisible(false);
+		av48.setVisible(false);
 		limpaav();
 	}
 	
@@ -2004,6 +2225,8 @@ public class Tficha_paciente extends JPanel {
 	public void prencheCampos() {
 		
 		leitura();
+		dao.privilegio(usuario);
+		if(usuario.getpCadCliente()==1) {
 		dao.dadosPaciente(paciente);
 		txnome.setText(paciente.getNomepaciente());
 		txcpf.setText(paciente.getCpf());
@@ -2066,8 +2289,16 @@ public class Tficha_paciente extends JPanel {
 		if(paciente.getDt48()==1) {dt48.setSelected(true);av48.setVisible(true);}else {dt48.setSelected(false);av48.setVisible(false);}
 		
 		tabbedPaneFicha.setVisible(false);
+		tabbedPaneCadastro.setSelectedIndex(0);
 		tabbedPaneCadastro.setEnabledAt( 1, true);
 		tabbedPaneCadastro.setVisible(true);
+		}else {
+			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
+			aviso.texto.setText("VOCE NÃO TEM PRIVILEGIO PARA ESTA AÇÃO");
+			aviso.setLocationRelativeTo(null);
+			aviso.show();
+
+		}
 	}
 
 	public void exibiAv(int i) {
@@ -2108,15 +2339,19 @@ public class Tficha_paciente extends JPanel {
 	}
 	
 	public void salvarAV(int i) {
-		varreCamposAv();
 		leitura();
+		varreCamposAv();
 		if(i==1) {
 			dao.alteraAvaliacao(paciente);
 		}else {
 			dao.inseriAvaliacao(paciente);
 		}
 		
+		
+		tabbedPaneav.setVisible(false);
+		limpaav();
 	}
+
 	public void atualiza() {
 		varreCampos();
 		leitura();
@@ -2127,6 +2362,59 @@ public class Tficha_paciente extends JPanel {
 		buscar();
 		tabbedPaneCadastro.setVisible(false);
 		tabbedPaneFicha.setVisible(true);
+	}
+	
+	public void checaPrivilegio() {
+		leitura();
+		dao.privilegio(usuario);
+		
+		if(usuario.getpCadCliente()==1) {
+			tabbedPaneFicha.setVisible(false);
+			tabbedPaneCadastro.setVisible(true);
+			tabbedPaneCadastro.setSelectedIndex(0);
+			tabbedPaneCadastro.setEnabledAt( 1, false);
+			
+		}else {
+			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
+			aviso.texto.setText("VOCE NÃO TEM PRIVILEGIO PARA ESTA AÇÃO");
+			aviso.setLocationRelativeTo(null);
+			aviso.show();
+		}
+	}
+	
+	public void excluir(int i) {
+		paciente.setIdpaciente(i);
+		
+		leitura();
+		dao.privilegio(usuario);
+		
+		if(usuario.getpCadCliente()==1) {
+			dao.excluirPaciente(paciente);
+			dao.fecharCon();
+		}else {
+			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
+			aviso.texto.setText("VOCE NÃO TEM PRIVILEGIO PARA ESTA AÇÃO");
+			aviso.setLocationRelativeTo(null);
+			aviso.show();
+		}
+	}
+	
+	public void desativa(int i) {
+		paciente.setIdpaciente(i);
+		
+		leitura();
+		dao.privilegio(usuario);
+		
+		if(usuario.getpCadCliente()==1) {
+			dao.desativaPaciente(paciente);
+			dao.fecharCon();
+		}else {
+			aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/atencao.png")));
+			aviso.texto.setText("VOCE NÃO TEM PRIVILEGIO PARA ESTA AÇÃO");
+			aviso.setLocationRelativeTo(null);
+			aviso.show();
+		}
+		
 	}
 	
 	public void ListagemEstados() {
@@ -2153,7 +2441,6 @@ public class Tficha_paciente extends JPanel {
 			e.printStackTrace();
 		}
 	}
-
 	
 	public void Avaliacao(int i) {
 		paciente.setDente(i);
@@ -2162,21 +2449,43 @@ public class Tficha_paciente extends JPanel {
 		dao.checaAvaliacao(paciente);
 		
 		
-		if(paciente.getP1()==1) {
-			p1.setSelected(true);
-		}else {
-			p1.setSelected(false);
-		}
+		if(paciente.getP1()==1) {p1.setSelected(true);}else {p1.setSelected(false);}
+		if(paciente.getP2()==1) {p2.setSelected(true);}else {p2.setSelected(false);}
+		if(paciente.getP3()==1) {p3.setSelected(true);}else {p3.setSelected(false);}
+		if(paciente.getP4()==1) {p4.setSelected(true);}else {p4.setSelected(false);}
+		
+		obsClinica.setText(paciente.getObsmedica());
+		
 	}
 	
 	public void leitura() {
 		try {
 			iniciar.LeituraIp();
+			iniciar.leituraUsuarioLogado();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
 		dao.conectar(iniciar.getIp_server());
+		usuario.setUsuarioLogado(iniciar.getUsuarioLogado());
 	}
 
+	
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }

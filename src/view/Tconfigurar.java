@@ -42,7 +42,7 @@ import java.awt.event.KeyEvent;
 
 public class Tconfigurar extends JPanel {
 	int acao;
-	TavisoConfiracao avisoAcao = new TavisoConfiracao();
+	TavisoConfiguracao avisoAcao = new TavisoConfiguracao();
 	Taviso aviso = new Taviso();
 	public int idUusuarioLogado;
 	private JTable tableUsuario;
@@ -846,13 +846,7 @@ public class Tconfigurar extends JPanel {
 			usuario.setSituacao(3);
 		}
 		
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		dao.conectar(iniciar.getIp_server());
+		leitura();
 		try {
 			dao.listUsuarios(tableUsuario, usuario);
 			if(usuario.getNumeroRegistro()==1) {
@@ -1022,14 +1016,7 @@ public class Tconfigurar extends JPanel {
 	}
 	
 	public void prencheCampos() {
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		dao.conectar(iniciar.getIp_server());
-		dao.dadosUsuario(usuario);
+		leitura();
 		tx_nome.setText(usuario.getNomeUsuario());
 		tx_login.setText(usuario.getLoginUsuario());
 		tx_senha.setText(usuario.getSenhaUsuario());
@@ -1282,16 +1269,7 @@ public class Tconfigurar extends JPanel {
 	public void checaPrivilegio() {
 		
 		
-		try {
-			iniciar.LeituraIp();
-			iniciar.leituraUsuarioLogado();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		dao.conectar(iniciar.getIp_server());
-		dao.privilegio(usuario);
+		leitura();
 		
 		if(usuario.getCadastroUsuario()==1) {
 			
@@ -1342,15 +1320,7 @@ public class Tconfigurar extends JPanel {
 		
 			usuario.setUsuarioId(i);
 			
-			try {
-				iniciar.LeituraIp();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			dao.conectar(iniciar.getIp_server());
-			dao.privilegio(usuario);
+			leitura();
 			
 			if(usuario.getCadastroUsuario()==1) {
 				
@@ -1372,17 +1342,8 @@ public class Tconfigurar extends JPanel {
 		
 		usuario.setUsuarioId(i);
 		
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		leitura();
 		
-		
-		dao.conectar(iniciar.getIp_server());
-		
-		dao.privilegio(usuario);
 		if(usuario.getCadastroUsuario()==1) {
 			dao.excluiUsuario(usuario);
 			dao.fecharCon();
@@ -1414,4 +1375,18 @@ public class Tconfigurar extends JPanel {
 			}
 		});
 	}
+	
+	public void leitura() {
+		try {
+			iniciar.LeituraIp();
+			iniciar.leituraUsuarioLogado();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		dao.conectar(iniciar.getIp_server());
+		dao.privilegio(usuario);
+	}
+
 }
