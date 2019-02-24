@@ -32,7 +32,16 @@ public class Paciente {
 	}
 
 	int idpaciente, idavliacao,alegia,dt11,dt12,dt13,dt14,dt15,dt16,dt17,dt18,dt21,dt22,dt23,dt24,dt25,dt26,dt27,dt28,
-	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio,dente,p1,p2,p3,p4,sit,numeroregistro;
+	dt31,dt32,dt33,dt34,dt35,dt36,dt37,dt38,dt41,dt42,dt43,dt44,dt45,dt46,dt47,dt48 ,whats1,whats2, convenio,dente,p1,
+	p2,p3,p4,sit,numeroregistro,resultadoAV;
+
+	public int getResultadoAV() {
+		return resultadoAV;
+	}
+
+	public void setResultadoAV(int resultadoAV) {
+		this.resultadoAV = resultadoAV;
+	}
 
 	public int getNumeroregistro() {
 		return numeroregistro;

@@ -9,7 +9,8 @@
 			import java.util.List;
 			
 			import javax.swing.ImageIcon;
-			import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 			import javax.swing.table.DefaultTableModel;
 
 import com.mysql.fabric.xmlrpc.base.Data;
@@ -25,6 +26,7 @@ import control.*;
 				private PreparedStatement stmt;
 				Usuario usuario = new Usuario();
 				Paciente paciente = new Paciente();
+				Regiao regiao = new Regiao();
 				FormataData formatData = new FormataData();
 				private final String USER = "root";
 				private final String PASS = "maynore";
@@ -119,7 +121,52 @@ import control.*;
 				 *                                                                         *
 				 ***************************************************************************/
 			
+				/***************************************************************************
+				 * 																		   *
+				 * 					Funções Listagem Estado e Cidades                      *
+				 *                                                                         *
+				 ***************************************************************************/
+				/*--------------------------------------------------
+				 * Lista Estados - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void ListEstados(JComboBox estado)throws SQLException{
+					try {
+						String sql= "SELECT * FROM estados ORDER BY id_estado;";
+						stmt = con.prepareStatement(sql);
+						ResultSet res = stmt.executeQuery();
+						while(res.next()) {
+								estado.addItem(res.getString("uf"));
+							};
 			
+						
+					}catch(Exception e){
+						erro(e.getMessage());
+					}
+				}
+				//Fim
+				
+				/*--------------------------------------------------
+				 * Lista Estados - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void ListCidades(JComboBox cidade,Regiao regiao)throws SQLException{
+					try {
+						String sql= "SELECT c.nome_cidade FROM estados e, cidades c where e.uf ='"+regiao.getUfEstado()+"' AND e.id_estado=c.estado ORDER BY id_estado;";
+						stmt = con.prepareStatement(sql);
+						ResultSet res = stmt.executeQuery();
+						while(res.next()) {
+								cidade.addItem(res.getString("nome_cidade"));
+								
+							};
+			
+						
+					}catch(Exception e){
+						erro(e.getMessage());
+					}
+				}
+				//Fim
+				
 			
 				/***************************************************************************
 				 * 																		   *
@@ -1002,7 +1049,7 @@ import control.*;
 				//Inicio
 				public void alteraAvaliacao(Paciente paciente) {
 			
-					String sql="UPDATE avaliacao SET"
+					String sql="UPDATE avaliacao SET "
 							+ "dente=?,"
 							+ "p1=?,"
 							+ "p2=?,"
@@ -1021,6 +1068,7 @@ import control.*;
 						stmt.setString(6, paciente.getObsmedica());
 						stmt.setInt(7, paciente.getIdpaciente());
 						stmt =  con.prepareStatement(sql);
+						System.out.println(stmt);
 						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
 						aviso.texto.setText("REGISTRO ATUALIZADO COM SUCESSO.");
 						aviso.setLocationRelativeTo(null);
@@ -1054,6 +1102,40 @@ import control.*;
 					}
 					
 				}
+				
+				public void checaAvaliacao(Paciente paciente) {
+					String sql="SELECT COUNT(idavprocedimento) AS resultado FROM avaliacao WHERE idpaciente='"+paciente.getIdpaciente()+"' and dente='"+paciente.getDente()+"';";
+					
+					try {
+						stmt=con.prepareStatement(sql);
+						ResultSet res = stmt.executeQuery();
+						while (res.next()) {
+							paciente.setResultadoAV(res.getInt("resultado"));
+							
+						}
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+					
+					if(paciente.getResultadoAV()==1) {
+						String sqldados="SELECT * FROM avaliacao WHERE idpaciente='"+paciente.getIdpaciente()+"' and dente='"+paciente.getDente()+"';";
+						try {
+							stmt=con.prepareStatement(sqldados);
+							ResultSet res = stmt.executeQuery();
+							while (res.next()) {
+								paciente.setP1(res.getInt("p1"));
+								paciente.setP2(res.getInt("p2"));
+								paciente.setP3(res.getInt("p3"));
+								paciente.setP4(res.getInt("p4"));
+								paciente.setObsmedica(res.getString("avdente"));
+							}
+						} catch (SQLException e) {
+							erro(e.getMessage());
+						}
+					}
+				
+				}
+				
 				/***************************************************************************
 				 * 																		   *
 				 * 							Função Fecha Conexão                           *

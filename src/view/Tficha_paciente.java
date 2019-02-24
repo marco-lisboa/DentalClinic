@@ -1,3 +1,4 @@
+
 package view;
 //
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -47,6 +49,7 @@ public class Tficha_paciente extends JPanel {
 	Paciente paciente = new Paciente();
 	Iniciador iniciar = new Iniciador();
 	DaoConnect dao = new DaoConnect();
+	Regiao regiao = new Regiao();
 	private JTextField txnomebuscar;
 	private JComboBox situacao;
 	private JTextField txnome;
@@ -157,6 +160,11 @@ public class Tficha_paciente extends JPanel {
 	private JScrollPane scroll;
 	private JLabel numRegistro;
 	private JCheckBox sit;
+	private JLabel av41;
+	private JLabel av26;
+	private JLabel av42;
+	private JLabel av43;
+	private JLabel av44;
 	
 	
 	  private JTable getTabela(){
@@ -468,8 +476,13 @@ public class Tficha_paciente extends JPanel {
 		dados.add(lblCidade);
 		
 		nacionalidade = new JComboBox();
+		nacionalidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListagemEstados();
+			}
+		});
 		nacionalidade.setFocusable(false);
-		nacionalidade.setModel(new DefaultComboBoxModel(new String[] {"Brasil"}));
+		nacionalidade.setModel(new DefaultComboBoxModel(new String[] {"Antiguano", "Argentino", "Bahamense", "Barbadiano, barbadense", "Belizenho", "Boliviano", "Brasileiro", "Chileno", "Colombiano", "Costarriquenho", "Cubano", "Dominicano", "Equatoriano", "Salvadorenho", "Granadino", "Guatemalteco", "Guian\u00EAs", "Guianense", "Haitiano", "Hondurenho", "Jamaicano", "Mexicano", "Nicaraguense", "Rep\u00FAblica Dominicana - Dominicana", "S\u00E3o-cristovense", "S\u00E3o-vicentino", "Santa-lucense", "Surinam\u00EAs", "Trindadense", "Uruguaio", "Venezuelano", "Alem\u00E3o", "Austr\u00EDaco", "Belga", "Croata", "Dinamarqu\u00EAs", "Eslovaco", "Esloveno", "Espanhol", "Franc\u00EAs", "Grego", "H\u00FAngaro", "Irland\u00EAs", "Italiano", "Noruego", "Holand\u00EAs", "Polon\u00EAs", "Portugu\u00EAs", "Brit\u00E2nico", "Ingl\u00EAs", "Gal\u00EAs", "Escoc\u00EAs", "Romeno", "Russo", "S\u00E9rvio", "Sueco", "Su\u00ED\u00E7o", "Turco", "Ucraniano", "Americano", "Canadense", "Angolano", "Mo\u00E7ambicano", "Sul-africano", "Zimbabuense", "Arg\u00E9lia", "Comorense", "Eg\u00EDpcio", "L\u00EDbio", "Marroquino", "Gan\u00E9s", "Queniano", "Ruand\u00EAs", "Ugandense", "Bechuano", "Marfinense", "Camaronense", "Nigeriano", "Somali", "Australiano", "Neozeland\u00EAs", "Afeg\u00E3o", "Saudita", "Armeno", "Bangladesh", "Chin\u00EAs", "Norte-coreano, coreano", "Sul-coreano, coreano", "Indiano", "Indon\u00E9sio", "Iraquiano", "Iraniano", "Israelita", "Japon\u00EAs", "Malaio", "Nepal\u00EAs", "Omanense", "Paquistan\u00EAs", "Palestino", "Qatarense", "S\u00EDrio", "Cingal\u00EAs", "Tailand\u00EAs", "Timorense, maubere", "\u00C1rabe, emiratense", "Vietnamita", "I\u00EAmen - Iemenita"}));
 		nacionalidade.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		nacionalidade.setBounds(102, 75, 152, 22);
 		dados.add(nacionalidade);
@@ -482,15 +495,19 @@ public class Tficha_paciente extends JPanel {
 		dados.add(lblEstado);
 		
 		estado = new JComboBox();
+		estado.setModel(new DefaultComboBoxModel(new String[] {""}));
+		estado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListagemCidades();
+			}
+		});
 		estado.setFocusable(false);
-		estado.setModel(new DefaultComboBoxModel(new String[] {"PB"}));
 		estado.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		estado.setBounds(312, 75, 54, 22);
 		dados.add(estado);
 		
 		cidade = new JComboBox();
 		cidade.setFocusable(false);
-		cidade.setModel(new DefaultComboBoxModel(new String[] {"Campina Grande"}));
 		cidade.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cidade.setBounds(424, 75, 136, 22);
 		dados.add(cidade);
@@ -716,6 +733,12 @@ public class Tficha_paciente extends JPanel {
 		dados.add(salvar);
 		
 		JLabel limpar = new JLabel("");
+		limpar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				limpaCampos();
+			}
+		});
 		limpar.setFocusable(false);
 		limpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		limpar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/eraser.png")));
@@ -815,8 +838,14 @@ public class Tficha_paciente extends JPanel {
 		panel_3.add(obsClinica);
 		
 		JLabel btConfirma = new JLabel("");
+		btConfirma.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				salvarAV(paciente.getResultadoAV());
+			}
+		});
 		btConfirma.setFocusable(false);
-		btConfirma.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btConfirma.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 		btConfirma.setHorizontalAlignment(SwingConstants.CENTER);
 		btConfirma.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
 		btConfirma.setBounds(144, 306, 46, 33);
@@ -828,6 +857,7 @@ public class Tficha_paciente extends JPanel {
 		btCancela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				limpaav();
 				tabbedPaneav.setVisible(false);
 			}
 		});
@@ -843,54 +873,33 @@ public class Tficha_paciente extends JPanel {
 		panel_3.add(bkav);
 		
 		dt18 = new JCheckBox("18");
-		dt18.setFocusable(false);
-		dt18.setOpaque(false);
-		dt18.setForeground(Color.WHITE);
-		dt18.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt18.setBounds(10, 281, 50, 23);
-		avaliacao.add(dt18);
-		
-		dt17 = new JCheckBox("17");
-		dt17.setFocusable(false);
-		dt17.setOpaque(false);
-		dt17.setForeground(Color.WHITE);
-		dt17.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt17.setBounds(10, 253, 50, 23);
-		avaliacao.add(dt17);
-		
-		dt16 = new JCheckBox("16");
-		dt16.setFocusable(false);
-		dt16.setOpaque(false);
-		dt16.setForeground(Color.WHITE);
-		dt16.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt16.setBounds(10, 222, 50, 23);
-		avaliacao.add(dt16);
-		
-		dt15 = new JCheckBox("15");
-		dt15.setFocusable(false);
-		dt15.setOpaque(false);
-		dt15.setForeground(Color.WHITE);
-		dt15.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt15.setBounds(10, 190, 50, 23);
-		avaliacao.add(dt15);
-		
-		dt14 = new JCheckBox("14");
-		dt14.setFocusable(false);
-		dt14.setOpaque(false);
-		dt14.setForeground(Color.WHITE);
-		dt14.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt14.setBounds(10, 162, 50, 23);
-		avaliacao.add(dt14);
-		
-		dt13 = new JCheckBox("13");
-		dt13.setFocusable(false);
-		dt13.setOpaque(false);
-		dt13.setForeground(Color.WHITE);
-		dt13.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt13.setBounds(10, 132, 50, 23);
-		avaliacao.add(dt13);
+		dt18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt18.isSelected()==true) {av18.setVisible(true);}else {av18.setVisible(false);}
+
+			}
+		});
 		
 		dt12 = new JCheckBox("12");
+		dt12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt12.isSelected()==true) {av12.setVisible(true);}else {av12.setVisible(false);}
+
+			}
+		});
+		
+		dt11 = new JCheckBox("11");
+		dt11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt11.isSelected()==true) {av11.setVisible(true);}else {av11.setVisible(false);}
+			}
+		});
+		dt11.setFocusable(false);
+		dt11.setOpaque(false);
+		dt11.setForeground(Color.WHITE);
+		dt11.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt11.setBounds(10, 72, 50, 23);
+		avaliacao.add(dt11);
 		dt12.setFocusable(false);
 		dt12.setOpaque(false);
 		dt12.setForeground(Color.WHITE);
@@ -898,15 +907,89 @@ public class Tficha_paciente extends JPanel {
 		dt12.setBounds(10, 104, 50, 23);
 		avaliacao.add(dt12);
 		
-		dt11 = new JCheckBox("11");
-		dt11.setFocusable(false);
-		dt11.setOpaque(false);
-		dt11.setForeground(Color.WHITE);
-		dt11.setFont(new Font("Tahoma", Font.BOLD, 11));
-		dt11.setBounds(10, 72, 50, 23);
-		avaliacao.add(dt11);
+		dt13 = new JCheckBox("13");
+		dt13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt13.isSelected()==true) {av13.setVisible(true);}else {av13.setVisible(false);}
+
+			}
+		});
+		dt13.setFocusable(false);
+		dt13.setOpaque(false);
+		dt13.setForeground(Color.WHITE);
+		dt13.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt13.setBounds(10, 132, 50, 23);
+		avaliacao.add(dt13);
+		
+		dt14 = new JCheckBox("14");
+		dt14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt14.isSelected()==true) {av14.setVisible(true);}else {av14.setVisible(false);}
+
+			}
+		});
+		dt14.setFocusable(false);
+		dt14.setOpaque(false);
+		dt14.setForeground(Color.WHITE);
+		dt14.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt14.setBounds(10, 162, 50, 23);
+		avaliacao.add(dt14);
+		
+		dt15 = new JCheckBox("15");
+		dt15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt15.isSelected()==true) {av15.setVisible(true);}else {av15.setVisible(false);}
+
+			}
+		});
+		dt15.setFocusable(false);
+		dt15.setOpaque(false);
+		dt15.setForeground(Color.WHITE);
+		dt15.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt15.setBounds(10, 190, 50, 23);
+		avaliacao.add(dt15);
+		
+		dt16 = new JCheckBox("16");
+		dt16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt16.isSelected()==true) {av16.setVisible(true);}else {av16.setVisible(false);}
+
+			}
+		});
+		dt16.setFocusable(false);
+		dt16.setOpaque(false);
+		dt16.setForeground(Color.WHITE);
+		dt16.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt16.setBounds(10, 222, 50, 23);
+		avaliacao.add(dt16);
+		
+		dt17 = new JCheckBox("17");
+		dt17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt17.isSelected()==true) {av17.setVisible(true);}else {av17.setVisible(false);}
+
+			}
+		});
+		dt17.setFocusable(false);
+		dt17.setOpaque(false);
+		dt17.setForeground(Color.WHITE);
+		dt17.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt17.setBounds(10, 253, 50, 23);
+		avaliacao.add(dt17);
+		dt18.setFocusable(false);
+		dt18.setOpaque(false);
+		dt18.setForeground(Color.WHITE);
+		dt18.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt18.setBounds(10, 281, 50, 23);
+		avaliacao.add(dt18);
 		
 		dt21 = new JCheckBox("21");
+		dt21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt21.isSelected()==true) {av21.setVisible(true);}else {av21.setVisible(false);}
+
+			}
+		});
 		dt21.setFocusable(false);
 		dt21.setOpaque(false);
 		dt21.setForeground(Color.WHITE);
@@ -915,6 +998,12 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt21);
 		
 		dt22 = new JCheckBox("22");
+		dt22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt22.isSelected()==true) {av22.setVisible(true);}else {av22.setVisible(false);}
+
+			}
+		});
 		dt22.setFocusable(false);
 		dt22.setOpaque(false);
 		dt22.setForeground(Color.WHITE);
@@ -923,6 +1012,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt22);
 		
 		dt23 = new JCheckBox("23");
+		dt23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt23.isSelected()==true) {av23.setVisible(true);}else {av23.setVisible(false);}
+			}
+		});
 		dt23.setOpaque(false);
 		dt23.setForeground(Color.WHITE);
 		dt23.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -931,6 +1025,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt23);
 		
 		dt24 = new JCheckBox("24");
+		dt24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt24.isSelected()==true) {av24.setVisible(true);}else {av24.setVisible(false);}
+			}
+		});
 		dt24.setFocusable(false);
 		dt24.setOpaque(false);
 		dt24.setForeground(Color.WHITE);
@@ -939,6 +1038,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt24);
 		
 		dt25 = new JCheckBox("25");
+		dt25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt25.isSelected()==true) {av25.setVisible(true);}else {av25.setVisible(false);}
+			}
+		});
 		dt25.setFocusable(false);
 		dt25.setOpaque(false);
 		dt25.setForeground(Color.WHITE);
@@ -947,6 +1051,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt25);
 		
 		dt26 = new JCheckBox("26");
+		dt26.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt26.isSelected()==true) {av26.setVisible(true);}else {av26.setVisible(false);}
+			}
+		});
 		dt26.setFocusable(false);
 		dt26.setOpaque(false);
 		dt26.setForeground(Color.WHITE);
@@ -955,6 +1064,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt26);
 		
 		dt27 = new JCheckBox("27");
+		dt27.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt27.isSelected()==true) {av27.setVisible(true);}else {av27.setVisible(false);}
+			}
+		});
 		dt27.setFocusable(false);
 		dt27.setOpaque(false);
 		dt27.setForeground(Color.WHITE);
@@ -963,6 +1077,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt27);
 		
 		dt28 = new JCheckBox("28");
+		dt28.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt28.isSelected()==true) {av28.setVisible(true);}else {av28.setVisible(false);}
+			}
+		});
 		dt28.setFocusable(false);
 		dt28.setOpaque(false);
 		dt28.setForeground(Color.WHITE);
@@ -971,6 +1090,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt28);
 		
 		dt31 = new JCheckBox("31");
+		dt31.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt31.isSelected()==true) {av31.setVisible(true);}else {av31.setVisible(false);}
+			}
+		});
 		dt31.setFocusable(false);
 		dt31.setOpaque(false);
 		dt31.setForeground(Color.WHITE);
@@ -979,6 +1103,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt31);
 		
 		dt32 = new JCheckBox("32");
+		dt32.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt32.isSelected()==true) {av32.setVisible(true);}else {av32.setVisible(false);}
+			}
+		});
 		dt32.setFocusable(false);
 		dt32.setOpaque(false);
 		dt32.setForeground(Color.WHITE);
@@ -987,6 +1116,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt32);
 		
 		dt33 = new JCheckBox("33");
+		dt33.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt33.isSelected()==true) {av33.setVisible(true);}else {av33.setVisible(false);}
+			}
+		});
 		dt33.setFocusable(false);
 		dt33.setOpaque(false);
 		dt33.setForeground(Color.WHITE);
@@ -995,6 +1129,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt33);
 		
 		dt34 = new JCheckBox("34");
+		dt34.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt34.isSelected()==true) {av34.setVisible(true);}else {av34.setVisible(false);}
+			}
+		});
 		dt34.setFocusable(false);
 		dt34.setOpaque(false);
 		dt34.setForeground(Color.WHITE);
@@ -1003,6 +1142,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt34);
 		
 		dt35 = new JCheckBox("35");
+		dt35.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt35.isSelected()==true) {av35.setVisible(true);}else {av35.setVisible(false);}
+			}
+		});
 		dt35.setFocusable(false);
 		dt35.setOpaque(false);
 		dt35.setForeground(Color.WHITE);
@@ -1011,6 +1155,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt35);
 		
 		dt36 = new JCheckBox("36");
+		dt36.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt36.isSelected()==true) {av36.setVisible(true);}else {av36.setVisible(false);}
+			}
+		});
 		dt36.setFocusable(false);
 		dt36.setOpaque(false);
 		dt36.setForeground(Color.WHITE);
@@ -1019,6 +1168,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt36);
 		
 		dt37 = new JCheckBox("37");
+		dt37.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt37.isSelected()==true) {av37.setVisible(true);}else {av37.setVisible(false);}
+			}
+		});
 		dt37.setFocusable(false);
 		dt37.setOpaque(false);
 		dt37.setForeground(Color.WHITE);
@@ -1027,6 +1181,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt37);
 		
 		dt38 = new JCheckBox("38");
+		dt38.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt38.isSelected()==true) {av38.setVisible(true);}else {av38.setVisible(false);}
+			}
+		});
 		dt38.setFocusable(false);
 		dt38.setOpaque(false);
 		dt38.setForeground(Color.WHITE);
@@ -1035,6 +1194,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt38);
 		
 		dt41 = new JCheckBox("41");
+		dt41.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt41.isSelected()==true) {av41.setVisible(true);}else {av41.setVisible(false);}
+			}
+		});
 		dt41.setFocusable(false);
 		dt41.setOpaque(false);
 		dt41.setForeground(Color.WHITE);
@@ -1043,6 +1207,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt41);
 		
 		dt42 = new JCheckBox("42");
+		dt42.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt42.isSelected()==true) {av42.setVisible(true);}else {av42.setVisible(false);}
+			}
+		});
 		dt42.setFocusable(false);
 		dt42.setOpaque(false);
 		dt42.setForeground(Color.WHITE);
@@ -1051,6 +1220,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt42);
 		
 		dt43 = new JCheckBox("43");
+		dt43.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt43.isSelected()==true) {av43.setVisible(true);}else {av43.setVisible(false);}
+			}
+		});
 		dt43.setFocusable(false);
 		dt43.setOpaque(false);
 		dt43.setForeground(Color.WHITE);
@@ -1059,6 +1233,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt43);
 		
 		dt44 = new JCheckBox("44");
+		dt44.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt44.isSelected()==true) {av44.setVisible(true);}else {av44.setVisible(false);}
+			}
+		});
 		dt44.setFocusable(false);
 		dt44.setOpaque(false);
 		dt44.setForeground(Color.WHITE);
@@ -1067,6 +1246,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt44);
 		
 		dt45 = new JCheckBox("45");
+		dt45.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt45.isSelected()==true) {av45.setVisible(true);}else {av45.setVisible(false);}
+			}
+		});
 		dt45.setFocusable(false);
 		dt45.setOpaque(false);
 		dt45.setForeground(Color.WHITE);
@@ -1075,6 +1259,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt45);
 		
 		dt46 = new JCheckBox("46");
+		dt46.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt46.isSelected()==true) {av46.setVisible(true);}else {av46.setVisible(false);}
+			}
+		});
 		dt46.setFocusable(false);
 		dt46.setOpaque(false);
 		dt46.setForeground(Color.WHITE);
@@ -1083,6 +1272,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt46);
 		
 		dt47 = new JCheckBox("47");
+		dt47.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt47.isSelected()==true) {av47.setVisible(true);}else {av47.setVisible(false);}
+			}
+		});
 		dt47.setFocusable(false);
 		dt47.setOpaque(false);
 		dt47.setForeground(Color.WHITE);
@@ -1091,6 +1285,11 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(dt47);
 		
 		dt48 = new JCheckBox("48");
+		dt48.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(dt48.isSelected()==true) {av48.setVisible(true);}else {av48.setVisible(false);}
+			}
+		});
 		dt48.setFocusable(false);
 		dt48.setOpaque(false);
 		dt48.setForeground(Color.WHITE);
@@ -1120,10 +1319,14 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(label_12);
 		
 		av11 = new JLabel("");
+		av11.setVisible(false);
+		av11.setFocusTraversalPolicyProvider(true);
+		av11.setFocusTraversalKeysEnabled(false);
 		av11.setFocusable(false);
 		av11.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(11);
 				exibiAv(11);
 			}
 		});
@@ -1134,10 +1337,12 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av11);
 		
 		av12 = new JLabel("");
+		av12.setVisible(false);
 		av12.setFocusable(false);
 		av12.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Avaliacao(12);
 				exibiAv(12);
 				
 			}
@@ -1149,6 +1354,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av12);
 		
 		av13 = new JLabel("");
+		av13.setVisible(false);
 		av13.setFocusable(false);
 		av13.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1163,6 +1369,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av13);
 		
 		av14 = new JLabel("");
+		av14.setVisible(false);
 		av14.setFocusable(false);
 		av14.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1177,6 +1384,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av14);
 		
 		av15 = new JLabel("");
+		av15.setVisible(false);
 		av15.setFocusable(false);
 		av15.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1191,6 +1399,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av15);
 		
 		av16 = new JLabel("");
+		av16.setVisible(false);
 		av16.setFocusable(false);
 		av16.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1205,6 +1414,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av16);
 		
 		av17 = new JLabel("");
+		av17.setVisible(false);
 		av17.setFocusable(false);
 		av17.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1220,6 +1430,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av17);
 		
 		av18 = new JLabel("");
+		av18.setVisible(false);
 		av18.setFocusable(false);
 		av18.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1234,6 +1445,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av18);
 		
 		av21 = new JLabel("");
+		av21.setVisible(false);
 		av21.setFocusable(false);
 		av21.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1248,6 +1460,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av21);
 		
 		av22 = new JLabel("");
+		av22.setVisible(false);
 		av22.setFocusable(false);
 		av22.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1262,6 +1475,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av22);
 		
 		av23 = new JLabel("");
+		av23.setVisible(false);
 		av23.setFocusable(false);
 		av23.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1276,6 +1490,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av23);
 		
 		av24 = new JLabel("");
+		av24.setVisible(false);
 		av24.setFocusable(false);
 		av24.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1290,6 +1505,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av24);
 		
 		av25 = new JLabel("");
+		av25.setVisible(false);
 		av25.setFocusable(false);
 		av25.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1303,7 +1519,8 @@ public class Tficha_paciente extends JPanel {
 		av25.setBounds(210, 190, 31, 25);
 		avaliacao.add(av25);
 		
-		JLabel av26 = new JLabel("");
+		av26 = new JLabel("");
+		av26.setVisible(false);
 		av26.setFocusable(false);
 		av26.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1318,6 +1535,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av26);
 		
 		av27 = new JLabel("");
+		av27.setVisible(false);
 		av27.setFocusable(false);
 		av27.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1332,6 +1550,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av27);
 		
 		av28 = new JLabel("");
+		av28.setVisible(false);
 		av28.setFocusable(false);
 		av28.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1345,7 +1564,8 @@ public class Tficha_paciente extends JPanel {
 		av28.setBounds(210, 281, 31, 25);
 		avaliacao.add(av28);
 		
-		JLabel av41 = new JLabel("");
+		av41 = new JLabel("");
+		av41.setVisible(false);
 		av41.setFocusable(false);
 		av41.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1359,7 +1579,8 @@ public class Tficha_paciente extends JPanel {
 		av41.setBounds(367, 70, 31, 25);
 		avaliacao.add(av41);
 		
-		JLabel av42 = new JLabel("");
+		av42 = new JLabel("");
+		av42.setVisible(false);
 		av42.setFocusable(false);
 		av42.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1373,7 +1594,8 @@ public class Tficha_paciente extends JPanel {
 		av42.setBounds(367, 104, 31, 25);
 		avaliacao.add(av42);
 		
-		JLabel av43 = new JLabel("");
+		av43 = new JLabel("");
+		av43.setVisible(false);
 		av43.setFocusable(false);
 		av43.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1387,7 +1609,8 @@ public class Tficha_paciente extends JPanel {
 		av43.setBounds(367, 132, 31, 25);
 		avaliacao.add(av43);
 		
-		JLabel av44 = new JLabel("");
+		av44 = new JLabel("");
+		av44.setVisible(false);
 		av44.setFocusable(false);
 		av44.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1402,6 +1625,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av44);
 		
 		av45 = new JLabel("");
+		av45.setVisible(false);
 		av45.setFocusable(false);
 		av45.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1416,6 +1640,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av45);
 		
 		av46 = new JLabel("");
+		av46.setVisible(false);
 		av46.setFocusable(false);
 		av46.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1430,6 +1655,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av46);
 		
 		av47 = new JLabel("");
+		av47.setVisible(false);
 		av47.setFocusable(false);
 		av47.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1444,6 +1670,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av47);
 		
 		av48 = new JLabel("");
+		av48.setVisible(false);
 		av48.setFocusable(false);
 		av48.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1458,6 +1685,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av48);
 		
 		av31 = new JLabel("");
+		av31.setVisible(false);
 		av31.setFocusable(false);
 		av31.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1472,6 +1700,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av31);
 		
 		av32 = new JLabel("");
+		av32.setVisible(false);
 		av32.setFocusable(false);
 		av32.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1486,6 +1715,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av32);
 		
 		av33 = new JLabel("");
+		av33.setVisible(false);
 		av33.setFocusable(false);
 		av33.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1500,6 +1730,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av33);
 		
 		av34 = new JLabel("");
+		av34.setVisible(false);
 		av34.setFocusable(false);
 		av34.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1514,6 +1745,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av34);
 		
 		av35 = new JLabel("");
+		av35.setVisible(false);
 		av35.setFocusable(false);
 		av35.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1528,6 +1760,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av35);
 		
 		av36 = new JLabel("");
+		av36.setVisible(false);
 		av36.setFocusable(false);
 		av36.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1542,6 +1775,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av36);
 		
 		av37 = new JLabel("");
+		av37.setVisible(false);
 		av37.setFocusable(false);
 		av37.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1556,6 +1790,7 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(av37);
 		
 		av38 = new JLabel("");
+		av38.setVisible(false);
 		av38.setFocusable(false);
 		av38.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1577,6 +1812,12 @@ public class Tficha_paciente extends JPanel {
 		avaliacao.add(duvidas);
 		
 		salva = new JLabel("");
+		salva.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		});
 		salva.setFocusable(false);
 		salva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		salva.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/savep.png")));
@@ -1641,6 +1882,7 @@ public class Tficha_paciente extends JPanel {
 		paciente.setEmail1(email1.getText());
 		paciente.setEmail2(email2.getText());
 		//paciente.setConvenio(convenio);
+		paciente.setMatricula(txmatricula.getText());
 		paciente.setObsmedicamento(textPaneobs.getText());
 		if(sit.isSelected()==true) {paciente.setSit(1);}else {paciente.setSit(0);}
 		if(w1.isSelected()==true) {	paciente.setWhats1(1);}else {paciente.setWhats1(0);}
@@ -1685,6 +1927,13 @@ public class Tficha_paciente extends JPanel {
 		
 		
 	}
+	public void varreCamposAv(){
+		if(p1.isSelected()==true) {paciente.setP1(1);}else {paciente.setP1(0);}
+		if(p2.isSelected()==true) {paciente.setP2(1);}else {paciente.setP2(0);}
+		if(p3.isSelected()==true) {paciente.setP3(1);}else {paciente.setP3(0);}
+		if(p4.isSelected()==true) {paciente.setP4(1);}else {paciente.setP4(0);}
+		paciente.setObsmedica(obsClinica.getText());
+	}
 	
 	public void limpaCampos() {
 		txnome.setText("");
@@ -1694,8 +1943,11 @@ public class Tficha_paciente extends JPanel {
 		op1.setSelectedIndex(0);
 		w1.setSelected(false);
 		txcontato2.setText("");
-		op2.setSelectedIndex(1);
+		op2.setSelectedIndex(0);
 		w2.setSelected(false);
+		nacionalidade.setSelectedIndex(6);
+		estado.setSelectedIndex(0);
+		cidade.setSelectedIndex(0);
 		email1.setText("");
 		email2.setText("");
 		convenios.setSelectedIndex(0);
@@ -1740,14 +1992,18 @@ public class Tficha_paciente extends JPanel {
 		limpaav();
 	}
 	
+	public void limpaav() {
+		textoav.setText("");
+		p1.setSelected(false);
+		p2.setSelected(false);
+		p3.setSelected(false);
+		p4.setSelected(false);
+		obsClinica.setText("");
+	}
+	
 	public void prencheCampos() {
 		
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		dao.conectar(iniciar.getIp_server());
+		leitura();
 		dao.dadosPaciente(paciente);
 		txnome.setText(paciente.getNomepaciente());
 		txcpf.setText(paciente.getCpf());
@@ -1758,6 +2014,11 @@ public class Tficha_paciente extends JPanel {
 		txcontato2.setText(paciente.getContato2());
 		email1.setText(paciente.getEmail1());
 		email2.setText(paciente.getEmail2());
+		nacionalidade.setSelectedItem(paciente.getNascionalidade());
+		estado.setSelectedItem(paciente.getEstado());
+		cidade.setSelectedItem(paciente.getCidade());
+		op1.setSelectedItem(paciente.getOp1());
+		op2.setSelectedItem(paciente.getOp2());
 		
 		
 		if(paciente.getWhats1()==1) {w1.setSelected(true);}else {w1.setSelected(false);}
@@ -1767,56 +2028,48 @@ public class Tficha_paciente extends JPanel {
 		if(paciente.getAlegia()==1) {rdbtnSim.setSelected(true);rdbtnNo.setSelected(false);}else {rdbtnNo.setSelected(true);rdbtnSim.setSelected(false);}
 		if(paciente.getSit()==1) {sit.setSelected(true);}else {sit.setSelected(false);}
 //--------------------------------------------------------------------------------------------------------
-		if(paciente.getDt11()==1) {dt11.setSelected(true);}else {dt11.setSelected(false);}
-		if(paciente.getDt12()==1) {dt12.setSelected(true);}else {dt12.setSelected(false);}
-		if(paciente.getDt13()==1) {dt13.setSelected(true);}else {dt13.setSelected(false);}
-		if(paciente.getDt14()==1) {dt14.setSelected(true);}else {dt14.setSelected(false);}
-		if(paciente.getDt15()==1) {dt15.setSelected(true);}else {dt15.setSelected(false);}
-		if(paciente.getDt16()==1) {dt16.setSelected(true);}else {dt16.setSelected(false);}
-		if(paciente.getDt17()==1) {dt17.setSelected(true);}else {dt17.setSelected(false);}
-		if(paciente.getDt18()==1) {dt18.setSelected(true);}else {dt18.setSelected(false);}
+		if(paciente.getDt11()==1) {dt11.setSelected(true);av11.setVisible(true);}else {dt11.setSelected(false);av11.setVisible(false);}
+		if(paciente.getDt12()==1) {dt12.setSelected(true);av12.setVisible(true);}else {dt12.setSelected(false);av12.setVisible(false);}
+		if(paciente.getDt13()==1) {dt13.setSelected(true);av13.setVisible(true);}else {dt13.setSelected(false);av13.setVisible(false);}
+		if(paciente.getDt14()==1) {dt14.setSelected(true);av14.setVisible(true);}else {dt14.setSelected(false);av14.setVisible(false);}
+		if(paciente.getDt15()==1) {dt15.setSelected(true);av15.setVisible(true);}else {dt15.setSelected(false);av15.setVisible(false);}
+		if(paciente.getDt16()==1) {dt16.setSelected(true);av16.setVisible(true);}else {dt16.setSelected(false);av16.setVisible(false);}
+		if(paciente.getDt17()==1) {dt17.setSelected(true);av17.setVisible(true);}else {dt17.setSelected(false);av17.setVisible(false);}
+		if(paciente.getDt18()==1) {dt18.setSelected(true);av18.setVisible(true);}else {dt18.setSelected(false);av18.setVisible(false);}
 		
-		if(paciente.getDt21()==1) {dt21.setSelected(true);}else {dt21.setSelected(false);}
-		if(paciente.getDt22()==1) {dt22.setSelected(true);}else {dt22.setSelected(false);}
-		if(paciente.getDt23()==1) {dt23.setSelected(true);}else {dt23.setSelected(false);}
-		if(paciente.getDt24()==1) {dt24.setSelected(true);}else {dt24.setSelected(false);}
-		if(paciente.getDt25()==1) {dt25.setSelected(true);}else {dt25.setSelected(false);}
-		if(paciente.getDt26()==1) {dt26.setSelected(true);}else {dt26.setSelected(false);}
-		if(paciente.getDt27()==1) {dt27.setSelected(true);}else {dt27.setSelected(false);}
-		if(paciente.getDt28()==1) {dt28.setSelected(true);}else {dt28.setSelected(false);}
 		
-		if(paciente.getDt31()==1) {dt31.setSelected(true);}else {dt31.setSelected(false);}
-		if(paciente.getDt32()==1) {dt32.setSelected(true);}else {dt32.setSelected(false);}
-		if(paciente.getDt33()==1) {dt33.setSelected(true);}else {dt33.setSelected(false);}
-		if(paciente.getDt34()==1) {dt34.setSelected(true);}else {dt34.setSelected(false);}
-		if(paciente.getDt35()==1) {dt35.setSelected(true);}else {dt35.setSelected(false);}
-		if(paciente.getDt36()==1) {dt36.setSelected(true);}else {dt36.setSelected(false);}
-		if(paciente.getDt37()==1) {dt37.setSelected(true);}else {dt37.setSelected(false);}
-		if(paciente.getDt38()==1) {dt38.setSelected(true);}else {dt38.setSelected(false);}
+		if(paciente.getDt21()==1) {dt21.setSelected(true);av21.setVisible(true);}else {dt21.setSelected(false);av21.setVisible(false);}
+		if(paciente.getDt22()==1) {dt22.setSelected(true);av22.setVisible(true);}else {dt22.setSelected(false);av22.setVisible(false);}
+		if(paciente.getDt23()==1) {dt23.setSelected(true);av23.setVisible(true);}else {dt23.setSelected(false);av23.setVisible(false);}
+		if(paciente.getDt24()==1) {dt24.setSelected(true);av24.setVisible(true);}else {dt24.setSelected(false);av24.setVisible(false);}
+		if(paciente.getDt25()==1) {dt25.setSelected(true);av25.setVisible(true);}else {dt25.setSelected(false);av25.setVisible(false);}
+		if(paciente.getDt26()==1) {dt26.setSelected(true);av26.setVisible(true);}else {dt26.setSelected(false);av26.setVisible(false);}
+		if(paciente.getDt27()==1) {dt27.setSelected(true);av27.setVisible(true);}else {dt27.setSelected(false);av27.setVisible(false);}
+		if(paciente.getDt28()==1) {dt28.setSelected(true);av28.setVisible(true);}else {dt28.setSelected(false);av28.setVisible(false);}
 		
-		if(paciente.getDt41()==1) {dt41.setSelected(true);}else {dt41.setSelected(false);}
-		if(paciente.getDt42()==1) {dt42.setSelected(true);}else {dt42.setSelected(false);}
-		if(paciente.getDt43()==1) {dt43.setSelected(true);}else {dt43.setSelected(false);}
-		if(paciente.getDt44()==1) {dt44.setSelected(true);}else {dt44.setSelected(false);}
-		if(paciente.getDt45()==1) {dt45.setSelected(true);}else {dt45.setSelected(false);}
-		if(paciente.getDt46()==1) {dt46.setSelected(true);}else {dt46.setSelected(false);}
-		if(paciente.getDt47()==1) {dt47.setSelected(true);}else {dt47.setSelected(false);}
-		if(paciente.getDt48()==1) {dt48.setSelected(true);}else {dt48.setSelected(false);}
+		if(paciente.getDt31()==1) {dt31.setSelected(true);av31.setVisible(true);}else {dt31.setSelected(false);av31.setVisible(false);}
+		if(paciente.getDt32()==1) {dt32.setSelected(true);av32.setVisible(true);}else {dt32.setSelected(false);av32.setVisible(false);}
+		if(paciente.getDt33()==1) {dt33.setSelected(true);av33.setVisible(true);}else {dt33.setSelected(false);av33.setVisible(false);}
+		if(paciente.getDt34()==1) {dt34.setSelected(true);av34.setVisible(true);}else {dt34.setSelected(false);av34.setVisible(false);}
+		if(paciente.getDt35()==1) {dt35.setSelected(true);av35.setVisible(true);}else {dt35.setSelected(false);av35.setVisible(false);}
+		if(paciente.getDt36()==1) {dt36.setSelected(true);av36.setVisible(true);}else {dt36.setSelected(false);av36.setVisible(false);}
+		if(paciente.getDt37()==1) {dt37.setSelected(true);av37.setVisible(true);}else {dt37.setSelected(false);av37.setVisible(false);}
+		if(paciente.getDt38()==1) {dt38.setSelected(true);av38.setVisible(true);}else {dt38.setSelected(false);av38.setVisible(false);}
+		
+		if(paciente.getDt41()==1) {dt41.setSelected(true);av41.setVisible(true);}else {dt41.setSelected(false);av41.setVisible(false);}
+		if(paciente.getDt42()==1) {dt42.setSelected(true);av42.setVisible(true);}else {dt42.setSelected(false);av42.setVisible(false);}
+		if(paciente.getDt43()==1) {dt43.setSelected(true);av43.setVisible(true);}else {dt43.setSelected(false);av43.setVisible(false);}
+		if(paciente.getDt44()==1) {dt44.setSelected(true);av44.setVisible(true);}else {dt44.setSelected(false);av44.setVisible(false);}
+		if(paciente.getDt45()==1) {dt45.setSelected(true);av45.setVisible(true);}else {dt45.setSelected(false);av45.setVisible(false);}
+		if(paciente.getDt46()==1) {dt46.setSelected(true);av46.setVisible(true);}else {dt46.setSelected(false);av46.setVisible(false);}
+		if(paciente.getDt47()==1) {dt47.setSelected(true);av47.setVisible(true);}else {dt47.setSelected(false);av47.setVisible(false);}
+		if(paciente.getDt48()==1) {dt48.setSelected(true);av48.setVisible(true);}else {dt48.setSelected(false);av48.setVisible(false);}
 		
 		tabbedPaneFicha.setVisible(false);
 		tabbedPaneCadastro.setEnabledAt( 1, true);
 		tabbedPaneCadastro.setVisible(true);
 	}
-	
-	public void limpaav() {
-		textoav.setText("");
-		p1.setSelected(false);
-		p2.setSelected(false);
-		p3.setSelected(false);
-		p4.setSelected(false);
-		obsClinica.setText("");
-	}
-	
+
 	public void exibiAv(int i) {
 		textoav.setText("Avaliação referente ao dente "+i);
 		tabbedPaneav.setVisible(true);
@@ -1832,13 +2085,7 @@ public class Tficha_paciente extends JPanel {
 			paciente.setSit(3);
 		}
 		
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		dao.conectar(iniciar.getIp_server());
+		leitura();
 		
 		dao.listaPaciente(tablePaciente, paciente);
 		if(paciente.getNumeroregistro()==1) {
@@ -1851,12 +2098,7 @@ public class Tficha_paciente extends JPanel {
 	
 	public void salvar() {
 		varreCampos();
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		dao.conectar(iniciar.getIp_server());
+		leitura();
 		dao.inserirPaciente(paciente);
 		dao.fecharCon();
 		limpaCampos();
@@ -1865,13 +2107,19 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneFicha.setVisible(true);
 	}
 	
+	public void salvarAV(int i) {
+		varreCamposAv();
+		leitura();
+		if(i==1) {
+			dao.alteraAvaliacao(paciente);
+		}else {
+			dao.inseriAvaliacao(paciente);
+		}
+		
+	}
 	public void atualiza() {
 		varreCampos();
-		try {
-			iniciar.LeituraIp();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		leitura();
 		dao.conectar(iniciar.getIp_server());
 		dao.alteraPaciente(paciente);
 		dao.fecharCon();
@@ -1880,4 +2128,55 @@ public class Tficha_paciente extends JPanel {
 		tabbedPaneCadastro.setVisible(false);
 		tabbedPaneFicha.setVisible(true);
 	}
+	
+	public void ListagemEstados() {
+		estado.setModel(new DefaultComboBoxModel(new String[] {""}));
+		leitura();
+		if(nacionalidade.getSelectedItem()=="Brasileiro") {
+			try {
+				dao.ListEstados(estado);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void ListagemCidades() {
+		cidade.setModel(new DefaultComboBoxModel(new String[] {""}));
+		regiao.setUfEstado((String)estado.getSelectedItem());
+		leitura();
+		try {
+			dao.ListCidades(cidade, regiao);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void Avaliacao(int i) {
+		paciente.setDente(i);
+		leitura();
+		dao.conectar(iniciar.getIp_server());
+		dao.checaAvaliacao(paciente);
+		
+		
+		if(paciente.getP1()==1) {
+			p1.setSelected(true);
+		}else {
+			p1.setSelected(false);
+		}
+	}
+	
+	public void leitura() {
+		try {
+			iniciar.LeituraIp();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		dao.conectar(iniciar.getIp_server());
+	}
+
 }
