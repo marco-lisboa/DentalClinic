@@ -25,6 +25,7 @@ import control.*;
 				private Connection con;
 				private PreparedStatement stmt;
 				Usuario usuario = new Usuario();
+				Agenda agenda = new Agenda();
 				Paciente paciente = new Paciente();
 				Regiao regiao = new Regiao();
 				FormataData formatData = new FormataData();
@@ -116,8 +117,10 @@ import control.*;
 				 * 																		   *
 				 * 				public void inserir() {}                                   *
 				 *				public void altera() {}                                    *
+				 *				public void desativarUsuario(Usuario usuario) {}           *
 				 *				public void exclui() {}                                    *
-				 *				public void dados() {}                               	   *
+				 *				public void dados() {}                                     *
+				 *              public void List()throws SQLException{}              	   *
 				 *                                                                         *
 				 ***************************************************************************/
 			
@@ -1146,7 +1149,10 @@ import control.*;
 					}
 					
 				}
-				
+				/*--------------------------------------------------
+				 * Checa Avaliação Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
 				public void checaAvaliacao(Paciente paciente) {
 					String sql="SELECT COUNT(idavprocedimento) AS resultado FROM avaliacao WHERE idpaciente='"+paciente.getIdpaciente()+"' and dente='"+paciente.getDente()+"';";
 					
@@ -1185,6 +1191,141 @@ import control.*;
 					}
 				
 				}
+				
+				/***************************************************************************
+				 * 																		   *
+				 * 							Função Agenda                                  *
+				 *                                                                         *
+				 ***************************************************************************/
+				/*--------------------------------------------------
+				 * Inseri Agendamento Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void inserirAgendamento(Agenda agenda) {
+					formatData.Formatar(agenda.getData(), 1);
+					
+					String sql = "INSERT INTO agenda("
+							+ "idpaciente,"
+							+ "procedimento,"
+							+ "data,"
+							+ "situacao"
+							+ ")VALUES(?,?,?,?);";
+					
+					try {
+						
+						stmt =  con.prepareStatement(sql);
+						stmt.setInt(1, agenda.getIdPaciente());
+						stmt.setString(2,agenda.getProcedimento());
+						stmt.setString(3,  formatData.getDatafinal());
+						stmt.setInt(4,agenda.getSituacao());
+						stmt.execute();
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("AGENDAMENTO REALIZADO COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+			
+				}; 
+				//Fim
+				/*--------------------------------------------------
+				 * Altera Agendamento Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void alteraAgendamento(Agenda agenda) {
+					
+					formatData.Formatar(agenda.getData(), 1);
+					
+					String sql = "UPDATE agenda SET "
+							+ "procedimento=?,"
+							+ "data=?,"
+							+ "situacao=? "
+							+ "WHERE idagenda=? and idpaciente = ?";
+					
+					try {
+						
+						stmt =  con.prepareStatement(sql);
+						stmt.setString(1,agenda.getProcedimento());
+						stmt.setString(2,formatData.getDatafinal());
+						stmt.setInt(3,agenda.getSituacao());
+						stmt.setInt(4,agenda.getIdAgenda());
+						stmt.setInt(5, agenda.getIdPaciente());
+						stmt.execute();
+						
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("AGENDAMENTO ATUALIZADO COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+				}; 
+				//Fim
+				/*--------------------------------------------------
+				 * Altera Situacao Agenda Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void alteraSituacaoAgenda(Agenda agenda, int i) {
+					String sql;
+					if(i==1) {
+						
+					}else {
+						
+					}
+				} ;
+				//Fim
+				/*--------------------------------------------------
+				 * Excluir Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void excluiAgendamento(Agenda agenda) {
+					String sql = "DELETE FROM agenda WHERE idagendamento =?;";
+					
+					try {
+						stmt =  con.prepareStatement(sql);
+						stmt.setInt(1,agenda.getIdAgenda());
+						stmt.execute();
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+			
+				
+				}; 
+				//Fim
+				/*--------------------------------------------------
+				 * Dados Agendamento Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void dadosAgendamento(Agenda agenda) {
+					formatData.Formatar(agenda.getData(), 0);
+					String sql = "SELECT * FROM agenda where idagenda ='"+ agenda.getIdAgenda()+ "';";
+					
+					try {
+						stmt =  con.prepareStatement(sql);
+						ResultSet res = stmt.executeQuery();
+						while (res.next()) {
+							agenda.setIdPaciente(res.getInt("idpaciente"));
+							agenda.setProcedimento(res.getString("procedimento"));
+							formatData.Formatar(res.getString("data"), 0);
+							agenda.setData(formatData.getDatafinal());
+							agenda.setSituacao(res.getInt("situacao"));
+							
+						};
+					} catch (SQLException e) {
+						erro(e.getMessage());
+					}
+			
+				} ;  
+				//Fim
+				/*--------------------------------------------------
+				 * Listagem Agendamento Paciente - Comentario Maynore Soft
+				 * ------------------------------------------------ */
+				//Inicio
+				public void ListAgendamento()throws SQLException{} ;
+				//Fim
+				
+				
 				
 				/***************************************************************************
 				 * 																		   *

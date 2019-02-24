@@ -30,6 +30,7 @@ public class Tagenda_marcacao extends JPanel {
 	private JTable table_1;
 	private JTabbedPane tabbedPaneagendamento;
 	private JTabbedPane tabbedPaneAgenda;
+	private JTextField textField_2;
 
 	/**
 	 * Create the panel.
@@ -63,15 +64,26 @@ public class Tagenda_marcacao extends JPanel {
 		tabbedPaneAgenda.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
 		
+		textField_2 = new JTextField();
+		textField_2.setBounds(67, 8, 170, 20);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblPaciente = new JLabel("Paciente :");
+		lblPaciente.setForeground(Color.WHITE);
+		lblPaciente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPaciente.setBounds(10, 14, 68, 14);
+		panel.add(lblPaciente);
+		
 		JLabel lblData = new JLabel("Data : ");
 		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblData.setForeground(Color.WHITE);
-		lblData.setBounds(10, 11, 46, 14);
+		lblData.setBounds(10, 51, 46, 14);
 		panel.add(lblData);
 		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		dateChooser.setBounds(47, 5, 122, 20);
+		dateChooser.setBounds(47, 45, 154, 20);
 		panel.add(dateChooser);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -81,7 +93,7 @@ public class Tagenda_marcacao extends JPanel {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
-		lblNewLabel.setBounds(179, 0, 39, 32);
+		lblNewLabel.setBounds(483, 33, 39, 32);
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -102,14 +114,14 @@ public class Tagenda_marcacao extends JPanel {
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o : ");
 		lblSituao.setForeground(Color.WHITE);
 		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSituao.setBounds(10, 37, 89, 14);
+		lblSituao.setBounds(221, 48, 89, 14);
 		panel.add(lblSituao);
 		
 		textField_1 = new JComboBox();
 		textField_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		textField_1.setForeground(Color.BLACK);
 		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Confirmado", "Confirma\u00E7\u00E3o Pedente"}));
-		textField_1.setBounds(73, 34, 145, 20);
+		textField_1.setBounds(284, 45, 189, 20);
 		panel.add(textField_1);
 		
 		JLabel lblProcedimento_2 = new JLabel("Procedimento : ");
