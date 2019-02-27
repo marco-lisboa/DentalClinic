@@ -33,6 +33,8 @@ import javax.swing.JSeparator;
 import javax.swing.JCheckBox;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tagenda_marcacao extends JPanel {
 	
@@ -360,6 +362,11 @@ public class Tagenda_marcacao extends JPanel {
 		panel_1.add(lblProcedimento);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		comboBox.setFont(new Font("Tahoma", Font.BOLD, 11));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ambos", "Clinico", "Estetico"}));
