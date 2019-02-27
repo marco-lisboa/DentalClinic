@@ -33,6 +33,8 @@ import javax.swing.JSeparator;
 import javax.swing.JCheckBox;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tagenda_marcacao extends JPanel {
 	
@@ -63,6 +65,8 @@ public class Tagenda_marcacao extends JPanel {
 		}
 	};
 	private JLabel dadoNomePaciente;
+	private JComboBox procedimento;
+	private JDateChooser data;
 	
 	 private JTable getTabela(){
 	    	if(tablePaciente==null){
@@ -348,10 +352,10 @@ public class Tagenda_marcacao extends JPanel {
 			));
 		scrollPane2.setViewportView(tablePaciente);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		dateChooser_1.setBounds(321, 218, 154, 20);
-		panel_1.add(dateChooser_1);
+		data = new JDateChooser();
+		data.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		data.setBounds(321, 218, 154, 20);
+		panel_1.add(data);
 		
 		JLabel lblProcedimento = new JLabel("Procedimento :");
 		lblProcedimento.setForeground(Color.WHITE);
@@ -359,12 +363,16 @@ public class Tagenda_marcacao extends JPanel {
 		lblProcedimento.setBounds(20, 224, 111, 14);
 		panel_1.add(lblProcedimento);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBox.setFont(new Font("Tahoma", Font.BOLD, 11));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ambos", "Clinico", "Estetico"}));
-		comboBox.setBounds(113, 218, 141, 20);
-		panel_1.add(comboBox);
+		procedimento = new JComboBox();
+		procedimento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		procedimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		procedimento.setFont(new Font("Tahoma", Font.BOLD, 11));
+		procedimento.setModel(new DefaultComboBoxModel(new String[] {"Ambos", "Clinico", "Estetico"}));
+		procedimento.setBounds(113, 218, 141, 20);
+		panel_1.add(procedimento);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 249, 550, 2);
@@ -429,6 +437,8 @@ public class Tagenda_marcacao extends JPanel {
 	
 	public void varreCamposPaciente() {
 		
+	}
+	public void procedimento() {
 	}
 	
 	public void buscarPaciente() {
