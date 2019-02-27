@@ -4,34 +4,114 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
+
+import control.Iniciador;
+import control.Paciente;
+import control.Usuario;
+import dao.DaoConnect;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import javax.swing.JSeparator;
 import javax.swing.JCheckBox;
 import java.awt.Cursor;
+import java.awt.Dimension;
 
 public class Tagenda_marcacao extends JPanel {
+	
+	Paciente paciente = new Paciente();
+	Usuario usuario  = new Usuario();
+	Iniciador iniciar = new Iniciador();
+	DaoConnect dao = new DaoConnect();
 	private JComboBox textField_1;
 	private JTable table;
 	private int totalregistro;
-	private JTextField textField;
-	private JTable table_1;
+	private JTextField txnomepaciente;
+	private JTable tablePaciente;
 	private JTabbedPane tabbedPaneagendamento;
 	private JTabbedPane tabbedPaneAgenda;
 	private JTextField textField_2;
+	private JScrollPane scrollPane2;
+	String[] coluna2  = {"Matricula", "Nome", "Função"};
+	String [][] linhas2 = {};
+	private DefaultTableModel tabela = new DefaultTableModel(linhas2, coluna2){
+		public boolean isCellEditable(int linhas, int coluna) {
+			
+			if(coluna==1){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+	};
+	private JLabel dadoNomePaciente;
+	
+	 private JTable getTabela(){
+	    	if(tablePaciente==null){
+	    		tablePaciente = new JTable(tabela);
+	    		tablePaciente.addMouseListener(new MouseAdapter() {
+	    			public void mouseReased(MouseEvent e){
+	    				
+	    				int i = tablePaciente.getSelectedRow();
+	    				Object x = tablePaciente.getValueAt(i, 1);
+	    				String codigo = x+"";
+	    			}
 
+	    		});
+	    	}
+	    	return tablePaciente;
+
+	    }
+
+	    
+	    
+	    
+		private JScrollPane getScroll(){
+			if (scrollPane2==null){
+				scrollPane2= new JScrollPane();
+				scrollPane2.setBackground(SystemColor.text);
+				scrollPane2.setViewportView(getTabela());
+				scrollPane2.setBounds(56,166,225,256);
+				defineRenderers();
+			}
+			
+			
+			
+			return scrollPane2;
+			
+		}
+
+		private void defineRenderers() {
+			
+			tablePaciente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			JTableHeader header = tablePaciente.getTableHeader();
+			header.setPreferredSize(new Dimension(2000, 25));
+			TableColumnModel modColuna = tablePaciente.getColumnModel();
+			
+			modColuna.getColumn(0).setPreferredWidth(50);
+			modColuna.getColumn(1).setPreferredWidth(150);
+			modColuna.getColumn(2).setPreferredWidth(150);
+			
+			
+		}
 	/**
 	 * Create the panel.
 	 */
@@ -54,7 +134,7 @@ public class Tagenda_marcacao extends JPanel {
 		tabbedPaneAgenda.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneAgenda.setBackground(new Color(32, 178, 170));
 		tabbedPaneAgenda.setBounds(0, 0, 575, 428);
-		add(tabbedPaneAgenda);
+	//	add(tabbedPaneAgenda);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
@@ -198,7 +278,6 @@ public class Tagenda_marcacao extends JPanel {
 		panel.add(bk);
 		
 		tabbedPaneagendamento = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneagendamento.setVisible(false);
 		tabbedPaneagendamento.setBounds(0, 0, 575, 428);
 		add(tabbedPaneagendamento);
 		
@@ -213,33 +292,61 @@ public class Tagenda_marcacao extends JPanel {
 		lblNewLabel_2.setBounds(10, 11, 111, 14);
 		panel_1.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBounds(113, 8, 141, 20);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		txnomepaciente = new JTextField();
+		txnomepaciente.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+			}
+		});
+		txnomepaciente.setBounds(113, 8, 141, 20);
+		panel_1.add(txnomepaciente);
+		txnomepaciente.setColumns(10);
 		
 		JLabel buscar = new JLabel("");
+		buscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				buscarPaciente();
+			}
+		});
 		buscar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buscar.setToolTipText("Buscar");
 		buscar.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/buscar.png")));
 		buscar.setBounds(264, 0, 46, 35);
 		panel_1.add(buscar);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 39, 550, 168);
-		panel_1.add(scrollPane_2);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"Nome", "Telefone", "Situa\u00E7\u00E3o"
+		
+		scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(10, 39, 550, 168);
+		panel_1.add(scrollPane2);
+		
+		tablePaciente = new JTable();
+		tablePaciente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent click) {
+				
+				if(click.getClickCount()==2) {
+					int linha;
+					Object codigo,nome;
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					nome =tablePaciente.getValueAt(linha, 1);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					dadoNomePaciente.setText("Paciente nome: "+nome);
+				}
+				
+				
 			}
-		));
-		scrollPane_2.setViewportView(table_1);
+		});
+		tablePaciente.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Codigo", "Nome", "Contato"
+				}
+			));
+		scrollPane2.setViewportView(tablePaciente);
 		
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -263,12 +370,12 @@ public class Tagenda_marcacao extends JPanel {
 		separator.setBounds(10, 249, 550, 2);
 		panel_1.add(separator);
 		
-		JLabel paciente = new JLabel("Paciente nome");
-		paciente.setForeground(Color.WHITE);
-		paciente.setIcon(new ImageIcon("C:\\Users\\SED\\Downloads\\user.png"));
-		paciente.setFont(new Font("Tahoma", Font.BOLD, 11));
-		paciente.setBounds(20, 272, 540, 14);
-		panel_1.add(paciente);
+		dadoNomePaciente = new JLabel("Paciente nome:");
+		dadoNomePaciente.setForeground(Color.WHITE);
+		dadoNomePaciente.setIcon(new ImageIcon("C:\\Users\\SED\\Downloads\\user.png"));
+		dadoNomePaciente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dadoNomePaciente.setBounds(20, 272, 540, 14);
+		panel_1.add(dadoNomePaciente);
 		
 		JLabel lblProcedimento_1 = new JLabel("Procedimento :");
 		lblProcedimento_1.setForeground(Color.WHITE);
@@ -318,5 +425,30 @@ public class Tagenda_marcacao extends JPanel {
 		bkagenda.setBounds(0, 0, 570, 409);
 		panel_1.add(bkagenda);
 
+	}
+	
+	public void varreCamposPaciente() {
+		
+	}
+	
+	public void buscarPaciente() {
+		paciente.setNomepaciente(txnomepaciente.getText());
+			paciente.setSit(1);
+		
+		leitura();
+		
+		dao.listaPaciente(tablePaciente, paciente);
+	
+	}
+	public void leitura() {
+		try {
+			iniciar.LeituraIp();
+			iniciar.leituraUsuarioLogado();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		dao.conectar(iniciar.getIp_server());
+		usuario.setUsuarioLogado(iniciar.getUsuarioLogado());
 	}
 }
