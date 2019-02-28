@@ -1,7 +1,13 @@
 package control;
 
 public class Agenda {
-	int idAgenda, idPaciente,situacao;
+	int idAgenda, idPaciente,vlProcedimento,situacao;
+	public int getVlProcedimento() {
+		return vlProcedimento;
+	}
+	public void setVlProcedimento(int vlProcedimento) {
+		this.vlProcedimento = vlProcedimento;
+	}
 	String procedimento,data;
 	public String getData() {
 		return data;

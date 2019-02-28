@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -35,6 +36,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class Tagenda_marcacao extends JPanel {
 	
@@ -65,6 +70,10 @@ public class Tagenda_marcacao extends JPanel {
 		}
 	};
 	private JLabel dadoNomePaciente;
+	private JComboBox procedimento;
+	private JDateChooser data;
+	private JLabel pro;
+	private JLabel dt;
 	
 	 private JTable getTabela(){
 	    	if(tablePaciente==null){
@@ -350,28 +359,41 @@ public class Tagenda_marcacao extends JPanel {
 			));
 		scrollPane2.setViewportView(tablePaciente);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		dateChooser_1.setBounds(321, 218, 154, 20);
-		panel_1.add(dateChooser_1);
+		data = new JDateChooser();
+		data.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent arg0) {
+				
+				if(data.getDate()==null) {
+					dt.setText("Data : ");
+				}else {
+					SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //DEFINE FORMATO DE DATA  
+				    String date = formato.format(data.getDate());
+					dt.setText("Data : "+date);
+				}
+				
+				
+			}
+		});
+		data.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		data.setBounds(321, 218, 154, 20);
+		panel_1.add(data);
 		
 		JLabel lblProcedimento = new JLabel("Procedimento :");
 		lblProcedimento.setForeground(Color.WHITE);
 		lblProcedimento.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblProcedimento.setBounds(20, 224, 111, 14);
 		panel_1.add(lblProcedimento);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
+		procedimento = new JComboBox();
+		procedimento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+					pro.setText("Procedimento : "+procedimento.getSelectedItem());
 			}
 		});
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBox.setFont(new Font("Tahoma", Font.BOLD, 11));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ambos", "Clinico", "Estetico"}));
-		comboBox.setBounds(113, 218, 141, 20);
-		panel_1.add(comboBox);
+		procedimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		procedimento.setFont(new Font("Tahoma", Font.BOLD, 11));
+		procedimento.setModel(new DefaultComboBoxModel(new String[] {"Ambos", "Clinico", "Estetico"}));
+		procedimento.setBounds(113, 218, 141, 20);
+		panel_1.add(procedimento);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 249, 550, 2);
@@ -384,19 +406,19 @@ public class Tagenda_marcacao extends JPanel {
 		dadoNomePaciente.setBounds(20, 272, 540, 14);
 		panel_1.add(dadoNomePaciente);
 		
-		JLabel lblProcedimento_1 = new JLabel("Procedimento :");
-		lblProcedimento_1.setForeground(Color.WHITE);
-		lblProcedimento_1.setIcon(new ImageIcon("C:\\Users\\SED\\Downloads\\tooth.png"));
-		lblProcedimento_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblProcedimento_1.setBounds(20, 307, 243, 14);
-		panel_1.add(lblProcedimento_1);
+		pro = new JLabel("Procedimento :");
+		pro.setForeground(Color.WHITE);
+		pro.setIcon(new ImageIcon("C:\\Users\\SED\\Downloads\\tooth.png"));
+		pro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		pro.setBounds(20, 307, 243, 14);
+		panel_1.add(pro);
 		
-		JLabel lblData_1 = new JLabel("Data :");
-		lblData_1.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/agenda de marcacao pequeno.png")));
-		lblData_1.setForeground(Color.WHITE);
-		lblData_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblData_1.setBounds(280, 307, 280, 14);
-		panel_1.add(lblData_1);
+		dt = new JLabel("Data :");
+		dt.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/agenda de marcacao pequeno.png")));
+		dt.setForeground(Color.WHITE);
+		dt.setFont(new Font("Tahoma", Font.BOLD, 11));
+		dt.setBounds(280, 307, 280, 14);
+		panel_1.add(dt);
 		
 		JLabel btSalva = new JLabel("");
 		btSalva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -433,6 +455,8 @@ public class Tagenda_marcacao extends JPanel {
 		panel_1.add(bkagenda);
 
 	}
+	
+
 	
 	public void varreCamposPaciente() {
 		
