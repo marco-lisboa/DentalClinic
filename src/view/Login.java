@@ -50,6 +50,7 @@ public class Login extends JFrame {
 	private Usuario usuario = new Usuario();
 	Menu menu = new Menu();
 	TavisoConfirma avisoconf = new TavisoConfirma();
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -76,7 +77,7 @@ public class Login extends JFrame {
 		setUndecorated(true);
 		setTitle("Dental Clinic");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/tooth.png")));
-		setBounds(100, 100, 839, 461);
+		setBounds(100, 100, 839, 573);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -114,7 +115,7 @@ public class Login extends JFrame {
 		JLabel lblUsuario = new JLabel("Usuario : ");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUsuario.setForeground(Color.WHITE);
-		lblUsuario.setBounds(298, 301, 63, 14);
+		lblUsuario.setBounds(296, 371, 63, 14);
 		contentPane.add(lblUsuario);
 
 		tLogin = new JTextField();
@@ -126,14 +127,14 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		tLogin.setBounds(354, 298, 182, 20);
+		tLogin.setBounds(352, 368, 182, 20);
 		contentPane.add(tLogin);
 		tLogin.setColumns(10);
 
 		JLabel lblSenha = new JLabel("Senha : ");
 		lblSenha.setForeground(Color.WHITE);
 		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSenha.setBounds(298, 331, 63, 14);
+		lblSenha.setBounds(296, 401, 63, 14);
 		contentPane.add(lblSenha);
 
 		tSenha = new JPasswordField();
@@ -149,23 +150,8 @@ public class Login extends JFrame {
 			}
 		});
 		tSenha.setColumns(10);
-		tSenha.setBounds(354, 328, 182, 20);
+		tSenha.setBounds(352, 398, 182, 20);
 		contentPane.add(tSenha);
-
-		btConfig = new JLabel("");
-		btConfig.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btConfig.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(btConfig.getX()>298) {				
-					new Mover().start();					
-
-				}else {
-					
-					new Mover2().start();
-				}
-			}
-		});
 		
 				JButton btnNewButton = new JButton("Acessar");
 				btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -180,29 +166,32 @@ public class Login extends JFrame {
 				btnNewButton.setForeground(Color.WHITE);
 				btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 				btnNewButton.setBackground(new Color(32, 178, 170));
-				btnNewButton.setBounds(354, 358, 182, 23);
+				btnNewButton.setBounds(352, 428, 182, 23);
 				contentPane.add(btnNewButton);
-		btConfig.setToolTipText("Configura\u00E7\u00E3o de Acesso ao Servidor");
-		btConfig.setHorizontalAlignment(SwingConstants.CENTER);
-		btConfig.setIcon(new ImageIcon(Login.class.getResource("/img/cogwheel.png")));
-		btConfig.setBounds(427, 407, 32, 32);
-		contentPane.add(btConfig);
+		
+		panel = new JPanel();
+		panel.setOpaque(false);
+		panel.setBounds(784, 496, 262, 77);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		lblEdenreoServidor = new JLabel("Endere\u00E7o Servidor :");
+		lblEdenreoServidor.setBounds(70, 11, 182, 14);
+		panel.add(lblEdenreoServidor);
 		lblEdenreoServidor.setVisible(false);
 		lblEdenreoServidor.setForeground(Color.WHITE);
 		lblEdenreoServidor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEdenreoServidor.setBounds(354, 392, 182, 14);
-		contentPane.add(lblEdenreoServidor);
 		
 		ipserve = new JTextField();
+		ipserve.setBounds(70, 26, 182, 20);
+		panel.add(ipserve);
 		ipserve.setHorizontalAlignment(SwingConstants.LEFT);
 		ipserve.setVisible(false);
 		ipserve.setColumns(10);
-		ipserve.setBounds(354, 407, 182, 20);
-		contentPane.add(ipserve);
 		
 		btnConfirma = new JButton("Confirma");
+		btnConfirma.setBounds(70, 49, 182, 20);
+		panel.add(btnConfirma);
 		btnConfirma.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -221,54 +210,68 @@ public class Login extends JFrame {
 		btnConfirma.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnConfirma.setFocusable(false);
 		btnConfirma.setBackground(new Color(32, 178, 170));
-		btnConfirma.setBounds(354, 430, 182, 20);
-		contentPane.add(btnConfirma);
+		
+				btConfig = new JLabel("");
+				btConfig.setBounds(10, 26, 32, 32);
+				panel.add(btConfig);
+				btConfig.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btConfig.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if(panel.getX()>552) {				
+							new Mover().start();					
+
+						}else {
+							
+							new Mover2().start();
+						}
+					}
+				});
+				btConfig.setToolTipText("Configura\u00E7\u00E3o de Acesso ao Servidor");
+				btConfig.setHorizontalAlignment(SwingConstants.CENTER);
+				btConfig.setIcon(new ImageIcon(Login.class.getResource("/img/cogwheel.png")));
 
 
 
 
 		JLabel backgraund = new JLabel("\r\n");
 		backgraund.setIcon(new ImageIcon(Login.class.getResource("/img/bk.jpeg")));
-		backgraund.setBounds(0, 0, 841, 461);
+		backgraund.setBounds(0, 0, 841, 573);
 		contentPane.add(backgraund);
 	}
 	public class Mover extends Thread {
 		public void run() {
-			while(btConfig.getX()>298) {
+		
+			while(panel.getX()>552) {
 				try {
 					sleep(20);
 				} catch (InterruptedException e) {
-
-					e.printStackTrace();
-				}
-				if(btConfig.getX()>298) {
-					btConfig.setBounds(btConfig.getX()-20, 407, 32, 32);
 					
 				}
-				
+				if(panel.getX()>552) {
+					panel.setBounds(panel.getX()-10,496,262,77);
+				}
 				
 					lblEdenreoServidor.setVisible(true);
 					ipserve.setVisible(true);
 					btnConfirma.setVisible(true);
-				
-				
-
 			}
 		}
 	}
 
 	public class Mover2 extends Thread{
 		public void run() {
-			while(btConfig.getX()<427) {
-				try {
-					sleep(20);
-				} catch (InterruptedException e) {
+				
+				while(panel.getX()<784) {
+					try {
+						sleep(20);
+					} catch (InterruptedException e) {
 
-					e.printStackTrace();
-				}
-				if(btConfig.getX()<427) {
-					btConfig.setBounds(btConfig.getX()+10, 407, 32, 32);
-
+						e.printStackTrace();
+					}
+					if(panel.getX()<784) {
+						panel.setBounds(panel.getX()+10,496,262,77);
+					}
 				}
 				
 				lblEdenreoServidor.setVisible(false);
@@ -276,7 +279,7 @@ public class Login extends JFrame {
 				btnConfirma.setVisible(false);
 
 			}
-		}
+	
 	}
 
 	public void logar() {

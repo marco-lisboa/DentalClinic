@@ -67,7 +67,7 @@ public class Menu extends JFrame {
 		setUndecorated(true);
 		setTitle("Dental Clinic");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("/img/tooth.png")));
-		setBounds(100, 100, 839, 461);
+		setBounds(100, 100, 839, 573);
 		contentPane = new JPanel();
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
@@ -133,31 +133,31 @@ public class Menu extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		
-		tlivro.setBounds(243, 26, 586, 435);
+		tlivro.setBounds(243, 53, 586, 435);
 		contentPane.add(tlivro);
 		tlivro.setVisible(false);
 		
-		tficha.setBounds(243, 26, 586, 435);
+		tficha.setBounds(243, 53, 586, 435);
 		contentPane.add(tficha);
 		tficha.setVisible(false);
 		
-		tagenda.setBounds(243, 26, 586, 435);
+		tagenda.setBounds(243, 53, 586, 435);
 		contentPane.add(tagenda);
 		tagenda.setVisible(false);
 		
-		tfinanceiro.setBounds(243, 26, 586, 435);
+		tfinanceiro.setBounds(243, 53, 586, 435);
 		contentPane.add(tfinanceiro);
 		tfinanceiro.setVisible(false);
 		
-		tcalcular.setBounds(243, 26, 586, 435);
+		tcalcular.setBounds(243, 53, 586, 435);
 		contentPane.add(tcalcular);
 		tcalcular.setVisible(false);
 		
-		tcaixa.setBounds(243, 26, 586, 435);
+		tcaixa.setBounds(243, 53, 586, 435);
 		contentPane.add(tcaixa);
 		tcaixa.setVisible(false);
 		
-		tconfig.setBounds(243, 26, 586, 435);
+		tconfig.setBounds(243, 53, 586, 435);
 		contentPane.add(tconfig);
 		tconfig.setVisible(false);
 		
@@ -373,7 +373,7 @@ public class Menu extends JFrame {
 		
 		JLabel backgraund = new JLabel("\r\n");
 		backgraund.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		backgraund.setBounds(0, 0, 841, 461);
+		backgraund.setBounds(0, 0, 841, 573);
 		contentPane.add(backgraund);
 	}
 	
