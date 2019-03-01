@@ -5,6 +5,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 
+import control.Agenda;
 import control.Iniciador;
 import control.Paciente;
 import control.Usuario;
@@ -47,6 +48,7 @@ public class Tagenda_marcacao extends JPanel {
 	Usuario usuario  = new Usuario();
 	Iniciador iniciar = new Iniciador();
 	DaoConnect dao = new DaoConnect();
+	Agenda agenda = new Agenda();
 	private JComboBox textField_1;
 	private JTable table;
 	private int totalregistro;
@@ -369,6 +371,7 @@ public class Tagenda_marcacao extends JPanel {
 					SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //DEFINE FORMATO DE DATA  
 				    String date = formato.format(data.getDate());
 					dt.setText("Data : "+date);
+					agenda.setData(date);
 				}
 				
 				
@@ -387,6 +390,7 @@ public class Tagenda_marcacao extends JPanel {
 		procedimento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					pro.setText("Procedimento : "+procedimento.getSelectedItem());
+					
 			}
 		});
 		procedimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
