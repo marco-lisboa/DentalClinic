@@ -741,11 +741,6 @@ import control.*;
 						erro(e.getMessage());
 					}
 			
-			
-			
-			
-			
-			
 				}
 				//Fim
 				/*--------------------------------------------------
@@ -1197,8 +1192,65 @@ import control.*;
 				 * 							Função Agenda                                  *
 				 *                                                                         *
 				 ***************************************************************************/
+				
+				public void listConsultas(JTable tabela,Paciente paciente,Agenda agenda , int i) {
+					formatData.Formatar(agenda.getData(), 1);
+					try {
+						String sql;
+							
+						if(i==1) {
+							sql = "SELECT a.idagenda, p.nome,p.contato1, a.procedimento FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}else if(i==2){
+							sql = "SELECT a.idagenda, p.nome,p.contato1, a.procedimento FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and  a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}else if (i==3){
+							sql = "SELECT a.idagenda, p.nome,p.contato1, a.procedimento FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}else {
+							sql = "SELECT a.idagenda, p.nome,p.contato1, a.procedimento FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}
+						
+						
+						stmt = con.prepareStatement(sql);
+						ResultSet res = stmt.executeQuery();
+						DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+						modelo.setNumRows(0);
+						while(res.next()) {
+							modelo.addRow(new Object[]{
+									res.getInt("a.idagenda"),
+									res.getString("p.nome"),
+									res.getString("p.contato1"),
+									res.getString("a.procedimento")
+							});
+			
+						}
+						
+						
+			
+					}catch(Exception e){
+						erro(e.getMessage());
+				}
+					
+					try {
+						String sqlconta;
+						if(i==1) {
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and p.idpaciente = a.idpaciente";
+						}else if(i==2){
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and  a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}else if (i==3){
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}else {
+							sqlconta = "SELECTCOUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+						}
+						stmt = con.prepareStatement(sqlconta);
+						ResultSet res = stmt.executeQuery();
+						while (res.next()) {
+							agenda.setRegistroAgenda(res.getInt("nresgistroC"));
+						}
+					}catch(Exception e){
+						erro(e.getMessage());
+					}
+				}
 				/*--------------------------------------------------
-				 * Inseri Agendamento Paciente - Comentario Maynore Soft
+				 * Inserir Agendamento Paciente - Comentario Maynore Soft
 				 * ------------------------------------------------ */
 				//Inicio
 				public void inserirAgendamento(Agenda agenda) {
@@ -1207,20 +1259,22 @@ import control.*;
 					String sql = "INSERT INTO agenda("
 							+ "idpaciente,"
 							+ "procedimento,"
+							+ "idprocedimento,"
 							+ "data,"
 							+ "situacao"
-							+ ")VALUES(?,?,?,?);";
+							+ ")VALUES(?,?,?,?,?);";
 					
 					try {
 						
 						stmt =  con.prepareStatement(sql);
 						stmt.setInt(1, agenda.getIdPaciente());
 						stmt.setString(2,agenda.getProcedimento());
-						stmt.setString(3,  formatData.getDatafinal());
-						stmt.setInt(4,agenda.getSituacao());
+						stmt.setInt(3, agenda.getVlProcedimento());
+						stmt.setString(4,  formatData.getDatafinal());
+						stmt.setInt(5,agenda.getSituacao());
 						stmt.execute();
 						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
-						aviso.texto.setText("AGENDAMENTO REALIZADO COM SUCESSO.");
+						aviso.texto.setText("CONSULTA AGENDADA COM SUCESSO.");
 						aviso.setLocationRelativeTo(null);
 						aviso.show();
 					} catch (SQLException e) {
@@ -1252,9 +1306,8 @@ import control.*;
 						stmt.setInt(4,agenda.getIdAgenda());
 						stmt.setInt(5, agenda.getIdPaciente());
 						stmt.execute();
-						
 						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
-						aviso.texto.setText("AGENDAMENTO ATUALIZADO COM SUCESSO.");
+						aviso.texto.setText("CONSULTA ATUALIZADO COM SUCESSO.");
 						aviso.setLocationRelativeTo(null);
 						aviso.show();
 					} catch (SQLException e) {
@@ -1269,9 +1322,25 @@ import control.*;
 				public void alteraSituacaoAgenda(Agenda agenda, int i) {
 					String sql;
 					if(i==1) {
-						
+						 sql = "UPDATE agenda SET situacao=1 "
+								+ "WHERE idagenda=?";
 					}else {
+						sql = "UPDATE agenda SET situacao=0 "
+								+ "WHERE idagenda=?";
+					}
+					
+					try {
 						
+						stmt =  con.prepareStatement(sql);
+						stmt.setInt(1,agenda.getIdAgenda());
+						stmt.execute();
+						System.out.println(stmt);
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("CONSULTA ATUALIZADA COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
+					} catch (SQLException e) {
+						erro(e.getMessage());
 					}
 				} ;
 				//Fim
@@ -1280,12 +1349,16 @@ import control.*;
 				 * ------------------------------------------------ */
 				//Inicio
 				public void excluiAgendamento(Agenda agenda) {
-					String sql = "DELETE FROM agenda WHERE idagendamento =?;";
+					String sql = "DELETE FROM agenda WHERE idagenda =?;";
 					
 					try {
 						stmt =  con.prepareStatement(sql);
 						stmt.setInt(1,agenda.getIdAgenda());
 						stmt.execute();
+						aviso.texto.setIcon(new ImageIcon(Taviso.class.getResource("/img/confimado.png")));
+						aviso.texto.setText("CONSULTA DELETADA COM SUCESSO.");
+						aviso.setLocationRelativeTo(null);
+						aviso.show();
 					} catch (SQLException e) {
 						erro(e.getMessage());
 					}
@@ -1297,19 +1370,20 @@ import control.*;
 				 * Dados Agendamento Paciente - Comentario Maynore Soft
 				 * ------------------------------------------------ */
 				//Inicio
-				public void dadosAgendamento(Agenda agenda) {
-					formatData.Formatar(agenda.getData(), 0);
-					String sql = "SELECT * FROM agenda where idagenda ='"+ agenda.getIdAgenda()+ "';";
+				public void dadosAgendamento(Paciente paciente,Agenda agenda) {
+					String sql = "SELECT p.nome,a.idpaciente,a.procedimento,a.idprocedimento,a.data,a.situacao FROM paciente p, agenda a WHERE a.idagenda='"+agenda.getIdAgenda()+"' and p.idpaciente = a.idpaciente ORDER BY a.idagenda;"; 
 					
 					try {
 						stmt =  con.prepareStatement(sql);
 						ResultSet res = stmt.executeQuery();
 						while (res.next()) {
-							agenda.setIdPaciente(res.getInt("idpaciente"));
-							agenda.setProcedimento(res.getString("procedimento"));
-							formatData.Formatar(res.getString("data"), 0);
+							paciente.setNomepaciente(res.getString("p.nome"));
+							agenda.setIdPaciente(res.getInt("a.idpaciente"));
+							agenda.setProcedimento(res.getString("a.procedimento"));
+							agenda.setVlProcedimento(res.getInt("a.idprocedimento"));
+							formatData.Formatar(res.getString("a.data"), 0);
 							agenda.setData(formatData.getDatafinal());
-							agenda.setSituacao(res.getInt("situacao"));
+							agenda.setSituacao(res.getInt("a.situacao"));
 							
 						};
 					} catch (SQLException e) {
@@ -1322,7 +1396,6 @@ import control.*;
 				 * Listagem Agendamento Paciente - Comentario Maynore Soft
 				 * ------------------------------------------------ */
 				//Inicio
-				public void ListAgendamento()throws SQLException{} ;
 				//Fim
 				
 				

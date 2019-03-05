@@ -1017,6 +1017,7 @@ public class Tconfigurar extends JPanel {
 	
 	public void prencheCampos() {
 		leitura();
+		dao.dadosUsuario(usuario);
 		tx_nome.setText(usuario.getNomeUsuario());
 		tx_login.setText(usuario.getLoginUsuario());
 		tx_senha.setText(usuario.getSenhaUsuario());

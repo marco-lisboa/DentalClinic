@@ -1,7 +1,13 @@
 package control;
 
 public class Agenda {
-	int idAgenda, idPaciente,vlProcedimento,situacao;
+	int idAgenda, idPaciente,vlProcedimento,situacao,registroAgenda;
+	public int getRegistroAgenda() {
+		return registroAgenda;
+	}
+	public void setRegistroAgenda(int registroAgenda) {
+		this.registroAgenda = registroAgenda;
+	}
 	public int getVlProcedimento() {
 		return vlProcedimento;
 	}

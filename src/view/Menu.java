@@ -240,6 +240,7 @@ public class Menu extends JFrame {
 				tcaixa.setVisible(false);
 				tconfig.setVisible(false);
 				tagenda.setVisible(true);
+				tagenda.dataDia();
 			}
 		});
 		btAgendaMarcacao.setToolTipText("Agenda de Marca\u00E7\u00E3o");

@@ -31,7 +31,7 @@ public class FormataData {
 			ano=dt[0];
 			mes=dt[1];
 			dia = dt[2];
-			setDatafinal(dia+mes+ano);
+			setDatafinal(dia+"/"+mes+"/"+ano);
 			}else {
 				setDatafinal("");
 			}
