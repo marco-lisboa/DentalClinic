@@ -798,6 +798,7 @@ public class Tagenda_marcacao extends JPanel {
 		}
 		
 	}
+	
 	public void buscarPaciente() {
 		paciente.setNomepaciente(txnomepaciente.getText());
 			paciente.setSit(1);

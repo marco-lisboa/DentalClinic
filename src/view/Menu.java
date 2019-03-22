@@ -197,6 +197,7 @@ public class Menu extends JFrame {
 				tcaixa.setVisible(false);
 				tconfig.setVisible(false);
 				tlivro.setVisible(true);
+				tlivro.dataDia();
 				
 			}
 		});

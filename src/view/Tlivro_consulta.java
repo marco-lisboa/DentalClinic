@@ -4,6 +4,14 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
+
+import control.Agenda;
+import control.Iniciador;
+import control.Paciente;
+import control.Usuario;
+import dao.DaoConnect;
+import viewTavisos.Taviso;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
@@ -14,8 +22,13 @@ import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
+
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.SystemColor;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
@@ -23,12 +36,90 @@ import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.beans.PropertyChangeEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tlivro_consulta extends JPanel {
-	private JTable table;
+	
+
+	Paciente paciente = new Paciente();
+	Usuario usuario  = new Usuario();
+	Iniciador iniciar = new Iniciador();
+	DaoConnect dao = new DaoConnect();
+	Agenda agenda = new Agenda();
+	Taviso aviso = new Taviso();
+	private JTable tableAgendas;
+	String[] coluna  = {"Matricula", "Nome", "Função"};
+	String [][] linhas = {};
+	private DefaultTableModel tabela = new DefaultTableModel(linhas, coluna){
+		public boolean isCellEditable(int linhas, int coluna) {
+			
+			if(coluna==1){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+	};
 	private JTextField textField;
 	private JComboBox textField_1;
+	private JScrollPane scrollPane;
+	private JLabel btImprimir;
+	private JComboBox procedimentoPaciente;
+	private JDateChooser dtConsulta;
+	private JTextField txnomepaciente;
+	private JLabel rg;
 
+	 private JTable getTabela(){
+	    	if(tableAgendas==null){
+	    		tableAgendas = new JTable(tabela);
+	    		tableAgendas.addMouseListener(new MouseAdapter() {
+	    			public void mouseReased(MouseEvent e){
+	    				
+	    				int i = tableAgendas.getSelectedRow();
+	    				Object x = tableAgendas.getValueAt(i, 1);
+	    				String codigo = x+"";
+	    			}
+
+	    		});
+	    	}
+	    	return tableAgendas;
+
+	    }
+	 private JScrollPane getScroll1(){
+			if (scrollPane==null){
+				scrollPane= new JScrollPane();
+				scrollPane.setBackground(SystemColor.text);
+				scrollPane.setViewportView(getTabela());
+				scrollPane.setBounds(56,166,225,256);
+				defineRenderers();
+			}
+			
+			return scrollPane;
+			
+		}
+	 
+	 private void defineRenderers() {
+
+			tableAgendas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			JTableHeader header = tableAgendas.getTableHeader();
+			header.setPreferredSize(new Dimension(2000, 25));
+			TableColumnModel modColuna = tableAgendas.getColumnModel();
+
+			modColuna.getColumn(0).setPreferredWidth(50);
+			modColuna.getColumn(1).setPreferredWidth(150);
+			modColuna.getColumn(2).setPreferredWidth(150);
+
+
+		}
+		
 	/**
 	 * Create the panel.
 	 */
@@ -61,16 +152,39 @@ public class Tlivro_consulta extends JPanel {
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
 		
+		JLabel label_3 = new JLabel("Paciente :");
+		label_3.setForeground(Color.WHITE);
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_3.setBounds(10, 25, 68, 14);
+		panel.add(label_3);
+		
+		txnomepaciente = new JTextField();
+		txnomepaciente.setColumns(10);
+		txnomepaciente.setBounds(67, 19, 170, 20);
+		panel.add(txnomepaciente);
+		
 		JLabel lblData = new JLabel("Data :");
 		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblData.setForeground(Color.WHITE);
-		lblData.setBounds(10, 11, 46, 14);
+		lblData.setBounds(10, 50, 46, 14);
 		panel.add(lblData);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		dateChooser.setBounds(45, 11, 104, 20);
-		panel.add(dateChooser);
+		dtConsulta = new JDateChooser();
+		dtConsulta.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent arg0) {
+				
+				if(dtConsulta.getDate()==null) {
+
+				}else {
+					SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //DEFINE FORMATO DE DATA  
+				    String date = formato.format(dtConsulta.getDate());
+					agenda.setData(date);
+				}
+			}
+		});
+		dtConsulta.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		dtConsulta.setBounds(47, 50, 156, 20);
+		panel.add(dtConsulta);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setToolTipText("Buscar");
@@ -79,7 +193,7 @@ public class Tlivro_consulta extends JPanel {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
-		lblNewLabel.setBounds(159, 2, 38, 32);
+		lblNewLabel.setBounds(487, 2, 38, 32);
 		panel.add(lblNewLabel);
 		
 		JLabel voltar1 = new JLabel("");
@@ -97,43 +211,55 @@ public class Tlivro_consulta extends JPanel {
 		voltar1.setBounds(535, 2, 25, 32);
 		panel.add(voltar1);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 36, 550, 302);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 81, 550, 267);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.setGridColor(new Color(32, 178, 170));
-		table.setForeground(new Color(255, 255, 255));
-		table.setBackground(new Color(32, 178, 170));
-		table.setModel(new DefaultTableModel(
+		tableAgendas = new JTable();
+		tableAgendas.setGridColor(new Color(32, 178, 170));
+		tableAgendas.setForeground(new Color(255, 255, 255));
+		tableAgendas.setBackground(new Color(32, 178, 170));
+		tableAgendas.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
 			},
 			new String[] {
-				"NOME", "PROCEDIMENTO", "PLANO"
+					"Codigo Agendamento","Nome", "Telefone", "Procedimento"
 			}
 		));
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(tableAgendas);
 		
-		JLabel label_2 = new JLabel("null registros encontrados");
-		label_2.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/confimado.png")));
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_2.setBounds(10, 359, 208, 14);
-		panel.add(label_2);
+		rg = new JLabel("null registros encontrados");
+		rg.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/confimado.png")));
+		rg.setForeground(Color.WHITE);
+		rg.setFont(new Font("Tahoma", Font.BOLD, 11));
+		rg.setBounds(10, 359, 208, 14);
+		panel.add(rg);
 		
 		JLabel lblProcedimento_1 = new JLabel("Procedimento :");
 		lblProcedimento_1.setForeground(Color.WHITE);
 		lblProcedimento_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblProcedimento_1.setBounds(276, 11, 109, 14);
+		lblProcedimento_1.setBounds(262, 17, 109, 14);
 		panel.add(lblProcedimento_1);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Clinico", "Estetico"}));
-		comboBox_1.setBounds(371, 8, 120, 20);
-		panel.add(comboBox_1);
+		procedimentoPaciente = new JComboBox();
+		procedimentoPaciente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				agenda.setVlProcedimento(procedimentoPaciente.getSelectedIndex());
+			}
+		});
+		procedimentoPaciente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		procedimentoPaciente.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		procedimentoPaciente.setModel(new DefaultComboBoxModel(new String[] {"Ambos", "Clinico", "Estetico", "Todos"}));
+		procedimentoPaciente.setBounds(357, 14, 120, 20);
+		panel.add(procedimentoPaciente);
+		
+		btImprimir = new JLabel("");
+		btImprimir.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/imprimir.png")));
+		btImprimir.setToolTipText("Imprimir");
+		btImprimir.setHorizontalAlignment(SwingConstants.CENTER);
+		btImprimir.setBounds(514, 359, 46, 24);
+		panel.add(btImprimir);
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
@@ -478,5 +604,47 @@ public class Tlivro_consulta extends JPanel {
 		bk02.setBounds(0, 0, 570, 409);
 		panel_1.add(bk02);
 
+	}
+	
+	public void varreCampos() {
+		paciente.setNomepaciente(txnomepaciente.getText());
+		agenda.setSituacao(1);
+		agenda.setVlProcedimento(procedimentoPaciente.getSelectedIndex());
+		
+	}
+	
+
+	public void buscarAgendamentos() {
+		varreCampos();
+		leitura();
+	
+		dao.listConsultas(tableAgendas, paciente, agenda,4);
+		
+	
+		if(agenda.getRegistroAgenda()<=1) {
+			rg.setText(agenda.getRegistroAgenda()+" registro encontrado");
+		}else {
+			rg.setText(agenda.getRegistroAgenda()+" registros encontrados");
+		}
+		
+	}
+	
+	public void leitura() {
+		try {
+			iniciar.LeituraIp();
+			iniciar.leituraUsuarioLogado();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		dao.conectar(iniciar.getIp_server());
+		usuario.setUsuarioLogado(iniciar.getUsuarioLogado());
+	}
+	public void dataDia() {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //DEFINE FORMATO DE DATA  
+		Date date = new Date();
+	    dtConsulta.setDate(date);
+	    procedimentoPaciente.setSelectedIndex(3);
+	    buscarAgendamentos();
 	}
 }
