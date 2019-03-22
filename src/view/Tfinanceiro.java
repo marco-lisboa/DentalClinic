@@ -79,6 +79,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblNewLabel);
 		
 		JButton lblNewLabel_2 = new JButton("Recebimento");
+		lblNewLabel_2.setFocusable(false);
 		lblNewLabel_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblNewLabel_2.setBackground(new Color(32, 178, 170));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -88,6 +89,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblNewLabel_2);
 		
 		JButton lblGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
+		lblGeraoDeParcelamento.setFocusable(false);
 		lblGeraoDeParcelamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGeraoDeParcelamento.setBackground(new Color(32, 178, 170));
 		lblGeraoDeParcelamento.setHorizontalAlignment(SwingConstants.CENTER);
@@ -97,6 +99,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblGeraoDeParcelamento);
 		
 		JButton lblGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
+		lblGerenciadorFinanceiro.setFocusable(false);
 		lblGerenciadorFinanceiro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblGerenciadorFinanceiro.setBackground(new Color(32, 178, 170));
 		lblGerenciadorFinanceiro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -106,6 +109,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblGerenciadorFinanceiro);
 		
 		JButton lblRecebimentoAvuso = new JButton("Recebimento Avuso");
+		lblRecebimentoAvuso.setFocusable(false);
 		lblRecebimentoAvuso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRecebimentoAvuso.setBackground(new Color(32, 178, 170));
 		lblRecebimentoAvuso.setHorizontalAlignment(SwingConstants.CENTER);
@@ -115,6 +119,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblRecebimentoAvuso);
 		
 		JButton lblBancosEContas = new JButton("Bancos e Contas");
+		lblBancosEContas.setFocusable(false);
 		lblBancosEContas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblBancosEContas.setBackground(new Color(32, 178, 170));
 		lblBancosEContas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -124,6 +129,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblBancosEContas);
 		
 		JButton btnServios = new JButton("Servi\u00E7os e Ofertas");
+		btnServios.setFocusable(false);
 		btnServios.setHorizontalAlignment(SwingConstants.CENTER);
 		btnServios.setForeground(Color.WHITE);
 		btnServios.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -139,6 +145,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblDespesas);
 		
 		JButton lblContasAPagar = new JButton("Contas a Pagar");
+		lblContasAPagar.setFocusable(false);
 		lblContasAPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblContasAPagar.setBackground(new Color(32, 178, 170));
 		lblContasAPagar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -148,6 +155,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblContasAPagar);
 		
 		JButton lblFolhaDePagamento = new JButton("Folha de Pagamento");
+		lblFolhaDePagamento.setFocusable(false);
 		lblFolhaDePagamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblFolhaDePagamento.setBackground(new Color(32, 178, 170));
 		lblFolhaDePagamento.setHorizontalAlignment(SwingConstants.CENTER);
@@ -157,6 +165,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblFolhaDePagamento);
 		
 		JButton lblCadastroDeFornecedores = new JButton("Cadastro de fornecedores");
+		lblCadastroDeFornecedores.setFocusable(false);
 		lblCadastroDeFornecedores.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCadastroDeFornecedores.setBackground(new Color(32, 178, 170));
 		lblCadastroDeFornecedores.setHorizontalAlignment(SwingConstants.CENTER);
@@ -166,6 +175,7 @@ public class Tfinanceiro extends JPanel {
 		panel.add(lblCadastroDeFornecedores);
 		
 		JButton lblRelatorios = new JButton("Relatorios");
+		lblRelatorios.setFocusable(false);
 		lblRelatorios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblRelatorios.setBackground(new Color(32, 178, 170));
 		lblRelatorios.setHorizontalAlignment(SwingConstants.CENTER);
