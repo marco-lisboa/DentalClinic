@@ -220,6 +220,7 @@ public class Menu extends JFrame {
 				tcaixa.setVisible(false);
 				tconfig.setVisible(false);
 				tficha.setVisible(true);
+				tficha.buscar();
 				
 			}
 		});
