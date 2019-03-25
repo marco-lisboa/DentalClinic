@@ -29,6 +29,8 @@ import java.awt.Frame;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Menu extends JFrame {
 	private JPanel contentPane;
@@ -41,8 +43,10 @@ public class Menu extends JFrame {
 	private Tcalculadora tcalcular = new Tcalculadora();
 	private Tlivrocaixa tcaixa = new Tlivrocaixa();
 	private Tconfigurar tconfig = new Tconfigurar();
+	private Trecebimento trebimento = new Trecebimento();
 	public JLabel nomeUsuario;
 	private JPanel tfinanceiro;
+	private JTabbedPane tabbedPaneFinanceiro;
 
 	/**
 	 * Launch the application.
@@ -133,116 +137,6 @@ public class Menu extends JFrame {
 		lblNewLabel.setBounds(744, 0, 46, 47);
 		contentPane.add(lblNewLabel);
 		
-		tfinanceiro = new JPanel();
-		tfinanceiro.setVisible(false);
-		tfinanceiro.setOpaque(false);
-		tfinanceiro.setBounds(244, 53, 291, 425);
-		contentPane.add(tfinanceiro);
-		tfinanceiro.setLayout(null);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 291, 425);
-		tfinanceiro.add(tabbedPane);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setFocusTraversalKeysEnabled(false);
-		tabbedPane.addTab("Receitas", new ImageIcon(Menu.class.getResource("/img/gambler pequeno.png")), panel_1, null);
-		tabbedPane.setForegroundAt(0, Color.WHITE);
-		panel_1.setLayout(null);
-		
-		JButton btnRecebimento = new JButton("Recebimento");
-		btnRecebimento.setBackground(new Color(32, 178, 170));
-		btnRecebimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRecebimento.setFocusable(false);
-		btnRecebimento.setForeground(Color.WHITE);
-		btnRecebimento.setBounds(10, 11, 266, 23);
-		panel_1.add(btnRecebimento);
-		
-		JButton btnRecebimentoAvuso = new JButton("Recebimento Avuso");
-		btnRecebimentoAvuso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRecebimentoAvuso.setBackground(new Color(32, 178, 170));
-		btnRecebimentoAvuso.setForeground(Color.WHITE);
-		btnRecebimentoAvuso.setFocusable(false);
-		btnRecebimentoAvuso.setBounds(10, 45, 266, 23);
-		panel_1.add(btnRecebimentoAvuso);
-		
-		JButton btnGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
-		btnGeraoDeParcelamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnGeraoDeParcelamento.setBackground(new Color(32, 178, 170));
-		btnGeraoDeParcelamento.setForeground(Color.WHITE);
-		btnGeraoDeParcelamento.setFocusable(false);
-		btnGeraoDeParcelamento.setBounds(10, 79, 266, 23);
-		panel_1.add(btnGeraoDeParcelamento);
-		
-		JButton btnGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
-		btnGerenciadorFinanceiro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnGerenciadorFinanceiro.setBackground(new Color(32, 178, 170));
-		btnGerenciadorFinanceiro.setForeground(Color.WHITE);
-		btnGerenciadorFinanceiro.setFocusable(false);
-		btnGerenciadorFinanceiro.setBounds(10, 113, 266, 23);
-		panel_1.add(btnGerenciadorFinanceiro);
-		
-		JButton btnBancos = new JButton("Bancos");
-		btnBancos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnBancos.setBackground(new Color(32, 178, 170));
-		btnBancos.setForeground(Color.WHITE);
-		btnBancos.setFocusable(false);
-		btnBancos.setBounds(10, 145, 266, 23);
-		panel_1.add(btnBancos);
-		
-		JButton btnServioesEOrfertas = new JButton("Servi\u00E7os e Orfertas");
-		btnServioesEOrfertas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnServioesEOrfertas.setBackground(new Color(32, 178, 170));
-		btnServioesEOrfertas.setForeground(Color.WHITE);
-		btnServioesEOrfertas.setFocusable(false);
-		btnServioesEOrfertas.setBounds(10, 179, 266, 23);
-		panel_1.add(btnServioesEOrfertas);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		lblNewLabel_1.setBounds(0, 0, 286, 397);
-		panel_1.add(lblNewLabel_1);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setFocusTraversalKeysEnabled(false);
-		tabbedPane.addTab("Despesas\r\n", new ImageIcon(Menu.class.getResource("/img/saida.png")), panel_2, null);
-		tabbedPane.setForegroundAt(1, Color.WHITE);
-		panel_2.setLayout(null);
-		
-		JButton btnContasAPagar = new JButton("Contas a Pagar");
-		btnContasAPagar.setForeground(Color.WHITE);
-		btnContasAPagar.setFocusable(false);
-		btnContasAPagar.setBackground(new Color(32, 178, 170));
-		btnContasAPagar.setBounds(10, 11, 266, 23);
-		panel_2.add(btnContasAPagar);
-		
-		JButton btnFolhaDePagamento = new JButton("Folha de Pagamento");
-		btnFolhaDePagamento.setForeground(Color.WHITE);
-		btnFolhaDePagamento.setFocusable(false);
-		btnFolhaDePagamento.setBackground(new Color(32, 178, 170));
-		btnFolhaDePagamento.setBounds(10, 45, 266, 23);
-		panel_2.add(btnFolhaDePagamento);
-		
-		JButton btnCadastroDeFornecedores = new JButton("Fornecedores e Funcionarios");
-		btnCadastroDeFornecedores.setForeground(Color.WHITE);
-		btnCadastroDeFornecedores.setFocusable(false);
-		btnCadastroDeFornecedores.setBackground(new Color(32, 178, 170));
-		btnCadastroDeFornecedores.setBounds(10, 79, 266, 23);
-		panel_2.add(btnCadastroDeFornecedores);
-		
-		JButton btnRelatorios = new JButton("Relatorios");
-		btnRelatorios.setForeground(Color.WHITE);
-		btnRelatorios.setFocusable(false);
-		btnRelatorios.setBackground(new Color(32, 178, 170));
-		btnRelatorios.setBounds(10, 113, 266, 23);
-		panel_2.add(btnRelatorios);
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_2.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		lblNewLabel_2.setBounds(0, 0, 286, 397);
-		panel_2.add(lblNewLabel_2);
-		
 		
 		tlivro.setBounds(243, 53, 586, 435);
 		contentPane.add(tlivro);
@@ -267,6 +161,13 @@ public class Menu extends JFrame {
 		tconfig.setBounds(243, 53, 586, 435);
 		contentPane.add(tconfig);
 		tconfig.setVisible(false);
+		
+		trebimento.setBounds(243, 53, 586, 435);
+		contentPane.add(trebimento);
+		trebimento.setVisible(false);
+		
+		tfinanceiro = new JPanel();
+		tfinanceiro.setVisible(false);
 		
 		
 		menu = new JPanel();
@@ -477,6 +378,120 @@ public class Menu extends JFrame {
 		btConfiguracao.setHorizontalAlignment(SwingConstants.CENTER);
 		btConfiguracao.setBounds(136, 408, 43, 58);
 		menu.add(btConfiguracao);
+		tfinanceiro.setOpaque(false);
+		tfinanceiro.setBounds(244, 53, 291, 425);
+		contentPane.add(tfinanceiro);
+		tfinanceiro.setLayout(null);
+		
+		tabbedPaneFinanceiro = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneFinanceiro.setBounds(0, 0, 291, 425);
+		tfinanceiro.add(tabbedPaneFinanceiro);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setFocusTraversalKeysEnabled(false);
+		tabbedPaneFinanceiro.addTab("Receitas", new ImageIcon(Menu.class.getResource("/img/gambler pequeno.png")), panel_1, null);
+		tabbedPaneFinanceiro.setForegroundAt(0, Color.WHITE);
+		panel_1.setLayout(null);
+		
+		JButton btnRecebimento = new JButton("Recebimento");
+		btnRecebimento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				trebimento.setVisible(true);
+				tfinanceiro.setVisible(false);
+				
+			}
+		});
+		btnRecebimento.setBackground(new Color(32, 178, 170));
+		btnRecebimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRecebimento.setFocusable(false);
+		btnRecebimento.setForeground(Color.WHITE);
+		btnRecebimento.setBounds(10, 11, 266, 23);
+		panel_1.add(btnRecebimento);
+		
+		JButton btnRecebimentoAvuso = new JButton("Recebimento Avuso");
+		btnRecebimentoAvuso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRecebimentoAvuso.setBackground(new Color(32, 178, 170));
+		btnRecebimentoAvuso.setForeground(Color.WHITE);
+		btnRecebimentoAvuso.setFocusable(false);
+		btnRecebimentoAvuso.setBounds(10, 45, 266, 23);
+		panel_1.add(btnRecebimentoAvuso);
+		
+		JButton btnGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
+		btnGeraoDeParcelamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGeraoDeParcelamento.setBackground(new Color(32, 178, 170));
+		btnGeraoDeParcelamento.setForeground(Color.WHITE);
+		btnGeraoDeParcelamento.setFocusable(false);
+		btnGeraoDeParcelamento.setBounds(10, 79, 266, 23);
+		panel_1.add(btnGeraoDeParcelamento);
+		
+		JButton btnGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
+		btnGerenciadorFinanceiro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGerenciadorFinanceiro.setBackground(new Color(32, 178, 170));
+		btnGerenciadorFinanceiro.setForeground(Color.WHITE);
+		btnGerenciadorFinanceiro.setFocusable(false);
+		btnGerenciadorFinanceiro.setBounds(10, 113, 266, 23);
+		panel_1.add(btnGerenciadorFinanceiro);
+		
+		JButton btnBancos = new JButton("Bancos");
+		btnBancos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnBancos.setBackground(new Color(32, 178, 170));
+		btnBancos.setForeground(Color.WHITE);
+		btnBancos.setFocusable(false);
+		btnBancos.setBounds(10, 145, 266, 23);
+		panel_1.add(btnBancos);
+		
+		JButton btnServioesEOrfertas = new JButton("Servi\u00E7os e Orfertas");
+		btnServioesEOrfertas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnServioesEOrfertas.setBackground(new Color(32, 178, 170));
+		btnServioesEOrfertas.setForeground(Color.WHITE);
+		btnServioesEOrfertas.setFocusable(false);
+		btnServioesEOrfertas.setBounds(10, 179, 266, 23);
+		panel_1.add(btnServioesEOrfertas);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		lblNewLabel_1.setBounds(0, 0, 286, 397);
+		panel_1.add(lblNewLabel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setFocusTraversalKeysEnabled(false);
+		tabbedPaneFinanceiro.addTab("Despesas\r\n", new ImageIcon(Menu.class.getResource("/img/saida.png")), panel_2, null);
+		tabbedPaneFinanceiro.setForegroundAt(1, Color.WHITE);
+		panel_2.setLayout(null);
+		
+		JButton btnContasAPagar = new JButton("Contas a Pagar");
+		btnContasAPagar.setForeground(Color.WHITE);
+		btnContasAPagar.setFocusable(false);
+		btnContasAPagar.setBackground(new Color(32, 178, 170));
+		btnContasAPagar.setBounds(10, 11, 266, 23);
+		panel_2.add(btnContasAPagar);
+		
+		JButton btnFolhaDePagamento = new JButton("Folha de Pagamento");
+		btnFolhaDePagamento.setForeground(Color.WHITE);
+		btnFolhaDePagamento.setFocusable(false);
+		btnFolhaDePagamento.setBackground(new Color(32, 178, 170));
+		btnFolhaDePagamento.setBounds(10, 45, 266, 23);
+		panel_2.add(btnFolhaDePagamento);
+		
+		JButton btnCadastroDeFornecedores = new JButton("Fornecedores e Funcionarios");
+		btnCadastroDeFornecedores.setForeground(Color.WHITE);
+		btnCadastroDeFornecedores.setFocusable(false);
+		btnCadastroDeFornecedores.setBackground(new Color(32, 178, 170));
+		btnCadastroDeFornecedores.setBounds(10, 79, 266, 23);
+		panel_2.add(btnCadastroDeFornecedores);
+		
+		JButton btnRelatorios = new JButton("Relatorios");
+		btnRelatorios.setForeground(Color.WHITE);
+		btnRelatorios.setFocusable(false);
+		btnRelatorios.setBackground(new Color(32, 178, 170));
+		btnRelatorios.setBounds(10, 113, 266, 23);
+		panel_2.add(btnRelatorios);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_2.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		lblNewLabel_2.setBounds(0, 0, 286, 397);
+		panel_2.add(lblNewLabel_2);
 		
 		
 	
