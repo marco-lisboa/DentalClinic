@@ -1227,27 +1227,30 @@ import control.*;
 			
 					}catch(Exception e){
 						erro(e.getMessage());
-				}
+					}
 					
+					//--------------------------------------------------------------------------------------------------------------------------------------------
 					try {
 						String sqlconta;
 						if(i==1) {
-							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and p.idpaciente = a.idpaciente";
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistro FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and p.idpaciente = a.idpaciente;";
 						}else if(i==2){
-							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and  a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistro FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and  a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda;";
 						}else if (i==3){
-							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistro FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and p.idpaciente = a.idpaciente ORDER BY a.idagenda;";
 						}else {
-							sqlconta = "SELECTCOUNT(a.idagenda) AS nresgistroC FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda";
+							sqlconta = "SELECT COUNT(a.idagenda) AS nresgistro FROM paciente p, agenda a WHERE p.nome like'"+paciente.getNomepaciente()+"%'and data ='"+ formatData.getDatafinal()+"' and a.idprocedimento =  '"+agenda.getVlProcedimento()+"' and a.situacao ='"+agenda.getSituacao()+"'  and p.idpaciente = a.idpaciente ORDER BY a.idagenda;";
 						}
 						stmt = con.prepareStatement(sqlconta);
 						ResultSet res = stmt.executeQuery();
 						while (res.next()) {
-							agenda.setRegistroAgenda(res.getInt("nresgistroC"));
+							agenda.setRegistroAgenda(res.getInt("nresgistro"));
 						}
 					}catch(Exception e){
 						erro(e.getMessage());
 					}
+					
+					
 				}
 				/*--------------------------------------------------
 				 * Inserir Agendamento Paciente - Comentario Maynore Soft

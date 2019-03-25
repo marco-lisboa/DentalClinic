@@ -187,6 +187,12 @@ public class Tlivro_consulta extends JPanel {
 		panel.add(dtConsulta);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				buscarAgendamentos();
+			}
+		});
 		lblNewLabel.setToolTipText("Buscar");
 		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -229,7 +235,7 @@ public class Tlivro_consulta extends JPanel {
 		));
 		scrollPane.setViewportView(tableAgendas);
 		
-		rg = new JLabel("null registros encontrados");
+		rg = new JLabel();
 		rg.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/confimado.png")));
 		rg.setForeground(Color.WHITE);
 		rg.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -617,15 +623,18 @@ public class Tlivro_consulta extends JPanel {
 	public void buscarAgendamentos() {
 		varreCampos();
 		leitura();
-	
-		dao.listConsultas(tableAgendas, paciente, agenda,4);
+		if(procedimentoPaciente.getSelectedIndex()==3) {
+			dao.listConsultas(tableAgendas, paciente, agenda,2);
+		}else {
+			dao.listConsultas(tableAgendas, paciente, agenda,4);
+		}
 		
-	
 		if(agenda.getRegistroAgenda()<=1) {
 			rg.setText(agenda.getRegistroAgenda()+" registro encontrado");
 		}else {
 			rg.setText(agenda.getRegistroAgenda()+" registros encontrados");
 		}
+	
 		
 	}
 	
@@ -640,6 +649,7 @@ public class Tlivro_consulta extends JPanel {
 		dao.conectar(iniciar.getIp_server());
 		usuario.setUsuarioLogado(iniciar.getUsuarioLogado());
 	}
+	
 	public void dataDia() {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //DEFINE FORMATO DE DATA  
 		Date date = new Date();
