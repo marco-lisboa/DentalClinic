@@ -45,7 +45,7 @@ public class Menu extends JFrame {
 	private Tconfigurar tconfig = new Tconfigurar();
 	private Trecebimento trebimento = new Trecebimento();
 	public JLabel nomeUsuario;
-	private JPanel tfinanceiro;
+	public   JPanel tfinanceiro;
 	private JTabbedPane tabbedPaneFinanceiro;
 
 	/**
@@ -264,13 +264,17 @@ public class Menu extends JFrame {
 		btRecebimentoPagamento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				new Mover2().start();
+				menu.setVisible(false);
 				tlivro.setVisible(false);
 				tficha.setVisible(false);
 				tagenda.setVisible(false);
 				tcalcular.setVisible(false);
 				tcaixa.setVisible(false);
 				tconfig.setVisible(false);
+				btMenu.setVisible(false);
 				tfinanceiro.setVisible(true);
+				
 			}
 		});
 		btRecebimentoPagamento.setToolTipText("Recebimento e Pagamento");
@@ -379,12 +383,12 @@ public class Menu extends JFrame {
 		btConfiguracao.setBounds(136, 408, 43, 58);
 		menu.add(btConfiguracao);
 		tfinanceiro.setOpaque(false);
-		tfinanceiro.setBounds(244, 53, 291, 425);
+		tfinanceiro.setBounds(10, 53, 232, 427);
 		contentPane.add(tfinanceiro);
 		tfinanceiro.setLayout(null);
 		
 		tabbedPaneFinanceiro = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneFinanceiro.setBounds(0, 0, 291, 425);
+		tabbedPaneFinanceiro.setBounds(0, 0, 232, 425);
 		tfinanceiro.add(tabbedPaneFinanceiro);
 		
 		JPanel panel_1 = new JPanel();
@@ -397,7 +401,7 @@ public class Menu extends JFrame {
 		btnRecebimento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				trebimento.setVisible(true);
-				tfinanceiro.setVisible(false);
+				
 				
 			}
 		});
@@ -405,7 +409,7 @@ public class Menu extends JFrame {
 		btnRecebimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRecebimento.setFocusable(false);
 		btnRecebimento.setForeground(Color.WHITE);
-		btnRecebimento.setBounds(10, 11, 266, 23);
+		btnRecebimento.setBounds(10, 11, 213, 23);
 		panel_1.add(btnRecebimento);
 		
 		JButton btnRecebimentoAvuso = new JButton("Recebimento Avuso");
@@ -413,7 +417,7 @@ public class Menu extends JFrame {
 		btnRecebimentoAvuso.setBackground(new Color(32, 178, 170));
 		btnRecebimentoAvuso.setForeground(Color.WHITE);
 		btnRecebimentoAvuso.setFocusable(false);
-		btnRecebimentoAvuso.setBounds(10, 45, 266, 23);
+		btnRecebimentoAvuso.setBounds(10, 45, 213, 23);
 		panel_1.add(btnRecebimentoAvuso);
 		
 		JButton btnGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
@@ -421,7 +425,7 @@ public class Menu extends JFrame {
 		btnGeraoDeParcelamento.setBackground(new Color(32, 178, 170));
 		btnGeraoDeParcelamento.setForeground(Color.WHITE);
 		btnGeraoDeParcelamento.setFocusable(false);
-		btnGeraoDeParcelamento.setBounds(10, 79, 266, 23);
+		btnGeraoDeParcelamento.setBounds(10, 79, 213, 23);
 		panel_1.add(btnGeraoDeParcelamento);
 		
 		JButton btnGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
@@ -429,7 +433,7 @@ public class Menu extends JFrame {
 		btnGerenciadorFinanceiro.setBackground(new Color(32, 178, 170));
 		btnGerenciadorFinanceiro.setForeground(Color.WHITE);
 		btnGerenciadorFinanceiro.setFocusable(false);
-		btnGerenciadorFinanceiro.setBounds(10, 113, 266, 23);
+		btnGerenciadorFinanceiro.setBounds(10, 113, 213, 23);
 		panel_1.add(btnGerenciadorFinanceiro);
 		
 		JButton btnBancos = new JButton("Bancos");
@@ -437,7 +441,7 @@ public class Menu extends JFrame {
 		btnBancos.setBackground(new Color(32, 178, 170));
 		btnBancos.setForeground(Color.WHITE);
 		btnBancos.setFocusable(false);
-		btnBancos.setBounds(10, 145, 266, 23);
+		btnBancos.setBounds(10, 145, 213, 23);
 		panel_1.add(btnBancos);
 		
 		JButton btnServioesEOrfertas = new JButton("Servi\u00E7os e Orfertas");
@@ -445,12 +449,26 @@ public class Menu extends JFrame {
 		btnServioesEOrfertas.setBackground(new Color(32, 178, 170));
 		btnServioesEOrfertas.setForeground(Color.WHITE);
 		btnServioesEOrfertas.setFocusable(false);
-		btnServioesEOrfertas.setBounds(10, 179, 266, 23);
+		btnServioesEOrfertas.setBounds(10, 179, 213, 23);
 		panel_1.add(btnServioesEOrfertas);
+		
+		JLabel bt = new JLabel("");
+		bt.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		bt.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+					voltarMenu();
+			}
+		});
+		bt.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
+		bt.setToolTipText("Voltar");
+		bt.setHorizontalAlignment(SwingConstants.CENTER);
+		bt.setBounds(183, 348, 46, 47);
+		panel_1.add(bt);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		lblNewLabel_1.setBounds(0, 0, 286, 397);
+		lblNewLabel_1.setBounds(0, 0, 229, 397);
 		panel_1.add(lblNewLabel_1);
 		
 		JPanel panel_2 = new JPanel();
@@ -460,37 +478,55 @@ public class Menu extends JFrame {
 		panel_2.setLayout(null);
 		
 		JButton btnContasAPagar = new JButton("Contas a Pagar");
+		btnContasAPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnContasAPagar.setForeground(Color.WHITE);
 		btnContasAPagar.setFocusable(false);
 		btnContasAPagar.setBackground(new Color(32, 178, 170));
-		btnContasAPagar.setBounds(10, 11, 266, 23);
+		btnContasAPagar.setBounds(10, 11, 213, 23);
 		panel_2.add(btnContasAPagar);
 		
 		JButton btnFolhaDePagamento = new JButton("Folha de Pagamento");
+		btnFolhaDePagamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFolhaDePagamento.setForeground(Color.WHITE);
 		btnFolhaDePagamento.setFocusable(false);
 		btnFolhaDePagamento.setBackground(new Color(32, 178, 170));
-		btnFolhaDePagamento.setBounds(10, 45, 266, 23);
+		btnFolhaDePagamento.setBounds(10, 45, 213, 23);
 		panel_2.add(btnFolhaDePagamento);
 		
 		JButton btnCadastroDeFornecedores = new JButton("Fornecedores e Funcionarios");
+		btnCadastroDeFornecedores.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCadastroDeFornecedores.setForeground(Color.WHITE);
 		btnCadastroDeFornecedores.setFocusable(false);
 		btnCadastroDeFornecedores.setBackground(new Color(32, 178, 170));
-		btnCadastroDeFornecedores.setBounds(10, 79, 266, 23);
+		btnCadastroDeFornecedores.setBounds(10, 79, 213, 23);
 		panel_2.add(btnCadastroDeFornecedores);
 		
 		JButton btnRelatorios = new JButton("Relatorios");
+		btnRelatorios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRelatorios.setForeground(Color.WHITE);
 		btnRelatorios.setFocusable(false);
 		btnRelatorios.setBackground(new Color(32, 178, 170));
-		btnRelatorios.setBounds(10, 113, 266, 23);
+		btnRelatorios.setBounds(10, 113, 213, 23);
 		panel_2.add(btnRelatorios);
+		
+		JLabel bt2 = new JLabel("");
+		bt2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		bt2.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
+		bt2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				voltarMenu();
+			}
+		});
+		bt2.setToolTipText("Voltar");
+		bt2.setHorizontalAlignment(SwingConstants.CENTER);
+		bt2.setBounds(181, 350, 46, 47);
+		panel_2.add(bt2);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		lblNewLabel_2.setBounds(0, 0, 286, 397);
+		lblNewLabel_2.setBounds(0, 0, 227, 397);
 		panel_2.add(lblNewLabel_2);
 		
 		
@@ -544,7 +580,7 @@ public class Menu extends JFrame {
 					tlivro.setVisible(false);
 					tficha.setVisible(false);
 					tagenda.setVisible(false);
-					tfinanceiro.setVisible(false);
+				
 					tcalcular.setVisible(false);
 					tcaixa.setVisible(false);
 					tconfig.setVisible(false);
@@ -561,7 +597,10 @@ public class Menu extends JFrame {
 		avisoconf.show();
 	}
 	
-	public void fechakrai() {
-		this.dispose();
+	public void voltarMenu() {
+		tfinanceiro.setVisible(false);
+		trebimento.setVisible(false);
+		menu.setVisible(true);
+		new Mover().start();
 	}
 }
