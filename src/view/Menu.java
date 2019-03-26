@@ -44,6 +44,12 @@ public class Menu extends JFrame {
 	private Tlivrocaixa tcaixa = new Tlivrocaixa();
 	private Tconfigurar tconfig = new Tconfigurar();
 	private Trecebimento trebimento = new Trecebimento();
+	private Trecebimento_avulso trebimentoAvulso = new Trecebimento_avulso();
+	private TfinanceiroPaciente tfinanceiroPaciente = new TfinanceiroPaciente();
+	private TgerenciadorFinaceiro tgerenciador = new TgerenciadorFinaceiro();
+	private Tbancos tbancos = new Tbancos();
+	private Tcontas tcontas = new Tcontas();
+	private Tservicos tservico = new Tservicos();
 	public JLabel nomeUsuario;
 	public   JPanel tfinanceiro;
 	private JTabbedPane tabbedPaneFinanceiro;
@@ -165,6 +171,30 @@ public class Menu extends JFrame {
 		trebimento.setBounds(243, 53, 586, 435);
 		contentPane.add(trebimento);
 		trebimento.setVisible(false);
+		
+		trebimentoAvulso.setBounds(243, 53, 586, 435);
+		contentPane.add(trebimentoAvulso);
+		trebimentoAvulso.setVisible(false);
+		
+		tfinanceiroPaciente.setBounds(243, 53, 586, 435);
+		contentPane.add(tfinanceiroPaciente);
+		tfinanceiroPaciente.setVisible(false);
+		
+		tgerenciador.setBounds(243, 53, 586, 435);
+		contentPane.add(tgerenciador);
+		tgerenciador.setVisible(false);
+		
+		tbancos.setBounds(243, 53, 586, 435);
+		contentPane.add(tbancos);
+		tbancos.setVisible(false);
+		
+		tcontas.setBounds(243, 53, 586, 435);
+		contentPane.add(tcontas);
+		tcontas.setVisible(false);
+		
+		tservico.setBounds(243, 53, 586, 435);
+		contentPane.add(tservico);
+		tservico.setVisible(false);
 		
 		tfinanceiro = new JPanel();
 		tfinanceiro.setVisible(false);
@@ -383,12 +413,15 @@ public class Menu extends JFrame {
 		btConfiguracao.setBounds(136, 408, 43, 58);
 		menu.add(btConfiguracao);
 		tfinanceiro.setOpaque(false);
-		tfinanceiro.setBounds(10, 53, 232, 427);
+		tfinanceiro.setBounds(10, 53, 232, 435);
 		contentPane.add(tfinanceiro);
 		tfinanceiro.setLayout(null);
 		
 		tabbedPaneFinanceiro = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneFinanceiro.setBounds(0, 0, 232, 425);
+		tabbedPaneFinanceiro.setBackground(new Color(32, 178, 170));
+		tabbedPaneFinanceiro.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tabbedPaneFinanceiro.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneFinanceiro.setBounds(0, 0, 232, 428);
 		tfinanceiro.add(tabbedPaneFinanceiro);
 		
 		JPanel panel_1 = new JPanel();
@@ -400,9 +433,13 @@ public class Menu extends JFrame {
 		JButton btnRecebimento = new JButton("Recebimento");
 		btnRecebimento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
 				trebimento.setVisible(true);
-				
-				
 			}
 		});
 		btnRecebimento.setBackground(new Color(32, 178, 170));
@@ -412,7 +449,18 @@ public class Menu extends JFrame {
 		btnRecebimento.setBounds(10, 11, 213, 23);
 		panel_1.add(btnRecebimento);
 		
-		JButton btnRecebimentoAvuso = new JButton("Recebimento Avuso");
+		JButton btnRecebimentoAvuso = new JButton("Recebimento Avulso");
+		btnRecebimentoAvuso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				trebimento.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				trebimentoAvulso.setVisible(true);
+			}
+		});
 		btnRecebimentoAvuso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRecebimentoAvuso.setBackground(new Color(32, 178, 170));
 		btnRecebimentoAvuso.setForeground(Color.WHITE);
@@ -421,6 +469,17 @@ public class Menu extends JFrame {
 		panel_1.add(btnRecebimentoAvuso);
 		
 		JButton btnGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
+		btnGeraoDeParcelamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tgerenciador.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tfinanceiroPaciente.setVisible(true);
+			}
+		});
 		btnGeraoDeParcelamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGeraoDeParcelamento.setBackground(new Color(32, 178, 170));
 		btnGeraoDeParcelamento.setForeground(Color.WHITE);
@@ -429,6 +488,17 @@ public class Menu extends JFrame {
 		panel_1.add(btnGeraoDeParcelamento);
 		
 		JButton btnGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
+		btnGerenciadorFinanceiro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tgerenciador.setVisible(true);
+			}
+		});
 		btnGerenciadorFinanceiro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGerenciadorFinanceiro.setBackground(new Color(32, 178, 170));
 		btnGerenciadorFinanceiro.setForeground(Color.WHITE);
@@ -437,6 +507,17 @@ public class Menu extends JFrame {
 		panel_1.add(btnGerenciadorFinanceiro);
 		
 		JButton btnBancos = new JButton("Bancos");
+		btnBancos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tbancos.setVisible(true);
+			}
+		});
 		btnBancos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBancos.setBackground(new Color(32, 178, 170));
 		btnBancos.setForeground(Color.WHITE);
@@ -444,13 +525,25 @@ public class Menu extends JFrame {
 		btnBancos.setBounds(10, 145, 213, 23);
 		panel_1.add(btnBancos);
 		
-		JButton btnServioesEOrfertas = new JButton("Servi\u00E7os e Orfertas");
-		btnServioesEOrfertas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnServioesEOrfertas.setBackground(new Color(32, 178, 170));
-		btnServioesEOrfertas.setForeground(Color.WHITE);
-		btnServioesEOrfertas.setFocusable(false);
-		btnServioesEOrfertas.setBounds(10, 179, 213, 23);
-		panel_1.add(btnServioesEOrfertas);
+		JButton btnContas = new JButton("Contas");
+		btnContas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tbancos.setVisible(false);
+				tservico.setVisible(false);
+				tcontas.setVisible(true);
+				
+			}
+		});
+		btnContas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnContas.setBackground(new Color(32, 178, 170));
+		btnContas.setForeground(Color.WHITE);
+		btnContas.setFocusable(false);
+		btnContas.setBounds(10, 179, 213, 23);
+		panel_1.add(btnContas);
 		
 		JLabel bt = new JLabel("");
 		bt.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -460,16 +553,36 @@ public class Menu extends JFrame {
 					voltarMenu();
 			}
 		});
+		
+		JButton btnServioesEOrfertas = new JButton("Servi\u00E7os e Orfertas");
+		btnServioesEOrfertas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(true);
+				
+			}
+		});
+		btnServioesEOrfertas.setForeground(Color.WHITE);
+		btnServioesEOrfertas.setFocusable(false);
+		btnServioesEOrfertas.setBackground(new Color(32, 178, 170));
+		btnServioesEOrfertas.setBounds(10, 209, 213, 23);
+		panel_1.add(btnServioesEOrfertas);
 		bt.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
 		bt.setToolTipText("Voltar");
 		bt.setHorizontalAlignment(SwingConstants.CENTER);
 		bt.setBounds(183, 348, 46, 47);
 		panel_1.add(bt);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		lblNewLabel_1.setBounds(0, 0, 229, 397);
-		panel_1.add(lblNewLabel_1);
+		JLabel bkfinaceiro = new JLabel("");
+		bkfinaceiro.setVerticalAlignment(SwingConstants.BOTTOM);
+		bkfinaceiro.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		bkfinaceiro.setBounds(0, 0, 229, 408);
+		panel_1.add(bkfinaceiro);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setFocusTraversalKeysEnabled(false);
@@ -493,22 +606,6 @@ public class Menu extends JFrame {
 		btnFolhaDePagamento.setBounds(10, 45, 213, 23);
 		panel_2.add(btnFolhaDePagamento);
 		
-		JButton btnCadastroDeFornecedores = new JButton("Fornecedores e Funcionarios");
-		btnCadastroDeFornecedores.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnCadastroDeFornecedores.setForeground(Color.WHITE);
-		btnCadastroDeFornecedores.setFocusable(false);
-		btnCadastroDeFornecedores.setBackground(new Color(32, 178, 170));
-		btnCadastroDeFornecedores.setBounds(10, 79, 213, 23);
-		panel_2.add(btnCadastroDeFornecedores);
-		
-		JButton btnRelatorios = new JButton("Relatorios");
-		btnRelatorios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRelatorios.setForeground(Color.WHITE);
-		btnRelatorios.setFocusable(false);
-		btnRelatorios.setBackground(new Color(32, 178, 170));
-		btnRelatorios.setBounds(10, 113, 213, 23);
-		panel_2.add(btnRelatorios);
-		
 		JLabel bt2 = new JLabel("");
 		bt2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bt2.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
@@ -524,10 +621,50 @@ public class Menu extends JFrame {
 		panel_2.add(bt2);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
-		lblNewLabel_2.setBounds(0, 0, 227, 397);
+		lblNewLabel_2.setBounds(0, 0, 227, 408);
 		panel_2.add(lblNewLabel_2);
+		
+		JPanel panel_3 = new JPanel();
+		tabbedPaneFinanceiro.addTab("Geral", new ImageIcon(Menu.class.getResource("/img/options.png")), panel_3, null);
+		tabbedPaneFinanceiro.setForegroundAt(2, Color.WHITE);
+		panel_3.setLayout(null);
+		
+		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				voltarMenu();
+			}
+		});
+		label.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
+		label.setToolTipText("Voltar");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(181, 350, 46, 47);
+		panel_3.add(label);
+		
+		JButton btnFornecedores = new JButton("Fornecedores");
+		btnFornecedores.setForeground(Color.WHITE);
+		btnFornecedores.setFocusable(false);
+		btnFornecedores.setBackground(new Color(32, 178, 170));
+		btnFornecedores.setBounds(10, 11, 213, 23);
+		panel_3.add(btnFornecedores);
+		
+		JButton btnFuncionarios = new JButton("Funcionarios");
+		btnFuncionarios.setForeground(Color.WHITE);
+		btnFuncionarios.setFocusable(false);
+		btnFuncionarios.setBackground(new Color(32, 178, 170));
+		btnFuncionarios.setBounds(10, 45, 213, 23);
+		panel_3.add(btnFuncionarios);
+		
+		JLabel bkGeral = new JLabel("");
+		bkGeral.setVerticalAlignment(SwingConstants.BOTTOM);
+		bkGeral.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		bkGeral.setHorizontalAlignment(SwingConstants.LEFT);
+		bkGeral.setBounds(0, 0, 227, 412);
+		panel_3.add(bkGeral);
 		
 		
 	
@@ -601,6 +738,7 @@ public class Menu extends JFrame {
 		tfinanceiro.setVisible(false);
 		trebimento.setVisible(false);
 		menu.setVisible(true);
+		btMenu.setVisible(true);
 		new Mover().start();
 	}
 }

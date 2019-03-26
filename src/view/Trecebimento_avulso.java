@@ -26,7 +26,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
-public class Trecebimento_avuso extends JPanel {
+public class Trecebimento_avulso extends JPanel {
 	private JTextField textField;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -36,7 +36,7 @@ public class Trecebimento_avuso extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Trecebimento_avuso() {
+	public Trecebimento_avulso() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -60,7 +60,7 @@ public class Trecebimento_avuso extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Recebimento", new ImageIcon(Trecebimento_avuso.class.getResource("/img/gambler pequeno.png")), panel, null);
+		tabbedPane.addTab("Recebimento Avulso", new ImageIcon(Trecebimento_avulso.class.getResource("/img/gambler pequeno.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -261,7 +261,7 @@ public class Trecebimento_avuso extends JPanel {
 		panel_1.add(confirma);
 		confirma.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		confirma.setToolTipText("Confirma Recebimento");
-		confirma.setIcon(new ImageIcon(Trecebimento_avuso.class.getResource("/img/bank.png")));
+		confirma.setIcon(new ImageIcon(Trecebimento_avulso.class.getResource("/img/bank.png")));
 		confirma.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel bk = new JLabel("");
