@@ -468,7 +468,7 @@ public class T_002_Menu extends JFrame {
 		btnRecebimento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRecebimento.setFocusable(false);
 		btnRecebimento.setForeground(Color.WHITE);
-		btnRecebimento.setBounds(10, 11, 213, 23);
+		btnRecebimento.setBounds(10, 11, 213, 15);
 		panel_1.add(btnRecebimento);
 		
 		JButton btnRecebimentoAvuso = new JButton("Recebimento Avulso");
@@ -481,7 +481,7 @@ public class T_002_Menu extends JFrame {
 		btnRecebimentoAvuso.setBackground(new Color(32, 178, 170));
 		btnRecebimentoAvuso.setForeground(Color.WHITE);
 		btnRecebimentoAvuso.setFocusable(false);
-		btnRecebimentoAvuso.setBounds(10, 45, 213, 23);
+		btnRecebimentoAvuso.setBounds(10, 45, 213, 15);
 		panel_1.add(btnRecebimentoAvuso);
 		
 		JButton btnGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
@@ -494,7 +494,7 @@ public class T_002_Menu extends JFrame {
 		btnGeraoDeParcelamento.setBackground(new Color(32, 178, 170));
 		btnGeraoDeParcelamento.setForeground(Color.WHITE);
 		btnGeraoDeParcelamento.setFocusable(false);
-		btnGeraoDeParcelamento.setBounds(10, 79, 213, 23);
+		btnGeraoDeParcelamento.setBounds(10, 79, 213, 15);
 		panel_1.add(btnGeraoDeParcelamento);
 		
 		JButton btnGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
@@ -507,7 +507,7 @@ public class T_002_Menu extends JFrame {
 		btnGerenciadorFinanceiro.setBackground(new Color(32, 178, 170));
 		btnGerenciadorFinanceiro.setForeground(Color.WHITE);
 		btnGerenciadorFinanceiro.setFocusable(false);
-		btnGerenciadorFinanceiro.setBounds(10, 113, 213, 23);
+		btnGerenciadorFinanceiro.setBounds(10, 113, 213, 15);
 		panel_1.add(btnGerenciadorFinanceiro);
 		
 		JLabel bt = new JLabel("");
@@ -547,7 +547,7 @@ public class T_002_Menu extends JFrame {
 		btnContasAPagar.setForeground(Color.WHITE);
 		btnContasAPagar.setFocusable(false);
 		btnContasAPagar.setBackground(new Color(32, 178, 170));
-		btnContasAPagar.setBounds(10, 11, 213, 23);
+		btnContasAPagar.setBounds(10, 11, 213, 16);
 		panel_2.add(btnContasAPagar);
 		
 		JButton btnFolhaDePagamento = new JButton("Folha de Pagamento");
@@ -560,7 +560,7 @@ public class T_002_Menu extends JFrame {
 		btnFolhaDePagamento.setForeground(Color.WHITE);
 		btnFolhaDePagamento.setFocusable(false);
 		btnFolhaDePagamento.setBackground(new Color(32, 178, 170));
-		btnFolhaDePagamento.setBounds(10, 45, 213, 23);
+		btnFolhaDePagamento.setBounds(10, 45, 213, 16);
 		panel_2.add(btnFolhaDePagamento);
 		
 		JLabel bt2 = new JLabel("");
@@ -613,7 +613,7 @@ public class T_002_Menu extends JFrame {
 		btnFornecedores.setForeground(Color.WHITE);
 		btnFornecedores.setFocusable(false);
 		btnFornecedores.setBackground(new Color(32, 178, 170));
-		btnFornecedores.setBounds(10, 11, 213, 23);
+		btnFornecedores.setBounds(10, 11, 213, 15);
 		panel_3.add(btnFornecedores);
 		
 		JButton btnFuncionarios = new JButton("Funcionarios");
@@ -625,7 +625,7 @@ public class T_002_Menu extends JFrame {
 		btnFuncionarios.setForeground(Color.WHITE);
 		btnFuncionarios.setFocusable(false);
 		btnFuncionarios.setBackground(new Color(32, 178, 170));
-		btnFuncionarios.setBounds(10, 45, 213, 23);
+		btnFuncionarios.setBounds(10, 45, 213, 15);
 		panel_3.add(btnFuncionarios);
 		
 		JButton button = new JButton("Bancos");
@@ -637,7 +637,7 @@ public class T_002_Menu extends JFrame {
 		button.setForeground(Color.WHITE);
 		button.setFocusable(false);
 		button.setBackground(new Color(32, 178, 170));
-		button.setBounds(10, 79, 213, 23);
+		button.setBounds(10, 79, 213, 15);
 		panel_3.add(button);
 		
 		JButton button_1 = new JButton("Contas");
@@ -649,7 +649,7 @@ public class T_002_Menu extends JFrame {
 		button_1.setForeground(Color.WHITE);
 		button_1.setFocusable(false);
 		button_1.setBackground(new Color(32, 178, 170));
-		button_1.setBounds(10, 113, 213, 23);
+		button_1.setBounds(10, 113, 213, 15);
 		panel_3.add(button_1);
 		
 		JButton button_2 = new JButton("Servi\u00E7os e Orfertas");
@@ -661,7 +661,7 @@ public class T_002_Menu extends JFrame {
 		button_2.setForeground(Color.WHITE);
 		button_2.setFocusable(false);
 		button_2.setBackground(new Color(32, 178, 170));
-		button_2.setBounds(10, 143, 213, 23);
+		button_2.setBounds(10, 143, 213, 15);
 		panel_3.add(button_2);
 		
 		JLabel bkGeral = new JLabel("");
@@ -897,6 +897,8 @@ public class T_002_Menu extends JFrame {
 				tcontas.setVisible(false);
 				tservico.setVisible(false);
 				tabbedPaneFinanceiro.setSelectedIndex(0);
+				tgerenciador.voltar();
+				
 			}
 		}
 	};

@@ -101,6 +101,9 @@ public class T_024_configurar extends JPanel {
 	private JScrollPane scroll;
 	private JComboBox cbsit;
 	private JLabel numRegistro;
+	private JTextField textField;
+	private JTable table;
+	private JTabbedPane tabbedPaneEmpresa;
 	
 	  private JTable getTabela(){
 	    	if(tableUsuario==null){
@@ -159,8 +162,187 @@ public class T_024_configurar extends JPanel {
 		setOpaque(false);
 		setBounds(243, 11, 575, 427);
 		setLayout(null);
+		
+		tabbedPanePrincipal = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPanePrincipal.setBorder(null);
+		tabbedPanePrincipal.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPanePrincipal.setBackground(new Color(32, 178, 170));
+		tabbedPanePrincipal.setBounds(0, 0, 575, 428);
+		add(tabbedPanePrincipal);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(32, 178, 170));
+		panel.setForeground(Color.WHITE);
+		tabbedPanePrincipal.addTab("Configura\u00E7\u00E3o", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel, null);
+		tabbedPanePrincipal.setBackgroundAt(0, new Color(32, 178, 170));
+		tabbedPanePrincipal.setForegroundAt(0, Color.WHITE);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setToolTipText("Voltar");
+		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				setVisible(false);
+			}
+		});
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setBounds(535, 2, 25, 32);
+		panel.add(lblNewLabel_1);
+		
+		JButton btnUsuario = new JButton("Empresa");
+		btnUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPanePrincipal.setVisible(false);
+				tabbedPaneUsuarios.setVisible(false);
+				tabbedPaneEmpresa.setVisible(true);
+			}
+		});
+		btnUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		btnUsuario.setForeground(Color.WHITE);
+		btnUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnUsuario.setBackground(new Color(32, 178, 170));
+		btnUsuario.setBounds(14, 25, 257, 14);
+		panel.add(btnUsuario);
+		
+		JButton btnUsuarios = new JButton("Usuarios");
+		btnUsuarios.setFocusable(false);
+		btnUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPanePrincipal.setVisible(false);
+				tabbedPaneEmpresa.setVisible(false);
+				tabbedPaneUsuarios.setVisible(true);
+			}
+		});
+		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
+		btnUsuarios.setForeground(Color.WHITE);
+		btnUsuarios.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnUsuarios.setBackground(new Color(32, 178, 170));
+		btnUsuarios.setBounds(14, 50, 257, 14);
+		panel.add(btnUsuarios);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(281, 11, 1, 324);
+		panel.add(separator);
+		
+		JLabel bk = new JLabel("");
+		bk.setHorizontalAlignment(SwingConstants.CENTER);
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setBounds(0, 2, 570, 409);
+		panel.add(bk);
 		tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneUsuarios.setVisible(false);
+		
+		tabbedPaneEmpresa = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneEmpresa.setVisible(false);
+		tabbedPaneEmpresa.setBounds(0, 0, 575, 428);
+		add(tabbedPaneEmpresa);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setForeground(Color.WHITE);
+		panel_3.setBackground(new Color(32, 178, 170));
+		tabbedPaneEmpresa.addTab("Empresa", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_3, null);
+		tabbedPaneEmpresa.setForegroundAt(0, Color.WHITE);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPaneEmpresa.setVisible(false);
+				tabbedPanePrincipal.setVisible(true);
+			}
+		});
+		label_3.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
+		label_3.setToolTipText("Voltar");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		label_3.setBounds(535, 2, 25, 32);
+		panel_3.add(label_3);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 100, 550, 244);
+		panel_3.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		scrollPane.setViewportView(table);
+		
+		JLabel label_4 = new JLabel("Nome : ");
+		label_4.setForeground(Color.WHITE);
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_4.setBounds(10, 11, 46, 14);
+		panel_3.add(label_4);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(52, 8, 145, 20);
+		panel_3.add(textField);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/buscar.png")));
+		label_5.setToolTipText("Buscar");
+		label_5.setHorizontalAlignment(SwingConstants.LEFT);
+		label_5.setForeground(Color.WHITE);
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_5.setBounds(207, 2, 46, 32);
+		panel_3.add(label_5);
+		
+		JLabel label_6 = new JLabel("Situa\u00E7\u00E3o : ");
+		label_6.setForeground(Color.WHITE);
+		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_6.setBounds(10, 39, 89, 14);
+		panel_3.add(label_6);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(73, 36, 145, 20);
+		panel_3.add(comboBox);
+		
+		JLabel label_8 = new JLabel();
+		label_8.setForeground(Color.WHITE);
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_8.setBounds(10, 368, 208, 14);
+		panel_3.add(label_8);
+		
+		JLabel label_9 = new JLabel("");
+		label_9.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/add.png")));
+		label_9.setToolTipText("Adicionar Novo Paciente");
+		label_9.setHorizontalAlignment(SwingConstants.CENTER);
+		label_9.setBounds(221, 355, 46, 43);
+		panel_3.add(label_9);
+		
+		JLabel label_10 = new JLabel("");
+		label_10.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/editar (2).png")));
+		label_10.setToolTipText("Editar");
+		label_10.setHorizontalAlignment(SwingConstants.CENTER);
+		label_10.setBounds(281, 355, 46, 43);
+		panel_3.add(label_10);
+		
+		JLabel label_11 = new JLabel("");
+		label_11.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/deleta.png")));
+		label_11.setToolTipText("Remover Usuario");
+		label_11.setHorizontalAlignment(SwingConstants.CENTER);
+		label_11.setBounds(337, 355, 46, 43);
+		panel_3.add(label_11);
+		
+		JLabel label_12 = new JLabel("");
+		label_12.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
+		label_12.setHorizontalAlignment(SwingConstants.CENTER);
+		label_12.setBounds(0, 2, 570, 409);
+		panel_3.add(label_12);
 		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneUsuarios.setBorder(null);
 		tabbedPaneUsuarios.setBackground(new Color(32, 178, 170));
@@ -172,6 +354,7 @@ public class T_024_configurar extends JPanel {
 		panel_1.setForeground(Color.WHITE);
 		panel_1.setBackground(new Color(32, 178, 170));
 		tabbedPaneUsuarios.addTab("USUARIO", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_1, null);
+		tabbedPaneUsuarios.setForegroundAt(0, Color.WHITE);
 		
 		JLabel voltarUsuarios = new JLabel("");
 		voltarUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -446,72 +629,6 @@ public class T_024_configurar extends JPanel {
 		bkUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		bkUsuarios.setBounds(0, 2, 570, 409);
 		panel_1.add(bkUsuarios);
-		
-		tabbedPanePrincipal = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPanePrincipal.setBorder(null);
-		tabbedPanePrincipal.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPanePrincipal.setBackground(new Color(32, 178, 170));
-		tabbedPanePrincipal.setBounds(0, 0, 575, 428);
-		add(tabbedPanePrincipal);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(32, 178, 170));
-		panel.setForeground(Color.WHITE);
-		tabbedPanePrincipal.addTab("Configura\u00E7\u00E3o", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel, null);
-		tabbedPanePrincipal.setBackgroundAt(0, new Color(32, 178, 170));
-		tabbedPanePrincipal.setForegroundAt(0, Color.WHITE);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setToolTipText("Voltar");
-		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				setVisible(false);
-			}
-		});
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
-		lblNewLabel_1.setBounds(535, 2, 25, 32);
-		panel.add(lblNewLabel_1);
-		
-		JButton btnUsuario = new JButton("Empresa");
-		btnUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		btnUsuario.setForeground(Color.WHITE);
-		btnUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnUsuario.setBackground(new Color(32, 178, 170));
-		btnUsuario.setBounds(14, 25, 257, 14);
-		panel.add(btnUsuario);
-		
-		JButton btnUsuarios = new JButton("Usuarios");
-		btnUsuarios.setFocusable(false);
-		btnUsuarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tabbedPanePrincipal.setVisible(false);
-				tabbedPaneUsuarios.setVisible(true);
-			}
-		});
-		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		btnUsuarios.setForeground(Color.WHITE);
-		btnUsuarios.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnUsuarios.setBackground(new Color(32, 178, 170));
-		btnUsuarios.setBounds(14, 50, 257, 14);
-		panel.add(btnUsuarios);
-		
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(281, 11, 1, 324);
-		panel.add(separator);
-		
-		JLabel bk = new JLabel("");
-		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
-		bk.setBounds(0, 2, 570, 409);
-		panel.add(bk);
 		
 		tabbedPaneCadastroUsuario = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneCadastroUsuario.setVisible(false);
@@ -1389,5 +1506,4 @@ public class T_024_configurar extends JPanel {
 		dao.conectar(iniciar.getIp_server());
 		dao.privilegio(usuario);
 	}
-
 }

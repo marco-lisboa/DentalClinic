@@ -24,6 +24,7 @@ public class T_009_gerenciadorFinaceiro extends JPanel {
 	private JTextField textField;
 	private JComboBox textField_1;
 	private JTable table;
+	private JTabbedPane tabbedPane;
 	
 
 	/**
@@ -43,7 +44,7 @@ public class T_009_gerenciadorFinaceiro extends JPanel {
 		setBounds(243, 11, 575, 427);
 		setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		tabbedPane.setBorder(null);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -247,6 +248,7 @@ public class T_009_gerenciadorFinaceiro extends JPanel {
 	
 	public void voltar() {
 		setVisible(false);
+		tabbedPane.setSelectedIndex(0);
 		
 	}
 }
