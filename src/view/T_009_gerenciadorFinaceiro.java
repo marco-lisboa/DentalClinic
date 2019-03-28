@@ -49,6 +49,7 @@ public class T_009_gerenciadorFinaceiro extends JPanel {
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPane.setBackground(new Color(32, 178, 170));
 		tabbedPane.setBounds(0, 0, 575, 428);
+		
 		add(tabbedPane);
 		
 		JPanel panelGerenciadorArquivosRemessa = new JPanel();

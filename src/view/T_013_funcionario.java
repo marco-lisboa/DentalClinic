@@ -52,7 +52,7 @@ public class T_013_funcionario extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Ficha de Paciente", new ImageIcon(T_004_ficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
+		tabbedPane.addTab("Funcionario", new ImageIcon(T_013_funcionario.class.getResource("/img/options.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -122,7 +122,7 @@ public class T_013_funcionario extends JPanel {
 		
 		JLabel adcionar = new JLabel("");
 		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adcionar.setToolTipText("Adicionar Novo Paciente");
+		adcionar.setToolTipText("Adicionar Novo Funcionario");
 		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
 		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
 		adcionar.setBounds(221, 355, 46, 43);
@@ -130,7 +130,7 @@ public class T_013_funcionario extends JPanel {
 		
 		JLabel deletar = new JLabel("");
 		deletar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		deletar.setToolTipText("Remover Paciente");
+		deletar.setToolTipText("Remover Funcionario");
 		deletar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
 		deletar.setHorizontalAlignment(SwingConstants.CENTER);
 		deletar.setBounds(281, 355, 46, 43);

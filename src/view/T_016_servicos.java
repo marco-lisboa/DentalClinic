@@ -52,7 +52,7 @@ public class T_016_servicos extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Servi\u00E7os e Ofertas", new ImageIcon(T_016_servicos.class.getResource("/img/gambler pequeno.png")), panel, null);
+		tabbedPane.addTab("Servi\u00E7os e Ofertas", new ImageIcon(T_016_servicos.class.getResource("/img/options.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -122,7 +122,7 @@ public class T_016_servicos extends JPanel {
 		
 		JLabel adcionar = new JLabel("");
 		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adcionar.setToolTipText("Adicionar Novo Paciente");
+		adcionar.setToolTipText("Adicionar Novo Servi\u00E7o");
 		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
 		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
 		adcionar.setBounds(221, 355, 46, 43);
@@ -130,7 +130,7 @@ public class T_016_servicos extends JPanel {
 		
 		JLabel deletar = new JLabel("");
 		deletar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		deletar.setToolTipText("Remover Paciente");
+		deletar.setToolTipText("Remover Servi\u00E7o");
 		deletar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
 		deletar.setHorizontalAlignment(SwingConstants.CENTER);
 		deletar.setBounds(281, 355, 46, 43);

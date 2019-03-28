@@ -52,7 +52,7 @@ public class T_010_contas_pagar extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Ficha de Paciente", new ImageIcon(T_004_ficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
+		tabbedPane.addTab("Contas a Pagar", new ImageIcon(T_010_contas_pagar.class.getResource("/img/saida.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -101,7 +101,7 @@ public class T_010_contas_pagar extends JPanel {
 		textField_1 = new JComboBox();
 		textField_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		textField_1.setForeground(Color.BLACK);
-		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativos", "Inativos"}));
+		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todas", "A Vencer", "Pago"}));
 		textField_1.setBounds(73, 36, 145, 20);
 		panel.add(textField_1);
 		
@@ -115,14 +115,14 @@ public class T_010_contas_pagar extends JPanel {
 				{null, null, null},
 			},
 			new String[] {
-				"Nome", "Telefone", "Situa\u00E7\u00E3o"
+				"Codigo", "Descri\u00E7\u00E3o", "Situa\u00E7\u00E3o"
 			}
 		));
 		scrollPane.setViewportView(table);
 		
 		JLabel adcionar = new JLabel("");
 		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adcionar.setToolTipText("Adicionar Novo Paciente");
+		adcionar.setToolTipText("Adicionar Nova Conta");
 		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
 		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
 		adcionar.setBounds(221, 355, 46, 43);
@@ -130,7 +130,7 @@ public class T_010_contas_pagar extends JPanel {
 		
 		JLabel deletar = new JLabel("");
 		deletar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		deletar.setToolTipText("Remover Paciente");
+		deletar.setToolTipText("Remover Conta");
 		deletar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
 		deletar.setHorizontalAlignment(SwingConstants.CENTER);
 		deletar.setBounds(281, 355, 46, 43);

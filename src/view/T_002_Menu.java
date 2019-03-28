@@ -40,16 +40,21 @@ public class T_002_Menu extends JFrame {
 	private T_003_livro_consulta tlivro = new T_003_livro_consulta();
 	private T_004_ficha_paciente tficha = new T_004_ficha_paciente();
 	private T_005_agenda_marcacao tagenda = new T_005_agenda_marcacao();
-	private T_017_calculadora tcalcular = new T_017_calculadora();
-	private T_018_livrocaixa tcaixa = new T_018_livrocaixa();
-	private T_024_configurar tconfig = new T_024_configurar();
 	private T_006_recebimento trebimento = new T_006_recebimento();
 	private T_007_recebimento_avulso trebimentoAvulso = new T_007_recebimento_avulso();
 	private T_008_financeiroPaciente tfinanceiroPaciente = new T_008_financeiroPaciente();
 	private T_009_gerenciadorFinaceiro tgerenciador = new T_009_gerenciadorFinaceiro();
+	private T_010_contas_pagar tcontasPagar = new T_010_contas_pagar();
+	private T_011_folha_pagamento tfolha = new T_011_folha_pagamento();
+	private T_012_fornecedores tfornecedores = new T_012_fornecedores();
+	private T_013_funcionario tfuncionario = new T_013_funcionario();
 	private T_014_bancos tbancos = new T_014_bancos();
 	private T_015_contas tcontas = new T_015_contas();
 	private T_016_servicos tservico = new T_016_servicos();
+	private T_017_calculadora tcalcular = new T_017_calculadora();
+	private T_018_livrocaixa tcaixa = new T_018_livrocaixa();
+	private T_024_configurar tconfig = new T_024_configurar();
+	
 	public JLabel nomeUsuario;
 	public   JPanel tfinanceiro;
 	private JTabbedPane tabbedPaneFinanceiro;
@@ -184,9 +189,30 @@ public class T_002_Menu extends JFrame {
 		contentPane.add(tgerenciador);
 		tgerenciador.setVisible(false);
 		
+		tcontasPagar.setBounds(243, 53, 586, 435);
+		contentPane.add(tcontasPagar);
+		tcontasPagar.setVisible(false);
+		
+		tfolha.setBounds(243, 53, 586, 435);
+		contentPane.add(tfolha);
+		tfolha.setVisible(false);
+		
+		tfornecedores.setBounds(243, 53, 586, 435);
+		contentPane.add(tfornecedores);
+		tfornecedores.setVisible(false);
+		
+		tfuncionario.setBounds(243, 53, 586, 435);
+		contentPane.add(tfuncionario);
+		tfuncionario.setVisible(false);
+		
+		tfuncionario.setBounds(243, 53, 586, 435);
+		contentPane.add(tfuncionario);
+		tfuncionario.setVisible(false);
+		
 		tbancos.setBounds(243, 53, 586, 435);
 		contentPane.add(tbancos);
 		tbancos.setVisible(false);
+		
 		
 		tcontas.setBounds(243, 53, 586, 435);
 		contentPane.add(tcontas);
@@ -195,6 +221,8 @@ public class T_002_Menu extends JFrame {
 		tservico.setBounds(243, 53, 586, 435);
 		contentPane.add(tservico);
 		tservico.setVisible(false);
+		
+		
 		
 		tfinanceiro = new JPanel();
 		tfinanceiro.setVisible(false);
@@ -433,13 +461,7 @@ public class T_002_Menu extends JFrame {
 		JButton btnRecebimento = new JButton("Recebimento");
 		btnRecebimento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				trebimentoAvulso.setVisible(false);
-				tfinanceiroPaciente.setVisible(false);
-				tgerenciador.setVisible(false);
-				tbancos.setVisible(false);
-				tcontas.setVisible(false);
-				tservico.setVisible(false);
-				trebimento.setVisible(true);
+				menuFinaceiro(1);
 			}
 		});
 		btnRecebimento.setBackground(new Color(32, 178, 170));
@@ -452,13 +474,7 @@ public class T_002_Menu extends JFrame {
 		JButton btnRecebimentoAvuso = new JButton("Recebimento Avulso");
 		btnRecebimentoAvuso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				trebimento.setVisible(false);
-				tfinanceiroPaciente.setVisible(false);
-				tgerenciador.setVisible(false);
-				tbancos.setVisible(false);
-				tcontas.setVisible(false);
-				tservico.setVisible(false);
-				trebimentoAvulso.setVisible(true);
+				menuFinaceiro(2);
 			}
 		});
 		btnRecebimentoAvuso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -471,13 +487,7 @@ public class T_002_Menu extends JFrame {
 		JButton btnGeraoDeParcelamento = new JButton("Gera\u00E7\u00E3o de Parcelamento");
 		btnGeraoDeParcelamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				trebimento.setVisible(false);
-				trebimentoAvulso.setVisible(false);
-				tgerenciador.setVisible(false);
-				tbancos.setVisible(false);
-				tcontas.setVisible(false);
-				tservico.setVisible(false);
-				tfinanceiroPaciente.setVisible(true);
+				menuFinaceiro(3);
 			}
 		});
 		btnGeraoDeParcelamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -490,13 +500,7 @@ public class T_002_Menu extends JFrame {
 		JButton btnGerenciadorFinanceiro = new JButton("Gerenciador Financeiro");
 		btnGerenciadorFinanceiro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				trebimento.setVisible(false);
-				trebimentoAvulso.setVisible(false);
-				tfinanceiroPaciente.setVisible(false);
-				tbancos.setVisible(false);
-				tcontas.setVisible(false);
-				tservico.setVisible(false);
-				tgerenciador.setVisible(true);
+				menuFinaceiro(4);
 			}
 		});
 		btnGerenciadorFinanceiro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -512,6 +516,7 @@ public class T_002_Menu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 					voltarMenu();
+					menuFinaceiro(100);
 			}
 		});
 		bt.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/voltar.png")));
@@ -533,6 +538,11 @@ public class T_002_Menu extends JFrame {
 		panel_2.setLayout(null);
 		
 		JButton btnContasAPagar = new JButton("Contas a Pagar");
+		btnContasAPagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menuFinaceiro(5);
+			}
+		});
 		btnContasAPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnContasAPagar.setForeground(Color.WHITE);
 		btnContasAPagar.setFocusable(false);
@@ -541,6 +551,11 @@ public class T_002_Menu extends JFrame {
 		panel_2.add(btnContasAPagar);
 		
 		JButton btnFolhaDePagamento = new JButton("Folha de Pagamento");
+		btnFolhaDePagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuFinaceiro(6);
+			}
+		});
 		btnFolhaDePagamento.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFolhaDePagamento.setForeground(Color.WHITE);
 		btnFolhaDePagamento.setFocusable(false);
@@ -555,6 +570,7 @@ public class T_002_Menu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				voltarMenu();
+				menuFinaceiro(100);
 			}
 		});
 		bt2.setToolTipText("Voltar");
@@ -579,6 +595,7 @@ public class T_002_Menu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				voltarMenu();
+				menuFinaceiro(100);
 			}
 		});
 		label.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/voltar.png")));
@@ -588,6 +605,11 @@ public class T_002_Menu extends JFrame {
 		panel_3.add(label);
 		
 		JButton btnFornecedores = new JButton("Fornecedores");
+		btnFornecedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuFinaceiro(7);
+			}
+		});
 		btnFornecedores.setForeground(Color.WHITE);
 		btnFornecedores.setFocusable(false);
 		btnFornecedores.setBackground(new Color(32, 178, 170));
@@ -595,6 +617,11 @@ public class T_002_Menu extends JFrame {
 		panel_3.add(btnFornecedores);
 		
 		JButton btnFuncionarios = new JButton("Funcionarios");
+		btnFuncionarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuFinaceiro(8);
+			}
+		});
 		btnFuncionarios.setForeground(Color.WHITE);
 		btnFuncionarios.setFocusable(false);
 		btnFuncionarios.setBackground(new Color(32, 178, 170));
@@ -602,6 +629,11 @@ public class T_002_Menu extends JFrame {
 		panel_3.add(btnFuncionarios);
 		
 		JButton button = new JButton("Bancos");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuFinaceiro(9);
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setFocusable(false);
 		button.setBackground(new Color(32, 178, 170));
@@ -609,6 +641,11 @@ public class T_002_Menu extends JFrame {
 		panel_3.add(button);
 		
 		JButton button_1 = new JButton("Contas");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuFinaceiro(10);
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setFocusable(false);
 		button_1.setBackground(new Color(32, 178, 170));
@@ -616,6 +653,11 @@ public class T_002_Menu extends JFrame {
 		panel_3.add(button_1);
 		
 		JButton button_2 = new JButton("Servi\u00E7os e Orfertas");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuFinaceiro(11);
+			}
+		});
 		button_2.setForeground(Color.WHITE);
 		button_2.setFocusable(false);
 		button_2.setBackground(new Color(32, 178, 170));
@@ -704,4 +746,158 @@ public class T_002_Menu extends JFrame {
 		btMenu.setVisible(true);
 		new Mover().start();
 	}
-}
+	
+	public void menuFinaceiro(int tl) {
+		if(tl==1) {
+			trebimentoAvulso.setVisible(false);
+			tfinanceiroPaciente.setVisible(false);
+			tgerenciador.setVisible(false);
+			tcontasPagar.setVisible(false);
+			tfolha.setVisible(false);
+			tfornecedores.setVisible(false);
+			tfuncionario.setVisible(false);
+			tbancos.setVisible(false);
+			tcontas.setVisible(false);
+			tservico.setVisible(false);
+			trebimento.setVisible(true);
+		}else if (tl==2) {
+			trebimento.setVisible(false);
+			tfinanceiroPaciente.setVisible(false);
+			tgerenciador.setVisible(false);
+			tcontasPagar.setVisible(false);
+			tfolha.setVisible(false);
+			tfornecedores.setVisible(false);
+			tfuncionario.setVisible(false);
+			tbancos.setVisible(false);
+			tcontas.setVisible(false);
+			tservico.setVisible(false);
+			trebimentoAvulso.setVisible(true);
+		}else if(tl==3) {
+			trebimento.setVisible(false);
+			trebimentoAvulso.setVisible(false);
+			tgerenciador.setVisible(false);
+			tcontasPagar.setVisible(false);
+			tfolha.setVisible(false);
+			tfornecedores.setVisible(false);
+			tfuncionario.setVisible(false);
+			tbancos.setVisible(false);
+			tcontas.setVisible(false);
+			tservico.setVisible(false);
+			tfinanceiroPaciente.setVisible(true);
+		}else if(tl==4) {
+			trebimento.setVisible(false);
+			trebimentoAvulso.setVisible(false);
+			tfinanceiroPaciente.setVisible(false);
+			tcontasPagar.setVisible(false);
+			tfolha.setVisible(false);
+			tfornecedores.setVisible(false);
+			tfuncionario.setVisible(false);
+			tbancos.setVisible(false);
+			tcontas.setVisible(false);
+			tservico.setVisible(false);
+			tgerenciador.setVisible(true);
+			}else if(tl==5) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tfolha.setVisible(false);
+				tfornecedores.setVisible(false);
+				tfuncionario.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tcontasPagar.setVisible(true);
+				
+			}else if(tl==6) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfornecedores.setVisible(false);
+				tfuncionario.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tfolha.setVisible(true);
+			}else if(tl==7) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfolha.setVisible(false);
+				tfuncionario.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tfornecedores.setVisible(true);
+				
+			}else if (tl==8) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfolha.setVisible(false);
+				tfornecedores.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tfuncionario.setVisible(true);
+			}else if(tl==9) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfolha.setVisible(false);
+				tfornecedores.setVisible(false);
+				tfuncionario.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tbancos.setVisible(true);
+			}else if(tl==10) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfolha.setVisible(false);
+				tfornecedores.setVisible(false);
+				tfuncionario.setVisible(false);
+				tbancos.setVisible(false);
+				tservico.setVisible(false);
+				tcontas.setVisible(true);
+				
+			}else if(tl==11) {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfolha.setVisible(false);
+				tfornecedores.setVisible(false);
+				tfuncionario.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(true);
+				
+			}else {
+				trebimento.setVisible(false);
+				trebimentoAvulso.setVisible(false);
+				tfinanceiroPaciente.setVisible(false);
+				tgerenciador.setVisible(false);
+				tcontasPagar.setVisible(false);
+				tfolha.setVisible(false);
+				tfornecedores.setVisible(false);
+				tfuncionario.setVisible(false);
+				tbancos.setVisible(false);
+				tcontas.setVisible(false);
+				tservico.setVisible(false);
+				tabbedPaneFinanceiro.setSelectedIndex(0);
+			}
+		}
+	};
+

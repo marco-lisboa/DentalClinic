@@ -52,7 +52,7 @@ public class T_011_folha_pagamento extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Ficha de Paciente", new ImageIcon(T_004_ficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
+		tabbedPane.addTab("Folha de Pagamento", new ImageIcon(T_011_folha_pagamento.class.getResource("/img/saida.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -101,7 +101,7 @@ public class T_011_folha_pagamento extends JPanel {
 		textField_1 = new JComboBox();
 		textField_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		textField_1.setForeground(Color.BLACK);
-		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativos", "Inativos"}));
+		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todas", "A Vencer", "Pago"}));
 		textField_1.setBounds(73, 36, 145, 20);
 		panel.add(textField_1);
 		
