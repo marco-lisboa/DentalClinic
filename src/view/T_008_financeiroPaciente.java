@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Cursor;
 
-public class TfinanceiroPaciente extends JPanel {
+public class T_008_financeiroPaciente extends JPanel {
 	private JTextField textField;
 	private JComboBox situacao;
 	private JTable table;
@@ -32,7 +32,7 @@ public class TfinanceiroPaciente extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TfinanceiroPaciente() {
+	public T_008_financeiroPaciente() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -56,7 +56,7 @@ public class TfinanceiroPaciente extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPanePrincipal.addTab("Financeiro de Paciente", new ImageIcon(TfinanceiroPaciente.class.getResource("/img/gambler pequeno.png")), panel, null);
+		tabbedPanePrincipal.addTab("Financeiro de Paciente", new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/gambler pequeno.png")), panel, null);
 		tabbedPanePrincipal.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPanePrincipal.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -80,7 +80,7 @@ public class TfinanceiroPaciente extends JPanel {
 		btBuscasPaciente.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btBuscasPaciente.setForeground(Color.WHITE);
 		btBuscasPaciente.setHorizontalAlignment(SwingConstants.LEFT);
-		btBuscasPaciente.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
+		btBuscasPaciente.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
 		btBuscasPaciente.setBounds(207, 2, 40, 32);
 		panel.add(btBuscasPaciente);
 		
@@ -93,7 +93,7 @@ public class TfinanceiroPaciente extends JPanel {
 			}
 		});
 		btVoltar.setHorizontalAlignment(SwingConstants.CENTER);
-		btVoltar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		btVoltar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
 		btVoltar.setBounds(535, 2, 25, 32);
 		panel.add(btVoltar);
 		
@@ -131,7 +131,7 @@ public class TfinanceiroPaciente extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JLabel rg = new JLabel("");
-		rg.setIcon(new ImageIcon(TfinanceiroPaciente.class.getResource("/img/confimado.png")));
+		rg.setIcon(new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/confimado.png")));
 		rg.setForeground(Color.WHITE);
 		rg.setFont(new Font("Tahoma", Font.BOLD, 11));
 		rg.setBounds(15, 368, 545, 14);
@@ -139,7 +139,7 @@ public class TfinanceiroPaciente extends JPanel {
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 		
@@ -155,11 +155,11 @@ public class TfinanceiroPaciente extends JPanel {
 		panel_1.setLayout(null);
 		panel_1.setForeground(Color.WHITE);
 		panel_1.setBackground(new Color(32, 178, 170));
-		tabbedPaneFinanceiro.addTab("Financeiro", new ImageIcon(TfinanceiroPaciente.class.getResource("/img/gambler pequeno.png")), panel_1, null);
+		tabbedPaneFinanceiro.addTab("Financeiro", new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/gambler pequeno.png")), panel_1, null);
 		tabbedPaneFinanceiro.setForegroundAt(0, Color.WHITE);
 		
 		JLabel buscar = new JLabel("");
-		buscar.setIcon(new ImageIcon(TfinanceiroPaciente.class.getResource("/img/buscar.png")));
+		buscar.setIcon(new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/buscar.png")));
 		buscar.setToolTipText("Buscar");
 		buscar.setHorizontalAlignment(SwingConstants.LEFT);
 		buscar.setForeground(Color.WHITE);
@@ -175,7 +175,7 @@ public class TfinanceiroPaciente extends JPanel {
 				tabbedPanePrincipal.setVisible(true);
 			}
 		});
-		btVoltar2.setIcon(new ImageIcon(TfinanceiroPaciente.class.getResource("/img/voltar.png")));
+		btVoltar2.setIcon(new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/voltar.png")));
 		btVoltar2.setHorizontalAlignment(SwingConstants.CENTER);
 		btVoltar2.setBounds(535, 2, 25, 32);
 		panel_1.add(btVoltar2);
@@ -232,14 +232,14 @@ public class TfinanceiroPaciente extends JPanel {
 		scrollPane_1.setViewportView(table_1);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(TfinanceiroPaciente.class.getResource("/img/confimado.png")));
+		label.setIcon(new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/confimado.png")));
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label.setBounds(10, 357, 550, 14);
 		panel_1.add(label);
 		
 		JLabel label_5 = new JLabel("");
-		label_5.setIcon(new ImageIcon(TfinanceiroPaciente.class.getResource("/img/bk.jpeg")));
+		label_5.setIcon(new ImageIcon(T_008_financeiroPaciente.class.getResource("/img/bk.jpeg")));
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
 		label_5.setBounds(0, 2, 570, 409);
 		panel_1.add(label_5);

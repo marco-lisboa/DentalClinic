@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import view.Tconfigurar;
+import view.T_024_configurar;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -65,7 +65,7 @@ public class TavisoConfiguracao extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Tconfigurar t = new Tconfigurar();
+					T_024_configurar t = new T_024_configurar();
 					if(acao==1) {
 						t.excluir(id);
 					}else {

@@ -8,8 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import view.Tconfigurar;
-import view.Tficha_paciente;
+import view.T_024_configurar;
+import view.T_004_ficha_paciente;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -66,7 +66,7 @@ public class TavisoPacientes extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Tficha_paciente p = new Tficha_paciente();
+					T_004_ficha_paciente p = new T_004_ficha_paciente();
 					if(acao==1) {
 						p.excluir(id);
 					}else {

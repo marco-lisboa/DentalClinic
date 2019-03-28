@@ -20,14 +20,15 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Cursor;
 
-public class Tcalculadora extends JPanel {
-	private JTextField textField_1;
+public class T_013_funcionario extends JPanel {
+	private JTextField textField;
+	private JComboBox textField_1;
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
-	public Tcalculadora() {
+	public T_013_funcionario() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -51,13 +52,28 @@ public class Tcalculadora extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Simulador Or\u00E7amentario", new ImageIcon(Tcalculadora.class.getResource("/img/calculatorpequeno.png")), panel, null);
+		tabbedPane.addTab("Ficha de Paciente", new ImageIcon(T_004_ficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
 		
+		JLabel lblData = new JLabel("Nome : ");
+		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblData.setForeground(Color.WHITE);
+		lblData.setBounds(10, 11, 46, 14);
+		panel.add(lblData);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel.setToolTipText("Buscar");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setBounds(207, 2, 40, 32);
+		panel.add(lblNewLabel);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setToolTipText("Voltar");
 		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -67,94 +83,62 @@ public class Tcalculadora extends JPanel {
 			}
 		});
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
 		lblNewLabel_1.setBounds(535, 2, 25, 32);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblSituao = new JLabel("Paciente : ");
+		textField = new JTextField();
+		textField.setBounds(52, 8, 145, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o : ");
 		lblSituao.setForeground(Color.WHITE);
 		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSituao.setBounds(10, 13, 139, 14);
+		lblSituao.setBounds(10, 39, 89, 14);
 		panel.add(lblSituao);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
+		textField_1 = new JComboBox();
+		textField_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		textField_1.setForeground(Color.BLACK);
-		textField_1.setBounds(77, 10, 168, 20);
+		textField_1.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Ativos", "Inativos"}));
+		textField_1.setBounds(73, 36, 145, 20);
 		panel.add(textField_1);
 		
-		JLabel label = new JLabel("");
-		label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		label.setToolTipText("Buscar Paciente");
-		label.setIcon(new ImageIcon(Tcalculadora.class.getResource("/img/buscar.png")));
-		label.setHorizontalAlignment(SwingConstants.LEFT);
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setBounds(255, 2, 46, 32);
-		panel.add(label);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 61, 550, 195);
+		scrollPane.setBounds(10, 78, 550, 279);
 		panel.add(scrollPane);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
+				{null, null, null},
 			},
 			new String[] {
-				"Nome", "Valor", "Desconto", "Valor Total"
+				"Nome", "Telefone", "Situa\u00E7\u00E3o"
 			}
 		));
 		scrollPane.setViewportView(table);
 		
-		JLabel lblTotal = new JLabel("Registros encontrados");
-		lblTotal.setIcon(new ImageIcon(Tcalculadora.class.getResource("/img/confimado.png")));
-		lblTotal.setForeground(Color.WHITE);
-		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTotal.setBounds(10, 276, 187, 14);
-		panel.add(lblTotal);
-		
-		JLabel lblValorIntegralDe = new JLabel("Valor Integral de : ");
-		lblValorIntegralDe.setIcon(new ImageIcon(Tcalculadora.class.getResource("/img/integral.png")));
-		lblValorIntegralDe.setForeground(Color.WHITE);
-		lblValorIntegralDe.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblValorIntegralDe.setBounds(10, 301, 187, 14);
-		panel.add(lblValorIntegralDe);
-		
-		JLabel lblValorTotalA = new JLabel("Valor Total a Pagar : ");
-		lblValorTotalA.setIcon(new ImageIcon(Tcalculadora.class.getResource("/img/pagamento.png")));
-		lblValorTotalA.setForeground(Color.WHITE);
-		lblValorTotalA.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblValorTotalA.setBounds(373, 301, 187, 14);
-		panel.add(lblValorTotalA);
-		
-		JLabel lblValorTotalDesconto = new JLabel("Valor Total Desconto : ");
-		lblValorTotalDesconto.setIcon(new ImageIcon(Tcalculadora.class.getResource("/img/banking.png")));
-		lblValorTotalDesconto.setForeground(Color.WHITE);
-		lblValorTotalDesconto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblValorTotalDesconto.setBounds(373, 267, 187, 14);
-		panel.add(lblValorTotalDesconto);
-		
 		JLabel adcionar = new JLabel("");
 		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adcionar.setToolTipText("Adicionar Procedimento");
+		adcionar.setToolTipText("Adicionar Novo Paciente");
 		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
-		adcionar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/add.png")));
+		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
 		adcionar.setBounds(221, 355, 46, 43);
 		panel.add(adcionar);
 		
 		JLabel deletar = new JLabel("");
 		deletar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		deletar.setToolTipText("Remover Procedimento");
-		deletar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/deleta.png")));
+		deletar.setToolTipText("Remover Paciente");
+		deletar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
 		deletar.setHorizontalAlignment(SwingConstants.CENTER);
 		deletar.setBounds(281, 355, 46, 43);
 		panel.add(deletar);
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 

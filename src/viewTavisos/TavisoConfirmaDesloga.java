@@ -61,7 +61,7 @@ public class TavisoConfirmaDesloga extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					new Login().show();
+					new T_001_Login().show();
 					dispose();
 				}
 			});
@@ -75,7 +75,7 @@ public class TavisoConfirmaDesloga extends JDialog {
 		btNao = new JButton("N\u00E3o");
 		btNao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Menu mn =new Menu();
+				T_002_Menu mn =new T_002_Menu();
 				mn.setVisible(true);
 				mn.setLocationRelativeTo(null);
 				dispose();

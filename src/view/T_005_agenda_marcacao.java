@@ -50,7 +50,7 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import javax.swing.JMenuItem;
 
-public class Tagenda_marcacao extends JPanel {
+public class T_005_agenda_marcacao extends JPanel {
 	
 	Paciente paciente = new Paciente();
 	Usuario usuario  = new Usuario();
@@ -186,7 +186,7 @@ public class Tagenda_marcacao extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Tagenda_marcacao() {
+	public T_005_agenda_marcacao() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -210,7 +210,7 @@ public class Tagenda_marcacao extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPaneAgenda.addTab("Agenda de Marca\u00E7\u00E3o", new ImageIcon(Tagenda_marcacao.class.getResource("/img/agenda de marcacao pequeno.png")), panel, null);
+		tabbedPaneAgenda.addTab("Agenda de Marca\u00E7\u00E3o", new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/agenda de marcacao pequeno.png")), panel, null);
 		tabbedPaneAgenda.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPaneAgenda.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -262,7 +262,7 @@ public class Tagenda_marcacao extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
 		lblNewLabel.setBounds(483, 33, 39, 32);
 		panel.add(lblNewLabel);
 		
@@ -277,7 +277,7 @@ public class Tagenda_marcacao extends JPanel {
 			}
 		});
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
 		lblNewLabel_1.setBounds(535, 2, 25, 32);
 		panel.add(lblNewLabel_1);
 		
@@ -467,20 +467,20 @@ public class Tagenda_marcacao extends JPanel {
 		});
 		btAdd.setToolTipText("Nova Marca\u00E7\u00E3o");
 		btAdd.setHorizontalAlignment(SwingConstants.CENTER);
-		btAdd.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/add.png")));
+		btAdd.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
 		btAdd.setBounds(221, 355, 46, 43);
 		panel.add(btAdd);
 		
 		JLabel btDeleta = new JLabel("");
 		btDeleta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btDeleta.setToolTipText("Remover Paciente");
-		btDeleta.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/deleta.png")));
+		btDeleta.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
 		btDeleta.setHorizontalAlignment(SwingConstants.CENTER);
 		btDeleta.setBounds(281, 355, 46, 43);
 		panel.add(btDeleta);
 		
 		rg = new JLabel();
-		rg.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/confimado.png")));
+		rg.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/confimado.png")));
 		rg.setForeground(Color.WHITE);
 		rg.setFont(new Font("Tahoma", Font.BOLD, 11));
 		rg.setBounds(10, 368, 208, 14);
@@ -488,7 +488,7 @@ public class Tagenda_marcacao extends JPanel {
 		
 		JLabel btImprimir = new JLabel("");
 		btImprimir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btImprimir.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/imprimir.png")));
+		btImprimir.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/imprimir.png")));
 		btImprimir.setToolTipText("Imprimir");
 		btImprimir.setHorizontalAlignment(SwingConstants.CENTER);
 		btImprimir.setBounds(514, 355, 46, 43);
@@ -497,7 +497,7 @@ public class Tagenda_marcacao extends JPanel {
 		JLabel bk = new JLabel("");
 		bk.setToolTipText("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 		
@@ -536,7 +536,7 @@ public class Tagenda_marcacao extends JPanel {
 		});
 		buscar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buscar.setToolTipText("Buscar");
-		buscar.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/buscar.png")));
+		buscar.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/buscar.png")));
 		buscar.setBounds(264, 0, 46, 35);
 		panel_1.add(buscar);
 		
@@ -633,7 +633,7 @@ public class Tagenda_marcacao extends JPanel {
 		panel_1.add(pro);
 		
 		dt = new JLabel("Data :");
-		dt.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/agenda de marcacao pequeno.png")));
+		dt.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/agenda de marcacao pequeno.png")));
 		dt.setForeground(Color.WHITE);
 		dt.setFont(new Font("Tahoma", Font.BOLD, 11));
 		dt.setBounds(280, 307, 280, 14);
@@ -652,7 +652,7 @@ public class Tagenda_marcacao extends JPanel {
 			}
 		});
 		btSalva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btSalva.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/savep.png")));
+		btSalva.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/savep.png")));
 		btSalva.setToolTipText("Salva");
 		btSalva.setBounds(224, 365, 30, 35);
 		panel_1.add(btSalva);
@@ -667,7 +667,7 @@ public class Tagenda_marcacao extends JPanel {
 				limpaCampos();
 			}
 		});
-		btVoltar.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/voltar.png")));
+		btVoltar.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/voltar.png")));
 		btVoltar.setToolTipText("Voltar");
 		btVoltar.setBounds(280, 365, 30, 35);
 		panel_1.add(btVoltar);
@@ -680,7 +680,7 @@ public class Tagenda_marcacao extends JPanel {
 		panel_1.add(sit);
 		
 		JLabel bkagenda = new JLabel("");
-		bkagenda.setIcon(new ImageIcon(Tagenda_marcacao.class.getResource("/img/bk.jpeg")));
+		bkagenda.setIcon(new ImageIcon(T_005_agenda_marcacao.class.getResource("/img/bk.jpeg")));
 		bkagenda.setHorizontalAlignment(SwingConstants.CENTER);
 		bkagenda.setBounds(0, 0, 570, 409);
 		panel_1.add(bkagenda);

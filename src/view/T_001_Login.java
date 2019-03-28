@@ -36,7 +36,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Login extends JFrame {
+public class T_001_Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tLogin;
@@ -48,7 +48,7 @@ public class Login extends JFrame {
 	private DaoConnect banco = new DaoConnect();
 	private Iniciador iniciar = new Iniciador();
 	private Usuario usuario = new Usuario();
-	Menu menu = new Menu();
+	T_002_Menu menu = new T_002_Menu();
 	TavisoConfirma avisoconf = new TavisoConfirma();
 	private JPanel panel;
 
@@ -56,11 +56,11 @@ public class Login extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		new Thread(new Carregando()).start();
+		new Thread(new T_000_Carregando()).start();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					T_001_Login frame = new T_001_Login();
 					frame.setVisible(false);
 					
 				} catch (Exception e) {
@@ -73,10 +73,10 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public T_001_Login() {
 		setUndecorated(true);
 		setTitle("Dental Clinic");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/tooth.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(T_001_Login.class.getResource("/img/tooth.png")));
 		setBounds(100, 100, 839, 573);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -96,13 +96,13 @@ public class Login extends JFrame {
 		btFechar.setBounds(795, 0, 46, 47);
 		contentPane.add(btFechar);
 		btFechar.setHorizontalAlignment(SwingConstants.CENTER);
-		btFechar.setIcon(new ImageIcon(Login.class.getResource("/img/fechar.png")));
+		btFechar.setIcon(new ImageIcon(T_001_Login.class.getResource("/img/fechar.png")));
 
 		JLabel btMinimizar = new JLabel("");
 		btMinimizar.setToolTipText("Maximizar");
 		btMinimizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btMinimizar.setHorizontalAlignment(SwingConstants.CENTER);
-		btMinimizar.setIcon(new ImageIcon(Login.class.getResource("/img/minus.png")));
+		btMinimizar.setIcon(new ImageIcon(T_001_Login.class.getResource("/img/minus.png")));
 		btMinimizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -229,13 +229,13 @@ public class Login extends JFrame {
 				});
 				btConfig.setToolTipText("Configura\u00E7\u00E3o de Acesso ao Servidor");
 				btConfig.setHorizontalAlignment(SwingConstants.CENTER);
-				btConfig.setIcon(new ImageIcon(Login.class.getResource("/img/cogwheel.png")));
+				btConfig.setIcon(new ImageIcon(T_001_Login.class.getResource("/img/cogwheel.png")));
 
 
 
 
 		JLabel backgraund = new JLabel("\r\n");
-		backgraund.setIcon(new ImageIcon(Login.class.getResource("/img/bk.jpeg")));
+		backgraund.setIcon(new ImageIcon(T_001_Login.class.getResource("/img/bk.jpeg")));
 		backgraund.setBounds(0, 0, 841, 573);
 		contentPane.add(backgraund);
 	}

@@ -20,14 +20,14 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Cursor;
 
-public class Tlivrocaixa extends JPanel {
+public class T_018_livrocaixa extends JPanel {
 	private JComboBox textField_1;
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
-	public Tlivrocaixa() {
+	public T_018_livrocaixa() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -51,7 +51,7 @@ public class Tlivrocaixa extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Livro Caixa", new ImageIcon(Tlivrocaixa.class.getResource("/img/receiptpequeno.png")), panel, null);
+		tabbedPane.addTab("Livro Caixa", new ImageIcon(T_018_livrocaixa.class.getResource("/img/receiptpequeno.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -84,7 +84,7 @@ public class Tlivrocaixa extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
 		lblNewLabel.setBounds(391, 2, 38, 32);
 		panel.add(lblNewLabel);
 		
@@ -99,7 +99,7 @@ public class Tlivrocaixa extends JPanel {
 			}
 		});
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
 		lblNewLabel_1.setBounds(535, 2, 25, 32);
 		panel.add(lblNewLabel_1);
 		
@@ -132,42 +132,42 @@ public class Tlivrocaixa extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JLabel label = new JLabel("Registros encontrados");
-		label.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/confimado.png")));
+		label.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/confimado.png")));
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label.setBounds(10, 284, 187, 14);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("Valor Integral de : ");
-		label_1.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/integral.png")));
+		label_1.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/integral.png")));
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_1.setBounds(10, 309, 187, 14);
 		panel.add(label_1);
 		
 		JLabel lblValorTotalDescontos = new JLabel("Valor Total Descontos : ");
-		lblValorTotalDescontos.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/banking.png")));
+		lblValorTotalDescontos.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/banking.png")));
 		lblValorTotalDescontos.setForeground(Color.WHITE);
 		lblValorTotalDescontos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValorTotalDescontos.setBounds(184, 284, 187, 14);
 		panel.add(lblValorTotalDescontos);
 		
 		JLabel lblValorTotalRecebido = new JLabel("Valor Total  Recebido : ");
-		lblValorTotalRecebido.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/recebidos.png")));
+		lblValorTotalRecebido.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/recebidos.png")));
 		lblValorTotalRecebido.setForeground(Color.WHITE);
 		lblValorTotalRecebido.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValorTotalRecebido.setBounds(184, 309, 187, 14);
 		panel.add(lblValorTotalRecebido);
 		
 		JLabel lblValorTotalDe = new JLabel("Valor Total de Saidas : ");
-		lblValorTotalDe.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/saida.png")));
+		lblValorTotalDe.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/saida.png")));
 		lblValorTotalDe.setForeground(Color.WHITE);
 		lblValorTotalDe.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValorTotalDe.setBounds(373, 284, 187, 14);
 		panel.add(lblValorTotalDe);
 		
 		JLabel lblValorLivroCaixa = new JLabel("Valor Em Caixa : ");
-		lblValorLivroCaixa.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/caixa.png")));
+		lblValorLivroCaixa.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/caixa.png")));
 		lblValorLivroCaixa.setForeground(Color.WHITE);
 		lblValorLivroCaixa.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValorLivroCaixa.setBounds(373, 309, 187, 14);
@@ -177,13 +177,13 @@ public class Tlivrocaixa extends JPanel {
 		lblNewLabel_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblNewLabel_2.setToolTipText("Imprimir");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setIcon(new ImageIcon(Tlivrocaixa.class.getResource("/img/imprimir.png")));
+		lblNewLabel_2.setIcon(new ImageIcon(T_018_livrocaixa.class.getResource("/img/imprimir.png")));
 		lblNewLabel_2.setBounds(243, 363, 46, 24);
 		panel.add(lblNewLabel_2);
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 

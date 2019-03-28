@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Cursor;
 
-public class Tcontas extends JPanel {
+public class T_015_contas extends JPanel {
 	private JTextField textField;
 	private JComboBox textField_1;
 	private JTable table;
@@ -28,7 +28,7 @@ public class Tcontas extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Tcontas() {
+	public T_015_contas() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -52,7 +52,7 @@ public class Tcontas extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Contas", new ImageIcon(Tcontas.class.getResource("/img/gambler pequeno.png")), panel, null);
+		tabbedPane.addTab("Contas", new ImageIcon(T_015_contas.class.getResource("/img/gambler pequeno.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -69,7 +69,7 @@ public class Tcontas extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
 		lblNewLabel.setBounds(207, 2, 40, 32);
 		panel.add(lblNewLabel);
 		
@@ -83,7 +83,7 @@ public class Tcontas extends JPanel {
 			}
 		});
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
 		lblNewLabel_1.setBounds(535, 2, 25, 32);
 		panel.add(lblNewLabel_1);
 		
@@ -124,21 +124,21 @@ public class Tcontas extends JPanel {
 		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		adcionar.setToolTipText("Adicionar Novo Paciente");
 		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
-		adcionar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/add.png")));
+		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
 		adcionar.setBounds(221, 355, 46, 43);
 		panel.add(adcionar);
 		
 		JLabel deletar = new JLabel("");
 		deletar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		deletar.setToolTipText("Remover Paciente");
-		deletar.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/deleta.png")));
+		deletar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
 		deletar.setHorizontalAlignment(SwingConstants.CENTER);
 		deletar.setBounds(281, 355, 46, 43);
 		panel.add(deletar);
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 

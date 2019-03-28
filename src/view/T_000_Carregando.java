@@ -22,11 +22,11 @@ import control.Iniciador;
 import javax.swing.SwingConstants;
 
 
-public class Carregando extends JFrame  implements Runnable {
+public class T_000_Carregando extends JFrame  implements Runnable {
 
 	Thread hilo;
 	private JPanel contentPane;
-	Login login = new Login();
+	T_001_Login login = new T_001_Login();
 	Iniciador iniciar = new Iniciador();
 	JProgressBar pbSplashScreen = new JProgressBar();
 	private int vlAjusta;
@@ -34,8 +34,8 @@ public class Carregando extends JFrame  implements Runnable {
 	/**
 	 * Create the frame.
 	 */
-	public Carregando() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Carregando.class.getResource("/img/tooth.png")));
+	public T_000_Carregando() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(T_000_Carregando.class.getResource("/img/tooth.png")));
 		
 		setLocationRelativeTo(null);
 		setUndecorated(true);
@@ -64,13 +64,13 @@ public class Carregando extends JFrame  implements Runnable {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(Carregando.class.getResource("/img/carregando.gif")));
+		lblNewLabel.setIcon(new ImageIcon(T_000_Carregando.class.getResource("/img/carregando.gif")));
 		lblNewLabel.setBounds(285, 280, 149, 100);
 		contentPane.add(lblNewLabel);
 		
 		JLabel backgraund = new JLabel("");
 		backgraund.setHorizontalAlignment(SwingConstants.CENTER);
-		backgraund.setIcon(new ImageIcon(Carregando.class.getResource("/img/bk.jpeg")));
+		backgraund.setIcon(new ImageIcon(T_000_Carregando.class.getResource("/img/bk.jpeg")));
 		backgraund.setBounds(0, 0, 719, 461);
 		contentPane.add(backgraund);
 		setLocationRelativeTo(null);
@@ -93,7 +93,7 @@ public class Carregando extends JFrame  implements Runnable {
 			}
 			
 		}catch(InterruptedException ex){
-			Logger.getLogger(Carregando.class.getName()).log(Level.SEVERE,null, ex);
+			Logger.getLogger(T_000_Carregando.class.getName()).log(Level.SEVERE,null, ex);
 		}
 		
 		this.dispose();

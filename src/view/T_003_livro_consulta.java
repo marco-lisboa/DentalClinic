@@ -45,7 +45,7 @@ import java.beans.PropertyChangeEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Tlivro_consulta extends JPanel {
+public class T_003_livro_consulta extends JPanel {
 	
 
 	Paciente paciente = new Paciente();
@@ -123,7 +123,7 @@ public class Tlivro_consulta extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Tlivro_consulta() {
+	public T_003_livro_consulta() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -147,7 +147,7 @@ public class Tlivro_consulta extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPane.addTab("Consultas Agendadas", new ImageIcon(Tlivro_consulta.class.getResource("/img/livro de consulta pequeno.png")), panel, null);
+		tabbedPane.addTab("Consultas Agendadas", new ImageIcon(T_003_livro_consulta.class.getResource("/img/livro de consulta pequeno.png")), panel, null);
 		tabbedPane.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPane.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -198,7 +198,7 @@ public class Tlivro_consulta extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
 		lblNewLabel.setBounds(487, 2, 38, 32);
 		panel.add(lblNewLabel);
 		
@@ -213,7 +213,7 @@ public class Tlivro_consulta extends JPanel {
 			}
 		});
 		voltar1.setHorizontalAlignment(SwingConstants.CENTER);
-		voltar1.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/voltar.png")));
+		voltar1.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/voltar.png")));
 		voltar1.setBounds(535, 2, 25, 32);
 		panel.add(voltar1);
 		
@@ -236,7 +236,7 @@ public class Tlivro_consulta extends JPanel {
 		scrollPane.setViewportView(tableAgendas);
 		
 		rg = new JLabel();
-		rg.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/confimado.png")));
+		rg.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/confimado.png")));
 		rg.setForeground(Color.WHITE);
 		rg.setFont(new Font("Tahoma", Font.BOLD, 11));
 		rg.setBounds(10, 359, 208, 14);
@@ -261,7 +261,7 @@ public class Tlivro_consulta extends JPanel {
 		panel.add(procedimentoPaciente);
 		
 		btImprimir = new JLabel("");
-		btImprimir.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/imprimir.png")));
+		btImprimir.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/imprimir.png")));
 		btImprimir.setToolTipText("Imprimir");
 		btImprimir.setHorizontalAlignment(SwingConstants.CENTER);
 		btImprimir.setBounds(514, 359, 46, 24);
@@ -269,7 +269,7 @@ public class Tlivro_consulta extends JPanel {
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 		
@@ -279,7 +279,7 @@ public class Tlivro_consulta extends JPanel {
 		add(tabbedPane_1);
 		
 		JPanel panel_1 = new JPanel();
-		tabbedPane_1.addTab("Consultas Agendadas", new ImageIcon(Tlivro_consulta.class.getResource("/img/livro de consulta pequeno.png")), panel_1, null);
+		tabbedPane_1.addTab("Consultas Agendadas", new ImageIcon(T_003_livro_consulta.class.getResource("/img/livro de consulta pequeno.png")), panel_1, null);
 		tabbedPane_1.setForegroundAt(0, Color.WHITE);
 		panel_1.setLayout(null);
 		
@@ -593,19 +593,19 @@ public class Tlivro_consulta extends JPanel {
 		panel_1.add(separator);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/voltar.png")));
+		label.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/voltar.png")));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(545, 0, 25, 32);
 		panel_1.add(label);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/atencao.png")));
+		label_1.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/atencao.png")));
 		label_1.setBounds(186, 60, 41, 32);
 		panel_1.add(label_1);
 		
 		JLabel bk02 = new JLabel("");
-		bk02.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk02.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk02.setHorizontalAlignment(SwingConstants.CENTER);
 		bk02.setBounds(0, 0, 570, 409);
 		panel_1.add(bk02);

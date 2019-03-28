@@ -32,24 +32,24 @@ import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Menu extends JFrame {
+public class T_002_Menu extends JFrame {
 	private JPanel contentPane;
 	private JLabel btMenu;
 	private JPanel menu;
 	TavisoConfirmaDesloga avisoconf = new TavisoConfirmaDesloga();
-	private Tlivro_consulta tlivro = new Tlivro_consulta();
-	private Tficha_paciente tficha = new Tficha_paciente();
-	private Tagenda_marcacao tagenda = new Tagenda_marcacao();
-	private Tcalculadora tcalcular = new Tcalculadora();
-	private Tlivrocaixa tcaixa = new Tlivrocaixa();
-	private Tconfigurar tconfig = new Tconfigurar();
-	private Trecebimento trebimento = new Trecebimento();
-	private Trecebimento_avulso trebimentoAvulso = new Trecebimento_avulso();
-	private TfinanceiroPaciente tfinanceiroPaciente = new TfinanceiroPaciente();
-	private TgerenciadorFinaceiro tgerenciador = new TgerenciadorFinaceiro();
-	private Tbancos tbancos = new Tbancos();
-	private Tcontas tcontas = new Tcontas();
-	private Tservicos tservico = new Tservicos();
+	private T_003_livro_consulta tlivro = new T_003_livro_consulta();
+	private T_004_ficha_paciente tficha = new T_004_ficha_paciente();
+	private T_005_agenda_marcacao tagenda = new T_005_agenda_marcacao();
+	private T_017_calculadora tcalcular = new T_017_calculadora();
+	private T_018_livrocaixa tcaixa = new T_018_livrocaixa();
+	private T_024_configurar tconfig = new T_024_configurar();
+	private T_006_recebimento trebimento = new T_006_recebimento();
+	private T_007_recebimento_avulso trebimentoAvulso = new T_007_recebimento_avulso();
+	private T_008_financeiroPaciente tfinanceiroPaciente = new T_008_financeiroPaciente();
+	private T_009_gerenciadorFinaceiro tgerenciador = new T_009_gerenciadorFinaceiro();
+	private T_014_bancos tbancos = new T_014_bancos();
+	private T_015_contas tcontas = new T_015_contas();
+	private T_016_servicos tservico = new T_016_servicos();
 	public JLabel nomeUsuario;
 	public   JPanel tfinanceiro;
 	private JTabbedPane tabbedPaneFinanceiro;
@@ -61,7 +61,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu();
+					T_002_Menu frame = new T_002_Menu();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -74,10 +74,10 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Menu() {
+	public T_002_Menu() {
 		setUndecorated(true);
 		setTitle("Dental Clinic");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("/img/tooth.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(T_002_Menu.class.getResource("/img/tooth.png")));
 		setBounds(100, 100, 839, 573);
 		contentPane = new JPanel();
 		contentPane.addKeyListener(new KeyAdapter() {
@@ -124,16 +124,16 @@ public class Menu extends JFrame {
 		fechar.setBounds(795, 0, 46, 47);
 		contentPane.add(fechar);
 		fechar.setHorizontalAlignment(SwingConstants.CENTER);
-		fechar.setIcon(new ImageIcon(Menu.class.getResource("/img/fechar.png")));
+		fechar.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/fechar.png")));
 		btMenu.setBounds(0, 207, 46, 47);
 		contentPane.add(btMenu);
-		btMenu.setIcon(new ImageIcon(Menu.class.getResource("/img/exibir.png")));
+		btMenu.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/exibir.png")));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setToolTipText("Minimizar");
 		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(Menu.class.getResource("/img/minus.png")));
+		lblNewLabel.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/minus.png")));
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -208,7 +208,7 @@ public class Menu extends JFrame {
 		menu.setLayout(null);
 		
 		JLabel fotoUsuario = new JLabel("");
-		fotoUsuario.setIcon(new ImageIcon(Menu.class.getResource("/img/toothgrande.png")));
+		fotoUsuario.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/toothgrande.png")));
 		fotoUsuario.setBounds(33, 9, 135, 134);
 		menu.add(fotoUsuario);
 		
@@ -241,7 +241,7 @@ public class Menu extends JFrame {
 		});
 		btconsulta.setToolTipText("Livro de Consultas Agendadas");
 		btconsulta.setHorizontalAlignment(SwingConstants.CENTER);
-		btconsulta.setIcon(new ImageIcon(Menu.class.getResource("/img/livro de consulta.png")));
+		btconsulta.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/livro de consulta.png")));
 		btconsulta.setBounds(28, 201, 43, 58);
 		menu.add(btconsulta);
 		
@@ -263,7 +263,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btFichaPaciente.setToolTipText("Ficha do Paciente ");
-		btFichaPaciente.setIcon(new ImageIcon(Menu.class.getResource("/img/ficha paciente.png")));
+		btFichaPaciente.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/ficha paciente.png")));
 		btFichaPaciente.setHorizontalAlignment(SwingConstants.CENTER);
 		btFichaPaciente.setBounds(82, 201, 43, 58);
 		menu.add(btFichaPaciente);
@@ -284,7 +284,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btAgendaMarcacao.setToolTipText("Agenda de Marca\u00E7\u00E3o");
-		btAgendaMarcacao.setIcon(new ImageIcon(Menu.class.getResource("/img/agenda de marcacao.png")));
+		btAgendaMarcacao.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/agenda de marcacao.png")));
 		btAgendaMarcacao.setHorizontalAlignment(SwingConstants.CENTER);
 		btAgendaMarcacao.setBounds(136, 201, 43, 58);
 		menu.add(btAgendaMarcacao);
@@ -308,7 +308,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btRecebimentoPagamento.setToolTipText("Recebimento e Pagamento");
-		btRecebimentoPagamento.setIcon(new ImageIcon(Menu.class.getResource("/img/gambler.png")));
+		btRecebimentoPagamento.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/gambler.png")));
 		btRecebimentoPagamento.setHorizontalAlignment(SwingConstants.CENTER);
 		btRecebimentoPagamento.setBounds(28, 270, 43, 58);
 		menu.add(btRecebimentoPagamento);
@@ -328,7 +328,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btCalculadoraOrcamento.setToolTipText("Calculadora Or\u00E7amentaria");
-		btCalculadoraOrcamento.setIcon(new ImageIcon(Menu.class.getResource("/img/calculator.png")));
+		btCalculadoraOrcamento.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/calculator.png")));
 		btCalculadoraOrcamento.setHorizontalAlignment(SwingConstants.CENTER);
 		btCalculadoraOrcamento.setBounds(82, 270, 43, 58);
 		menu.add(btCalculadoraOrcamento);
@@ -348,7 +348,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btLivrocaixa.setToolTipText("Livro Caixa");
-		btLivrocaixa.setIcon(new ImageIcon(Menu.class.getResource("/img/receipt.png")));
+		btLivrocaixa.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/receipt.png")));
 		btLivrocaixa.setHorizontalAlignment(SwingConstants.CENTER);
 		btLivrocaixa.setBounds(136, 270, 43, 58);
 		menu.add(btLivrocaixa);
@@ -356,7 +356,7 @@ public class Menu extends JFrame {
 		JLabel btFilachegada = new JLabel("");
 		btFilachegada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btFilachegada.setToolTipText("Fila de chamada");
-		btFilachegada.setIcon(new ImageIcon(Menu.class.getResource("/img/fila.png")));
+		btFilachegada.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/fila.png")));
 		btFilachegada.setHorizontalAlignment(SwingConstants.CENTER);
 		btFilachegada.setBounds(28, 339, 43, 58);
 		menu.add(btFilachegada);
@@ -364,7 +364,7 @@ public class Menu extends JFrame {
 		JLabel btObterSenha = new JLabel("");
 		btObterSenha.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btObterSenha.setToolTipText("Obter Senha");
-		btObterSenha.setIcon(new ImageIcon(Menu.class.getResource("/img/coins.png")));
+		btObterSenha.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/coins.png")));
 		btObterSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		btObterSenha.setBounds(82, 339, 43, 58);
 		menu.add(btObterSenha);
@@ -372,7 +372,7 @@ public class Menu extends JFrame {
 		JLabel btRealizarChamada = new JLabel("");
 		btRealizarChamada.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btRealizarChamada.setToolTipText("Realizar Chamada");
-		btRealizarChamada.setIcon(new ImageIcon(Menu.class.getResource("/img/realizar chamada.png")));
+		btRealizarChamada.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/realizar chamada.png")));
 		btRealizarChamada.setHorizontalAlignment(SwingConstants.CENTER);
 		btRealizarChamada.setBounds(136, 339, 43, 58);
 		menu.add(btRealizarChamada);
@@ -380,7 +380,7 @@ public class Menu extends JFrame {
 		JLabel btAjustaSite = new JLabel("");
 		btAjustaSite.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btAjustaSite.setToolTipText("Atualizar Site");
-		btAjustaSite.setIcon(new ImageIcon(Menu.class.getResource("/img/worldwide.png")));
+		btAjustaSite.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/worldwide.png")));
 		btAjustaSite.setHorizontalAlignment(SwingConstants.CENTER);
 		btAjustaSite.setBounds(28, 408, 43, 58);
 		menu.add(btAjustaSite);
@@ -388,7 +388,7 @@ public class Menu extends JFrame {
 		JLabel btAtualizarSistema = new JLabel("");
 		btAtualizarSistema.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btAtualizarSistema.setToolTipText("Verifica\u00E7\u00E3o de Atualiza\u00E7\u00E3o");
-		btAtualizarSistema.setIcon(new ImageIcon(Menu.class.getResource("/img/refresh.png")));
+		btAtualizarSistema.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/refresh.png")));
 		btAtualizarSistema.setHorizontalAlignment(SwingConstants.CENTER);
 		btAtualizarSistema.setBounds(82, 408, 43, 58);
 		menu.add(btAtualizarSistema);
@@ -408,7 +408,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btConfiguracao.setToolTipText("Configura\u00E7\u00E3o");
-		btConfiguracao.setIcon(new ImageIcon(Menu.class.getResource("/img/cogwheel.png")));
+		btConfiguracao.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/cogwheel.png")));
 		btConfiguracao.setHorizontalAlignment(SwingConstants.CENTER);
 		btConfiguracao.setBounds(136, 408, 43, 58);
 		menu.add(btConfiguracao);
@@ -426,7 +426,7 @@ public class Menu extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setFocusTraversalKeysEnabled(false);
-		tabbedPaneFinanceiro.addTab("Receitas", new ImageIcon(Menu.class.getResource("/img/gambler pequeno.png")), panel_1, null);
+		tabbedPaneFinanceiro.addTab("Receitas", new ImageIcon(T_002_Menu.class.getResource("/img/gambler pequeno.png")), panel_1, null);
 		tabbedPaneFinanceiro.setForegroundAt(0, Color.WHITE);
 		panel_1.setLayout(null);
 		
@@ -506,45 +506,6 @@ public class Menu extends JFrame {
 		btnGerenciadorFinanceiro.setBounds(10, 113, 213, 23);
 		panel_1.add(btnGerenciadorFinanceiro);
 		
-		JButton btnBancos = new JButton("Bancos");
-		btnBancos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				trebimento.setVisible(false);
-				trebimentoAvulso.setVisible(false);
-				tfinanceiroPaciente.setVisible(false);
-				tgerenciador.setVisible(false);
-				tcontas.setVisible(false);
-				tservico.setVisible(false);
-				tbancos.setVisible(true);
-			}
-		});
-		btnBancos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnBancos.setBackground(new Color(32, 178, 170));
-		btnBancos.setForeground(Color.WHITE);
-		btnBancos.setFocusable(false);
-		btnBancos.setBounds(10, 145, 213, 23);
-		panel_1.add(btnBancos);
-		
-		JButton btnContas = new JButton("Contas");
-		btnContas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				trebimento.setVisible(false);
-				trebimentoAvulso.setVisible(false);
-				tfinanceiroPaciente.setVisible(false);
-				tgerenciador.setVisible(false);
-				tbancos.setVisible(false);
-				tservico.setVisible(false);
-				tcontas.setVisible(true);
-				
-			}
-		});
-		btnContas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnContas.setBackground(new Color(32, 178, 170));
-		btnContas.setForeground(Color.WHITE);
-		btnContas.setFocusable(false);
-		btnContas.setBounds(10, 179, 213, 23);
-		panel_1.add(btnContas);
-		
 		JLabel bt = new JLabel("");
 		bt.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bt.addMouseListener(new MouseAdapter() {
@@ -553,26 +514,7 @@ public class Menu extends JFrame {
 					voltarMenu();
 			}
 		});
-		
-		JButton btnServioesEOrfertas = new JButton("Servi\u00E7os e Orfertas");
-		btnServioesEOrfertas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				trebimento.setVisible(false);
-				trebimentoAvulso.setVisible(false);
-				tfinanceiroPaciente.setVisible(false);
-				tgerenciador.setVisible(false);
-				tbancos.setVisible(false);
-				tcontas.setVisible(false);
-				tservico.setVisible(true);
-				
-			}
-		});
-		btnServioesEOrfertas.setForeground(Color.WHITE);
-		btnServioesEOrfertas.setFocusable(false);
-		btnServioesEOrfertas.setBackground(new Color(32, 178, 170));
-		btnServioesEOrfertas.setBounds(10, 209, 213, 23);
-		panel_1.add(btnServioesEOrfertas);
-		bt.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
+		bt.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/voltar.png")));
 		bt.setToolTipText("Voltar");
 		bt.setHorizontalAlignment(SwingConstants.CENTER);
 		bt.setBounds(183, 348, 46, 47);
@@ -580,13 +522,13 @@ public class Menu extends JFrame {
 		
 		JLabel bkfinaceiro = new JLabel("");
 		bkfinaceiro.setVerticalAlignment(SwingConstants.BOTTOM);
-		bkfinaceiro.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		bkfinaceiro.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/bk.jpeg")));
 		bkfinaceiro.setBounds(0, 0, 229, 408);
 		panel_1.add(bkfinaceiro);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setFocusTraversalKeysEnabled(false);
-		tabbedPaneFinanceiro.addTab("Despesas\r\n", new ImageIcon(Menu.class.getResource("/img/saida.png")), panel_2, null);
+		tabbedPaneFinanceiro.addTab("Despesas\r\n", new ImageIcon(T_002_Menu.class.getResource("/img/saida.png")), panel_2, null);
 		tabbedPaneFinanceiro.setForegroundAt(1, Color.WHITE);
 		panel_2.setLayout(null);
 		
@@ -608,7 +550,7 @@ public class Menu extends JFrame {
 		
 		JLabel bt2 = new JLabel("");
 		bt2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		bt2.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
+		bt2.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/voltar.png")));
 		bt2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -623,12 +565,12 @@ public class Menu extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_2.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		lblNewLabel_2.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/bk.jpeg")));
 		lblNewLabel_2.setBounds(0, 0, 227, 408);
 		panel_2.add(lblNewLabel_2);
 		
 		JPanel panel_3 = new JPanel();
-		tabbedPaneFinanceiro.addTab("Geral", new ImageIcon(Menu.class.getResource("/img/options.png")), panel_3, null);
+		tabbedPaneFinanceiro.addTab("Geral", new ImageIcon(T_002_Menu.class.getResource("/img/options.png")), panel_3, null);
 		tabbedPaneFinanceiro.setForegroundAt(2, Color.WHITE);
 		panel_3.setLayout(null);
 		
@@ -639,7 +581,7 @@ public class Menu extends JFrame {
 				voltarMenu();
 			}
 		});
-		label.setIcon(new ImageIcon(Menu.class.getResource("/img/voltar.png")));
+		label.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/voltar.png")));
 		label.setToolTipText("Voltar");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(181, 350, 46, 47);
@@ -659,9 +601,30 @@ public class Menu extends JFrame {
 		btnFuncionarios.setBounds(10, 45, 213, 23);
 		panel_3.add(btnFuncionarios);
 		
+		JButton button = new JButton("Bancos");
+		button.setForeground(Color.WHITE);
+		button.setFocusable(false);
+		button.setBackground(new Color(32, 178, 170));
+		button.setBounds(10, 79, 213, 23);
+		panel_3.add(button);
+		
+		JButton button_1 = new JButton("Contas");
+		button_1.setForeground(Color.WHITE);
+		button_1.setFocusable(false);
+		button_1.setBackground(new Color(32, 178, 170));
+		button_1.setBounds(10, 113, 213, 23);
+		panel_3.add(button_1);
+		
+		JButton button_2 = new JButton("Servi\u00E7os e Orfertas");
+		button_2.setForeground(Color.WHITE);
+		button_2.setFocusable(false);
+		button_2.setBackground(new Color(32, 178, 170));
+		button_2.setBounds(10, 143, 213, 23);
+		panel_3.add(button_2);
+		
 		JLabel bkGeral = new JLabel("");
 		bkGeral.setVerticalAlignment(SwingConstants.BOTTOM);
-		bkGeral.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		bkGeral.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/bk.jpeg")));
 		bkGeral.setHorizontalAlignment(SwingConstants.LEFT);
 		bkGeral.setBounds(0, 0, 227, 412);
 		panel_3.add(bkGeral);
@@ -670,7 +633,7 @@ public class Menu extends JFrame {
 	
 		
 		JLabel backgraund = new JLabel("\r\n");
-		backgraund.setIcon(new ImageIcon(Menu.class.getResource("/img/bk.jpeg")));
+		backgraund.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/bk.jpeg")));
 		backgraund.setBounds(0, 0, 841, 573);
 		contentPane.add(backgraund);
 	}
@@ -690,7 +653,7 @@ public class Menu extends JFrame {
 				}
 				if(menu.getX()<0) {
 					menu.setBounds(menu.getX()+10, 0, 201, 461);
-					btMenu.setIcon(new ImageIcon(Menu.class.getResource("/img/esconder.png")));
+					btMenu.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/esconder.png")));
 					
 					
 				}
@@ -713,7 +676,7 @@ public class Menu extends JFrame {
 				}
 				if(menu.getX()>-200) {
 					menu.setBounds(menu.getX()-10, 0, 201, 461);
-					btMenu.setIcon(new ImageIcon(Menu.class.getResource("/img/exibir.png")));
+					btMenu.setIcon(new ImageIcon(T_002_Menu.class.getResource("/img/exibir.png")));
 					tlivro.setVisible(false);
 					tficha.setVisible(false);
 					tagenda.setVisible(false);

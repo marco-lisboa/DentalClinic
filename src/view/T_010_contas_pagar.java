@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Cursor;
 
-public class Tpadrao extends JPanel {
+public class T_010_contas_pagar extends JPanel {
 	private JTextField textField;
 	private JComboBox textField_1;
 	private JTable table;
@@ -28,7 +28,7 @@ public class Tpadrao extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Tpadrao() {
+	public T_010_contas_pagar() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {

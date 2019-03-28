@@ -8,8 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import view.Tagenda_marcacao;
-import view.Tconfigurar;
+import view.T_005_agenda_marcacao;
+import view.T_024_configurar;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -66,7 +66,7 @@ public class TavisoAgenda extends JDialog {
 			btSim = new JButton("Sim");
 			btSim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Tagenda_marcacao a = new Tagenda_marcacao();
+					T_005_agenda_marcacao a = new T_005_agenda_marcacao();
 						a.excluir();
 					
 						dispose();

@@ -40,7 +40,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Tconfigurar extends JPanel {
+public class T_024_configurar extends JPanel {
 	int acao;
 	TavisoConfiguracao avisoAcao = new TavisoConfiguracao();
 	Taviso aviso = new Taviso();
@@ -153,7 +153,7 @@ public class Tconfigurar extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Tconfigurar() {
+	public T_024_configurar() {
 		
 		
 		setOpaque(false);
@@ -171,7 +171,7 @@ public class Tconfigurar extends JPanel {
 		panel_1.setLayout(null);
 		panel_1.setForeground(Color.WHITE);
 		panel_1.setBackground(new Color(32, 178, 170));
-		tabbedPaneUsuarios.addTab("USUARIO", new ImageIcon(Tconfigurar.class.getResource("/img/configPequena.png")), panel_1, null);
+		tabbedPaneUsuarios.addTab("USUARIO", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_1, null);
 		
 		JLabel voltarUsuarios = new JLabel("");
 		voltarUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -183,7 +183,7 @@ public class Tconfigurar extends JPanel {
 				limpaCampos();
 			}
 		});
-		voltarUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/voltar.png")));
+		voltarUsuarios.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
 		voltarUsuarios.setToolTipText("Voltar");
 		voltarUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		voltarUsuarios.setBounds(535, 2, 25, 32);
@@ -341,7 +341,7 @@ public class Tconfigurar extends JPanel {
 			}
 		});
 		btPesquisaUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btPesquisaUsuario.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/buscar.png")));
+		btPesquisaUsuario.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/buscar.png")));
 		btPesquisaUsuario.setToolTipText("Buscar");
 		btPesquisaUsuario.setHorizontalAlignment(SwingConstants.LEFT);
 		btPesquisaUsuario.setForeground(Color.WHITE);
@@ -361,7 +361,7 @@ public class Tconfigurar extends JPanel {
 		panel_1.add(cbsit);
 		
 		numRegistro = new JLabel();
-		numRegistro.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/confimado.png")));
+		numRegistro.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/confimado.png")));
 		numRegistro.setForeground(Color.WHITE);
 		numRegistro.setFont(new Font("Tahoma", Font.BOLD, 11));
 		numRegistro.setBounds(10, 368, 208, 14);
@@ -376,7 +376,7 @@ public class Tconfigurar extends JPanel {
 				checaPrivilegio();
 			}
 		});
-		btAdicionar.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/add.png")));
+		btAdicionar.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/add.png")));
 		btAdicionar.setToolTipText("Adicionar Novo Paciente");
 		btAdicionar.setHorizontalAlignment(SwingConstants.CENTER);
 		btAdicionar.setBounds(221, 355, 46, 43);
@@ -397,7 +397,7 @@ public class Tconfigurar extends JPanel {
 			}
 		});
 		btEditar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btEditar.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/editar (2).png")));
+		btEditar.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/editar (2).png")));
 		btEditar.setToolTipText("Editar");
 		btEditar.setHorizontalAlignment(SwingConstants.CENTER);
 		btEditar.setBounds(281, 355, 46, 43);
@@ -435,14 +435,14 @@ public class Tconfigurar extends JPanel {
 			}
 		});
 		btDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btDelete.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/deleta.png")));
+		btDelete.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/deleta.png")));
 		btDelete.setToolTipText("Remover Usuario");
 		btDelete.setHorizontalAlignment(SwingConstants.CENTER);
 		btDelete.setBounds(337, 355, 46, 43);
 		panel_1.add(btDelete);
 		
 		JLabel bkUsuarios = new JLabel("");
-		bkUsuarios.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
+		bkUsuarios.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
 		bkUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		bkUsuarios.setBounds(0, 2, 570, 409);
 		panel_1.add(bkUsuarios);
@@ -457,7 +457,7 @@ public class Tconfigurar extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(32, 178, 170));
 		panel.setForeground(Color.WHITE);
-		tabbedPanePrincipal.addTab("Configura\u00E7\u00E3o", new ImageIcon(Tconfigurar.class.getResource("/img/configPequena.png")), panel, null);
+		tabbedPanePrincipal.addTab("Configura\u00E7\u00E3o", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel, null);
 		tabbedPanePrincipal.setBackgroundAt(0, new Color(32, 178, 170));
 		tabbedPanePrincipal.setForegroundAt(0, Color.WHITE);
 		panel.setLayout(null);
@@ -473,7 +473,7 @@ public class Tconfigurar extends JPanel {
 			}
 		});
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(Tficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
 		lblNewLabel_1.setBounds(535, 2, 25, 32);
 		panel.add(lblNewLabel_1);
 		
@@ -509,7 +509,7 @@ public class Tconfigurar extends JPanel {
 		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(Tlivro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
 		bk.setBounds(0, 2, 570, 409);
 		panel.add(bk);
 		
@@ -525,7 +525,7 @@ public class Tconfigurar extends JPanel {
 		panel_2.setLayout(null);
 		panel_2.setForeground(Color.WHITE);
 		panel_2.setBackground(new Color(32, 178, 170));
-		tabbedPaneCadastroUsuario.addTab("USUARIO", new ImageIcon(Tconfigurar.class.getResource("/img/configPequena.png")), panel_2, null);
+		tabbedPaneCadastroUsuario.addTab("USUARIO", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_2, null);
 		tabbedPaneCadastroUsuario.setForegroundAt(0, Color.WHITE);
 		
 		JLabel label_1 = new JLabel("");
@@ -539,7 +539,7 @@ public class Tconfigurar extends JPanel {
 				
 			}
 		});
-		label_1.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/voltar.png")));
+		label_1.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
 		label_1.setToolTipText("Voltar");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setBounds(535, 2, 25, 32);
@@ -821,14 +821,14 @@ public class Tconfigurar extends JPanel {
 			}
 		});
 		btSalvar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btSalvar.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/save.png")));
+		btSalvar.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/save.png")));
 		btSalvar.setToolTipText("Salvar");
 		btSalvar.setHorizontalAlignment(SwingConstants.CENTER);
 		btSalvar.setBounds(272, 366, 47, 32);
 		panel_2.add(btSalvar);
 		
 		JLabel label_14 = new JLabel("");
-		label_14.setIcon(new ImageIcon(Tconfigurar.class.getResource("/img/bk.jpeg")));
+		label_14.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
 		label_14.setHorizontalAlignment(SwingConstants.CENTER);
 		label_14.setBounds(0, 2, 570, 409);
 		panel_2.add(label_14);
