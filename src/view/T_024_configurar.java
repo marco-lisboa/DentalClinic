@@ -246,11 +246,6 @@ public class T_024_configurar extends JPanel {
 		btnConfiguraoNfs.setBounds(14, 75, 257, 14);
 		panel.add(btnConfiguraoNfs);
 		
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(281, 11, 1, 324);
-		panel.add(separator);
-		
 		JLabel bk = new JLabel("");
 		bk.setHorizontalAlignment(SwingConstants.CENTER);
 		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
