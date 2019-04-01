@@ -39,6 +39,7 @@ import java.awt.Component;
 import javax.swing.JMenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFormattedTextField;
 
 public class T_024_configurar extends JPanel {
 	int acao;
@@ -104,6 +105,16 @@ public class T_024_configurar extends JPanel {
 	private JTextField textField;
 	private JTable table;
 	private JTabbedPane tabbedPaneEmpresa;
+	private JTabbedPane tabbedPaneCadastroEmpresa;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JFormattedTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
 	
 	  private JTable getTabela(){
 	    	if(tableUsuario==null){
@@ -226,6 +237,15 @@ public class T_024_configurar extends JPanel {
 		btnUsuarios.setBounds(14, 50, 257, 14);
 		panel.add(btnUsuarios);
 		
+		JButton btnConfiguraoNfs = new JButton("Configura\u00E7\u00E3o NFS");
+		btnConfiguraoNfs.setHorizontalAlignment(SwingConstants.CENTER);
+		btnConfiguraoNfs.setForeground(Color.WHITE);
+		btnConfiguraoNfs.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnConfiguraoNfs.setFocusable(false);
+		btnConfiguraoNfs.setBackground(new Color(32, 178, 170));
+		btnConfiguraoNfs.setBounds(14, 75, 257, 14);
+		panel.add(btnConfiguraoNfs);
+		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(281, 11, 1, 324);
@@ -238,111 +258,6 @@ public class T_024_configurar extends JPanel {
 		panel.add(bk);
 		tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneUsuarios.setVisible(false);
-		
-		tabbedPaneEmpresa = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneEmpresa.setVisible(false);
-		tabbedPaneEmpresa.setBounds(0, 0, 575, 428);
-		add(tabbedPaneEmpresa);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setForeground(Color.WHITE);
-		panel_3.setBackground(new Color(32, 178, 170));
-		tabbedPaneEmpresa.addTab("Empresa", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_3, null);
-		tabbedPaneEmpresa.setForegroundAt(0, Color.WHITE);
-		
-		JLabel label_3 = new JLabel("");
-		label_3.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				tabbedPaneEmpresa.setVisible(false);
-				tabbedPanePrincipal.setVisible(true);
-			}
-		});
-		label_3.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
-		label_3.setToolTipText("Voltar");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setBounds(535, 2, 25, 32);
-		panel_3.add(label_3);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 100, 550, 244);
-		panel_3.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column"
-			}
-		));
-		scrollPane.setViewportView(table);
-		
-		JLabel label_4 = new JLabel("Nome : ");
-		label_4.setForeground(Color.WHITE);
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_4.setBounds(10, 11, 46, 14);
-		panel_3.add(label_4);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(52, 8, 145, 20);
-		panel_3.add(textField);
-		
-		JLabel label_5 = new JLabel("");
-		label_5.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/buscar.png")));
-		label_5.setToolTipText("Buscar");
-		label_5.setHorizontalAlignment(SwingConstants.LEFT);
-		label_5.setForeground(Color.WHITE);
-		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_5.setBounds(207, 2, 46, 32);
-		panel_3.add(label_5);
-		
-		JLabel label_6 = new JLabel("Situa\u00E7\u00E3o : ");
-		label_6.setForeground(Color.WHITE);
-		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_6.setBounds(10, 39, 89, 14);
-		panel_3.add(label_6);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(73, 36, 145, 20);
-		panel_3.add(comboBox);
-		
-		JLabel label_8 = new JLabel();
-		label_8.setForeground(Color.WHITE);
-		label_8.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_8.setBounds(10, 368, 208, 14);
-		panel_3.add(label_8);
-		
-		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/add.png")));
-		label_9.setToolTipText("Adicionar Novo Paciente");
-		label_9.setHorizontalAlignment(SwingConstants.CENTER);
-		label_9.setBounds(221, 355, 46, 43);
-		panel_3.add(label_9);
-		
-		JLabel label_10 = new JLabel("");
-		label_10.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/editar (2).png")));
-		label_10.setToolTipText("Editar");
-		label_10.setHorizontalAlignment(SwingConstants.CENTER);
-		label_10.setBounds(281, 355, 46, 43);
-		panel_3.add(label_10);
-		
-		JLabel label_11 = new JLabel("");
-		label_11.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/deleta.png")));
-		label_11.setToolTipText("Remover Usuario");
-		label_11.setHorizontalAlignment(SwingConstants.CENTER);
-		label_11.setBounds(337, 355, 46, 43);
-		panel_3.add(label_11);
-		
-		JLabel label_12 = new JLabel("");
-		label_12.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
-		label_12.setHorizontalAlignment(SwingConstants.CENTER);
-		label_12.setBounds(0, 2, 570, 409);
-		panel_3.add(label_12);
 		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneUsuarios.setBorder(null);
 		tabbedPaneUsuarios.setBackground(new Color(32, 178, 170));
@@ -632,6 +547,118 @@ public class T_024_configurar extends JPanel {
 		
 		tabbedPaneCadastroUsuario = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneCadastroUsuario.setVisible(false);
+		
+		tabbedPaneEmpresa = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneEmpresa.setVisible(false);
+		tabbedPaneEmpresa.setBounds(0, 0, 575, 428);
+		add(tabbedPaneEmpresa);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setForeground(Color.WHITE);
+		panel_3.setBackground(new Color(32, 178, 170));
+		tabbedPaneEmpresa.addTab("Empresa", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_3, null);
+		tabbedPaneEmpresa.setForegroundAt(0, Color.WHITE);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPaneEmpresa.setVisible(false);
+				tabbedPanePrincipal.setVisible(true);
+			}
+		});
+		label_3.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
+		label_3.setToolTipText("Voltar");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		label_3.setBounds(535, 2, 25, 32);
+		panel_3.add(label_3);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 100, 550, 244);
+		panel_3.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		scrollPane.setViewportView(table);
+		
+		JLabel label_4 = new JLabel("Nome : ");
+		label_4.setForeground(Color.WHITE);
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_4.setBounds(10, 11, 46, 14);
+		panel_3.add(label_4);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(52, 8, 145, 20);
+		panel_3.add(textField);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/buscar.png")));
+		label_5.setToolTipText("Buscar");
+		label_5.setHorizontalAlignment(SwingConstants.LEFT);
+		label_5.setForeground(Color.WHITE);
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_5.setBounds(207, 2, 46, 32);
+		panel_3.add(label_5);
+		
+		JLabel label_6 = new JLabel("Situa\u00E7\u00E3o : ");
+		label_6.setForeground(Color.WHITE);
+		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_6.setBounds(10, 39, 89, 14);
+		panel_3.add(label_6);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(73, 36, 145, 20);
+		panel_3.add(comboBox);
+		
+		JLabel label_8 = new JLabel();
+		label_8.setForeground(Color.WHITE);
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_8.setBounds(10, 368, 208, 14);
+		panel_3.add(label_8);
+		
+		JLabel btAdcEmpresa = new JLabel("");
+		btAdcEmpresa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPaneEmpresa.setVisible(false);
+				tabbedPaneCadastroEmpresa.setVisible(true);
+			}
+		});
+		btAdcEmpresa.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/add.png")));
+		btAdcEmpresa.setToolTipText("Adicionar Nova Empresa");
+		btAdcEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		btAdcEmpresa.setBounds(221, 355, 46, 43);
+		panel_3.add(btAdcEmpresa);
+		
+		JLabel btEditarEmpresa = new JLabel("");
+		btEditarEmpresa.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/editar (2).png")));
+		btEditarEmpresa.setToolTipText("Editar");
+		btEditarEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		btEditarEmpresa.setBounds(281, 355, 46, 43);
+		panel_3.add(btEditarEmpresa);
+		
+		JLabel btDeletaEmpresa = new JLabel("");
+		btDeletaEmpresa.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/deleta.png")));
+		btDeletaEmpresa.setToolTipText("Remover Usuario");
+		btDeletaEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		btDeletaEmpresa.setBounds(337, 355, 46, 43);
+		panel_3.add(btDeletaEmpresa);
+		
+		JLabel label_12 = new JLabel("");
+		label_12.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
+		label_12.setHorizontalAlignment(SwingConstants.CENTER);
+		label_12.setBounds(0, 2, 570, 409);
+		panel_3.add(label_12);
 		tabbedPaneCadastroUsuario.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneCadastroUsuario.setBorder(null);
 		tabbedPaneCadastroUsuario.setBackground(new Color(32, 178, 170));
@@ -949,6 +976,366 @@ public class T_024_configurar extends JPanel {
 		label_14.setHorizontalAlignment(SwingConstants.CENTER);
 		label_14.setBounds(0, 2, 570, 409);
 		panel_2.add(label_14);
+		
+		tabbedPaneCadastroEmpresa = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneCadastroEmpresa.setVisible(false);
+		tabbedPaneCadastroEmpresa.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneCadastroEmpresa.setBorder(null);
+		tabbedPaneCadastroEmpresa.setBackground(new Color(32, 178, 170));
+		tabbedPaneCadastroEmpresa.setBounds(0, 0, 575, 428);
+		add(tabbedPaneCadastroEmpresa);
+		
+		JPanel panel_4 = new JPanel();
+		tabbedPaneCadastroEmpresa.addTab("Empresa", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_4, null);
+		tabbedPaneCadastroEmpresa.setForegroundAt(0, Color.WHITE);
+		panel_4.setLayout(null);
+		
+		JLabel btvoltarempresa = new JLabel("");
+		btvoltarempresa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				tabbedPaneCadastroEmpresa.setVisible(false);
+				tabbedPaneEmpresa.setVisible(true);
+			}
+		});
+		btvoltarempresa.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
+		btvoltarempresa.setToolTipText("Voltar");
+		btvoltarempresa.setHorizontalAlignment(SwingConstants.CENTER);
+		btvoltarempresa.setBounds(535, 0, 25, 32);
+		panel_4.add(btvoltarempresa);
+		
+		JLabel lblRazoSocial = new JLabel("Raz\u00E3o Social : ");
+		lblRazoSocial.setForeground(Color.WHITE);
+		lblRazoSocial.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRazoSocial.setBounds(10, 28, 96, 14);
+		panel_4.add(lblRazoSocial);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(93, 25, 432, 20);
+		panel_4.add(textField_1);
+		
+		JLabel lblNomeFantasia = new JLabel("Nome Fantasia: ");
+		lblNomeFantasia.setForeground(Color.WHITE);
+		lblNomeFantasia.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNomeFantasia.setBounds(10, 53, 96, 14);
+		panel_4.add(lblNomeFantasia);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(103, 50, 422, 20);
+		panel_4.add(textField_2);
+		
+		JLabel lblCnpj = new JLabel("CNPJ : ");
+		lblCnpj.setForeground(Color.WHITE);
+		lblCnpj.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCnpj.setBounds(10, 82, 96, 14);
+		panel_4.add(lblCnpj);
+		
+		textField_3 = new JFormattedTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(47, 79, 211, 20);
+		panel_4.add(textField_3);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setBounds(20, 127, 540, 2);
+		panel_4.add(separator_5);
+		
+		JLabel label_13 = new JLabel("Nascionalidade :");
+		label_13.setForeground(Color.WHITE);
+		label_13.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_13.setFocusable(false);
+		label_13.setBounds(10, 144, 123, 14);
+		panel_4.add(label_13);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Antiguano", "Argentino", "Bahamense", "Barbadiano, barbadense", "Belizenho", "Boliviano", "Brasileiro", "Chileno", "Colombiano", "Costarriquenho", "Cubano", "Dominicano", "Equatoriano", "Salvadorenho", "Granadino", "Guatemalteco", "Guian\u00EAs", "Guianense", "Haitiano", "Hondurenho", "Jamaicano", "Mexicano", "Nicaraguense", "Rep\u00FAblica Dominicana - Dominicana", "S\u00E3o-cristovense", "S\u00E3o-vicentino", "Santa-lucense", "Surinam\u00EAs", "Trindadense", "Uruguaio", "Venezuelano", "Alem\u00E3o", "Austr\u00EDaco", "Belga", "Croata", "Dinamarqu\u00EAs", "Eslovaco", "Esloveno", "Espanhol", "Franc\u00EAs", "Grego", "H\u00FAngaro", "Irland\u00EAs", "Italiano", "Noruego", "Holand\u00EAs", "Polon\u00EAs", "Portugu\u00EAs", "Brit\u00E2nico", "Ingl\u00EAs", "Gal\u00EAs", "Escoc\u00EAs", "Romeno", "Russo", "S\u00E9rvio", "Sueco", "Su\u00ED\u00E7o", "Turco", "Ucraniano", "Americano", "Canadense", "Angolano", "Mo\u00E7ambicano", "Sul-africano", "Zimbabuense", "Arg\u00E9lia", "Comorense", "Eg\u00EDpcio", "L\u00EDbio", "Marroquino", "Gan\u00E9s", "Queniano", "Ruand\u00EAs", "Ugandense", "Bechuano", "Marfinense", "Camaronense", "Nigeriano", "Somali", "Australiano", "Neozeland\u00EAs", "Afeg\u00E3o", "Saudita", "Armeno", "Bangladesh", "Chin\u00EAs", "Norte-coreano, coreano", "Sul-coreano, coreano", "Indiano", "Indon\u00E9sio", "Iraquiano", "Iraniano", "Israelita", "Japon\u00EAs", "Malaio", "Nepal\u00EAs", "Omanense", "Paquistan\u00EAs", "Palestino", "Qatarense", "S\u00EDrio", "Cingal\u00EAs", "Tailand\u00EAs", "Timorense, maubere", "\u00C1rabe, emiratense", "Vietnamita", "I\u00EAmen - Iemenita"}));
+		comboBox_1.setFocusable(false);
+		comboBox_1.setBounds(102, 140, 152, 22);
+		panel_4.add(comboBox_1);
+		
+		JLabel label_15 = new JLabel("Estado :");
+		label_15.setForeground(Color.WHITE);
+		label_15.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_15.setFocusable(false);
+		label_15.setBounds(264, 144, 54, 14);
+		panel_4.add(label_15);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setFocusable(false);
+		comboBox_2.setBounds(312, 140, 54, 22);
+		panel_4.add(comboBox_2);
+		
+		JLabel label_16 = new JLabel("Cidade :");
+		label_16.setForeground(Color.WHITE);
+		label_16.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_16.setFocusable(false);
+		label_16.setBounds(376, 144, 54, 14);
+		panel_4.add(label_16);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setFocusable(false);
+		comboBox_3.setBounds(424, 140, 136, 22);
+		panel_4.add(comboBox_3);
+		
+		JLabel lblRua = new JLabel("Rua : ");
+		lblRua.setForeground(Color.WHITE);
+		lblRua.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRua.setFocusable(false);
+		lblRua.setBounds(10, 172, 38, 14);
+		panel_4.add(lblRua);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(52, 169, 508, 20);
+		panel_4.add(textField_4);
+		
+		JLabel lblCep = new JLabel("N\u00BA : ");
+		lblCep.setForeground(Color.WHITE);
+		lblCep.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCep.setBounds(10, 200, 38, 14);
+		panel_4.add(lblCep);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setColumns(10);
+		formattedTextField.setBounds(47, 197, 176, 20);
+		panel_4.add(formattedTextField);
+		
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1.setColumns(10);
+		formattedTextField_1.setBounds(315, 200, 176, 20);
+		panel_4.add(formattedTextField_1);
+		
+		JLabel label_17 = new JLabel("CEP : ");
+		label_17.setForeground(Color.WHITE);
+		label_17.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_17.setBounds(278, 203, 96, 14);
+		panel_4.add(label_17);
+		
+		JLabel label_18 = new JLabel("Email : ");
+		label_18.setForeground(Color.WHITE);
+		label_18.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_18.setFocusable(false);
+		label_18.setBounds(10, 256, 48, 14);
+		panel_4.add(label_18);
+		
+		JLabel label_19 = new JLabel("Email : ");
+		label_19.setForeground(Color.WHITE);
+		label_19.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_19.setFocusable(false);
+		label_19.setBounds(10, 228, 123, 14);
+		panel_4.add(label_19);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(52, 225, 458, 20);
+		panel_4.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(52, 253, 458, 20);
+		panel_4.add(textField_6);
+		
+		JLabel label_20 = new JLabel("Contato : ");
+		label_20.setForeground(Color.WHITE);
+		label_20.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_20.setFocusable(false);
+		label_20.setBounds(10, 281, 61, 14);
+		panel_4.add(label_20);
+		
+		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
+		formattedTextField_2.setColumns(10);
+		formattedTextField_2.setBounds(65, 278, 127, 20);
+		panel_4.add(formattedTextField_2);
+		
+		JLabel label_21 = new JLabel("Op :");
+		label_21.setForeground(Color.WHITE);
+		label_21.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_21.setFocusable(false);
+		label_21.setBounds(203, 280, 32, 14);
+		panel_4.add(label_21);
+		
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setFocusable(false);
+		comboBox_4.setBounds(235, 277, 152, 22);
+		panel_4.add(comboBox_4);
+		
+		JCheckBox checkBox = new JCheckBox("WhatsApp");
+		checkBox.setOpaque(false);
+		checkBox.setForeground(Color.WHITE);
+		checkBox.setFocusable(false);
+		checkBox.setBounds(401, 278, 97, 23);
+		panel_4.add(checkBox);
+		
+		JLabel label_22 = new JLabel("Contato : ");
+		label_22.setForeground(Color.WHITE);
+		label_22.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_22.setFocusable(false);
+		label_22.setBounds(10, 309, 61, 14);
+		panel_4.add(label_22);
+		
+		JFormattedTextField formattedTextField_3 = new JFormattedTextField();
+		formattedTextField_3.setColumns(10);
+		formattedTextField_3.setBounds(64, 305, 127, 20);
+		panel_4.add(formattedTextField_3);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		comboBox_5.setFocusable(false);
+		comboBox_5.setBounds(234, 304, 152, 22);
+		panel_4.add(comboBox_5);
+		
+		JLabel label_23 = new JLabel("Op :");
+		label_23.setForeground(Color.WHITE);
+		label_23.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_23.setFocusable(false);
+		label_23.setBounds(201, 308, 32, 14);
+		panel_4.add(label_23);
+		
+		JCheckBox checkBox_1 = new JCheckBox("WhatsApp");
+		checkBox_1.setOpaque(false);
+		checkBox_1.setForeground(Color.WHITE);
+		checkBox_1.setFocusable(false);
+		checkBox_1.setBounds(400, 304, 97, 23);
+		panel_4.add(checkBox_1);
+		
+		JLabel bkempresas = new JLabel("");
+		bkempresas.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
+		bkempresas.setHorizontalAlignment(SwingConstants.CENTER);
+		bkempresas.setBounds(0, 0, 570, 409);
+		panel_4.add(bkempresas);
+		
+		JPanel panel_5 = new JPanel();
+		tabbedPaneCadastroEmpresa.addTab("Propriet\u00E1rio", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_5, null);
+		tabbedPaneCadastroEmpresa.setForegroundAt(1, Color.WHITE);
+		panel_5.setLayout(null);
+		
+		JLabel bt = new JLabel("");
+		bt.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPaneCadastroEmpresa.setVisible(false);
+				tabbedPaneEmpresa.setVisible(true);
+			}
+		});
+		bt.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
+		bt.setToolTipText("Voltar");
+		bt.setHorizontalAlignment(SwingConstants.CENTER);
+		bt.setBounds(535, 0, 25, 32);
+		panel_5.add(bt);
+		
+		JLabel lblNome = new JLabel("Nome : ");
+		lblNome.setForeground(Color.WHITE);
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNome.setBounds(10, 32, 96, 14);
+		panel_5.add(lblNome);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(57, 29, 432, 20);
+		panel_5.add(textField_7);
+		
+		JLabel lblCpf = new JLabel("CPF :");
+		lblCpf.setForeground(Color.WHITE);
+		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCpf.setBounds(10, 57, 39, 14);
+		panel_5.add(lblCpf);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(47, 54, 205, 20);
+		panel_5.add(textField_8);
+		
+		JLabel lblCro = new JLabel("CRO : ");
+		lblCro.setForeground(Color.WHITE);
+		lblCro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCro.setBounds(262, 57, 96, 14);
+		panel_5.add(lblCro);
+		
+		JFormattedTextField formattedTextField_4 = new JFormattedTextField();
+		formattedTextField_4.setColumns(10);
+		formattedTextField_4.setBounds(299, 54, 211, 20);
+		panel_5.add(formattedTextField_4);
+		
+		JLabel label_9 = new JLabel("Email : ");
+		label_9.setForeground(Color.WHITE);
+		label_9.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_9.setFocusable(false);
+		label_9.setBounds(10, 85, 123, 14);
+		panel_5.add(label_9);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(52, 82, 458, 20);
+		panel_5.add(textField_9);
+		
+		JLabel label_10 = new JLabel("Contato : ");
+		label_10.setForeground(Color.WHITE);
+		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_10.setFocusable(false);
+		label_10.setBounds(10, 110, 61, 14);
+		panel_5.add(label_10);
+		
+		JFormattedTextField formattedTextField_5 = new JFormattedTextField();
+		formattedTextField_5.setColumns(10);
+		formattedTextField_5.setBounds(65, 107, 127, 20);
+		panel_5.add(formattedTextField_5);
+		
+		JLabel label_11 = new JLabel("Op :");
+		label_11.setForeground(Color.WHITE);
+		label_11.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_11.setFocusable(false);
+		label_11.setBounds(203, 109, 32, 14);
+		panel_5.add(label_11);
+		
+		JComboBox comboBox_6 = new JComboBox();
+		comboBox_6.setFocusable(false);
+		comboBox_6.setBounds(235, 106, 152, 22);
+		panel_5.add(comboBox_6);
+		
+		JCheckBox checkBox_2 = new JCheckBox("WhatsApp");
+		checkBox_2.setOpaque(false);
+		checkBox_2.setForeground(Color.WHITE);
+		checkBox_2.setFocusable(false);
+		checkBox_2.setBounds(401, 107, 97, 23);
+		panel_5.add(checkBox_2);
+		
+		JLabel label_25 = new JLabel("Contato : ");
+		label_25.setForeground(Color.WHITE);
+		label_25.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_25.setFocusable(false);
+		label_25.setBounds(10, 138, 61, 14);
+		panel_5.add(label_25);
+		
+		JFormattedTextField formattedTextField_6 = new JFormattedTextField();
+		formattedTextField_6.setColumns(10);
+		formattedTextField_6.setBounds(64, 134, 127, 20);
+		panel_5.add(formattedTextField_6);
+		
+		JLabel label_26 = new JLabel("Op :");
+		label_26.setForeground(Color.WHITE);
+		label_26.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_26.setFocusable(false);
+		label_26.setBounds(201, 137, 32, 14);
+		panel_5.add(label_26);
+		
+		JComboBox comboBox_7 = new JComboBox();
+		comboBox_7.setFocusable(false);
+		comboBox_7.setBounds(234, 133, 152, 22);
+		panel_5.add(comboBox_7);
+		
+		JCheckBox checkBox_3 = new JCheckBox("WhatsApp");
+		checkBox_3.setOpaque(false);
+		checkBox_3.setForeground(Color.WHITE);
+		checkBox_3.setFocusable(false);
+		checkBox_3.setBounds(400, 133, 97, 23);
+		panel_5.add(checkBox_3);
+		
+		JLabel bkempresas2 = new JLabel("");
+		bkempresas2.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
+		bkempresas2.setHorizontalAlignment(SwingConstants.CENTER);
+		bkempresas2.setBounds(0, 0, 570, 409);
+		panel_5.add(bkempresas2);
 
 	}
 	

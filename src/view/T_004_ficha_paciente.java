@@ -244,311 +244,6 @@ public class T_004_ficha_paciente extends JPanel {
 		tabbedPaneCadastro = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneCadastro.setFocusable(false);
 		tabbedPaneCadastro.setVisible(false);
-		
-		tabbedPaneFicha = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneFicha.setFocusable(false);
-		tabbedPaneFicha.setBorder(null);
-		tabbedPaneFicha.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPaneFicha.setBackground(new Color(32, 178, 170));
-		tabbedPaneFicha.setBounds(0, 0, 575, 428);
-		add(tabbedPaneFicha);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(32, 178, 170));
-		panel.setForeground(Color.WHITE);
-		tabbedPaneFicha.addTab("Ficha de Paciente", new ImageIcon(T_004_ficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
-		tabbedPaneFicha.setForegroundAt(0, Color.WHITE);
-		panel.setLayout(null);
-		
-		JLabel lblData = new JLabel("Nome : ");
-		lblData.setFocusable(false);
-		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblData.setForeground(Color.WHITE);
-		lblData.setBounds(10, 11, 46, 14);
-		panel.add(lblData);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setFocusable(false);
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				buscar();
-			}
-		});
-		lblNewLabel.setToolTipText("Buscar");
-		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
-		lblNewLabel.setBounds(207, 2, 46, 32);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				setVisible(false);
-			}
-		});
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
-		lblNewLabel_1.setBounds(535, 2, 25, 32);
-		panel.add(lblNewLabel_1);
-		
-		txnomebuscar = new JTextField();
-		txnomebuscar.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
-					buscar();
-				}
-			}
-		});
-		txnomebuscar.setBounds(52, 8, 145, 20);
-		panel.add(txnomebuscar);
-		txnomebuscar.setColumns(10);
-		
-		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o : ");
-		lblSituao.setFocusable(false);
-		lblSituao.setForeground(Color.WHITE);
-		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSituao.setBounds(10, 39, 89, 14);
-		panel.add(lblSituao);
-		
-		situacao = new JComboBox();
-		situacao.setFocusable(false);
-		situacao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		situacao.setModel(new DefaultComboBoxModel(new String[] {"Ativo", "Inativo", "Todos"}));
-		situacao.setBounds(73, 36, 145, 20);
-		panel.add(situacao);
-		
-		
-		tablePaciente = new JTable();
-		tablePaciente.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent click) {
-				if(click.getClickCount()==2) {
-					acao =0;
-					int linha;
-					Object codigo;
-					linha= tablePaciente.getSelectedRow();
-					codigo =  tablePaciente.getValueAt(linha, 0);
-					
-					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
-					prencheCampos();
-				}
-			}
-		});
-		tablePaciente.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Codigo", "Nome", "Contato"
-				}
-			));
-		scroll = new JScrollPane();
-		scroll.setBounds(10, 100, 550, 244);
-		panel.add(scroll);
-		
-		popupMenu = new JPopupMenu();
-		addPopup(scroll, popupMenu);
-		
-		JMenuItem mntmNovoCadastro = new JMenuItem("Novo Cadastro");
-		mntmNovoCadastro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				acao=1;
-				limpaCampos();
-				checaPrivilegio();
-			}
-		});
-		popupMenu.add(mntmNovoCadastro);
-		
-		JSeparator separator_1 = new JSeparator();
-		popupMenu.add(separator_1);
-		
-		JMenuItem mntmEditarCadastro = new JMenuItem("Editar Cadastro");
-		mntmEditarCadastro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				acao =0;
-				int linha;
-				Object codigo;
-				linha= tablePaciente.getSelectedRow();
-				
-				if(linha < 0) {
-					aviso.texto.setText("Nenhum Paciente Selecionado.");
-					aviso.setLocationRelativeTo(null);
-					aviso.show();
-				}else {
-					
-					linha= tablePaciente.getSelectedRow();
-					codigo =  tablePaciente.getValueAt(linha, 0);
-					
-					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
-					prencheCampos();
-
-				}
-			}
-		});
-		popupMenu.add(mntmEditarCadastro);
-		
-		JSeparator separator_2 = new JSeparator();
-		popupMenu.add(separator_2);
-		
-		JMenuItem mntmDesativar = new JMenuItem("Desativar");
-		mntmDesativar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				acao =0;
-				int linha;
-				Object codigo;
-				linha= tablePaciente.getSelectedRow();
-				
-				if(linha < 0) {
-					aviso.texto.setText("Nenhum Paciente Selecionado.");
-					aviso.setLocationRelativeTo(null);
-					aviso.show();
-				}else {
-					codigo =  tablePaciente.getValueAt(linha, 0);
-					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
-					avisoAcao.id=paciente.getIdpaciente();
-					avisoAcao.acao=0;
-					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
-					avisoAcao.setLocationRelativeTo(null);
-					avisoAcao.show();
-				}
-				buscar();
-			}
-		});
-		popupMenu.add(mntmDesativar);
-		
-		JSeparator separator_3 = new JSeparator();
-		popupMenu.add(separator_3);
-		
-		JMenuItem mntmExcluir = new JMenuItem("Excluir");
-		mntmExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int linha;
-				Object codigo;
-				linha= tablePaciente.getSelectedRow();
-				
-				if(linha < 0) {
-					aviso.texto.setText("Nenhum Paciente Selecionado.");
-					aviso.setLocationRelativeTo(null);
-					aviso.show();
-				}else {
-					codigo =  tablePaciente.getValueAt(linha, 0);
-					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
-					avisoAcao.id=paciente.getIdpaciente();
-					avisoAcao.acao=1;
-					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
-					avisoAcao.setLocationRelativeTo(null);
-					avisoAcao.show();
-				}
-				buscar();
-			}
-		});
-		popupMenu.add(mntmExcluir);
-		scroll.setViewportView(tablePaciente);
-		
-		JLabel adcionar = new JLabel("");
-		adcionar.setFocusable(false);
-		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		adcionar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				acao=1;
-				limpaCampos();
-				checaPrivilegio();
-				
-			}
-		});
-		adcionar.setToolTipText("Adicionar Novo Paciente");
-		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
-		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
-		adcionar.setBounds(221, 355, 46, 43);
-		panel.add(adcionar);
-		
-		JLabel delete = new JLabel("");
-		delete.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int linha;
-				Object codigo;
-				linha= tablePaciente.getSelectedRow();
-				
-				if(linha < 0) {
-					aviso.texto.setText("Nenhum Paciente Selecionado.");
-					aviso.setLocationRelativeTo(null);
-					aviso.show();
-				}else {
-					codigo =  tablePaciente.getValueAt(linha, 0);
-					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
-					avisoAcao.id=paciente.getIdpaciente();
-					avisoAcao.acao=1;
-					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
-					avisoAcao.setLocationRelativeTo(null);
-					avisoAcao.show();
-				}
-				buscar();
-				
-			}
-		});
-		delete.setFocusable(false);
-		delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		delete.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
-		delete.setToolTipText("Remover Paciente");
-		delete.setHorizontalAlignment(SwingConstants.CENTER);
-		delete.setBounds(337, 355, 46, 43);
-		panel.add(delete);
-		
-		JLabel editar = new JLabel("");
-		editar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				acao =0;
-				int linha;
-				Object codigo;
-				linha= tablePaciente.getSelectedRow();
-				
-				if(linha < 0) {
-					aviso.texto.setText("Nenhum Paciente Selecionado.");
-					aviso.setLocationRelativeTo(null);
-					aviso.show();
-				}else {
-					
-					linha= tablePaciente.getSelectedRow();
-					codigo =  tablePaciente.getValueAt(linha, 0);
-					
-					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
-					prencheCampos();
-
-				}
-				
-			}
-		});
-		editar.setFocusable(false);
-		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		editar.setToolTipText("Editar");
-		editar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/editar (2).png")));
-		editar.setHorizontalAlignment(SwingConstants.CENTER);
-		editar.setBounds(281, 355, 46, 43);
-		panel.add(editar);
-		
-		numRegistro = new JLabel();
-		numRegistro.setFocusable(false);
-		numRegistro.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/confimado.png")));
-		numRegistro.setForeground(Color.WHITE);
-		numRegistro.setFont(new Font("Tahoma", Font.BOLD, 11));
-		numRegistro.setBounds(10, 368, 208, 14);
-		panel.add(numRegistro);
-		
-		JLabel bk = new JLabel("");
-		bk.setHorizontalAlignment(SwingConstants.CENTER);
-		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
-		bk.setBounds(0, 2, 570, 409);
-		panel.add(bk);
 		tabbedPaneCadastro.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneCadastro.setBorder(null);
 		tabbedPaneCadastro.setBackground(new Color(32, 178, 170));
@@ -758,7 +453,7 @@ public class T_004_ficha_paciente extends JPanel {
 		
 		txcontato1 = new JFormattedTextField();
 		txcontato1.setColumns(10);
-		txcontato1.setBounds(64, 104, 127, 20);
+		txcontato1.setBounds(65, 105, 127, 20);
 		try {
 			txcontato1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(**)****-****")));
 		} catch (ParseException e1) {
@@ -771,14 +466,14 @@ public class T_004_ficha_paciente extends JPanel {
 		lblContato.setFocusable(false);
 		lblContato.setForeground(Color.WHITE);
 		lblContato.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblContato.setBounds(9, 107, 61, 14);
+		lblContato.setBounds(10, 108, 61, 14);
 		dados.add(lblContato);
 		
 		JLabel label = new JLabel("Contato : ");
 		label.setFocusable(false);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setBounds(9, 135, 61, 14);
+		label.setBounds(10, 136, 61, 14);
 		dados.add(label);
 		
 		txcontato2 = new JFormattedTextField();
@@ -796,14 +491,14 @@ public class T_004_ficha_paciente extends JPanel {
 		lblOp.setFocusable(false);
 		lblOp.setForeground(Color.WHITE);
 		lblOp.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblOp.setBounds(202, 106, 32, 14);
+		lblOp.setBounds(203, 107, 32, 14);
 		dados.add(lblOp);
 		
 		op1 = new JComboBox();
 		op1.setFocusable(false);
 		op1.setModel(new DefaultComboBoxModel(new String[] {"Vivo", "Claro", "Oi", "Tim", "Outros"}));
 		op1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		op1.setBounds(234, 103, 152, 22);
+		op1.setBounds(235, 104, 152, 22);
 		dados.add(op1);
 		
 		w1 = new JCheckBox("WhatsApp");
@@ -811,7 +506,7 @@ public class T_004_ficha_paciente extends JPanel {
 		w1.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		w1.setForeground(Color.WHITE);
 		w1.setOpaque(false);
-		w1.setBounds(400, 104, 97, 23);
+		w1.setBounds(401, 105, 97, 23);
 		dados.add(w1);
 		
 		JLabel label_1 = new JLabel("Op :");
@@ -2042,6 +1737,311 @@ public class T_004_ficha_paciente extends JPanel {
 		bkAvc.setHorizontalAlignment(SwingConstants.CENTER);
 		bkAvc.setBounds(0, 0, 570, 409);
 		avaliacao.add(bkAvc);
+		
+		tabbedPaneFicha = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneFicha.setFocusable(false);
+		tabbedPaneFicha.setBorder(null);
+		tabbedPaneFicha.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneFicha.setBackground(new Color(32, 178, 170));
+		tabbedPaneFicha.setBounds(0, 0, 575, 428);
+		add(tabbedPaneFicha);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(32, 178, 170));
+		panel.setForeground(Color.WHITE);
+		tabbedPaneFicha.addTab("Ficha de Paciente", new ImageIcon(T_004_ficha_paciente.class.getResource("/img/ficha paciente pequeno.png")), panel, null);
+		tabbedPaneFicha.setForegroundAt(0, Color.WHITE);
+		panel.setLayout(null);
+		
+		JLabel lblData = new JLabel("Nome : ");
+		lblData.setFocusable(false);
+		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblData.setForeground(Color.WHITE);
+		lblData.setBounds(10, 11, 46, 14);
+		panel.add(lblData);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setFocusable(false);
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				buscar();
+			}
+		});
+		lblNewLabel.setToolTipText("Buscar");
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/buscar.png")));
+		lblNewLabel.setBounds(207, 2, 46, 32);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				setVisible(false);
+			}
+		});
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/voltar.png")));
+		lblNewLabel_1.setBounds(535, 2, 25, 32);
+		panel.add(lblNewLabel_1);
+		
+		txnomebuscar = new JTextField();
+		txnomebuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
+					buscar();
+				}
+			}
+		});
+		txnomebuscar.setBounds(52, 8, 145, 20);
+		panel.add(txnomebuscar);
+		txnomebuscar.setColumns(10);
+		
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o : ");
+		lblSituao.setFocusable(false);
+		lblSituao.setForeground(Color.WHITE);
+		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSituao.setBounds(10, 39, 89, 14);
+		panel.add(lblSituao);
+		
+		situacao = new JComboBox();
+		situacao.setFocusable(false);
+		situacao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		situacao.setModel(new DefaultComboBoxModel(new String[] {"Ativo", "Inativo", "Todos"}));
+		situacao.setBounds(73, 36, 145, 20);
+		panel.add(situacao);
+		
+		
+		tablePaciente = new JTable();
+		tablePaciente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent click) {
+				if(click.getClickCount()==2) {
+					acao =0;
+					int linha;
+					Object codigo;
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+				}
+			}
+		});
+		tablePaciente.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Codigo", "Nome", "Contato"
+				}
+			));
+		scroll = new JScrollPane();
+		scroll.setBounds(10, 100, 550, 244);
+		panel.add(scroll);
+		
+		popupMenu = new JPopupMenu();
+		addPopup(scroll, popupMenu);
+		
+		JMenuItem mntmNovoCadastro = new JMenuItem("Novo Cadastro");
+		mntmNovoCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acao=1;
+				limpaCampos();
+				checaPrivilegio();
+			}
+		});
+		popupMenu.add(mntmNovoCadastro);
+		
+		JSeparator separator_1 = new JSeparator();
+		popupMenu.add(separator_1);
+		
+		JMenuItem mntmEditarCadastro = new JMenuItem("Editar Cadastro");
+		mntmEditarCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				acao =0;
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+
+				}
+			}
+		});
+		popupMenu.add(mntmEditarCadastro);
+		
+		JSeparator separator_2 = new JSeparator();
+		popupMenu.add(separator_2);
+		
+		JMenuItem mntmDesativar = new JMenuItem("Desativar");
+		mntmDesativar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acao =0;
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=paciente.getIdpaciente();
+					avisoAcao.acao=0;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				buscar();
+			}
+		});
+		popupMenu.add(mntmDesativar);
+		
+		JSeparator separator_3 = new JSeparator();
+		popupMenu.add(separator_3);
+		
+		JMenuItem mntmExcluir = new JMenuItem("Excluir");
+		mntmExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=paciente.getIdpaciente();
+					avisoAcao.acao=1;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				buscar();
+			}
+		});
+		popupMenu.add(mntmExcluir);
+		scroll.setViewportView(tablePaciente);
+		
+		JLabel adcionar = new JLabel("");
+		adcionar.setFocusable(false);
+		adcionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		adcionar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				acao=1;
+				limpaCampos();
+				checaPrivilegio();
+				
+			}
+		});
+		adcionar.setToolTipText("Adicionar Novo Paciente");
+		adcionar.setHorizontalAlignment(SwingConstants.CENTER);
+		adcionar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/add.png")));
+		adcionar.setBounds(221, 355, 46, 43);
+		panel.add(adcionar);
+		
+		JLabel delete = new JLabel("");
+		delete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					avisoAcao.id=paciente.getIdpaciente();
+					avisoAcao.acao=1;
+					avisoAcao.texto.setText("Tem Certeza Deseja Realizar Esta Ação?");
+					avisoAcao.setLocationRelativeTo(null);
+					avisoAcao.show();
+				}
+				buscar();
+				
+			}
+		});
+		delete.setFocusable(false);
+		delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		delete.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/deleta.png")));
+		delete.setToolTipText("Remover Paciente");
+		delete.setHorizontalAlignment(SwingConstants.CENTER);
+		delete.setBounds(337, 355, 46, 43);
+		panel.add(delete);
+		
+		JLabel editar = new JLabel("");
+		editar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				acao =0;
+				int linha;
+				Object codigo;
+				linha= tablePaciente.getSelectedRow();
+				
+				if(linha < 0) {
+					aviso.texto.setText("Nenhum Paciente Selecionado.");
+					aviso.setLocationRelativeTo(null);
+					aviso.show();
+				}else {
+					
+					linha= tablePaciente.getSelectedRow();
+					codigo =  tablePaciente.getValueAt(linha, 0);
+					
+					paciente.setIdpaciente(Integer.parseInt(codigo.toString()));
+					prencheCampos();
+
+				}
+				
+			}
+		});
+		editar.setFocusable(false);
+		editar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		editar.setToolTipText("Editar");
+		editar.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/editar (2).png")));
+		editar.setHorizontalAlignment(SwingConstants.CENTER);
+		editar.setBounds(281, 355, 46, 43);
+		panel.add(editar);
+		
+		numRegistro = new JLabel();
+		numRegistro.setFocusable(false);
+		numRegistro.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/confimado.png")));
+		numRegistro.setForeground(Color.WHITE);
+		numRegistro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		numRegistro.setBounds(10, 368, 208, 14);
+		panel.add(numRegistro);
+		
+		JLabel bk = new JLabel("");
+		bk.setHorizontalAlignment(SwingConstants.CENTER);
+		bk.setIcon(new ImageIcon(T_003_livro_consulta.class.getResource("/img/bk.jpeg")));
+		bk.setBounds(0, 2, 570, 409);
+		panel.add(bk);
 
 	}
 	
