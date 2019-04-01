@@ -2432,6 +2432,7 @@ public class T_004_ficha_paciente extends JPanel {
 		dao.conectar(iniciar.getIp_server());
 		dao.checaAvaliacao(paciente);
 		
+		//Ajustar
 		
 		//	if(paciente.getP1()==1) {p1.setSelected(true);}else {p1.setSelected(false);}
 		//	if(paciente.getP2()==1) {p2.setSelected(true);}else {p2.setSelected(false);}
