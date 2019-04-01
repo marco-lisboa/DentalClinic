@@ -66,7 +66,6 @@ public class T_004_ficha_paciente extends JPanel {
 	private JFormattedTextField txcontato1;
 	private JFormattedTextField txcontato2;
 	private JTextField email1;
-	private JTextField email2;
 	private JTabbedPane tabbedPaneCadastro;
 	private JTabbedPane tabbedPaneFicha;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -140,10 +139,6 @@ public class T_004_ficha_paciente extends JPanel {
 	private JTabbedPane tabbedPaneav;
 	private JLabel bkav;
 	private JLabel textoav;
-	private JCheckBox p1;
-	private JCheckBox p2;
-	private JCheckBox p3;
-	private JCheckBox p4;
 	private JTextArea obsClinica;
 	private JComboBox estado;
 	private JComboBox cidade;
@@ -174,6 +169,8 @@ public class T_004_ficha_paciente extends JPanel {
 	private JLabel av43;
 	private JLabel av44;
 	private JPopupMenu popupMenu;
+	private JTextField textField;
+	private JLabel lblRua;
 	
 	
 	  private JTable getTabela(){
@@ -278,7 +275,7 @@ public class T_004_ficha_paciente extends JPanel {
 		lblCpf.setFocusable(false);
 		lblCpf.setForeground(Color.WHITE);
 		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCpf.setBounds(10, 39, 123, 14);
+		lblCpf.setBounds(10, 39, 32, 14);
 		dados.add(lblCpf);
 		
 		txcpf = new JFormattedTextField();
@@ -453,7 +450,7 @@ public class T_004_ficha_paciente extends JPanel {
 		
 		txcontato1 = new JFormattedTextField();
 		txcontato1.setColumns(10);
-		txcontato1.setBounds(65, 105, 127, 20);
+		txcontato1.setBounds(65, 135, 127, 20);
 		try {
 			txcontato1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(**)****-****")));
 		} catch (ParseException e1) {
@@ -466,19 +463,19 @@ public class T_004_ficha_paciente extends JPanel {
 		lblContato.setFocusable(false);
 		lblContato.setForeground(Color.WHITE);
 		lblContato.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblContato.setBounds(10, 108, 61, 14);
+		lblContato.setBounds(10, 138, 61, 14);
 		dados.add(lblContato);
 		
 		JLabel label = new JLabel("Contato : ");
 		label.setFocusable(false);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setBounds(10, 136, 61, 14);
+		label.setBounds(10, 166, 61, 14);
 		dados.add(label);
 		
 		txcontato2 = new JFormattedTextField();
 		txcontato2.setColumns(10);
-		txcontato2.setBounds(64, 132, 127, 20);
+		txcontato2.setBounds(64, 162, 127, 20);
 		try {
 			txcontato2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(**)****-****")));
 		} catch (ParseException e1) {
@@ -491,14 +488,14 @@ public class T_004_ficha_paciente extends JPanel {
 		lblOp.setFocusable(false);
 		lblOp.setForeground(Color.WHITE);
 		lblOp.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblOp.setBounds(203, 107, 32, 14);
+		lblOp.setBounds(203, 137, 32, 14);
 		dados.add(lblOp);
 		
 		op1 = new JComboBox();
 		op1.setFocusable(false);
 		op1.setModel(new DefaultComboBoxModel(new String[] {"Vivo", "Claro", "Oi", "Tim", "Outros"}));
 		op1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		op1.setBounds(235, 104, 152, 22);
+		op1.setBounds(235, 134, 152, 22);
 		dados.add(op1);
 		
 		w1 = new JCheckBox("WhatsApp");
@@ -506,21 +503,21 @@ public class T_004_ficha_paciente extends JPanel {
 		w1.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		w1.setForeground(Color.WHITE);
 		w1.setOpaque(false);
-		w1.setBounds(401, 105, 97, 23);
+		w1.setBounds(401, 135, 97, 23);
 		dados.add(w1);
 		
 		JLabel label_1 = new JLabel("Op :");
 		label_1.setFocusable(false);
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setBounds(201, 135, 32, 14);
+		label_1.setBounds(201, 165, 32, 14);
 		dados.add(label_1);
 		
 		op2 = new JComboBox();
 		op2.setFocusable(false);
 		op2.setModel(new DefaultComboBoxModel(new String[] {"Vivo", "Claro", "Oi", "Tim", "Outros"}));
 		op2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		op2.setBounds(234, 131, 152, 22);
+		op2.setBounds(234, 161, 152, 22);
 		dados.add(op2);
 		
 		w2 = new JCheckBox("WhatsApp");
@@ -528,32 +525,20 @@ public class T_004_ficha_paciente extends JPanel {
 		w2.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		w2.setOpaque(false);
 		w2.setForeground(Color.WHITE);
-		w2.setBounds(400, 131, 97, 23);
+		w2.setBounds(400, 161, 97, 23);
 		dados.add(w2);
 		
 		JLabel lblEmail = new JLabel("Email : ");
 		lblEmail.setFocusable(false);
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmail.setBounds(10, 163, 123, 14);
+		lblEmail.setBounds(10, 193, 54, 14);
 		dados.add(lblEmail);
 		
 		email1 = new JTextField();
 		email1.setColumns(10);
-		email1.setBounds(52, 160, 458, 20);
+		email1.setBounds(52, 190, 458, 20);
 		dados.add(email1);
-		
-		email2 = new JTextField();
-		email2.setColumns(10);
-		email2.setBounds(52, 188, 458, 20);
-		dados.add(email2);
-		
-		JLabel label_3 = new JLabel("Email : ");
-		label_3.setFocusable(false);
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_3.setBounds(10, 191, 123, 14);
-		dados.add(label_3);
 		
 		JLabel salvar = new JLabel("");
 		salvar.setFocusable(false);
@@ -609,11 +594,35 @@ public class T_004_ficha_paciente extends JPanel {
 		voltar.setBounds(528, 320, 32, 49);
 		dados.add(voltar);
 		
-		JLabel label_6 = new JLabel("");
-		label_6.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/bk.jpeg")));
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setBounds(0, 2, 570, 409);
-		dados.add(label_6);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(52, 104, 314, 20);
+		dados.add(textField);
+		
+		lblRua = new JLabel("Rua : ");
+		lblRua.setForeground(Color.WHITE);
+		lblRua.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRua.setFocusable(false);
+		lblRua.setBounds(10, 107, 54, 14);
+		dados.add(lblRua);
+		
+		JLabel lblN = new JLabel("N\u00BA : ");
+		lblN.setForeground(Color.WHITE);
+		lblN.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblN.setFocusable(false);
+		lblN.setBounds(381, 106, 32, 14);
+		dados.add(lblN);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setColumns(10);
+		formattedTextField.setBounds(414, 103, 68, 20);
+		dados.add(formattedTextField);
+		
+		JLabel bkdados = new JLabel("");
+		bkdados.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/bk.jpeg")));
+		bkdados.setHorizontalAlignment(SwingConstants.CENTER);
+		bkdados.setBounds(0, 2, 570, 409);
+		dados.add(bkdados);
 		
 		JPanel avaliacao = new JPanel();
 		avaliacao.setEnabled(false);
@@ -640,38 +649,6 @@ public class T_004_ficha_paciente extends JPanel {
 		textoav.setHorizontalAlignment(SwingConstants.CENTER);
 		textoav.setBounds(6, 11, 373, 14);
 		panel_3.add(textoav);
-		
-		p1 = new JCheckBox("Canal");
-		p1.setFocusable(false);
-		p1.setOpaque(false);
-		p1.setForeground(Color.WHITE);
-		p1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		p1.setBounds(16, 36, 155, 23);
-		panel_3.add(p1);
-		
-		p2 = new JCheckBox("Restaura\u00E7\u00E3o");
-		p2.setFocusable(false);
-		p2.setOpaque(false);
-		p2.setForeground(Color.WHITE);
-		p2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		p2.setBounds(16, 62, 155, 23);
-		panel_3.add(p2);
-		
-		p3 = new JCheckBox("Coroa");
-		p3.setFocusable(false);
-		p3.setOpaque(false);
-		p3.setForeground(Color.WHITE);
-		p3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		p3.setBounds(256, 32, 155, 23);
-		panel_3.add(p3);
-		
-		p4 = new JCheckBox("Extra\u00E7\u00E3o");
-		p4.setFocusable(false);
-		p4.setOpaque(false);
-		p4.setForeground(Color.WHITE);
-		p4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		p4.setBounds(256, 62, 155, 23);
-		panel_3.add(p4);
 		
 		JLabel lblObservaesClinicas = new JLabel("Observa\u00E7\u00F5es Clinicas");
 		lblObservaesClinicas.setFocusable(false);
@@ -719,6 +696,16 @@ public class T_004_ficha_paciente extends JPanel {
 		bkav.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/bk.jpeg")));
 		bkav.setBounds(0, 0, 389, 350);
 		panel_3.add(bkav);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPaneav.addTab("Adicionar Procedimento", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon(T_004_ficha_paciente.class.getResource("/img/bk.jpeg")));
+		label_3.setBounds(194, 5, 0, 0);
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(label_3);
 		
 		dt18 = new JCheckBox("18");
 		dt18.addActionListener(new ActionListener() {
@@ -2069,7 +2056,6 @@ public class T_004_ficha_paciente extends JPanel {
 		paciente.setContato2(txcontato2.getText());
 		paciente.setOp2(op2.getSelectedItem().toString());
 		paciente.setEmail1(email1.getText());
-		paciente.setEmail2(email2.getText());
 		//paciente.setConvenio(convenio);
 		paciente.setMatricula(txmatricula.getText());
 		paciente.setObsmedicamento(textPaneobs.getText());
@@ -2117,10 +2103,10 @@ public class T_004_ficha_paciente extends JPanel {
 		
 	}
 	public void varreCamposAv(){
-		if(p1.isSelected()==true) {paciente.setP1(1);}else {paciente.setP1(0);}
-		if(p2.isSelected()==true) {paciente.setP2(1);}else {paciente.setP2(0);}
-		if(p3.isSelected()==true) {paciente.setP3(1);}else {paciente.setP3(0);}
-		if(p4.isSelected()==true) {paciente.setP4(1);}else {paciente.setP4(0);}
+	//	if(p1.isSelected()==true) {paciente.setP1(1);}else {paciente.setP1(0);}
+		//	if(p2.isSelected()==true) {paciente.setP2(1);}else {paciente.setP2(0);}
+		//	if(p3.isSelected()==true) {paciente.setP3(1);}else {paciente.setP3(0);}
+		//	if(p4.isSelected()==true) {paciente.setP4(1);}else {paciente.setP4(0);}
 		paciente.setObsmedica(obsClinica.getText());
 	}
 	
@@ -2138,7 +2124,6 @@ public class T_004_ficha_paciente extends JPanel {
 		estado.setSelectedIndex(0);
 		cidade.setSelectedIndex(0);
 		email1.setText("");
-		email2.setText("");
 		convenios.setSelectedIndex(0);
 		txmatricula.setText("");
 		rdbtnSim.setSelected(false);
@@ -2215,10 +2200,10 @@ public class T_004_ficha_paciente extends JPanel {
 	
 	public void limpaav() {
 		textoav.setText("");
-		p1.setSelected(false);
-		p2.setSelected(false);
-		p3.setSelected(false);
-		p4.setSelected(false);
+		//	p1.setSelected(false);
+		//	p2.setSelected(false);
+		//	p3.setSelected(false);
+		//	p4.setSelected(false);
 		obsClinica.setText("");
 	}
 	
@@ -2236,7 +2221,6 @@ public class T_004_ficha_paciente extends JPanel {
 		txcontato1.setText(paciente.getContato1());
 		txcontato2.setText(paciente.getContato2());
 		email1.setText(paciente.getEmail1());
-		email2.setText(paciente.getEmail2());
 		nacionalidade.setSelectedItem(paciente.getNascionalidade());
 		estado.setSelectedItem(paciente.getEstado());
 		cidade.setSelectedItem(paciente.getCidade());
@@ -2449,10 +2433,10 @@ public class T_004_ficha_paciente extends JPanel {
 		dao.checaAvaliacao(paciente);
 		
 		
-		if(paciente.getP1()==1) {p1.setSelected(true);}else {p1.setSelected(false);}
-		if(paciente.getP2()==1) {p2.setSelected(true);}else {p2.setSelected(false);}
-		if(paciente.getP3()==1) {p3.setSelected(true);}else {p3.setSelected(false);}
-		if(paciente.getP4()==1) {p4.setSelected(true);}else {p4.setSelected(false);}
+		//	if(paciente.getP1()==1) {p1.setSelected(true);}else {p1.setSelected(false);}
+		//	if(paciente.getP2()==1) {p2.setSelected(true);}else {p2.setSelected(false);}
+		//if(paciente.getP3()==1) {p3.setSelected(true);}else {p3.setSelected(false);}
+		//	if(paciente.getP4()==1) {p4.setSelected(true);}else {p4.setSelected(false);}
 		
 		obsClinica.setText(paciente.getObsmedica());
 		

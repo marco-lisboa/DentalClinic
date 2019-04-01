@@ -115,6 +115,9 @@ public class T_024_configurar extends JPanel {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTable table_1;
+	private JTabbedPane tabbedPaneNotaFiscal;
 	
 	  private JTable getTabela(){
 	    	if(tableUsuario==null){
@@ -238,6 +241,13 @@ public class T_024_configurar extends JPanel {
 		panel.add(btnUsuarios);
 		
 		JButton btnConfiguraoNfs = new JButton("Configura\u00E7\u00E3o NFS");
+		btnConfiguraoNfs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPanePrincipal.setVisible(false);
+				tabbedPaneNotaFiscal.setVisible(true);
+				
+			}
+		});
 		btnConfiguraoNfs.setHorizontalAlignment(SwingConstants.CENTER);
 		btnConfiguraoNfs.setForeground(Color.WHITE);
 		btnConfiguraoNfs.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -253,6 +263,115 @@ public class T_024_configurar extends JPanel {
 		panel.add(bk);
 		tabbedPaneUsuarios = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPaneUsuarios.setVisible(false);
+		
+		tabbedPaneNotaFiscal = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneNotaFiscal.setVisible(false);
+		tabbedPaneNotaFiscal.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPaneNotaFiscal.setBorder(null);
+		tabbedPaneNotaFiscal.setBackground(new Color(32, 178, 170));
+		tabbedPaneNotaFiscal.setBounds(0, 0, 575, 428);
+		add(tabbedPaneNotaFiscal);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setForeground(Color.WHITE);
+		panel_6.setBackground(new Color(32, 178, 170));
+		tabbedPaneNotaFiscal.addTab("Certificados Fiscais", new ImageIcon(T_024_configurar.class.getResource("/img/configPequena.png")), panel_6, null);
+		tabbedPaneNotaFiscal.setForegroundAt(0, Color.WHITE);
+		
+		JLabel bdnfs = new JLabel("");
+		bdnfs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tabbedPaneNotaFiscal.setVisible(false);
+				tabbedPanePrincipal.setVisible(true);
+				
+			}
+		});
+		bdnfs.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/voltar.png")));
+		bdnfs.setToolTipText("Voltar");
+		bdnfs.setHorizontalAlignment(SwingConstants.CENTER);
+		bdnfs.setBounds(535, 2, 25, 32);
+		panel_6.add(bdnfs);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 100, 550, 244);
+		panel_6.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		scrollPane_1.setViewportView(table_1);
+		
+		JLabel label_27 = new JLabel("Nome : ");
+		label_27.setForeground(Color.WHITE);
+		label_27.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_27.setBounds(10, 11, 46, 14);
+		panel_6.add(label_27);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(52, 8, 145, 20);
+		panel_6.add(textField_10);
+		
+		JLabel label_28 = new JLabel("");
+		label_28.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/buscar.png")));
+		label_28.setToolTipText("Buscar");
+		label_28.setHorizontalAlignment(SwingConstants.LEFT);
+		label_28.setForeground(Color.WHITE);
+		label_28.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_28.setBounds(207, 2, 46, 32);
+		panel_6.add(label_28);
+		
+		JLabel label_29 = new JLabel("Situa\u00E7\u00E3o : ");
+		label_29.setForeground(Color.WHITE);
+		label_29.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_29.setBounds(10, 39, 89, 14);
+		panel_6.add(label_29);
+		
+		JComboBox comboBox_8 = new JComboBox();
+		comboBox_8.setBounds(73, 36, 145, 20);
+		panel_6.add(comboBox_8);
+		
+		JLabel label_30 = new JLabel();
+		label_30.setForeground(Color.WHITE);
+		label_30.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_30.setBounds(10, 368, 208, 14);
+		panel_6.add(label_30);
+		
+		JLabel btadcNfs = new JLabel("");
+		btadcNfs.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/add.png")));
+		btadcNfs.setToolTipText("Adicionar Nova Empresa");
+		btadcNfs.setHorizontalAlignment(SwingConstants.CENTER);
+		btadcNfs.setBounds(221, 355, 46, 43);
+		panel_6.add(btadcNfs);
+		
+		JLabel btEditarNfs = new JLabel("");
+		btEditarNfs.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/editar (2).png")));
+		btEditarNfs.setToolTipText("Editar");
+		btEditarNfs.setHorizontalAlignment(SwingConstants.CENTER);
+		btEditarNfs.setBounds(281, 355, 46, 43);
+		panel_6.add(btEditarNfs);
+		
+		JLabel btdeletenfs = new JLabel("");
+		btdeletenfs.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/deleta.png")));
+		btdeletenfs.setToolTipText("Remover Usuario");
+		btdeletenfs.setHorizontalAlignment(SwingConstants.CENTER);
+		btdeletenfs.setBounds(337, 355, 46, 43);
+		panel_6.add(btdeletenfs);
+		
+		JLabel bknfs = new JLabel("");
+		bknfs.setIcon(new ImageIcon(T_024_configurar.class.getResource("/img/bk.jpeg")));
+		bknfs.setHorizontalAlignment(SwingConstants.CENTER);
+		bknfs.setBounds(0, 2, 570, 409);
+		panel_6.add(bknfs);
 		tabbedPaneUsuarios.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPaneUsuarios.setBorder(null);
 		tabbedPaneUsuarios.setBackground(new Color(32, 178, 170));
